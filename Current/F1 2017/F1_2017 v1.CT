@@ -1,0 +1,2002 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Activate (F5 to toggle - then Num 4/5/6/8 for camera manipulation - DISABLE BEFORE LEAVING PHOTOMODE)"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : F1_2017.exe
+  Version: 
+  Date   : 2019-01-20
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(camloc,F1_2017.exe,0F 29 08 0F 28 91 20 02 00 00) // should be unique
+alloc(newmem,$1000,"F1_2017.exe"+B6E72A)
+
+label(code)
+label(return)
+
+globalalloc(camera, 4)
+
+newmem:
+
+code:
+  mov [camera],rax
+  movaps xmm2,[rcx+00000220]
+  jmp return
+
+camloc:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(camloc)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+camloc:
+  db 0F 29 08 0F 28 91 20 02 00 00
+
+unregistersymbol(camloc)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "F1_2017.exe"+B6E72A
+
+"F1_2017.exe"+B6E6F2: 0F 11 89 E0 02 00 00     -  movups [rcx+000002E0],xmm1
+"F1_2017.exe"+B6E6F9: 0F 10 89 D0 01 00 00     -  movups xmm1,[rcx+000001D0]
+"F1_2017.exe"+B6E700: 0F 11 81 F0 02 00 00     -  movups [rcx+000002F0],xmm0
+"F1_2017.exe"+B6E707: 0F 28 81 30 02 00 00     -  movaps xmm0,[rcx+00000230]
+"F1_2017.exe"+B6E70E: 0F 11 89 00 03 00 00     -  movups [rcx+00000300],xmm1
+"F1_2017.exe"+B6E715: 66 0F 7F 81 40 02 00 00  -  movdqa [rcx+00000240],xmm0
+"F1_2017.exe"+B6E71D: 0F 28 CC                 -  movaps xmm1,xmm4
+"F1_2017.exe"+B6E720: 0F C6 C9 00              -  shufps xmm1,xmm1,00
+"F1_2017.exe"+B6E724: 0F 59 C8                 -  mulps xmm1,xmm0
+"F1_2017.exe"+B6E727: 0F 58 08                 -  addps xmm1,[rax]
+// ---------- INJECTING HERE ----------
+"F1_2017.exe"+B6E72A: 0F 29 08                 -  movaps [rax],xmm1
+"F1_2017.exe"+B6E72D: 0F 28 91 20 02 00 00     -  movaps xmm2,[rcx+00000220]
+// ---------- DONE INJECTING  ----------
+"F1_2017.exe"+B6E734: 0F 28 CA                 -  movaps xmm1,xmm2
+"F1_2017.exe"+B6E737: 0F 59 CA                 -  mulps xmm1,xmm2
+"F1_2017.exe"+B6E73A: 0F 28 C1                 -  movaps xmm0,xmm1
+"F1_2017.exe"+B6E73D: 0F C6 C1 EE              -  shufps xmm0,xmm1,-12
+"F1_2017.exe"+B6E741: 0F 58 C8                 -  addps xmm1,xmm0
+"F1_2017.exe"+B6E744: 0F C6 C9 40              -  shufps xmm1,xmm1,40
+"F1_2017.exe"+B6E748: 0F C6 C1 F0              -  shufps xmm0,xmm1,-10
+"F1_2017.exe"+B6E74C: 0F 58 C8                 -  addps xmm1,xmm0
+"F1_2017.exe"+B6E74F: 0F C6 C9 AA              -  shufps xmm1,xmm1,-56
+"F1_2017.exe"+B6E753: 0F 51 D9                 -  sqrtps xmm3,xmm1
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>116</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Activate 2"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : F1_2017.exe
+  Version: 
+  Date   : 2019-01-20
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(blockers,F1_2017.exe,0F 29 91 90 01 00 00) // should be unique
+alloc(newmem,$1000,"F1_2017.exe"+B8A18F)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  jmp return
+
+blockers:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(blockers)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+blockers:
+  db 0F 29 91 90 01 00 00
+
+unregistersymbol(blockers)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "F1_2017.exe"+B8A18F
+
+"F1_2017.exe"+B8A152: 0F C6 D2 27              -  shufps xmm2,xmm2,27
+"F1_2017.exe"+B8A156: F3 0F 10 D1              -  movss xmm2,xmm1
+"F1_2017.exe"+B8A15A: 0F C6 D2 27              -  shufps xmm2,xmm2,27
+"F1_2017.exe"+B8A15E: 0F 29 91 D0 01 00 00     -  movaps [rcx+000001D0],xmm2
+"F1_2017.exe"+B8A165: 0F 28 89 B0 01 00 00     -  movaps xmm1,[rcx+000001B0]
+"F1_2017.exe"+B8A16C: 0F 28 81 A0 01 00 00     -  movaps xmm0,[rcx+000001A0]
+"F1_2017.exe"+B8A173: 0F 29 81 60 01 00 00     -  movaps [rcx+00000160],xmm0
+"F1_2017.exe"+B8A17A: 0F 28 81 C0 01 00 00     -  movaps xmm0,[rcx+000001C0]
+"F1_2017.exe"+B8A181: 0F 29 89 70 01 00 00     -  movaps [rcx+00000170],xmm1
+"F1_2017.exe"+B8A188: 0F 29 81 80 01 00 00     -  movaps [rcx+00000180],xmm0
+// ---------- INJECTING HERE ----------
+"F1_2017.exe"+B8A18F: 0F 29 91 90 01 00 00     -  movaps [rcx+00000190],xmm2
+// ---------- DONE INJECTING  ----------
+"F1_2017.exe"+B8A196: 0F 28 91 50 02 00 00     -  movaps xmm2,[rcx+00000250]
+"F1_2017.exe"+B8A19D: 0F 28 C2                 -  movaps xmm0,xmm2
+"F1_2017.exe"+B8A1A0: 0F 28 DA                 -  movaps xmm3,xmm2
+"F1_2017.exe"+B8A1A3: 0F C6 DA FF              -  shufps xmm3,xmm2,-01
+"F1_2017.exe"+B8A1A7: 0F 59 99 D0 01 00 00     -  mulps xmm3,[rcx+000001D0]
+"F1_2017.exe"+B8A1AE: 0F C6 C2 55              -  shufps xmm0,xmm2,55
+"F1_2017.exe"+B8A1B2: 0F 59 C1                 -  mulps xmm0,xmm1
+"F1_2017.exe"+B8A1B5: 0F 28 CA                 -  movaps xmm1,xmm2
+"F1_2017.exe"+B8A1B8: 0F C6 CA AA              -  shufps xmm1,xmm2,-56
+"F1_2017.exe"+B8A1BC: 0F 59 89 C0 01 00 00     -  mulps xmm1,[rcx+000001C0]
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>116</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>5</ID>
+              <Description>"X"</Description>
+              <VariableType>Float</VariableType>
+              <Address>camera</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>104</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>101</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>6</ID>
+              <Description>"Z"</Description>
+              <VariableType>Float</VariableType>
+              <Address>camera</Address>
+              <Offsets>
+                <Offset>4</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>105</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>103</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7</ID>
+              <Description>"Y"</Description>
+              <VariableType>Float</VariableType>
+              <Address>camera</Address>
+              <Offsets>
+                <Offset>8</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>102</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>100</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>203</ID>
+      <Description>"No Clip"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048,"F1_2017.exe"+B5790E) 
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+originalcode:
+jmp F1_2017.exe+B57937
+mov rcx,[rdi+00003080]
+
+exit:
+jmp returnhere
+
+"F1_2017.exe"+B5790E:
+jmp newmem
+nop
+nop
+nop
+nop
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"F1_2017.exe"+B5790E:
+je F1_2017.exe+B57937
+mov rcx,[rdi+00003080]
+//Alt: db 74 27 48 8B 8F 80 30 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>205</ID>
+      <Description>"-----------------------------------------------------------"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>204</ID>
+          <Description>"Test"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>145</ID>
+              <Description>"keep1"</Description>
+              <VariableType>Float</VariableType>
+              <Address>16585B644</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>191</ID>
+              <Description>"keep 2"</Description>
+              <VariableType>Float</VariableType>
+              <Address>17A45D044</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of movaps [rbx+00000230],xmm6</Description>
+      <AddressString>F1_2017.exe+B562E3</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B3</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>71</Byte>
+        <Byte>A6</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000230],xmm2</Description>
+      <AddressString>F1_2017.exe+B62A0F</AddressString>
+      <Before>
+        <Byte>91</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>91</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>B1</Byte>
+        <Byte>38</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movdqa [rcx+00000240],xmm0</Description>
+      <AddressString>F1_2017.exe+B6E715</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>81</Byte>
+        <Byte>40</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm3</Description>
+      <AddressString>F1_2017.exe+B8A1DE</AddressString>
+      <Before>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>46</Byte>
+        <Byte>9A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax],xmm1</Description>
+      <AddressString>F1_2017.exe+B6E72A</AddressString>
+      <Before>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>20</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm2</Description>
+      <AddressString>F1_2017.exe+B8A18F</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>80</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>91</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm3</Description>
+      <AddressString>F1_2017.exe+B8A1DE</AddressString>
+      <Before>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>46</Byte>
+        <Byte>9A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax],xmm0</Description>
+      <AddressString>F1_2017.exe+B58670</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>10</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm2</Description>
+      <AddressString>F1_2017.exe+B8A18F</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>80</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>91</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm3</Description>
+      <AddressString>F1_2017.exe+B8A1DE</AddressString>
+      <Before>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>46</Byte>
+        <Byte>9A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movdqa [rcx+00000240],xmm0</Description>
+      <AddressString>F1_2017.exe+B6E715</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>81</Byte>
+        <Byte>40</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call F1_2017.exe+B70960</Description>
+      <AddressString>F1_2017.exe+B562EA</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>71</Byte>
+        <Byte>A6</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax+00000210],xmm0</Description>
+      <AddressString>F1_2017.exe+B8A333</AddressString>
+      <Before>
+        <Byte>88</Byte>
+        <Byte>00</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>80</Byte>
+        <Byte>10</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>60</Byte>
+        <Byte>5B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm2</Description>
+      <AddressString>F1_2017.exe+B8A18F</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>80</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>91</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+00000190],xmm3</Description>
+      <AddressString>F1_2017.exe+B8A1DE</AddressString>
+      <Before>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>99</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>46</Byte>
+        <Byte>9A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rcx+000001D0],xmm1</Description>
+      <AddressString>F1_2017.exe+B8A0E8</AddressString>
+      <Before>
+        <Byte>4A</Byte>
+        <Byte>30</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>89</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>A0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rcx+000001D0],xmm2</Description>
+      <AddressString>F1_2017.exe+B8A15E</AddressString>
+      <Before>
+        <Byte>D1</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>D2</Byte>
+        <Byte>27</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>91</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>89</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax+000002C0],xmm1</Description>
+      <AddressString>F1_2017.exe+B8A2EE</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>88</Byte>
+        <Byte>C0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>18</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax+00000300],xmm0</Description>
+      <AddressString>F1_2017.exe+B8A313</AddressString>
+      <Before>
+        <Byte>88</Byte>
+        <Byte>F0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>18</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax+00000210],xmm0</Description>
+      <AddressString>F1_2017.exe+B8A333</AddressString>
+      <Before>
+        <Byte>88</Byte>
+        <Byte>00</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>80</Byte>
+        <Byte>10</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>60</Byte>
+        <Byte>5B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rbx+00000280],xmm6</Description>
+      <AddressString>F1_2017.exe+B9081A</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>E1</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B3</Byte>
+        <Byte>80</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B3</Byte>
+        <Byte>70</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rbx+00000230],xmm6</Description>
+      <AddressString>F1_2017.exe+B562E3</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B3</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>71</Byte>
+        <Byte>A6</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm2,[rcx+000001D0]</Description>
+      <AddressString>F1_2017.exe+B8A14B</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>D2</Byte>
+        <Byte>27</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mulps xmm3,[rcx+000001D0]</Description>
+      <AddressString>F1_2017.exe+B8A1A7</AddressString>
+      <Before>
+        <Byte>DA</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>DA</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>99</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>C2</Byte>
+        <Byte>55</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm0,[rcx]</Description>
+      <AddressString>F1_2017.exe+B6A9DB</AddressString>
+      <Before>
+        <Byte>88</Byte>
+        <Byte>90</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>02</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm1,[rcx+000001D0]</Description>
+      <AddressString>F1_2017.exe+B6E6F9</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>E0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>81</Byte>
+        <Byte>F0</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rbx+000001D0],xmm1</Description>
+      <AddressString>F1_2017.exe+B6E877</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>8B</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>93</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm0,[rbx+000001D0]</Description>
+      <AddressString>F1_2017.exe+B6E8B7</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>83</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>CA</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rbx+000001D0],xmm0</Description>
+      <AddressString>F1_2017.exe+B6E8C7</AddressString>
+      <Before>
+        <Byte>58</Byte>
+        <Byte>D9</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C3</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>83</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>40</Byte>
+        <Byte>84</Byte>
+        <Byte>FF</Byte>
+        <Byte>74</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm1,[rsi+30]</Description>
+      <AddressString>F1_2017.exe+B93CAC</AddressString>
+      <Before>
+        <Byte>20</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>43</Byte>
+        <Byte>70</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4E</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8B</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rcx+00000300],xmm1</Description>
+      <AddressString>F1_2017.exe+B6E70E</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm1,[rdi+30]</Description>
+      <AddressString>F1_2017.exe+B6E6B2</AddressString>
+      <Before>
+        <Byte>07</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>57</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4F</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>81</Byte>
+        <Byte>90</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of addps xmm1,[rax]</Description>
+      <AddressString>F1_2017.exe+B6E727</AddressString>
+      <Before>
+        <Byte>C9</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>08</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax],xmm1</Description>
+      <AddressString>F1_2017.exe+B6E72A</AddressString>
+      <Before>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>20</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm1,[rdi+30]</Description>
+      <AddressString>F1_2017.exe+B6E86C</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4F</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of subps xmm0,[rbx+00000190]</Description>
+      <AddressString>F1_2017.exe+B6E8FE</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>83</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>74</Byte>
+        <Byte>19</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of subps xmm0,[rax]</Description>
+      <AddressString>F1_2017.exe+B8936C</AddressString>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>C0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>45</Byte>
+        <Byte>C0</Byte>
+        <Byte>EB</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm1,[rcx+000001B0]</Description>
+      <AddressString>F1_2017.exe+B6E6DD</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>C0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>81</Byte>
+        <Byte>D0</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rcx+000002E0],xmm1</Description>
+      <AddressString>F1_2017.exe+B6E6F2</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>89</Byte>
+        <Byte>E0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm1,xmm4</Description>
+      <AddressString>F1_2017.exe+B6E71D</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>40</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CC</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>C9</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of shufps xmm1,xmm1,00</Description>
+      <AddressString>F1_2017.exe+B6E720</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>C9</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of subps xmm0,[rbx+00000190]</Description>
+      <AddressString>F1_2017.exe+B6E8FE</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>83</Byte>
+        <Byte>90</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>74</Byte>
+        <Byte>19</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of subps xmm0,[rax]</Description>
+      <AddressString>F1_2017.exe+B8936C</AddressString>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>C0</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>45</Byte>
+        <Byte>C0</Byte>
+        <Byte>EB</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm0,[rax]</Description>
+      <AddressString>F1_2017.exe+B57832</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>44</Byte>
+        <Byte>0C</Byte>
+        <Byte>70</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>44</Byte>
+        <Byte>0C</Byte>
+        <Byte>70</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps xmm1,[rdi+30]</Description>
+      <AddressString>F1_2017.exe+B6E86C</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4F</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rax],xmm1</Description>
+      <AddressString>F1_2017.exe+B6E72A</AddressString>
+      <Before>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>91</Byte>
+        <Byte>20</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of addps xmm1,[rax]</Description>
+      <AddressString>F1_2017.exe+B6E727</AddressString>
+      <Before>
+        <Byte>C9</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>08</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm1,[rdi+30]</Description>
+      <AddressString>F1_2017.exe+B6E6B2</AddressString>
+      <Before>
+        <Byte>07</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>57</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4F</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>81</Byte>
+        <Byte>90</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movdqa [rcx+00000240],xmm0</Description>
+      <AddressString>F1_2017.exe+B6E715</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>81</Byte>
+        <Byte>40</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je F1_2017.exe+B6FA33</Description>
+      <AddressString>F1_2017.exe+B6FA04</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>2D</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :sub rsp,38</Description>
+      <AddressString>F1_2017.exe+B62990</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>38</Byte>
+      </Actual>
+      <After>
+        <Byte>F6</Byte>
+        <Byte>81</Byte>
+        <Byte>B4</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je F1_2017.exe+B62BA0</Description>
+      <AddressString>F1_2017.exe+B629A3</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>F9</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>F7</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>99</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jna F1_2017.exe+B62A08</Description>
+      <AddressString>F1_2017.exe+B629F1</AddressString>
+      <Before>
+        <Byte>C9</Byte>
+        <Byte>AA</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>76</Byte>
+        <Byte>15</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of comiss xmm1,xmm0</Description>
+      <AddressString>F1_2017.exe+B629EE</AddressString>
+      <Before>
+        <Byte>C3</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>C9</Byte>
+        <Byte>AA</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C8</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>15</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of subps xmm2,[rcx+00000230]</Description>
+      <AddressString>F1_2017.exe+B629C5</AddressString>
+      <Before>
+        <Byte>59</Byte>
+        <Byte>DF</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>D2</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>91</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CA</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movaps [rbx+00000230],xmm6</Description>
+      <AddressString>F1_2017.exe+B562E3</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B3</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>71</Byte>
+        <Byte>A6</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :test r14l,r14l</Description>
+      <AddressString>F1_2017.exe+D6CDB0</AddressString>
+      <Before>
+        <Byte>C6</Byte>
+        <Byte>FF</Byte>
+        <Byte>C6</Byte>
+        <Byte>EB</Byte>
+        <Byte>05</Byte>
+      </Before>
+      <Actual>
+        <Byte>45</Byte>
+        <Byte>84</Byte>
+        <Byte>F6</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>61</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>05</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call F1_2017.exe+B7AF30</Description>
+      <AddressString>F1_2017.exe+B6E83E</AddressString>
+      <Before>
+        <Byte>75</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>ED</Byte>
+        <Byte>C6</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>07</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>no limit on one side: Code :jmp F1_2017.exe+B57937</Description>
+      <AddressString>F1_2017.exe+B5790E</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>12</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>27</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8F</Byte>
+        <Byte>80</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je F1_2017.exe+B8A22E</Description>
+      <AddressString>F1_2017.exe+B8A222</AddressString>
+      <Before>
+        <Byte>74</Byte>
+        <Byte>0F</Byte>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>DB</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>0A</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+        <Byte>E8</Byte>
+        <Byte>04</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je F1_2017.exe+B8A24B</Description>
+      <AddressString>F1_2017.exe+B8A239</AddressString>
+      <Before>
+        <Byte>74</Byte>
+        <Byte>23</Byte>
+        <Byte>48</Byte>
+        <Byte>3B</Byte>
+        <Byte>DF</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>DB</Byte>
+        <Byte>74</Byte>
+        <Byte>0B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call F1_2017.exe+B8A0B0</Description>
+      <AddressString>F1_2017.exe+B8F920</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>8B</Byte>
+        <Byte>A7</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>68</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call F1_2017.exe+B8F8F0</Description>
+      <AddressString>F1_2017.exe+5AE4418</AddressString>
+      <Before>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>C2</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>D3</Byte>
+        <Byte>B4</Byte>
+        <Byte>0A</Byte>
+        <Byte>FB</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8B</Byte>
+        <Byte>B0</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mulps xmm1,[rcx+000001C0]</Description>
+      <AddressString>F1_2017.exe+B8A1BC</AddressString>
+      <Before>
+        <Byte>CA</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>CA</Byte>
+        <Byte>AA</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>89</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>D8</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mulps xmm2,[rcx+000001A0]</Description>
+      <AddressString>F1_2017.exe+B8A1CA</AddressString>
+      <Before>
+        <Byte>D8</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+        <Byte>D2</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>91</Byte>
+        <Byte>A0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>CA</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>camera</Name>
+      <Address>00510000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Comments>Info about this table:
+</Comments>
+</CheatTable>

@@ -1,0 +1,7 @@
+far cry 5 codes:
+7FFFDA7D5D3C - F3 0F11 33  - movss [rbx],xmm6 - freeze the memory location and make this no op
+
+'FIND ADDRESS THAT THESE ACCESS
+7FFFD077D5DE - F3 0F10 8B 40010000  - movss xmm1,[rbx+00000140]
+7FFFD0654743 - F3 0F10 8B 40010000  - movss xmm1,[rbx+00000140]
+7FFFD0522C7C - F3 0F10 91 40010000  - movss xmm2,[rcx+00000140]

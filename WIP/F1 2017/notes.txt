@@ -1,0 +1,26 @@
+f1 2017
+
+F1_2017.AK::Monitor::GetTimeStamp+61A3A - 0F29 08               - movaps [rax],xmm1
+''this code stops z input
+
+140B8A18F - 0F29 91 90010000  - movaps [rcx+00000190],xmm2
+140B8A1DE - 0F29 99 90010000  - movaps [rcx+00000190],xmm3
+---blocker codes
+
+140B6E7F8 - 0F29 A3 90010000  - movaps [rbx+00000190],xmm4
+140B6E827 - 0F29 B3 90010000  - movaps [rbx+00000190],xmm6
+
+
+-367.21
+
+140B8A2E2 - 0F28 88 90010000  - movaps xmm1,[rax+00000190]
+140B8A1D7 - 0F58 99 90010000  - addps xmm3,[rcx+00000190]
+
+''this is it
+
+1) F1_2017.AK::Monitor::GetTimeStamp+495F3 - 0F29 B3 30020000      - movaps [rbx+00000230],xmm6
+2) F1_2017.AK::Monitor::GetTimeStamp+7D49F - 0F29 91 90010000      - movaps [rcx+00000190],xmm2
+3) F1_2017.AK::Monitor::GetTimeStamp+55D1F - 0F29 91 30020000      - movaps [rcx+00000230],xmm2
+4) F1_2017.AK::Monitor::GetTimeStamp+61A25 - 66 0F7F 81 40020000   - movdqa [rcx+00000240],xmm0
+5) F1_2017.AK::Monitor::GetTimeStamp+7D4EE - 0F29 99 90010000      - movaps [rcx+00000190],xmm3
+6) F1_2017.AK::Monitor::GetTimeStamp+61A3A - 0F29 08               - movaps [rax],xmm1

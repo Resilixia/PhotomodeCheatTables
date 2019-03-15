@@ -1,0 +1,54 @@
+[ENABLE]
+
+aobscanmodule(Photo,NMS.exe,0F B6 98 E0 9F 39 00) // should be unique
+alloc(newmem,$1000,"NMS.exe"+A31910)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+movzx ebx,byte ptr [rax+00399FE0]
+jmp return
+
+Photo:
+movzx ebx,byte ptr [rax+00399FEC]
+return:
+registersymbol(Photo)
+
+[DISABLE]
+
+Photo:
+db 0F B6 98 E0 9F 39 00
+
+unregistersymbol(Photo)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "NMS.exe"+A31910
+
+"NMS.exe"+A318DD: 48 81 EC 10 01 00 00 - sub rsp,00000110
+"NMS.exe"+A318E4: 44 0F 29 48 98 - movaps [rax-68],xmm9
+"NMS.exe"+A318E9: 48 8B F9 - mov rdi,rcx
+"NMS.exe"+A318EC: 44 0F 29 50 88 - movaps [rax-78],xmm10
+"NMS.exe"+A318F1: 45 33 C9 - xor r9d,r9d
+"NMS.exe"+A318F4: 44 0F 29 98 78 FF FF FF - movaps [rax-00000088],xmm11
+"NMS.exe"+A318FC: BA AC 00 00 00 - mov edx,000000AC
+"NMS.exe"+A31901: 48 8B 05 E0 7A B5 01 - mov rax,[NMS.exe+25893E8]
+"NMS.exe"+A31908: 44 0F 28 D9 - movaps xmm11,xmm1
+"NMS.exe"+A3190C: 45 8D 41 FF - lea r8d,[r9-01]
+// ---------- INJECTING HERE ----------
+"NMS.exe"+A31910: 0F B6 98 E0 9F 39 00 - movzx ebx,byte ptr [rax+00399FE0]
+// ---------- DONE INJECTING ----------
+"NMS.exe"+A31917: 48 8D 88 58 A3 4F 00 - lea rcx,[rax+004FA358]
+"NMS.exe"+A3191E: 48 8B 01 - mov rax,[rcx]
+"NMS.exe"+A31921: FF 50 20 - call qword ptr [rax+20]
+"NMS.exe"+A31924: 84 C0 - test al,al
+"NMS.exe"+A31926: 75 69 - jne NMS.exe+A31991
+"NMS.exe"+A31928: 48 8B 0D B9 7A B5 01 - mov rcx,[NMS.exe+25893E8]
+"NMS.exe"+A3192F: 45 33 C9 - xor r9d,r9d
+"NMS.exe"+A31932: 48 81 C1 58 A3 4F 00 - add rcx,004FA358
+"NMS.exe"+A31939: 41 8D 51 4D - lea edx,[r9+4D]
+"NMS.exe"+A3193D: 48 8B 01 - mov rax,[rcx]
+}
