@@ -50,3 +50,5 @@ Ace7Game.exe+B19ECFE - 8B 44 24 5C           - mov eax,[rsp+5C]
 Ace7Game.exe+B19ED02 - 0F11 87 18040000      - movups [rdi+00000418],xmm0
 Ace7Game.exe+B19ED09 - 83 E0 03              - and eax,03 { 3 }
 Ace7Game.exe+B19ED0C - F3 0F10 44 24 58      - movss xmm0,[rsp+58]
+
+CamAOB scan: F2 0F 11 87 ?? ?? ?? ?? F2 0F 10 44 24 ?? F2 0F 11 87 ?? ?? ?? ??
