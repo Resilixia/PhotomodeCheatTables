@@ -1,0 +1,4 @@
+f1 photomode dimensions
+10.34  z
+19.797 y/x
+19.8 y/x

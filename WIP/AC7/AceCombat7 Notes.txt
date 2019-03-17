@@ -47,7 +47,7 @@ Ace7Game.exe+B19ECEE - 89 87 08040000        - mov [rdi+00000408],eax						<<<< 
 Ace7Game.exe+B19ECF4 - 8B 44 24 44           - mov eax,[rsp+44]
 Ace7Game.exe+B19ECF8 - 89 87 14040000        - mov [rdi+00000414],eax						<<<< roll Write
 Ace7Game.exe+B19ECFE - 8B 44 24 5C           - mov eax,[rsp+5C]
-Ace7Game.exe+B19ED02 - 0F11 87 18040000      - movups [rdi+00000418],xmm0
+Ace7Game.exe+B19ED02 - 0F11 87 18040000      - movups [rdi+00000418],xmm0 					<<<< fov write
 Ace7Game.exe+B19ED09 - 83 E0 03              - and eax,03 { 3 }
 Ace7Game.exe+B19ED0C - F3 0F10 44 24 58      - movss xmm0,[rsp+58]
 
