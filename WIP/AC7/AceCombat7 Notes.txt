@@ -52,3 +52,10 @@ Ace7Game.exe+B19ED09 - 83 E0 03              - and eax,03 { 3 }
 Ace7Game.exe+B19ED0C - F3 0F10 44 24 58      - movss xmm0,[rsp+58]
 
 CamAOB scan: F2 0F 11 87 ?? ?? ?? ?? F2 0F 10 44 24 ?? F2 0F 11 87 ?? ?? ?? ??
+
+Ace7Game.exe+EA75210 - F3 0F10 81 84030000   - movss xmm0,[rcx+00000384]
+Ace7Game.exe+EA75218 - 0F57 C9               - xorps xmm1,xmm1
+Ace7Game.exe+EA7521B - 0F2F C1               - comiss xmm0,xmm1
+Ace7Game.exe+EA7521E - 77 08                 - ja Ace7Game.exe+EA75228
+Ace7Game.exe+EA75220 - F3 0F10 81 18040000   - movss xmm0,[rcx+00000418] << FoV Read
+Ace7Game.exe+EA75228 - C3                    - ret 

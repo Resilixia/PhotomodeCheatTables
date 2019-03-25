@@ -1,0 +1,18 @@
+
+Simply drop all files where the ".exe" is located. 
+Once ingame press TAB key to toggle the HUD
+
+OPTIONAL
+
+If you want to change the toggle key, open d3dx.ini and find this section:
+
+[KeyHUD]
+Key = VK_TAB
+x = 0
+type=toggle
+
+And then simply change key = caps to any other key you want.
+
+
+
+
