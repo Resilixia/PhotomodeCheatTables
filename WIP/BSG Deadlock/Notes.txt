@@ -1,364 +1,294 @@
-3228F7F7 - D9 40 48  - fld dword ptr [eax+48]
-3228F8F4 - D9 58 48  - fstp dword ptr [eax+48]
-
-3228F800 - D9 9F 9C000000  - fstp dword ptr [edi+0000009C] - some distance value/ not FoV
-3228F815 - D9 87 9C000000  - fld dword ptr [edi+0000009C]
-
-
-3228ED36 - 8B 48 04  - mov ecx,[eax+04]  ''use this to find Z value
-1CD5EC49 - 89 48 04  - mov [eax+04],ecx
-
-
-
-//these access fov value
-3228EBA7 - D9 9F B0000000  - fstp dword ptr [edi+000000B0]
-3228EC2D - D9 87 B0000000  - fld dword ptr [edi+000000B0]
-
-0FABDE90 - F3 0F11 96 38010000  - movss [esi+00000138],xmm2
-
-
-
-[ENABLE]
-//code from here to '[DISABLE]' will be used to enable the cheat
-alloc(newmem,2048,"NMS.exe"+B8B879)
-label(returnhere)
-label(exit)
-
-label(fov)
-registersymbol(fov)
-
-newmem:
-mov [fov],rax
-jmp exit
-
-exit:
-jmp returnhere
-
-///
-fov:
-dq 0
-///
-
-"NMS.exe"+B8B879:
-jmp newmem
-nop
-returnhere:
+Camera 1 - for height adjustment with game camera
+1EA6ECCA - 89 4C 24 08           - mov [esp+08],ecx
+1EA6ECCE - 50                    - push eax
+1EA6ECCF - E8 84CF61E9           - call 0808BC58
+1EA6ECD4 - 83 C4 1C              - add esp,1C { 28 }
+1EA6ECD7 - 8B 45 8C              - mov eax,[ebp-74]
+1EA6ECDA - 39 00                 - cmp [eax],eax
+1EA6ECDC - 05 40000000           - add eax,00000040 { 64 }
+1EA6ECE1 - 8B 4D C0              - mov ecx,[ebp-40]
+1EA6ECE4 - 89 08                 - mov [eax],ecx				<<<<read of camera struct/height at +4
+1EA6ECE6 - 8B 4D C4              - mov ecx,[ebp-3C]
+1EA6ECE9 - 89 48 04              - mov [eax+04],ecx
+1EA6ECEC - 8B 4D C8              - mov ecx,[ebp-38]
+1EA6ECEF - 89 48 08              - mov [eax+08],ecx
+1EA6ECF2 - 83 EC 0C              - sub esp,0C { 12 }
+1EA6ECF5 - 6A 00                 - push 00 { 0 }
+1EA6ECF7 - E8 F4765CE9           - call 080363F0
 
 
- 
- 
-[DISABLE]
-//code from here till the end of the code will be used to disable the cheat
-dealloc(newmem)
-"NMS.exe"+B8B879:
-mov [rax+000056F4],ecx
-unregistersymbol(fov)
-//Alt: db 89 88 54 52 00 00
+FOV Write
+UnityPlayer.dll+25DD58 - 0F2F D0               - comiss xmm2,xmm0
+UnityPlayer.dll+25DD5B - 77 0C                 - ja UnityPlayer.dll+25DD69
+UnityPlayer.dll+25DD5D - F3 0F10 15 800C4057   - movss xmm2,[UnityPlayer.dll+EF0C80] { (179.00) }
+UnityPlayer.dll+25DD65 - F3 0F5D D0            - minss xmm2,xmm0
+UnityPlayer.dll+25DD69 - 83 BE 70040000 02     - cmp dword ptr [esi+00000470],02 { 2 }
+UnityPlayer.dll+25DD70 - F3 0F11 96 38010000   - movss [esi+00000138],xmm2							<<<FOV Write
+UnityPlayer.dll+25DD78 - 66 C7 86 6C040000 0101 - mov word ptr [esi+0000046C],0101 { 257 }
+UnityPlayer.dll+25DD81 - 75 3C                 - jne UnityPlayer.dll+25DDBF
+UnityPlayer.dll+25DD83 - F3 0F59 15 50BB3B57   - mulss xmm2,[UnityPlayer.dll+EABB50] { (0.02) }
+UnityPlayer.dll+25DD8B - F3 0F10 4E 28         - movss xmm1,[esi+28]
+UnityPlayer.dll+25DD90 - F3 0F59 0D 58863B57   - mulss xmm1,[UnityPlayer.dll+EA8658] { (0.50) }
+UnityPlayer.dll+25DD98 - F3 0F59 15 58863B57   - mulss xmm2,[UnityPlayer.dll+EA8658] { (0.50) }
+UnityPlayer.dll+25DDA0 - F3 0F11 4D 08         - movss [ebp+08],xmm1
+UnityPlayer.dll+25DDA5 - 0F5A C2               - vcvtps2pd xmm0,xmm2
+UnityPlayer.dll+25DDA8 - E8 23A4C000           - call UnityPlayer.dll+E681D0
+UnityPlayer.dll+25DDAD - F3 0F10 4D 08         - movss xmm1,[ebp+08]
+UnityPlayer.dll+25DDB2 - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+UnityPlayer.dll+25DDB6 - F3 0F5E C8            - divss xmm1,xmm0
+UnityPlayer.dll+25DDBA - F3 0F11 4E 34         - movss [esi+34],xmm1
+UnityPlayer.dll+25DDBF - 5E                    - pop esi
+UnityPlayer.dll+25DDC0 - 8B E5                 - mov esp,ebp
 
-fov value:
-UnityPlayer.dll+25DE68 - C2 0400               - ret 0004 { 4 }
-UnityPlayer.dll+25DE6B - F3 0F10 15 509A2C10   - movss xmm2,[UnityPlayer.dll+EA9A50] { [0.00] }
-UnityPlayer.dll+25DE73 - F3 0F10 45 08         - movss xmm0,[ebp+08]
-UnityPlayer.dll+25DE78 - 0F2F D0               - comiss xmm2,xmm0
-UnityPlayer.dll+25DE7B - 77 0C                 - ja UnityPlayer.dll+25DE89
-UnityPlayer.dll+25DE7D - F3 0F10 15 180C3110   - movss xmm2,[UnityPlayer.dll+EF0C18] { [179.00] }
-UnityPlayer.dll+25DE85 - F3 0F5D D0            - minss xmm2,xmm0
-UnityPlayer.dll+25DE89 - 83 BE 70040000 02     - cmp dword ptr [esi+00000470],02 { 2 }
-UnityPlayer.dll+25DE90 - F3 0F11 96 38010000   - movss [esi+00000138],xmm2                                <<fov write
-UnityPlayer.dll+25DE98 - 66 C7 86 6C040000 0101 - mov word ptr [esi+0000046C],0101 { 257 }
-UnityPlayer.dll+25DEA1 - 75 3C                 - jne UnityPlayer.dll+25DEDF
-UnityPlayer.dll+25DEA3 - F3 0F59 15 E0BA2C10   - mulss xmm2,[UnityPlayer.dll+EABAE0] { [0.02] }
-UnityPlayer.dll+25DEAB - F3 0F10 4E 28         - movss xmm1,[esi+28]
-UnityPlayer.dll+25DEB0 - F3 0F59 0D 58862C10   - mulss xmm1,[UnityPlayer.dll+EA8658] { [0.50] }
-UnityPlayer.dll+25DEB8 - F3 0F59 15 58862C10   - mulss xmm2,[UnityPlayer.dll+EA8658] { [0.50] }
-UnityPlayer.dll+25DEC0 - F3 0F11 4D 08         - movss [ebp+08],xmm1
-UnityPlayer.dll+25DEC5 - 0F5A C2               - vcvtps2pd xmm0,xmm2
-UnityPlayer.dll+25DEC8 - E8 C398C000           - call UnityPlayer.dll+E67790
-UnityPlayer.dll+25DECD - F3 0F10 4D 08         - movss xmm1,[ebp+08]
-UnityPlayer.dll+25DED2 - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
-UnityPlayer.dll+25DED6 - F3 0F5E C8            - divss xmm1,xmm0
-UnityPlayer.dll+25DEDA - F3 0F11 4E 34         - movss [esi+34],xmm1
-UnityPlayer.dll+25DEDF - 5E                    - pop esi
+FOV Write Update Jump
+1EA6EB0E - 00 00                 - add [eax],al
+1EA6EB10 - 55                    - push ebp
+1EA6EB11 - 8B EC                 - mov ebp,esp
+1EA6EB13 - 57                    - push edi
+1EA6EB14 - 83 EC 24              - sub esp,24 { 36 }
+1EA6EB17 - 8B 7D 08              - mov edi,[ebp+08]
+1EA6EB1A - D9EE                  - fldz 
+1EA6EB1C - D9 5D F8              - fstp dword ptr [ebp-08]
+1EA6EB1F - D9 87 C8000000        - fld dword ptr [edi+000000C8]
+1EA6EB25 - D9E8                  - fld1 
+1EA6EB27 - DFF1                  - fcomip st(0),st(1)
+1EA6EB29 - DDD8                  - fstp st(0)
+1EA6EB2B - 0F86 C1000000         - jbe 1EA6EBF2							<<<NOP/jump over this to change FOV without changing target
+1EA6EB31 - D9 87 C8000000        - fld dword ptr [edi+000000C8]
+1EA6EB37 - DD 5D E0              - fstp qword ptr [ebp-20]
+1EA6EB3A - 83 EC 0C              - sub esp,0C { 12 }
+1EA6EB3D - 57                    - push edi
+1EA6EB3E - E8 81DAF5FF           - call 1E9CC5C4
+1EA6EB43 - 83 C4 10              - add esp,10 { 16 }
+1EA6EB46 - DD 45 E0              - fld qword ptr [ebp-20]
+1EA6EB49 - D9 87 B4000000        - fld dword ptr [edi+000000B4]
 
-zheight (3 writes)
-1FD9CD5B - 8B 8D 7CFFFFFF        - mov ecx,[ebp-00000084]
-1FD9CD61 - 89 08                 - mov [eax],ecx
-1FD9CD63 - 8B 4D 80              - mov ecx,[ebp-80]
-1FD9CD66 - 89 48 04              - mov [eax+04],ecx                  << Zheight write
-1FD9CD69 - 8B 4D 84              - mov ecx,[ebp-7C]
-1FD9CD6C - 89 48 08              - mov [eax+08],ecx
-1FD9CD6F - 8D 47 3C              - lea eax,[edi+3C]
-1FD9CD72 - 8B 08                 - mov ecx,[eax]
-1FD9CD74 - 89 4D 88              - mov [ebp-78],ecx
-1FD9CD77 - 8B 48 04              - mov ecx,[eax+04]
-1FD9CD7A - 89 4D 8C              - mov [ebp-74],ecx
-1FD9CD7D - 8B 40 08              - mov eax,[eax+08]
-1FD9CD80 - 89 45 90              - mov [ebp-70],eax
-1FD9CD83 - 8D 47 30              - lea eax,[edi+30]
-1FD9CD86 - 8B 08                 - mov ecx,[eax]
-1FD9CD88 - 89 4D 94              - mov [ebp-6C],ecx
-1FD9CD8B - 8B 48 04              - mov ecx,[eax+04]
-1FD9CD8E - 89 4D 98              - mov [ebp-68],ecx
-1FD9CD91 - 8B 40 08              - mov eax,[eax+08]
-1FD9CD94 - 89 45 9C              - mov [ebp-64],eax
+Camera Speed values:
+1EA6F0C3 - C7 85 ACFEFFFF 00000000 - mov [ebp-00000154],00000000 { 0 }
+1EA6F0CD - C7 85 B0FEFFFF 00000000 - mov [ebp-00000150],00000000 { 0 }
+1EA6F0D7 - C7 85 B4FEFFFF 00000000 - mov [ebp-0000014C],00000000 { 0 }
+1EA6F0E1 - C7 85 B8FEFFFF 00000000 - mov [ebp-00000148],00000000 { 0 }
+1EA6F0EB - C7 85 BCFEFFFF 00000000 - mov [ebp-00000144],00000000 { 0 }
+1EA6F0F5 - C7 85 C0FEFFFF 00000000 - mov [ebp-00000140],00000000 { 0 }
+1EA6F0FF - C7 85 C4FEFFFF 00000000 - mov [ebp-0000013C],00000000 { 0 }
+1EA6F109 - 8B 46 20              - mov eax,[esi+20]
+1EA6F10C - D9 40 1C              - fld dword ptr [eax+1C]					<<<reads movement speed +1C/rotation speed is +24
+1EA6F10F - DD 9D 80FEFFFF        - fstp qword ptr [ebp-00000180]
+1EA6F115 - 83 EC 0C              - sub esp,0C { 12 }
+1EA6F118 - 56                    - push esi
+1EA6F119 - E8 22060000           - call 1EA6F740
+1EA6F11E - 83 C4 10              - add esp,10 { 16 }
+1EA6F121 - DD 85 80FEFFFF        - fld qword ptr [ebp-00000180]
+1EA6F127 - D9C9                  - fxch st(1)
+1EA6F129 - DEC9                  - fmulp st(1),st(0)
+1EA6F12B - DD 9D 88FEFFFF        - fstp qword ptr [ebp-00000178]
+1EA6F131 - 83 EC 0C              - sub esp,0C { 12 }
 
-1FD9B464 - 83 C4 1C              - add esp,1C { 28 }
-1FD9B467 - 8B 45 8C              - mov eax,[ebp-74]
-1FD9B46A - 39 00                 - cmp [eax],eax
-1FD9B46C - 05 3C000000           - add eax,0000003C { 60 }
-1FD9B471 - 8B 4D C0              - mov ecx,[ebp-40]
-1FD9B474 - 89 08                 - mov [eax],ecx					<< coords 2 write
-1FD9B476 - 8B 4D C4              - mov ecx,[ebp-3C]
-1FD9B479 - 89 48 04              - mov [eax+04],ecx					<< Zheight write
-1FD9B47C - 8B 4D C8              - mov ecx,[ebp-38]
-1FD9B47F - 89 48 08              - mov [eax+08],ecx					<< coords1 write
-1FD9B482 - 83 EC 0C              - sub esp,0C { 12 }
-1FD9B485 - 6A 00                 - push 00 { 0 }
-1FD9B487 - E8 7C7D65E8           - call 083F3208
-1FD9B48C - 83 C4 10              - add esp,10 { 16 }
-1FD9B48F - 85 C0                 - test eax,eax
-1FD9B491 - 0F85 25010000         - jne 1FD9B5BC
-1FD9B497 - 8D 45 9C              - lea eax,[ebp-64]
-1FD9B49A - 83 EC 08              - sub esp,08 { 8 }
-1FD9B49D - 56                    - push esi
+Replay borders
+UnityPlayer.dll+4324C0 - 55                    - push ebp
+UnityPlayer.dll+4324C1 - 8B EC                 - mov ebp,esp
+UnityPlayer.dll+4324C3 - 83 EC 08              - sub esp,08 { 8 }
+UnityPlayer.dll+4324C6 - 56                    - push esi
+UnityPlayer.dll+4324C7 - 8B 75 08              - mov esi,[ebp+08]
+UnityPlayer.dll+4324CA - 8B CE                 - mov ecx,esi
+UnityPlayer.dll+4324CC - F3 0F10 86 A0000000   - movss xmm0,[esi+000000A0]			<<<< This code copies border size, copy 0 into esi to remove border	
+UnityPlayer.dll+4324D4 - FF 05 08F15C57        - inc [UnityPlayer.dll+10BF108] { (1) }
+UnityPlayer.dll+4324DA - 57                    - push edi
+UnityPlayer.dll+4324DB - 8D BE 9C000000        - lea edi,[esi+0000009C]
+UnityPlayer.dll+4324E1 - F3 0F11 45 FC         - movss [ebp-04],xmm0
+UnityPlayer.dll+4324E6 - F3 0F10 45 0C         - movss xmm0,[ebp+0C]
+UnityPlayer.dll+4324EB - 6A 01                 - push 01 { 1 }
+UnityPlayer.dll+4324ED - F3 0F11 45 F8         - movss [ebp-08],xmm0
+UnityPlayer.dll+4324F2 - E8 290E0000           - call UnityPlayer.dll+433320
+UnityPlayer.dll+4324F7 - 6A 0A                 - push 0A { 10 }
 
-1FD9B504 - 83 C4 1C              - add esp,1C { 28 }
-1FD9B507 - 8B 45 8C              - mov eax,[ebp-74]
-1FD9B50A - 39 00                 - cmp [eax],eax
-1FD9B50C - 05 3C000000           - add eax,0000003C { 60 }
-1FD9B511 - 8B 4D D8              - mov ecx,[ebp-28]
-1FD9B514 - 89 08                 - mov [eax],ecx
-1FD9B516 - 8B 4D DC              - mov ecx,[ebp-24]
-1FD9B519 - 89 48 04              - mov [eax+04],ecx					<< Zheight write
-1FD9B51C - 8B 4D E0              - mov ecx,[ebp-20]
-1FD9B51F - 89 48 08              - mov [eax+08],ecx
-1FD9B522 - E9 95000000           - jmp 1FD9B5BC
-1FD9B527 - 83 7D 0C 01           - cmp dword ptr [ebp+0C],01 { 1 }
-1FD9B52B - 0F85 8B000000         - jne 1FD9B5BC
-1FD9B531 - 8D 45 A8              - lea eax,[ebp-58]
-1FD9B534 - 83 EC 08              - sub esp,08 { 8 }
-1FD9B537 - 56                    - push esi
+camera struct/coords write
+UnityPlayer.dll+923D6 - FF 34 B0              - push [eax+esi*4]
+UnityPlayer.dll+923D9 - 57                    - push edi
+UnityPlayer.dll+923DA - E8 11E9FFFF           - call UnityPlayer.dll+90CF0
+UnityPlayer.dll+923DF - 0F28 4D F0            - movaps xmm1,[ebp-10]
+UnityPlayer.dll+923E3 - 83 C4 0C              - add esp,0C { 12 }
+UnityPlayer.dll+923E6 - 8D 04 76              - lea eax,[esi+esi*2]
+UnityPlayer.dll+923E9 - C1 E0 04              - shl eax,04 { 4 }
+UnityPlayer.dll+923EC - 03 47 10              - add eax,[edi+10]
+UnityPlayer.dll+923EF - 0F10 00               - movups xmm0,[eax]
+UnityPlayer.dll+923F2 - 0FC2 C1 04            - cmpps xmm0,xmm104 { 4 }
+UnityPlayer.dll+923F6 - 0F11 08               - movups [eax],xmm1					<<<<writes coords get struct from this
+UnityPlayer.dll+923F9 - 0F50 C0               - movmskps eax,xmm0
+UnityPlayer.dll+923FC - A8 07                 - test al,07 { 7 }
+UnityPlayer.dll+923FE - 74 2A                 - je UnityPlayer.dll+9242A
+UnityPlayer.dll+92400 - 8B 43 08              - mov eax,[ebx+08]
+UnityPlayer.dll+92403 - 6A 00                 - push 00 { 0 }
+UnityPlayer.dll+92405 - 6A 00                 - push 00 { 0 }
+UnityPlayer.dll+92407 - FF 70 3C              - push [eax+3C]
+UnityPlayer.dll+9240A - FF 70 38              - push [eax+38]
+UnityPlayer.dll+9240D - FF 70 34              - push [eax+34]
 
-movespeed:
-007BFFFB - 00 00                 - add [eax],al
-007BFFFD - 00 00                 - add [eax],al
-007BFFFF - 00 A3 00007B00        - add [ebx+speed],ah
-007C0005 - D9 40 14              - fld dword ptr [eax+14]			<< move speed read
-007C0008 - DD 9D 80FEFFFF        - fstp qword ptr [ebp-00000180]
-007C000E - E9 92B85D1F           - jmp 1FD9B8A5
-007C0013 - 00 00                 - add [eax],al
-007C0015 - 00 00                 - add [eax],al
+camera quaternion write:
+UnityPlayer.dll+929DB - 0F58 C1               - addps xmm0,xmm1
+UnityPlayer.dll+929DE - 0F28 0D 10873B57      - movaps xmm1,[UnityPlayer.dll+EA8710] { (228737632) }
+UnityPlayer.dll+929E5 - 0FC2 C8 01            - cmpps xmm1,xmm001 { 1 }
+UnityPlayer.dll+929E9 - 0F51 C0               - sqrtps xmm0,xmm0
+UnityPlayer.dll+929EC - 66 0F72 E1  1F        - psrad xmm1,1F { 31 }
+UnityPlayer.dll+929F1 - 0F5E D0               - divps xmm2,xmm0
+UnityPlayer.dll+929F4 - 0F10 41 10            - movups xmm0,[ecx+10]
+UnityPlayer.dll+929F8 - 0F54 D1               - andps xmm2,xmm1
+UnityPlayer.dll+929FB - 0F55 0D 508B3B57      - andnps xmm1,[UnityPlayer.dll+EA8B50] { (0) }
+UnityPlayer.dll+92A02 - 0F56 D1               - orps xmm2,xmm1
+UnityPlayer.dll+92A05 - 0FC2 C2 04            - cmpps xmm0,xmm204 { 4 }
+UnityPlayer.dll+92A09 - 0F11 51 10            - movups [ecx+10],xmm2		<<<<< quaternion write
+UnityPlayer.dll+92A0D - 0F50 C0               - movmskps eax,xmm0
+UnityPlayer.dll+92A10 - 85 C0                 - test eax,eax
+UnityPlayer.dll+92A12 - 74 2D                 - je UnityPlayer.dll+92A41
+UnityPlayer.dll+92A14 - 8B 55 08              - mov edx,[ebp+08]
+UnityPlayer.dll+92A17 - FF 72 3C              - push [edx+3C]
+UnityPlayer.dll+92A1A - 8B 42 44              - mov eax,[edx+44]
+UnityPlayer.dll+92A1D - FF 72 38              - push [edx+38]
+UnityPlayer.dll+92A20 - 8B 4A 40              - mov ecx,[edx+40]
+UnityPlayer.dll+92A23 - 0B 45 18              - or eax,[ebp+18]
+UnityPlayer.dll+92A26 - 0B 4D 14              - or ecx,[ebp+14]
+UnityPlayer.dll+92A29 - 50                    - push eax
+UnityPlayer.dll+92A2A - 51                    - push ecx
+UnityPlayer.dll+92A2B - FF 72 34              - push [edx+34]
+UnityPlayer.dll+92A2E - FF 72 30              - push [edx+30]
+UnityPlayer.dll+92A31 - FF 75 0C              - push [ebp+0C]
+UnityPlayer.dll+92A34 - 52                    - push edx
 
-0843E7F0 - 55                    - push ebp
-0843E7F1 - 8B EC                 - mov ebp,esp
-0843E7F3 - 83 EC 08              - sub esp,08 { 8 }
-0843E7F6 - 8B 45 08              - mov eax,[ebp+08]
-0843E7F9 - 8B 80 D0000000        - mov eax,[eax+000000D0]
-0843E7FF - D9 45 0C              - fld dword ptr [ebp+0C]
-0843E802 - D9 58 14              - fstp dword ptr [eax+14]			<< move speed write
-0843E805 - C9                    - leave 
-0843E806 - C3                    - ret 
-0843E807 - 00 55 8B              - add [ebp-75],dl
-0843E80A - EC                    - in al,dx
-0843E80B - 53                    - push ebx
-0843E80C - 57                    - push edi
-0843E80D - 56                    - push esi
+No Clip:
+1EA7089B - E8 B00E54E9           - call 07FB1750
+1EA708A0 - 83 C4 10              - add esp,10 { 16 }
+1EA708A3 - 85 C0                 - test eax,eax
+1EA708A5 - 0F84 54000000         - je 1EA708FF
+1EA708AB - 8B 45 08              - mov eax,[ebp+08]
+1EA708AE - D9 40 20              - fld dword ptr [eax+20]
+1EA708B1 - DD 5D B8              - fstp qword ptr [ebp-48]
+1EA708B4 - 05 38000000           - add eax,00000038 { 56 }
+1EA708B9 - 8B 00                 - mov eax,[eax]			<<< copies value of no clip (hex 8100 default) set to 0 for no clip
+1EA708BB - 89 45 C8              - mov [ebp-38],eax
+1EA708BE - 83 EC 0C              - sub esp,0C { 12 }
+1EA708C1 - FF 75 C8              - push [ebp-38]
+1EA708C4 - E8 5F58F6FF           - call 1E9D6128
+1EA708C9 - 83 C4 10              - add esp,10 { 16 }
+1EA708CC - DD 45 B8              - fld qword ptr [ebp-48]
+1EA708CF - 83 EC 08              - sub esp,08 { 8 }
+1EA708D2 - 6A 02                 - push 02 { 2 }
+1EA708D4 - 50                    - push eax
+1EA708D5 - 83 EC 04              - sub esp,04 { 4 }
+1EA708D8 - D9 1C 24              - fstp dword ptr [esp]
 
-rotate speed:
-1FD9CAEB - 83 C4 10              - add esp,10 { 16 }
-1FD9CAEE - 85 C0                 - test eax,eax
-1FD9CAF0 - 74 0E                 - je 1FD9CB00
-1FD9CAF2 - D9 45 F4              - fld dword ptr [ebp-0C]
-1FD9CAF5 - D9 05 200A7F1C        - fld dword ptr [1C7F0A20] { [2.50] }
-1FD9CAFB - DEC9                  - fmulp st(1),st(0)
-1FD9CAFD - D9 5D F4              - fstp dword ptr [ebp-0C]
-1FD9CB00 - D9 45 F4              - fld dword ptr [ebp-0C]
-1FD9CB03 - 8B 47 1C              - mov eax,[edi+1C]
-1FD9CB06 - D9 40 1C              - fld dword ptr [eax+1C]			<< rotate speed read 1
-1FD9CB09 - DEC9                  - fmulp st(1),st(0)
-1FD9CB0B - D9 5D F4              - fstp dword ptr [ebp-0C]
-1FD9CB0E - D9 45 F4              - fld dword ptr [ebp-0C]
-1FD9CB11 - D9E0                  - fchs 
-1FD9CB13 - 8D 65 F8              - lea esp,[ebp-08]
-1FD9CB16 - 5E                    - pop esi
-1FD9CB17 - 5F                    - pop edi
-1FD9CB18 - C9                    - leave 
-1FD9CB19 - C3                    - ret 
+aa setting struct
+1E9A327D - 6A 18                 - push 18 { 24 }
+1E9A327F - 6A 00                 - push 00 { 0 }
+1E9A3281 - 50                    - push eax
+1E9A3282 - E8 29E267E9           - call 080214B0
+1E9A3287 - 83 C4 10              - add esp,10 { 16 }
+1E9A328A - 8B 45 08              - mov eax,[ebp+08]
+1E9A328D - 8B 40 0C              - mov eax,[eax+0C]
+1E9A3290 - 8B C8                 - mov ecx,eax
+1E9A3292 - 39 09                 - cmp [ecx],ecx
+1E9A3294 - 0FB6 40 08            - movzx eax,byte ptr [eax+08]		<<<<read of AA settings
+1E9A3298 - 85 C0                 - test eax,eax
+1E9A329A - 0F84 58000000         - je 1E9A32F8
+1E9A32A0 - 8B 45 08              - mov eax,[ebp+08]
+1E9A32A3 - 8B 48 0C              - mov ecx,[eax+0C]
+1E9A32A6 - 8B C1                 - mov eax,ecx
+1E9A32A8 - 39 00                 - cmp [eax],eax
+1E9A32AA - 83 C1 0C              - add ecx,0C { 12 }
+1E9A32AD - 8D 45 E4              - lea eax,[ebp-1C]
+1E9A32B0 - 83 EC 04              - sub esp,04 { 4 }
+1E9A32B3 - 6A 18                 - push 18 { 24 }
+1E9A32B5 - 51                    - push ecx
+1E9A32B6 - 50                    - push eax
+1E9A32B7 - E8 D48561E9           - call 07FBB890
+1E9A32BC - 83 C4 10              - add esp,10 { 16 }
 
-1FD9CCAC - E8 1FD1F6FF           - call 1FD09DD0
-1FD9CCB1 - 83 C4 10              - add esp,10 { 16 }
-1FD9CCB4 - 85 C0                 - test eax,eax
-1FD9CCB6 - 74 09                 - je 1FD9CCC1
-1FD9CCB8 - D9 05 A80A7F1C        - fld dword ptr [1C7F0AA8] { [-0.60] }
-1FD9CCBE - D9 5D F4              - fstp dword ptr [ebp-0C]
-1FD9CCC1 - D9 45 F4              - fld dword ptr [ebp-0C]
-1FD9CCC4 - 8B 47 1C              - mov eax,[edi+1C]
-1FD9CCC7 - D9 40 1C              - fld dword ptr [eax+1C]			<< rotate speed read 2
-1FD9CCCA - DEC9                  - fmulp st(1),st(0)
-1FD9CCCC - D9 5D F4              - fstp dword ptr [ebp-0C]
-1FD9CCCF - 8B 47 1C              - mov eax,[edi+1C]
-1FD9CCD2 - 0FB6 40 27            - movzx eax,byte ptr [eax+27]
-1FD9CCD6 - 85 C0                 - test eax,eax
-1FD9CCD8 - 74 08                 - je 1FD9CCE2
-1FD9CCDA - D9 45 F4              - fld dword ptr [ebp-0C]
-1FD9CCDD - D9E0                  - fchs 
-1FD9CCDF - D9 5D F4              - fstp dword ptr [ebp-0C]
-1FD9CCE2 - D9 45 F4              - fld dword ptr [ebp-0C]
-1FD9CCE5 - 8D 65 F8              - lea esp,[ebp-08]
+ao setting struct:
+1E9A2F85 - 00 00                 - add [eax],al
+1E9A2F87 - 00 55 8B              - add [ebp-75],dl
+1E9A2F8A - EC                    - in al,dx
+1E9A2F8B - 56                    - push esi
+1E9A2F8C - 83 EC 14              - sub esp,14 { 20 }
+1E9A2F8F - C7 45 EC 00000000     - mov [ebp-14],00000000 { 0 }
+1E9A2F96 - C7 45 F0 00000000     - mov [ebp-10],00000000 { 0 }
+1E9A2F9D - C7 45 F4 00000000     - mov [ebp-0C],00000000 { 0 }
+1E9A2FA4 - C7 45 F8 00000000     - mov [ebp-08],00000000 { 0 }
+1E9A2FAB - 8B 45 08              - mov eax,[ebp+08]
+1E9A2FAE - 8B 40 0C              - mov eax,[eax+0C]
+1E9A2FB1 - 8B C8                 - mov ecx,eax
+1E9A2FB3 - 39 09                 - cmp [ecx],ecx
+1E9A2FB5 - 0FB6 40 08            - movzx eax,byte ptr [eax+08]		<<<read of AO settings
+1E9A2FB9 - 85 C0                 - test eax,eax
+1E9A2FBB - 0F84 4D000000         - je 1E9A300E
+1E9A2FC1 - 8B 45 08              - mov eax,[ebp+08]
+1E9A2FC4 - 8B 40 0C              - mov eax,[eax+0C]
+1E9A2FC7 - 8B C8                 - mov ecx,eax
+1E9A2FC9 - 39 09                 - cmp [ecx],ecx
+1E9A2FCB - 05 0C000000           - add eax,0000000C { 12 }
+1E9A2FD0 - 8B 08                 - mov ecx,[eax]
+1E9A2FD2 - 89 4D EC              - mov [ebp-14],ecx
+1E9A2FD5 - 8B 48 04              - mov ecx,[eax+04]
+1E9A2FD8 - 89 4D F0              - mov [ebp-10],ecx
+1E9A2FDB - 8B 48 08              - mov ecx,[eax+08]
+1E9A2FDE - 89 4D F4              - mov [ebp-0C],ecx
+1E9A2FE1 - 8B 40 0C              - mov eax,[eax+0C]
+1E9A2FE4 - 89 45 F8              - mov [ebp-08],eax
+1E9A2FE7 - D9 45 EC              - fld dword ptr [ebp-14]
+1E9A2FEA - D9EE                  - fldz 
+1E9A2FEC - DFF1                  - fcomip st(0),st(1)
+1E9A2FEE - DDD8                  - fstp st(0)
+1E9A2FF0 - 7A 1C                 - jp 1E9A300E
+1E9A2FF2 - 73 1A                 - jae 1E9A300E
+1E9A2FF4 - 8B 45 08              - mov eax,[ebp+08]
+1E9A2FF7 - 8B 40 08              - mov eax,[eax+08]
+1E9A2FFA - 8B C8                 - mov ecx,eax
 
-30C490EA - 00 00                 - add [eax],al
-30C490EC - 00 00                 - add [eax],al
-30C490EE - 00 00                 - add [eax],al
-30C490F0 - 55                    - push ebp
-30C490F1 - 8B EC                 - mov ebp,esp
-30C490F3 - 83 EC 08              - sub esp,08 { 8 }
-30C490F6 - 8B 45 08              - mov eax,[ebp+08]
-30C490F9 - 8B 80 D0000000        - mov eax,[eax+000000D0]
-30C490FF - D9 45 0C              - fld dword ptr [ebp+0C]
-30C49102 - D9 58 1C              - fstp dword ptr [eax+1C]			<< rotate speed write
-30C49105 - C9                    - leave 
-30C49106 - C3                    - ret 
-30C49107 - 00 55 8B              - add [ebp-75],dl
-30C4910A - EC                    - in al,dx
-30C4910B - 53                    - push ebx
-30C4910C - 57                    - push edi
-30C4910D - 56                    - push esi
-30C4910E - 83 EC 2C              - sub esp,2C { 44 }
-30C49111 - 8B 7D 08              - mov edi,[ebp+08]
-30C49114 - D9EE                  - fldz 
-30C49116 - D9 5D EC              - fstp dword ptr [ebp-14]
-
-UnityPlayer.dll+3B7472 - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
-UnityPlayer.dll+3B7476 - C7 46 10 00000000     - mov [esi+10],00000000 { 0 }
-UnityPlayer.dll+3B747D - C7 46 20 00000000     - mov [esi+20],00000000 { 0 }				<< rotate x
-UnityPlayer.dll+3B7484 - C7 46 30 00000000     - mov [esi+30],00000000 { 0 }				<< x offset from focal point
-UnityPlayer.dll+3B748B - C7 46 04 00000000     - mov [esi+04],00000000 { 0 }
-UnityPlayer.dll+3B7492 - F3 0F10 65 10         - movss xmm4,[ebp+10]
-UnityPlayer.dll+3B7497 - F3 0F5E C8            - divss xmm1,xmm0
-UnityPlayer.dll+3B749B - C7 46 24 00000000     - mov [esi+24],00000000 { 0 }				<< rotate z 
-UnityPlayer.dll+3B74A2 - C7 46 34 00000000     - mov [esi+34],00000000 { 0 }				<< z offset from focal point
-UnityPlayer.dll+3B74A9 - C7 46 08 00000000     - mov [esi+08],00000000 { 0 }
-UnityPlayer.dll+3B74B0 - C7 46 18 00000000     - mov [esi+18],00000000 { 0 }
-UnityPlayer.dll+3B74B7 - C7 46 0C 00000000     - mov [esi+0C],00000000 { 0 }
-UnityPlayer.dll+3B74BE - C7 46 1C 00000000     - mov [esi+1C],00000000 { 0 }
-UnityPlayer.dll+3B74C5 - C7 46 2C 000080BF     - mov [esi+2C],BF800000 { -1.00 }			<< weird fisheye
-UnityPlayer.dll+3B74CC - C7 46 3C 00000000     - mov [esi+3C],00000000 { 0 }
-UnityPlayer.dll+3B74D3 - F3 0F10 55 14         - movss xmm2,[ebp+14]
-UnityPlayer.dll+3B74D8 - 0F28 DC               - movaps xmm3,xmm4
-
-201010CE - 00 00                 - add [eax],al
-201010D0 - 55                    - push ebp
-201010D1 - 8B EC                 - mov ebp,esp
-201010D3 - 57                    - push edi
-201010D4 - 83 EC 24              - sub esp,24 { 36 }
-201010D7 - 8B 7D 08              - mov edi,[ebp+08]
-201010DA - D9EE                  - fldz
-201010DC - D9 5D F8              - fstp dword ptr [ebp-08]
-201010DF - D9 87 C8000000        - fld dword ptr [edi+000000C8]
-201010E5 - D9E8                  - fld1
-201010E7 - DFF1                  - fcomip st(0),st(1)
-201010E9 - DDD8                  - fstp st(0)
-201010EB - 0F86 C1000000         - jbe 201011B2			<<<< nop for fov update
-201010F1 - D9 87 C8000000        - fld dword ptr [edi+000000C8]
-201010F7 - DD 5D E0              - fstp qword ptr [ebp-20]
-201010FA - 83 EC 0C              - sub esp,0C { 12 }
-201010FD - 57                    - push edi
-201010FE - E8 9576F6FF           - call 20068798
-20101103 - 83 C4 10              - add esp,10 { 16 }
-20101106 - DD 45 E0              - fld qword ptr [ebp-20]
-20101109 - D9 87 B4000000        - fld dword ptr [edi+000000B4]
-2010110F - D9CA                  - fxch st(2)
-20101111 - D9C9                  - fxch st(1)
-20101113 - D9CA                  - fxch st(2)
-20101115 - DEF9                  - fdivp st(1),st(0)
-20101117 - DEC1                  - faddp
-
-writes 1
-20F7F947 - E8 DCCA14E8           - call 090CC428
-20F7F94C - 83 C4 1C              - add esp,1C { 28 }
-20F7F94F - 8B 45 8C              - mov eax,[ebp-74]
-20F7F952 - 39 00                 - cmp [eax],eax
-20F7F954 - 05 40000000           - add eax,00000040 { 64 }
-20F7F959 - 8B 4D C0              - mov ecx,[ebp-40]
-20F7F95C - 89 08                 - mov [eax],ecx			<<< x write
-20F7F95E - 8B 4D C4              - mov ecx,[ebp-3C]
-20F7F961 - 89 48 04              - mov [eax+04],ecx			<<< y write
-20F7F964 - 8B 4D C8              - mov ecx,[ebp-38]
-20F7F967 - 89 48 08              - mov [eax+08],ecx			<<< z write
-20F7F96A - 83 EC 0C              - sub esp,0C { 12 }		<<< continue here
-20F7F96D - 6A 00                 - push 00 { 0 }
-20F7F96F - E8 14730FE8           - call 09076C88
-20F7F974 - 83 C4 10              - add esp,10 { 16 }
-20F7F977 - 85 C0                 - test eax,eax
-20F7F979 - 0F85 25010000         - jne 20F7FAA4
-20F7F97F - 8D 45 9C              - lea eax,[ebp-64]
-
-writes 2
-20F7F9E7 - E8 3CCA14E8           - call 090CC428
-20F7F9EC - 83 C4 1C              - add esp,1C { 28 }
-20F7F9EF - 8B 45 8C              - mov eax,[ebp-74]
-20F7F9F2 - 39 00                 - cmp [eax],eax
-20F7F9F4 - 05 40000000           - add eax,00000040 { 64 }
-20F7F9F9 - 8B 4D D8              - mov ecx,[ebp-28]
-20F7F9FC - 89 08                 - mov [eax],ecx		<<<< x write 2
-20F7F9FE - 8B 4D DC              - mov ecx,[ebp-24]
-20F7FA01 - 89 48 04              - mov [eax+04],ecx		<<<< y write 2
-20F7FA04 - 8B 4D E0              - mov ecx,[ebp-20]
-20F7FA07 - 89 48 08              - mov [eax+08],ecx		<<<< z write 2
-20F7FA0A - E9 95000000           - jmp 20F7FAA4			<<<< continue here
-20F7FA0F - 83 7D 0C 01           - cmp dword ptr [ebp+0C],01 { 1 }
-20F7FA13 - 0F85 8B000000         - jne 20F7FAA4
-20F7FA19 - 8D 45 A8              - lea eax,[ebp-58]
-20F7FA1C - 83 EC 08              - sub esp,08 { 8 }
-20F7FA1F - 56                    - push esi
-20F7FA20 - 50                    - push eax
-20F7FA21 - E8 86000000           - call 20F7FAAC
-20F7FA26 - 83 C4 0C              - add esp,0C { 12 }
-20F7FA29 - 8B 86 84000000        - mov eax,[esi+00000084]
-20F7FA2F - 8B C8                 - mov ecx,eax
-20F7FA31 - 89 4D 8C              - mov [ebp-74],ecx
-
-writes 3:
-20F81257 - 89 14 24              - mov [esp],edx
-20F8125A - 8B 95 74FFFFFF        - mov edx,[ebp-0000008C]
-20F81260 - 89 54 24 04           - mov [esp+04],edx
-20F81264 - 8B 95 78FFFFFF        - mov edx,[ebp-00000088]
-20F8126A - 89 54 24 08           - mov [esp+08],edx
-20F8126E - 51                    - push ecx
-20F8126F - 50                    - push eax
-20F81270 - E8 7BDBF7FF           - call 20EFEDF0
-20F81275 - 83 C4 1C              - add esp,1C { 28 }
-20F81278 - 8D 47 40              - lea eax,[edi+40]
-20F8127B - 8B 8D 7CFFFFFF        - mov ecx,[ebp-00000084]
-20F81281 - 89 08                 - mov [eax],ecx			<<< x write 3/inject here
-20F81283 - 8B 4D 80              - mov ecx,[ebp-80]
-20F81286 - 89 48 04              - mov [eax+04],ecx			<<< y write 3
-20F81289 - 8B 4D 84              - mov ecx,[ebp-7C]
-20F8128C - 89 48 08              - mov [eax+08],ecx			<<< z write 3
-20F8128F - 8D 47 40              - lea eax,[edi+40]			<<< continue here
-20F81292 - 8B 08                 - mov ecx,[eax]			
-20F81294 - 89 4D 88              - mov [ebp-78],ecx
-20F81297 - 8B 48 04              - mov ecx,[eax+04]
-20F8129A - 89 4D 8C              - mov [ebp-74],ecx
-20F8129D - 8B 40 08              - mov eax,[eax+08]
-20F812A0 - 89 45 90              - mov [ebp-70],eax
-
-20F7B921 - E8 BA37F6FF           - call 20EDF0E0
-20F7B926 - 83 C4 0C              - add esp,0C { 12 }
-20F7B929 - 8B 45 08              - mov eax,[ebp+08]
-20F7B92C - 05 34000000           - add eax,00000034 { 52 }
-20F7B931 - 8B 4D F4              - mov ecx,[ebp-0C]
-20F7B934 - 89 08                 - mov [eax],ecx			<<< rotation write 
-20F7B936 - 8B 4D F8              - mov ecx,[ebp-08]
-20F7B939 - 89 48 04              - mov [eax+04],ecx			<<< rotation write
-20F7B93C - 8B 4D FC              - mov ecx,[ebp-04]
-20F7B93F - 89 48 08              - mov [eax+08],ecx			<<< rotation write
-20F7B942 - C9                    - leave 
-20F7B943 - C3                    - ret 
-20F7B944 - 00 00                 - add [eax],al
-20F7B946 - 00 00                 - add [eax],al
-20F7B948 - 55                    - push ebp
-20F7B949 - 8B EC                 - mov ebp,esp
-20F7B94B - 53                    - push ebx
-20F7B94C - 83 EC 44              - sub esp,44 { 68 }
+bloom setting struct:
+1E9A349F - 8D 45 E0              - lea eax,[ebp-20]
+1E9A34A2 - 83 EC 04              - sub esp,04 { 4 }
+1E9A34A5 - 6A 1C                 - push 1C { 28 }
+1E9A34A7 - 6A 00                 - push 00 { 0 }
+1E9A34A9 - 50                    - push eax
+1E9A34AA - E8 01E067E9           - call 080214B0
+1E9A34AF - 83 C4 10              - add esp,10 { 16 }
+1E9A34B2 - 8B 45 08              - mov eax,[ebp+08]
+1E9A34B5 - 8B 40 0C              - mov eax,[eax+0C]
+1E9A34B8 - 8B C8                 - mov ecx,eax
+1E9A34BA - 39 09                 - cmp [ecx],ecx
+1E9A34BC - 0FB6 40 08            - movzx eax,byte ptr [eax+08]		<<<Bloom setting read
+1E9A34C0 - 85 C0                 - test eax,eax
+1E9A34C2 - 0F84 46000000         - je 1E9A350E
+1E9A34C8 - 8B 45 08              - mov eax,[ebp+08]
+1E9A34CB - 8B 48 0C              - mov ecx,[eax+0C]
+1E9A34CE - 8B C1                 - mov eax,ecx
+1E9A34D0 - 39 00                 - cmp [eax],eax
+1E9A34D2 - 83 C1 0C              - add ecx,0C { 12 }
+1E9A34D5 - 8D 45 E0              - lea eax,[ebp-20]
+1E9A34D8 - 83 EC 04              - sub esp,04 { 4 }
+1E9A34DB - 6A 1C                 - push 1C { 28 }
+1E9A34DD - 51                    - push ecx
+1E9A34DE - 50                    - push eax
+1E9A34DF - E8 AC8361E9           - call 07FBB890
+1E9A34E4 - 83 C4 10              - add esp,10 { 16 }
+1E9A34E7 - D9 45 E0              - fld dword ptr [ebp-20]
+1E9A34EA - D9EE                  - fldz 
+1E9A34EC - DFF1                  - fcomip st(0),st(1)
+1E9A34EE - DDD8                  - fstp st(0)
+1E9A34F0 - 7A 1C                 - jp 1E9A350E
+1E9A34F2 - 73 1A                 - jae 1E9A350E
+1E9A34F4 - 8B 45 08              - mov eax,[ebp+08]
+1E9A34F7 - 8B 40 08              - mov eax,[eax+08]
+1E9A34FA - 8B C8                 - mov ecx,eax
+1E9A34FC - 39 09                 - cmp [ecx],ecx
+1E9A34FE - 0FB6 40 18            - movzx eax,byte ptr [eax+18]
+1E9A3502 - 85 C0                 - test eax,eax
+1E9A3504 - 0F94 C0               - sete al
+1E9A3507 - 0FB6 C0               - movzx eax,al
+1E9A350A - 8B F0                 - mov esi,eax
+1E9A350C - EB 02                 - jmp 1E9A3510
+1E9A350E - 33 F6                 - xor esi,esi
+1E9A3510 - 8B C6                 - mov eax,esi
+1E9A3512 - 8D 65 FC              - lea esp,[ebp-04]
+1E9A3515 - 5E                    - pop esi
+1E9A3516 - C9                    - leave 
+1E9A3517 - C3                    - ret 
 
