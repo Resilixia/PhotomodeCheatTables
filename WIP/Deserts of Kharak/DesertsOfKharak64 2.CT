@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"No description"</Description>
+      <LastState Value="686588744" RealAddress="7FF6DC325EF0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>00007FF6DC325EF0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"No description"</Description>
+      <LastState Value="44474" RealAddress="9E19DED0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>000000009E19DED0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"No description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>000000006E37CB30</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"No description"</Description>
+      <LastState Value="0" RealAddress="7FFE91FD0328"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>7FFE91FD0328</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Code :call rsi</Description>
+      <AddressString>mono.dll+124085</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>C4</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>D6</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D6</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8D</Byte>
+        <Byte>40</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jmp mono.mono_set_defaults+2B9B</Description>
+      <AddressString>mono.dll+12406C</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>4C</Byte>
+        <Byte>99</Byte>
+        <Byte>F5</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>19</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of jmp mono.mono_set_defaults+2B9B</Description>
+      <AddressString>mono.dll+124075</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
