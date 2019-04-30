@@ -1,0 +1,33 @@
+FC_m64.dll+1F034E4 - 4C 8B 4D BF           - mov r9,[rbp-41]
+FC_m64.dll+1F034E8 - 0FB6 D0               - movzx edx,al
+FC_m64.dll+1F034EB - 84 C0                 - test al,al
+FC_m64.dll+1F034ED - 74 18                 - je FC_m64.dll+1F03507
+FC_m64.dll+1F034EF - 41 8B 49 10           - mov ecx,[r9+10]
+FC_m64.dll+1F034F3 - F2 41 0F10 41 08      - movsd xmm0,[r9+08]
+FC_m64.dll+1F034F9 - 89 4D 9F              - mov [rbp-61],ecx
+FC_m64.dll+1F034FC - 48 8D 4D 97           - lea rcx,[rbp-69]
+FC_m64.dll+1F03500 - F2 0F11 45 97         - movsd [rbp-69],xmm0
+FC_m64.dll+1F03505 - EB 3C                 - jmp FC_m64.dll+1F03543				<< photomode range nop
+FC_m64.dll+1F03507 - 0F28 C6               - movaps xmm0,xmm6
+FC_m64.dll+1F0350A - 48 8D 4D A3           - lea rcx,[rbp-5D]
+FC_m64.dll+1F0350E - F3 0F58 87 B4040000   - addss xmm0,dword ptr [rdi+000004B4]
+FC_m64.dll+1F03516 - 41 0F28 D0            - movaps xmm2,xmm8
+FC_m64.dll+1F0351A - 0F28 CF               - movaps xmm1,xmm7
+FC_m64.dll+1F0351D - F3 0F58 97 AC040000   - addss xmm2,dword ptr [rdi+000004AC]
+FC_m64.dll+1F03525 - F3 0F58 8F B0040000   - addss xmm1,dword ptr [rdi+000004B0]
+FC_m64.dll+1F0352D - F3 0F11 45 B7         - movss [rbp-49],xmm0
+FC_m64.dll+1F03532 - 8B 45 B7              - mov eax,[rbp-49]
+FC_m64.dll+1F03535 - 0F28 C2               - movaps xmm0,xmm2
+FC_m64.dll+1F03538 - 89 45 AB              - mov [rbp-55],eax
+FC_m64.dll+1F0353B - 0F14 C1               - unpcklps xmm0,xmm1
+FC_m64.dll+1F0353E - F2 0F11 45 A3         - movsd [rbp-5D],xmm0
+FC_m64.dll+1F03543 - 8B 01                 - mov eax,[rcx]
+FC_m64.dll+1F03545 - 89 87 AC040000        - mov [rdi+000004AC],eax
+FC_m64.dll+1F0354B - 8B 41 04              - mov eax,[rcx+04]
+FC_m64.dll+1F0354E - 89 87 B0040000        - mov [rdi+000004B0],eax
+FC_m64.dll+1F03554 - 8B 41 08              - mov eax,[rcx+08]
+FC_m64.dll+1F03557 - 89 87 B4040000        - mov [rdi+000004B4],eax
+
+74 18 41 8B 49 10 F2 41 0F 10 41 08 89 4D 9F 48 8D 4D 97 F2 0F 11 45 97
+
+0F 57 FF F3 41 0F 5C 84 24 B4 04 00 00 41 0F 28 C8 41 0F 28 D1 F3 41 0F 5C 94 24 B0 04 00 00 F3 41 0F 5C 8C 24 AC 04 00 00 F3 0F 59 C0 F3 0F 11 55 7C F3 0F 59 D2
