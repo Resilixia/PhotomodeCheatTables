@@ -1,0 +1,97 @@
+DOF:
+dirtrally2.exe+63BDCE - CC                    - int 3 
+dirtrally2.exe+63BDCF - CC                    - int 3 
+dirtrally2.exe+63BDD0 - 48 8B 81 A8010000     - mov rax,[rcx+000001A8]
+dirtrally2.exe+63BDD7 - F3 0F11 88 C8250000   - movss [rax+000025C8],xmm1	>>>DOF
+dirtrally2.exe+63BDDF - C3                    - ret 
+dirtrally2.exe+63BDE0 - 48 89 91 38020000     - mov [rcx+00000238],rdx
+dirtrally2.exe+63BDE7 - C3                    - ret 
+dirtrally2.exe+63BDE8 - CC                    - int 3 
+
+
+quaternion location:
+dirtrally2.exe+9FCB67 - 33 C0                 - xor eax,eax
+dirtrally2.exe+9FCB69 - 48 83 C4 20           - add rsp,20 { 32 }
+dirtrally2.exe+9FCB6D - 5B                    - pop rbx
+dirtrally2.exe+9FCB6E - C3                    - ret 
+dirtrally2.exe+9FCB6F - CC                    - int 3 
+dirtrally2.exe+9FCB70 - 48 8D 81 40010000     - lea rax,[rcx+00000140] <<<loads address for current camera
+dirtrally2.exe+9FCB77 - C3                    - ret 
+dirtrally2.exe+9FCB78 - CC                    - int 3 
+dirtrally2.exe+9FCB79 - CC                    - int 3 
+dirtrally2.exe+9FCB7A - CC                    - int 3 
+dirtrally2.exe+9FCB7B - CC                    - int 3 
+dirtrally2.exe+9FCB7C - CC                    - int 3 
+dirtrally2.exe+9FCB7D - CC                    - int 3 
+
+
+
+
+problem write:
+dirtrally2.exe+B600E9 - 0F28 C6               - movaps xmm0,xmm6
+dirtrally2.exe+B600EC - 0F28 74 24 10         - movaps xmm6,[rsp+10]
+dirtrally2.exe+B600F1 - F3 0F10 D1            - movss xmm2,xmm1
+dirtrally2.exe+B600F5 - 0FC6 D2 E1            - shufps xmm2,xmm2,-1F { 225 }
+dirtrally2.exe+B600F9 - 0F28 C8               - movaps xmm1,xmm0
+dirtrally2.exe+B600FC - 0FC6 D2 C6            - shufps xmm2,xmm2,-3A { 198 }
+dirtrally2.exe+B60100 - 0F28 C7               - movaps xmm0,xmm7
+dirtrally2.exe+B60103 - 0F28 3C 24            - movaps xmm7,[rsp]
+dirtrally2.exe+B60107 - F3 0F10 D1            - movss xmm2,xmm1
+dirtrally2.exe+B6010B - 0FC6 D2 C6            - shufps xmm2,xmm2,-3A { 198 }
+dirtrally2.exe+B6010F - 0F28 C8               - movaps xmm1,xmm0
+dirtrally2.exe+B60112 - 0FC6 D2 27            - shufps xmm2,xmm2,27 { 39 }
+dirtrally2.exe+B60116 - F3 0F10 D1            - movss xmm2,xmm1
+dirtrally2.exe+B6011A - 0FC6 D2 27            - shufps xmm2,xmm2,27 { 39 }
+dirtrally2.exe+B6011E - 0F29 12               - movaps [rdx],xmm2  <<<<
+dirtrally2.exe+B60121 - 48 83 C4 28           - add rsp,28 { 40 }
+dirtrally2.exe+B60125 - C3                    - ret 
+
+
+call 1 to rotation quat write 
+dirtrally2.exe+996A3F - 48 8D 54 24 30        - lea rdx,[rsp+30]
+dirtrally2.exe+996A44 - 41 B8 08000000        - mov r8d,00000008 { 8 }
+dirtrally2.exe+996A4A - FF 50 10              - call qword ptr [rax+10]
+dirtrally2.exe+996A4D - 48 8B D3              - mov rdx,rbx
+dirtrally2.exe+996A50 - 48 8D 4C 24 30        - lea rcx,[rsp+30]
+dirtrally2.exe+996A55 - E8 C6951C00           - call dirtrally2.exe+B60020  <<<<
+dirtrally2.exe+996A5A - 48 83 C4 20           - add rsp,20 { 32 }
+dirtrally2.exe+996A5E - 5B                    - pop rbx
+
+
+call 2 to rotation quat write
+dirtrally2.exe+996A3F - 48 8D 54 24 30        - lea rdx,[rsp+30]
+dirtrally2.exe+996A44 - 41 B8 08000000        - mov r8d,00000008 { 8 }
+dirtrally2.exe+996A4A - FF 50 10              - call qword ptr [rax+10]
+dirtrally2.exe+996A4D - 48 8B D3              - mov rdx,rbx
+dirtrally2.exe+996A50 - 48 8D 4C 24 30        - lea rcx,[rsp+30]
+dirtrally2.exe+996A55 - E8 C6951C00           - call dirtrally2.exe+B60020 <<<
+dirtrally2.exe+996A5A - 48 83 C4 20           - add rsp,20 { 32 }
+dirtrally2.exe+996A5E - 5B                    - pop rbx
+dirtrally2.exe+996A5F - C3                    - ret 
+
+call to second quat write:
+dirtrally2.exe+A0111C - 7C 3E                 - jl dirtrally2.exe+A0115C
+dirtrally2.exe+A0111E - 80 7C 24 60 00        - cmp byte ptr [rsp+60],00 { 0 }
+dirtrally2.exe+A01123 - 74 37                 - je dirtrally2.exe+A0115C
+dirtrally2.exe+A01125 - 48 8D 9F 40010000     - lea rbx,[rdi+00000140]
+dirtrally2.exe+A0112C - C6 87 E6020000 00     - mov byte ptr [rdi+000002E6],00 { 0 }
+dirtrally2.exe+A01133 - 44 0FB6 CD            - movzx r9d,bpl
+dirtrally2.exe+A01137 - 48 89 5C 24 20        - mov [rsp+20],rbx
+dirtrally2.exe+A0113C - 0F28 D6               - movaps xmm2,xmm6
+dirtrally2.exe+A0113F - 48 8B D6              - mov rdx,rsi
+dirtrally2.exe+A01142 - 48 8B CF              - mov rcx,rdi
+dirtrally2.exe+A01145 - E8 E6190000           - call dirtrally2.exe+A02B30	<<<<<<<<<
+dirtrally2.exe+A0114A - 44 0FB6 CD            - movzx r9d,bpl
+dirtrally2.exe+A0114E - 0F28 D6               - movaps xmm2,xmm6
+dirtrally2.exe+A01151 - 48 8B D6              - mov rdx,rsi
+dirtrally2.exe+A01154 - 48 8B CB              - mov rcx,rbx
+dirtrally2.exe+A01157 - E8 C40D0000           - call dirtrally2.exe+A01F20
+dirtrally2.exe+A0115C - 48 8B 5C 24 68        - mov rbx,[rsp+68]
+dirtrally2.exe+A01161 - 0F28 74 24 30         - movaps xmm6,[rsp+30]
+dirtrally2.exe+A01166 - C6 87 E5020000 00     - mov byte ptr [rdi+000002E5],00 { 0 }
+dirtrally2.exe+A0116D - 48 83 C4 40           - add rsp,40 { 64 }
+dirtrally2.exe+A01171 - 5F                    - pop rdi
+dirtrally2.exe+A01172 - 5E                    - pop rsi
+dirtrally2.exe+A01173 - 5D                    - pop rbp
+
+
