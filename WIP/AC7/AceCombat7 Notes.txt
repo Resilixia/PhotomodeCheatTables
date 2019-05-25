@@ -69,3 +69,77 @@ Ace7Game.exe+EAA797C - 0F11 83 18040000      - movups [rbx+00000418],xmm0
 Ace7Game.exe+EAA7983 - 83 E0 03              - and eax,03 { 3 }
 Ace7Game.exe+EAA7986 - F3 0F10 44 24 48      - movss xmm0,[rsp+48]
 
+Static hud:
+Ace7Game.exe+C9E43FD - 48 8D 55 D0           - lea rdx,[rbp-30]
+Ace7Game.exe+C9E4401 - 66 0F7F 45 C0         - movdqa [rbp-40],xmm0
+Ace7Game.exe+C9E4406 - 45 85 F6              - test r14d,r14d
+Ace7Game.exe+C9E4409 - 4C 89 E8              - mov rax,r13
+Ace7Game.exe+C9E440C - 48 89 BD A0000000     - mov [rbp+000000A0],rdi
+Ace7Game.exe+C9E4413 - 48 0F4E C1            - cmovle rax,rcx
+Ace7Game.exe+C9E4417 - 89 9D A8000000        - mov [rbp+000000A8],ebx
+Ace7Game.exe+C9E441D - 48 8D 4D A0           - lea rcx,[rbp-60]
+Ace7Game.exe+C9E4421 - 0F10 00               - movups xmm0,[rax]          << one of 2 addresses in rax
+Ace7Game.exe+C9E4424 - 48 8D 45 C0           - lea rax,[rbp-40]
+Ace7Game.exe+C9E4428 - 48 89 44 24 38        - mov [rsp+38],rax
+Ace7Game.exe+C9E442D - 48 8D 45 30           - lea rax,[rbp+30]
+Ace7Game.exe+C9E4431 - 48 89 44 24 30        - mov [rsp+30],rax
+Ace7Game.exe+C9E4436 - 48 8D 85 A0000000     - lea rax,[rbp+000000A0]
+Ace7Game.exe+C9E443D - 0F29 45 30            - movaps [rbp+30],xmm0
+Ace7Game.exe+C9E4441 - F3 0F10 05 DB4BC6F6   - movss xmm0,[Ace7Game.exe+3649024] { (2.20) }
+
+OR
+
+Ace7Game.exe+CB5DB82 - 48 89 81 C0000000     - mov [rcx+000000C0],rax
+Ace7Game.exe+CB5DB89 - 48 89 81 C8000000     - mov [rcx+000000C8],rax
+Ace7Game.exe+CB5DB90 - 48 89 81 D0000000     - mov [rcx+000000D0],rax
+Ace7Game.exe+CB5DB97 - 48 89 81 D8000000     - mov [rcx+000000D8],rax
+Ace7Game.exe+CB5DB9E - 48 89 81 E0000000     - mov [rcx+000000E0],rax
+Ace7Game.exe+CB5DBA5 - 48 89 81 E8000000     - mov [rcx+000000E8],rax
+Ace7Game.exe+CB5DBAC - 48 89 81 F0000000     - mov [rcx+000000F0],rax
+Ace7Game.exe+CB5DBB3 - 48 89 81 00010000     - mov [rcx+00000100],rax
+Ace7Game.exe+CB5DBBA - C7 81 F8000000 FFFFFFFF - mov [rcx+000000F8],FFFFFFFF { (0) }
+Ace7Game.exe+CB5DBC4 - 0F10 05 1572EFF6      - movups xmm0,[Ace7Game.exe+3A54DE0] { (0.00) }
+Ace7Game.exe+CB5DBCB - 0F11 81 08010000      - movups [rcx+00000108],xmm0
+Ace7Game.exe+CB5DBD2 - 0F10 0D 0772EFF6      - movups xmm1,[Ace7Game.exe+3A54DE0] { (0.00) }
+Ace7Game.exe+CB5DBD9 - 0F11 89 18010000      - movups [rcx+00000118],xmm1
+Ace7Game.exe+CB5DBE0 - 0F10 05 C963ADF6      - movups xmm0,[Ace7Game.exe+3633FB0] { (1.00) }   <<<this is hud opacity
+Ace7Game.exe+CB5DBE7 - 89 81 38010000        - mov [rcx+00000138],eax
+Ace7Game.exe+CB5DBED - C7 81 3C010000 0000C842 - mov [rcx+0000013C],42C80000 { (0) }
+Ace7Game.exe+CB5DBF7 - 0F11 81 28010000      - movups [rcx+00000128],xmm0
+Ace7Game.exe+CB5DBFE - 48 89 81 40010000     - mov [rcx+00000140],rax
+Ace7Game.exe+CB5DC05 - 48 89 81 48010000     - mov [rcx+00000148],rax
+Ace7Game.exe+CB5DC0C - 48 89 81 60010000     - mov [rcx+00000160],rax
+Ace7Game.exe+CB5DC13 - 48 89 81 68010000     - mov [rcx+00000168],rax
+Ace7Game.exe+CB5DC1A - 89 81 74010000        - mov [rcx+00000174],eax
+Ace7Game.exe+CB5DC20 - C7 81 70010000 FFFFFFFF - mov [rcx+00000170],FFFFFFFF { (0) }
+Ace7Game.exe+CB5DC2A - 48 89 81 80010000     - mov [rcx+00000180],rax
+Ace7Game.exe+CB5DC31 - 89 81 88010000        - mov [rcx+00000188],eax
+Ace7Game.exe+CB5DC37 - 88 81 E0010000        - mov [rcx+000001E0],al
+Ace7Game.exe+CB5DC3D - 48 C7 81 E8010000 FFFFFFFF - mov qword ptr [rcx+000001E8],FFFFFFFF { (0) }
+
+
+dynamic hud elements
+Ace7Game.exe+713AB2C - C3                    - ret 
+Ace7Game.exe+713AB2D - 68 66904053           - push 53409066 { (0) }
+Ace7Game.exe+713AB32 - 48 83 EC 20           - sub rsp,20 { 32 }
+Ace7Game.exe+713AB36 - 80 B9 A00C0000 00     - cmp byte ptr [rcx+00000CA0],00 { 0 }
+Ace7Game.exe+713AB3D - 48 89 CB              - mov rbx,rcx
+Ace7Game.exe+713AB40 - 74 08                 - je Ace7Game.exe+713AB4A
+Ace7Game.exe+713AB42 - 30 C0                 - xor al,al
+Ace7Game.exe+713AB44 - 48 83 C4 20           - add rsp,20 { 32 }
+Ace7Game.exe+713AB48 - 5B                    - pop rbx
+Ace7Game.exe+713AB49 - C3                    - ret 
+Ace7Game.exe+713AB4A - 80 B9 260C0000 00     - cmp byte ptr [rcx+00000C26],00 { 0 }
+Ace7Game.exe+713AB51 - 74 16                 - je Ace7Game.exe+713AB69
+Ace7Game.exe+713AB53 - 80 3D A6CF3EFC 00     - cmp byte ptr [Ace7Game.AmdPowerXpressRequestHighPerformance+AA48],00 { (1),0 }  <<this one
+Ace7Game.exe+713AB5A - 74 0D                 - je Ace7Game.exe+713AB69
+Ace7Game.exe+713AB5C - E8 FF336AF9           - call Ace7Game.exe+7DDF60
+Ace7Game.exe+713AB61 - 84 C0                 - test al,al
+Ace7Game.exe+713AB63 - 74 04                 - je Ace7Game.exe+713AB69
+Ace7Game.exe+713AB65 - B0 01                 - mov al,01 { 1 }
+Ace7Game.exe+713AB67 - EB 02                 - jmp Ace7Game.exe+713AB6B
+Ace7Game.exe+713AB69 - 30 C0                 - xor al,al
+Ace7Game.exe+713AB6B - 0F57 C0               - xorps xmm0,xmm0
+Ace7Game.exe+713AB6E - 0F2F 83 5C0C0000      - comiss xmm0,[rbx+00000C5C]
+Ace7Game.exe+713AB75 - 73 1A                 - jae Ace7Game.exe+713AB91
+
