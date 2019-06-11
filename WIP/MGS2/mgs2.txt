@@ -1,0 +1,173 @@
+
+300F708E - 83 E1 F0              - and ecx,-10 { 240 }
+300F7091 - 89 C8                 - mov eax,ecx
+300F7093 - C1 E8 0C              - shr eax,0C { 12 }
+300F7096 - 8B 04 85 30802C0E     - mov eax,[eax*4+0E2C8030]
+300F709D - BB B0700F30           - mov ebx,300F70B0 { (3.69) }
+300F70A2 - 01 C1                 - add ecx,eax
+300F70A4 - 0F88 16A230D2         - js pcsx2.exe+22012C0
+300F70AA - 0F28 22               - movaps xmm4,[edx]
+300F70AD - 0F29 21               - movaps [ecx],xmm4		<<<
+300F70B0 - BA 909BA300           - mov edx,pcsx2.exe+839B90 { (0) }
+300F70B5 - 8B 0D 409BA300        - mov ecx,[pcsx2.exe+839B40] { (0) }
+300F70BB - 83 C1 10              - add ecx,10 { 16 }
+300F70BE - 83 E1 F0              - and ecx,-10 { 240 }
+300F70C1 - 89 C8                 - mov eax,ecx
+300F70C3 - C1 E8 0C              - shr eax,0C { 12 }
+300F70C6 - 8B 04 85 30802C0E     - mov eax,[eax*4+0E2C8030]
+300F70CD - BB E0700F30           - mov ebx,300F70E0 { (3.69) }
+300F70D2 - 01 C1                 - add ecx,eax
+300F70D4 - 0F88 E6A130D2         - js pcsx2.exe+22012C0
+300F70DA - 0F28 2A               - movaps xmm5,[edx]
+300F70DD - 0F29 29               - movaps [ecx],xmm5		<<<
+300F70E0 - BA A09BA300           - mov edx,pcsx2.exe+839BA0 { (0) }
+300F70E5 - 8B 0D 409BA300        - mov ecx,[pcsx2.exe+839B40] { (0) }
+300F70EB - 83 C1 20              - add ecx,20 { 32 }
+300F70EE - 83 E1 F0              - and ecx,-10 { 240 }
+300F70F1 - 89 C8                 - mov eax,ecx
+300F70F3 - C1 E8 0C              - shr eax,0C { 12 }
+300F70F6 - 8B 04 85 30802C0E     - mov eax,[eax*4+0E2C8030]
+300F70FD - BB 10710F30           - mov ebx,300F7110 { (-1661979253) }
+300F7102 - 01 C1                 - add ecx,eax
+300F7104 - 0F88 B6A130D2         - js pcsx2.exe+22012C0
+300F710A - 0F28 32               - movaps xmm6,[edx]
+300F710D - 0F29 31               - movaps [ecx],xmm6		<<<
+300F7110 - 8B 35 F09CA300        - mov esi,[pcsx2.exe+839CF0] { (0) }
+300F7116 - BA A02CAE00           - mov edx,pcsx2.exe+8E2CA0 { (40000001) }
+300F711B - 8B 0D 409BA300        - mov ecx,[pcsx2.exe+839B40] { (0) }
+300F7121 - 83 C1 30              - add ecx,30 { 48 }
+300F7124 - 89 C8                 - mov eax,ecx
+300F7126 - C1 E8 0C              - shr eax,0C { 12 }
+300F7129 - 8B 04 85 30802C0E     - mov eax,[eax*4+0E2C8030]
+300F7130 - BB 43710F30           - mov ebx,300F7143 { (137) }
+300F7135 - 01 C1                 - add ecx,eax
+300F7137 - 0F88 83A130D2         - js pcsx2.exe+22012C0
+300F713D - 0F28 3A               - movaps xmm7,[edx]
+300F7140 - 0F29 39               - movaps [ecx],xmm7		<<<
+300F7143 - 89 35 A89DA300        - mov [pcsx2.exe+839DA8],esi { (532416) }
+300F7149 - A1 C09EA300           - mov eax,[pcsx2.exe+839EC0] { (-1982913422) }
+300F714E - 83 C0 27              - add eax,27 { 39 }
+300F7151 - A3 C09EA300           - mov [pcsx2.exe+839EC0],eax { (-1982913422) }
+300F7156 - 2B 05 807EA200        - sub eax,[pcsx2.exe+827E80] { (-1982913418) }
+300F715C - 0F88 A3BE38D2         - js pcsx2.exe+2283005
+300F7162 - E9 99BE38D2           - jmp pcsx2.exe+2283000
+300F7167 - A1 009CA300           - mov eax,[pcsx2.exe+839C00] { (0) }
+300F716C - 8B 15 049CA300        - mov edx,[pcsx2.exe+839C04] { (0) }
+300F7172 - A3 409BA300           - mov [pcsx2.exe+839B40],eax { (0) }
+300F7177 - 89 15 449BA300        - mov [pcsx2.exe+839B44],edx { (0) }
+300F717D - 8B 0D 109CA300        - mov ecx,[pcsx2.exe+839C10] { (0) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WRONG COORDS
+30BE917C - 89 C8                 - mov eax,ecx
+30BE917E - C1 E8 0C              - shr eax,0C { 12 }
+30BE9181 - 8B 04 85 30C0851F     - mov eax,[eax*4+1F85C030]
+30BE9188 - BB 9791BE30           - mov ebx,30BE9197 { (199) }
+30BE918D - 01 C1                 - add ecx,eax
+30BE918F - 0F88 AB8081D1         - js pcsx2.exe+2201240
+30BE9195 - 89 11                 - mov [ecx],edx
+30BE9197 - C7 05 A89DA300 FC022600 - mov [pcsx2.exe+839DA8],pcsx2.exe+602FC { (1371680),(-858993460) }
+30BE91A1 - 83 05 C09EA300 05     - add dword ptr [pcsx2.exe+839EC0],05 { (3093DBB4),5 }
+30BE91A8 - E9 6C9E89D1           - jmp pcsx2.exe+2283019
+30BE91AD - 8B 15 907EA200        - mov edx,[pcsx2.exe+827E90] { (0.00) }
+30BE91B3 - 8B 0D 209CA300        - mov ecx,[pcsx2.exe+839C20] { (0) }
+30BE91B9 - 83 C1 20              - add ecx,20 { 32 }
+30BE91BC - 89 C8                 - mov eax,ecx
+30BE91BE - C1 E8 0C              - shr eax,0C { 12 }
+30BE91C1 - 8B 04 85 30C0851F     - mov eax,[eax*4+1F85C030]
+30BE91C8 - BB D791BE30           - mov ebx,30BE91D7 { (199) }
+30BE91CD - 01 C1                 - add ecx,eax
+30BE91CF - 0F88 6B8081D1         - js pcsx2.exe+2201240
+30BE91D5 - 89 11                 - mov [ecx],edx				<<<fov write
+30BE91D7 - C7 05 A89DA300 1CBE1000 - mov [pcsx2.exe+839DA8],0010BE1C { (003DB060),1097244 }
+30BE91E1 - 83 05 C09EA300 01     - add dword ptr [pcsx2.exe+839EC0],01 { (30971C19),1 }
+30BE91E8 - E9 85DEFFFF           - jmp 30BE7072
+30BE91ED - B9 1CEB2D00           - mov ecx,pcsx2.exe+DEB1C { (-2142714751) }
+30BE91F2 - BA 02000000           - mov edx,00000002 { 2 }
+30BE91F7 - 81 3D 1CEB2D20 0000228E - cmp [202DEB1C],8E220000 { (30420001),-1910374400 }
+30BE9201 - 0F85 649E89D1         - jne pcsx2.exe+228306B
+30BE9207 - 81 3D 20EB2D20 FFFF4224 - cmp [202DEB20],2442FFFF { (00431025),608370687 }
+30BE9211 - 0F85 549E89D1         - jne pcsx2.exe+228306B
+30BE9217 - 66 83 05 BC454802 02  - add word ptr [pcsx2.exe+22845BC],02 { (0),2 }
+30BE921F - 0F82 4D9E89D1         - jb pcsx2.exe+2283072
+30BE9225 - 8B 0D 109CA300        - mov ecx,[pcsx2.exe+839C10] { (01637B70) }
+30BE922B - 89 C8                 - mov eax,ecx
+30BE922D - C1 E8 0C              - shr eax,0C { 12 }
+30BE9230 - 8B 04 85 30C0851F     - mov eax,[eax*4+1F85C030]
+
+
+coord
+30089804 - 0F54 3D D05D8100      - andps xmm7,[pcsx2.exe+615DD0] { (-2147483648) }
+3008980B - F3 0F58 C7            - addss xmm0,xmm7
+3008980F - EB 26                 - jmp 30089837
+30089811 - 49                    - dec ecx
+30089812 - BB FFFFFFFF           - mov ebx,FFFFFFFF { -1 }
+30089817 - D3 E3                 - shl ebx,cl
+30089819 - 66 0F6E FB            - movd xmm7,ebx
+3008981D - 0F54 F9               - andps xmm7,xmm1
+30089820 - F3 0F58 C7            - addss xmm0,xmm7
+30089824 - EB 11                 - jmp 30089837
+30089826 - 0F54 05 D05D8100      - andps xmm0,[pcsx2.exe+615DD0] { (-2147483648) }
+3008982D - F3 0F58 C1            - addss xmm0,xmm1
+30089831 - EB 04                 - jmp 30089837
+30089833 - F3 0F58 C1            - addss xmm0,xmm1
+30089837 - F3 0F5D 05 805D8100   - minss xmm0,[pcsx2.exe+615D80] { (340282346638528860000000000000000000000.00) }
+3008983F - F3 0F5F 05 905D8100   - maxss xmm0,[pcsx2.exe+615D90] { (-340282346638528860000000000000000000000.00) }
+30089847 - F3 0F11 05 947EA200   - movss [pcsx2.exe+827E94],xmm0 { (0.00) }
+3008984F - 8B 15 947EA200        - mov edx,[pcsx2.exe+827E94] { (0) }
+30089855 - 8B 0D 409BA300        - mov ecx,[pcsx2.exe+839B40] { (0) }
+3008985B - F3 0F11 0D 907EA200   - movss [pcsx2.exe+827E90],xmm1 { (0.00) }
+30089863 - 89 C8                 - mov eax,ecx
+30089865 - C1 E8 0C              - shr eax,0C { 12 }
+30089868 - 8B 04 85 30C0851F     - mov eax,[eax*4+1F85C030]
+3008986F - BB 7E980830           - mov ebx,3008987E { (131) }
+30089874 - 01 C1                 - add ecx,eax
+30089876 - 0F88 C47937D2         - js pcsx2.exe+2201240
+3008987C - 89 11                 - mov [ecx],edx											<<to Z coord
+3008987E - 83 3D 649BA300 00     - cmp dword ptr [pcsx2.exe+839B64],00 { (0),0 }
+30089885 - 0F8C 3A000000         - jl 300898C5
+3008988B - 83 05 409BA300 04     - add dword ptr [pcsx2.exe+839B40],04 { (1879052304),4 }
+30089892 - 9F                    - lahf 
+30089893 - 66 C1 F8 0F           - sar ax,0F { 15 }
+30089897 - 98                    - cwde 
+30089898 - A3 449BA300           - mov [pcsx2.exe+839B44],eax { (0) }
+3008989D - C7 05 A89DA300 783D1400 - mov [pcsx2.exe+839DA8],00143D78 { (1227232),1326456 }
+300898A7 - A1 C09EA300           - mov eax,[pcsx2.exe+839EC0] { (1908938692) }
+300898AC - 83 C0 0F              - add eax,0F { 15 }
+300898AF - A3 C09EA300           - mov [pcsx2.exe+839EC0],eax { (1908971657) }
+300898B4 - 2B 05 807EA200        - sub eax,[pcsx2.exe+827E80] { (1908979242) }
+300898BA - 0F88 D7FDFFFF         - js 30089697
+300898C0 - E9 3B973FD2           - jmp pcsx2.exe+2283000
+300898C5 - 83 05 409BA300 04     - add dword ptr [pcsx2.exe+839B40],04 { (1),4 }

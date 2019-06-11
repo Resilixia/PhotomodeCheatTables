@@ -118,7 +118,7 @@ Ace7Game.exe+CB5DC37 - 88 81 E0010000        - mov [rcx+000001E0],al
 Ace7Game.exe+CB5DC3D - 48 C7 81 E8010000 FFFFFFFF - mov qword ptr [rcx+000001E8],FFFFFFFF { (0) }
 
 
-dynamic hud elements
+dynamic hud elements 74 16 80 3D ?? ?? ?? ?? 0074 0D
 Ace7Game.exe+713AB2C - C3                    - ret 
 Ace7Game.exe+713AB2D - 68 66904053           - push 53409066 { (0) }
 Ace7Game.exe+713AB32 - 48 83 EC 20           - sub rsp,20 { 32 }
