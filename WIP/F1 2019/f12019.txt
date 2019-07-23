@@ -1,0 +1,30 @@
+f1:
+F1_2019_dx12.exe+15F8A85E - 0F11 81 80020000      - movups [rcx+00000280],xmm0
+F1_2019_dx12.exe+15F8A865 - 0F10 43 20            - movups xmm0,[rbx+20]
+F1_2019_dx12.exe+15F8A869 - 0F11 91 90020000      - movups [rcx+00000290],xmm2
+F1_2019_dx12.exe+15F8A870 - 0F11 81 A0020000      - movups [rcx+000002A0],xmm0
+F1_2019_dx12.exe+15F8A877 - 0F10 81 A0010000      - movups xmm0,[rcx+000001A0]
+F1_2019_dx12.exe+15F8A87E - 0F11 89 B0020000      - movups [rcx+000002B0],xmm1
+F1_2019_dx12.exe+15F8A885 - 0F10 89 B0010000      - movups xmm1,[rcx+000001B0]
+F1_2019_dx12.exe+15F8A88C - 0F11 81 C0020000      - movups [rcx+000002C0],xmm0
+F1_2019_dx12.exe+15F8A893 - 0F10 81 C0010000      - movups xmm0,[rcx+000001C0]
+F1_2019_dx12.exe+15F8A89A - 0F11 89 D0020000      - movups [rcx+000002D0],xmm1
+F1_2019_dx12.exe+15F8A8A1 - 0F10 89 D0010000      - movups xmm1,[rcx+000001D0]
+F1_2019_dx12.exe+15F8A8A8 - 0F11 81 E0020000      - movups [rcx+000002E0],xmm0
+F1_2019_dx12.exe+15F8A8AF - 0F11 89 F0020000      - movups [rcx+000002F0],xmm1
+F1_2019_dx12.exe+15F8A8B6 - 0F28 C4               - movaps xmm0,xmm4
+F1_2019_dx12.exe+15F8A8B9 - 0FC6 C0 00            - shufps xmm0,xmm0,00 { 0 }
+F1_2019_dx12.exe+15F8A8BD - 0F59 81 30020000      - mulps xmm0,[rcx+00000230]
+F1_2019_dx12.exe+15F8A8C4 - 0F58 00               - addps xmm0,[rax]
+F1_2019_dx12.exe+15F8A8C7 - 0F29 00               - movaps [rax],xmm0   <<< coords write
+F1_2019_dx12.exe+15F8A8CA - 0F28 91 20020000      - movaps xmm2,[rcx+00000220]
+F1_2019_dx12.exe+15F8A8D1 - 0F28 CA               - movaps xmm1,xmm2
+F1_2019_dx12.exe+15F8A8D4 - 0F59 CA               - mulps xmm1,xmm2
+F1_2019_dx12.exe+15F8A8D7 - 0F28 C1               - movaps xmm0,xmm1
+F1_2019_dx12.exe+15F8A8DA - 0FC6 C1 EE            - shufps xmm0,xmm1,-12 { 238 }
+F1_2019_dx12.exe+15F8A8DE - 0F58 C8               - addps xmm1,xmm0
+F1_2019_dx12.exe+15F8A8E1 - 0FC6 C9 40            - shufps xmm1,xmm1,40 { 64 }
+F1_2019_dx12.exe+15F8A8E5 - 0FC6 C1 F0            - shufps xmm0,xmm1,-10 { 240 }
+F1_2019_dx12.exe+15F8A8E9 - 0F58 C8               - addps xmm1,xmm0
+F1_2019_dx12.exe+15F8A8EC - 0FC6 C9 AA            - shufps xmm1,xmm1,-56 { 170 }
+F1_2019_dx12.exe+15F8A8F0 - 0F51 D9               - sqrtps xmm3,xmm1
