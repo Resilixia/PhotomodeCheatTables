@@ -90,3 +90,29 @@ DesertsOfKharak64.Camera::SetFov+12- CC                    - int 3
 DesertsOfKharak64.Camera::SetFov+13- CC                    - int 3 
 DesertsOfKharak64.Camera::SetFov+14- CC                    - int 3 
 DesertsOfKharak64.Camera::SetFov+15- CC                    - int 3 
+
+1173C25C - 48 83 C4 20           - add rsp,20 { 32 }
+1173C260 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+1173C264 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+1173C269 - F3 45 0F11 7F 54      - movss [r15+54],xmm15
+1173C26F - 49 8B CE              - mov rcx,r14
+1173C272 - 48 83 EC 20           - sub rsp,20 { 32 }
+1173C276 - 41 83 3E 00           - cmp dword ptr [r14],00 { 0 }
+1173C27A - 49 BB 4097766100000000 - mov r11,0000000061769740 { (-326416299) }
+1173C284 - 41 FF D3              - call r11
+1173C287 - 48 83 C4 20           - add rsp,20 { 32 }
+1173C28B - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+1173C28F - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+1173C294 - F3 45 0F11 7F 58      - movss [r15+58],xmm15   <<<<<<<< fov read/write (but doesnt do anything)
+1173C29A - 49 8B CE              - mov rcx,r14
+1173C29D - 48 83 EC 20           - sub rsp,20 { 32 }
+1173C2A1 - 41 83 3E 00           - cmp dword ptr [r14],00 { 0 }
+1173C2A5 - 49 BB 3098766100000000 - mov r11,0000000061769830 { (-326416299) }
+1173C2AF - 41 FF D3              - call r11
+1173C2B2 - 48 83 C4 20           - add rsp,20 { 32 }
+1173C2B6 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+1173C2BA - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+1173C2BF - F3 45 0F11 7F 5C      - movss [r15+5C],xmm15
+1173C2C5 - 49 8B 57 30           - mov rdx,[r15+30]
+1173C2C9 - 49 8B CF              - mov rcx,r15
+1173C2CC - 48 83 EC 20           - sub rsp,20 { 32 }
