@@ -3,11 +3,13 @@
   <CheatEntries>
     <CheatEntry>
       <ID>25</ID>
-      <Description>"&gt;&gt; GET CAMERA"</Description>
+      <Description>"&gt;&gt; DISABLE CAMERA (REQUIRED FOR IGCS)"</Description>
+      <Options moManualExpandCollapse="1"/>
       <LastState/>
       <Color>FF0000</Color>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
+{
 globalalloc(rotMemory, 0x50,"DesertsOfKharak64.exe"+1B2654)
 
 alloc(_fov,8)
@@ -16,13 +18,13 @@ registersymbol(_fov)
 
 aobscanmodule(fovAOB,DesertsOfKharak64.exe,F3 0F 10 83 84 02 00 00)
 registersymbol(fovAOB)
-
+}
 aobscan(writeNOP,8B EC 48 83 EC 20 48 89 4D E8 48 8B C1 48 8B 40 70 48 8B C8 48 83 EC 10 48 8B 55 30 48 89 14 24 48 63 55 38 89 54 24 08 48 83 EC 20 83 38 00 49 BB x x x x x x x x 41 FF D3 48 83 C4 30 C9 C3)
 registersymbol(writeNOP)
 
 aobscan(writeNOPquat,55 48 8B EC 48 83 EC 20 48 89 4D E8 48 8B C1 48 8B 40 70 48 8B C8 48 83 EC 10 48 8B 55 30 48 89 14 24 48 8B 55 38 48 89 54 24 08 48 83 EC 20 83 38 00 49 BB x x x x x x x x 41 FF D3 48 83 C4 30 C9 C3)
 registersymbol(writeNOPquat)
-
+{
 alloc(fovbase,$1000,fovAOB)
 label(return)
 
@@ -49,7 +51,7 @@ fovAOB:
   jmp fovbase
   db 90 90 90
   return:
-
+}
 writeNOP+39:
 db 90 90 90
 
@@ -58,25 +60,37 @@ db 90 90 90
 
 
 [DISABLE]
+{
 fovAOB:
 db F3 0F 10 83 84 02 00 00
-
+}
 writeNOP+39:
 db 41 FF D3
 
-writeNOPquat:
+writeNOPquat+3C:
 db 41 FF D3
 
-unregistersymbol(fovAOB)
+//unregistersymbol(fovAOB)
 unregistersymbol(writeNOP)
-dealloc(fovbase)
+unregistersymbol(writeNOPquat)
+//dealloc(fovbase)
 
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>46</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound>Activate</ActivateSound>
+          <DeactivateSound>Deactivate</DeactivateSound>
+        </Hotkey>
+      </Hotkeys>
       <CheatEntries>
         <CheatEntry>
           <ID>62</ID>
           <Description>"x"</Description>
-          <LastState Value="-577692928" RealAddress="62B245D0"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -104,7 +118,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>63</ID>
           <Description>"y"</Description>
-          <LastState Value="987576448" RealAddress="62B245D4"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -132,7 +145,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>64</ID>
           <Description>"z"</Description>
-          <LastState Value="859781120" RealAddress="62B245D8"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -160,7 +172,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>58</ID>
           <Description>"qx"</Description>
-          <LastState Value="0.09181559086" RealAddress="62B245C0"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -170,7 +181,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>59</ID>
           <Description>"qy"</Description>
-          <LastState Value="0.907881856" RealAddress="62B245C4"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -180,7 +190,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>60</ID>
           <Description>"qz"</Description>
-          <LastState Value="-0.3012789786" RealAddress="62B245C8"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -190,7 +199,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>61</ID>
           <Description>"qw"</Description>
-          <LastState Value="0.276679486" RealAddress="62B245CC"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -200,7 +208,6 @@ dealloc(fovbase)
         <CheatEntry>
           <ID>2693</ID>
           <Description>"FOV"</Description>
-          <LastState Value="64" RealAddress="62B25474"/>
           <VariableType>Float</VariableType>
           <Address>_fov</Address>
           <Offsets>
@@ -226,342 +233,6 @@ dealloc(fovbase)
           </Hotkeys>
         </CheatEntry>
       </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>55</ID>
-      <Description>"ENABLE FIRST Rotation (HOME)"</Description>
-      <Options moManualExpandCollapse="1"/>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{$lua}
-local halfDegToRad = 0.5 * math.pi / 180
-prevYaw = 0
-prevPitch = 0
-prevRoll = 0
-
-function calcQuaternion(rotMemory, yaw, pitch, roll)
-    --print("calcQuaternion")
-	pitch = pitch * halfDegToRad
-    yaw = yaw * halfDegToRad
-    roll = roll * halfDegToRad
-
-    local sinX = math.sin(-pitch)
-    local cosX = math.cos(-pitch)
-    local sinY = math.sin(-yaw)
-    local cosY = math.cos(-yaw)
-    local sinZ = math.sin(-roll)
-    local cosZ = math.cos(-roll)
-
-    local w = cosY * cosX * cosZ + sinY * sinX * sinZ
-    local x = cosY * sinX * cosZ + sinY * cosX * sinZ
-    local y = sinY * cosX * cosZ - cosY * sinX * sinZ
-    local z = cosY * cosX * sinZ - sinY * sinX * cosZ
-
-    writeFloat(rotMemory + 16, x)
-    writeFloat(rotMemory + 20, y)
-    writeFloat(rotMemory + 24, z)
-    writeFloat(rotMemory + 28, w)
-end
-
-
-function timer_tick(timer)
-         --print("timer_tick")
-         local rotMemory = getAddressSafe("rotMemory")
-         if rotMemory == nil then
-            return
-         end
-
-         local yaw = readFloat(rotMemory)
-         local pitch = readFloat(rotMemory+4)
-         local roll = readFloat(rotMemory+8)
-
-         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
-            return
-         end
-
-         calcQuaternion(rotMemory, yaw, pitch, roll)
-
-         prevYaw = yaw
-         prevPitch = pitch
-         prevRoll = roll
-end
-
-function init()
-         --print("init")
-         if timer == nil then
-            print("Creating timer")
-            timer = createTimer(nil, false)
-            timer.setInterval(10)
-            timer.OnTimer = timer_tick
-         else
-             timer.setEnabled(true)
-         end
-end
-
-function deinit()
-         --print("deinit")
-         timer.setEnabled(false)
-end
-
-
-{$asm}
-[ENABLE]
-globalalloc(rotMemory, 0x50, "DesertsOfKharak64.exe"+1B2654)
-{$lua}
-init()
-
-{$asm}
-[DISABLE]
-{$lua}
-deinit()
-{$asm}
-dealloc(rotMemory)
-</AssemblerScript>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>1</ID>
-          <Description>"Yaw"</Description>
-          <LastState Value="233" RealAddress="7FF6E7B60000"/>
-          <VariableType>Float</VariableType>
-          <Address>rotMemory</Address>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>100</Key>
-              </Keys>
-              <Value>0.5</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>102</Key>
-              </Keys>
-              <Value>0.5</Value>
-              <ID>1</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>16</Key>
-                <Key>37</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>2</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>16</Key>
-                <Key>39</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>3</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>3</ID>
-          <Description>"Pitch"</Description>
-          <LastState Value="-5.5" RealAddress="7FF6E7B60004"/>
-          <VariableType>Float</VariableType>
-          <Address>rotMemory+4</Address>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>101</Key>
-              </Keys>
-              <Value>0.5</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>104</Key>
-              </Keys>
-              <Value>0.5</Value>
-              <ID>1</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>16</Key>
-                <Key>38</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>2</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>16</Key>
-                <Key>40</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>3</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>2</ID>
-          <Description>"Roll"</Description>
-          <LastState Value="0" RealAddress="7FF6E7B60008"/>
-          <VariableType>Float</VariableType>
-          <Address>rotMemory+8</Address>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>99</Key>
-              </Keys>
-              <Value>1</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>97</Key>
-              </Keys>
-              <Value>1</Value>
-              <ID>1</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>4</ID>
-          <Description>"---- Quaternion ----"</Description>
-          <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
-          <GroupHeader>1</GroupHeader>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys/>
-              <ID>0</ID>
-            </Hotkey>
-          </Hotkeys>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>5</ID>
-              <Description>"qX"</Description>
-              <LastState Value="-0.02140773647" RealAddress="7FF6E7B60010"/>
-              <VariableType>Float</VariableType>
-              <Address>rotMemory+10</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>6</ID>
-              <Description>"qY"</Description>
-              <LastState Value="-0.8939037323" RealAddress="7FF6E7B60014"/>
-              <VariableType>Float</VariableType>
-              <Address>rotMemory+14</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>7</ID>
-              <Description>"qZ"</Description>
-              <LastState Value="0.04293727502" RealAddress="7FF6E7B60018"/>
-              <VariableType>Float</VariableType>
-              <Address>rotMemory+18</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>56</ID>
-              <Description>"qW"</Description>
-              <LastState Value="-0.4456839561" RealAddress="7FF6E7B6001C"/>
-              <VariableType>Float</VariableType>
-              <Address>rotMemory+1C</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>57</ID>
-      <Description>"quaternion find backup"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(CamRot,DesertsOfKharak64.exe,89 43 30 41 8B 43 04 89 43 34 41 8B 43 08 89 43 38 41 8B 43 0C 89 43 3C E8 x x x x 48 83 C4 50) // should be unique
-registersymbol(CamRot)
-alloc(camRotation,$1000,"DesertsOfKharak64.exe"+1B2654)
-globalalloc(rotMemory, 0x50,"DesertsOfKharak64.exe"+1B2654)  //to be able to access memory allocated by quaternion script
-//registersymbol(quataddress)
-
-
-label(return)
-//label(skipadd)
-
-camRotation:
-//check if right address
-  push r8
-  mov r8,[rotMemory+10]
-  mov [rbx+30],r8
-  mov r8,[rotMemory+14]
-  mov [rbx+34],r8
-  mov r8,[rotMemory+18]
-  mov [rbx+38],r8
-  mov r8,[rotMemory+1C]
-  mov [rbx+3C],r8
-  pop r8
-  jmp return
-{
-skipadd:
-  mov [rbx+30],eax
-  mov eax,[r11+04]
-  mov [rbx+34],eax
-  mov eax,[r11+08]
-  mov [rbx+38],eax
-  mov eax,[r11+0C]
-  mov [rbx+3C],eax
-  jmp return
-
-quataddress:
-dq 0
-}
-CamRot:
-  jmp camRotation
-  db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
-  return:
-
-
-[DISABLE]
-//code from here till the end of the code will be used to disable the cheat
-CamRot:
-  db 89 43 30 41 8B 43 04 89 43 34 41 8B 43 08 89 43 38 41 8B 43 0C 89 43 3C
-
-unregistersymbol(CamRot)
-unregistersymbol(quataddress)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "DesertsOfKharak64.exe"+1B2654
-
-"DesertsOfKharak64.exe"+1B2635: 0F 2E 40 08           -  ucomiss xmm0,[rax+08]
-"DesertsOfKharak64.exe"+1B2639: 7A 0F                 -  jp DesertsOfKharak64.exe+1B264A
-"DesertsOfKharak64.exe"+1B263B: 75 0D                 -  jne DesertsOfKharak64.exe+1B264A
-"DesertsOfKharak64.exe"+1B263D: F3 0F 10 43 3C        -  movss xmm0,[rbx+3C]
-"DesertsOfKharak64.exe"+1B2642: 0F 2E 40 0C           -  ucomiss xmm0,[rax+0C]
-"DesertsOfKharak64.exe"+1B2646: 7A 02                 -  jp DesertsOfKharak64.exe+1B264A
-"DesertsOfKharak64.exe"+1B2648: 74 27                 -  je DesertsOfKharak64.exe+1B2671
-"DesertsOfKharak64.exe"+1B264A: 8B 00                 -  mov eax,[rax]
-"DesertsOfKharak64.exe"+1B264C: BA 02 00 00 00        -  mov edx,00000002
-"DesertsOfKharak64.exe"+1B2651: 48 8B CB              -  mov rcx,rbx
-// ---------- INJECTING HERE ----------
-"DesertsOfKharak64.exe"+1B2654: 89 43 30              -  mov [rbx+30],eax
-"DesertsOfKharak64.exe"+1B2657: 41 8B 43 04           -  mov eax,[r11+04]
-// ---------- DONE INJECTING  ----------
-"DesertsOfKharak64.exe"+1B265B: 89 43 34              -  mov [rbx+34],eax
-"DesertsOfKharak64.exe"+1B265E: 41 8B 43 08           -  mov eax,[r11+08]
-"DesertsOfKharak64.exe"+1B2662: 89 43 38              -  mov [rbx+38],eax
-"DesertsOfKharak64.exe"+1B2665: 41 8B 43 0C           -  mov eax,[r11+0C]
-"DesertsOfKharak64.exe"+1B2669: 89 43 3C              -  mov [rbx+3C],eax
-"DesertsOfKharak64.exe"+1B266C: E8 EF E0 FF FF        -  call DesertsOfKharak64.exe+1B0760
-"DesertsOfKharak64.exe"+1B2671: 48 83 C4 50           -  add rsp,50
-"DesertsOfKharak64.exe"+1B2675: 5B                    -  pop rbx
-"DesertsOfKharak64.exe"+1B2676: C3                    -  ret 
-"DesertsOfKharak64.exe"+1B2677: CC                    -  int 3 
-}
-</AssemblerScript>
     </CheatEntry>
     <CheatEntry>
       <ID>65</ID>
@@ -714,6 +385,335 @@ dealloc(newmem)
               </Offsets>
             </CheatEntry>
           </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"ENABLE FIRST Rotation (HOME)"</Description>
+          <Options moManualExpandCollapse="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+local halfDegToRad = 0.5 * math.pi / 180
+prevYaw = 0
+prevPitch = 0
+prevRoll = 0
+
+function calcQuaternion(rotMemory, yaw, pitch, roll)
+    --print("calcQuaternion")
+	pitch = pitch * halfDegToRad
+    yaw = yaw * halfDegToRad
+    roll = roll * halfDegToRad
+
+    local sinX = math.sin(-pitch)
+    local cosX = math.cos(-pitch)
+    local sinY = math.sin(-yaw)
+    local cosY = math.cos(-yaw)
+    local sinZ = math.sin(-roll)
+    local cosZ = math.cos(-roll)
+
+    local w = cosY * cosX * cosZ + sinY * sinX * sinZ
+    local x = cosY * sinX * cosZ + sinY * cosX * sinZ
+    local y = sinY * cosX * cosZ - cosY * sinX * sinZ
+    local z = cosY * cosX * sinZ - sinY * sinX * cosZ
+
+    writeFloat(rotMemory + 16, x)
+    writeFloat(rotMemory + 20, y)
+    writeFloat(rotMemory + 24, z)
+    writeFloat(rotMemory + 28, w)
+end
+
+
+function timer_tick(timer)
+         --print("timer_tick")
+         local rotMemory = getAddressSafe("rotMemory")
+         if rotMemory == nil then
+            return
+         end
+
+         local yaw = readFloat(rotMemory)
+         local pitch = readFloat(rotMemory+4)
+         local roll = readFloat(rotMemory+8)
+
+         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
+            return
+         end
+
+         calcQuaternion(rotMemory, yaw, pitch, roll)
+
+         prevYaw = yaw
+         prevPitch = pitch
+         prevRoll = roll
+end
+
+function init()
+         --print("init")
+         if timer == nil then
+            print("Creating timer")
+            timer = createTimer(nil, false)
+            timer.setInterval(10)
+            timer.OnTimer = timer_tick
+         else
+             timer.setEnabled(true)
+         end
+end
+
+function deinit()
+         --print("deinit")
+         timer.setEnabled(false)
+end
+
+
+{$asm}
+[ENABLE]
+globalalloc(rotMemory, 0x50, "DesertsOfKharak64.exe"+1B2654)
+{$lua}
+init()
+
+{$asm}
+[DISABLE]
+{$lua}
+deinit()
+{$asm}
+dealloc(rotMemory)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1</ID>
+              <Description>"Yaw"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory</Address>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>100</Key>
+                  </Keys>
+                  <Value>0.5</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>102</Key>
+                  </Keys>
+                  <Value>0.5</Value>
+                  <ID>1</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>16</Key>
+                    <Key>37</Key>
+                  </Keys>
+                  <Value>5</Value>
+                  <ID>2</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>16</Key>
+                    <Key>39</Key>
+                  </Keys>
+                  <Value>5</Value>
+                  <ID>3</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3</ID>
+              <Description>"Pitch"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory+4</Address>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>101</Key>
+                  </Keys>
+                  <Value>0.5</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>104</Key>
+                  </Keys>
+                  <Value>0.5</Value>
+                  <ID>1</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>16</Key>
+                    <Key>38</Key>
+                  </Keys>
+                  <Value>5</Value>
+                  <ID>2</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>16</Key>
+                    <Key>40</Key>
+                  </Keys>
+                  <Value>5</Value>
+                  <ID>3</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2</ID>
+              <Description>"Roll"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory+8</Address>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>99</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>97</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4</ID>
+              <Description>"---- Quaternion ----"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys/>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>5</ID>
+                  <Description>"qX"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>rotMemory+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>6</ID>
+                  <Description>"qY"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>rotMemory+14</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>7</ID>
+                  <Description>"qZ"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>rotMemory+18</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>56</ID>
+                  <Description>"qW"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>rotMemory+1C</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"quaternion find backup"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(CamRot,DesertsOfKharak64.exe,89 43 30 41 8B 43 04 89 43 34 41 8B 43 08 89 43 38 41 8B 43 0C 89 43 3C E8 x x x x 48 83 C4 50) // should be unique
+registersymbol(CamRot)
+alloc(camRotation,$1000,"DesertsOfKharak64.exe"+1B2654)
+globalalloc(rotMemory, 0x50,"DesertsOfKharak64.exe"+1B2654)  //to be able to access memory allocated by quaternion script
+//registersymbol(quataddress)
+
+
+label(return)
+//label(skipadd)
+
+camRotation:
+//check if right address
+  push r8
+  mov r8,[rotMemory+10]
+  mov [rbx+30],r8
+  mov r8,[rotMemory+14]
+  mov [rbx+34],r8
+  mov r8,[rotMemory+18]
+  mov [rbx+38],r8
+  mov r8,[rotMemory+1C]
+  mov [rbx+3C],r8
+  pop r8
+  jmp return
+{
+skipadd:
+  mov [rbx+30],eax
+  mov eax,[r11+04]
+  mov [rbx+34],eax
+  mov eax,[r11+08]
+  mov [rbx+38],eax
+  mov eax,[r11+0C]
+  mov [rbx+3C],eax
+  jmp return
+
+quataddress:
+dq 0
+}
+CamRot:
+  jmp camRotation
+  db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+  return:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+CamRot:
+  db 89 43 30 41 8B 43 04 89 43 34 41 8B 43 08 89 43 38 41 8B 43 0C 89 43 3C
+
+unregistersymbol(CamRot)
+unregistersymbol(quataddress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "DesertsOfKharak64.exe"+1B2654
+
+"DesertsOfKharak64.exe"+1B2635: 0F 2E 40 08           -  ucomiss xmm0,[rax+08]
+"DesertsOfKharak64.exe"+1B2639: 7A 0F                 -  jp DesertsOfKharak64.exe+1B264A
+"DesertsOfKharak64.exe"+1B263B: 75 0D                 -  jne DesertsOfKharak64.exe+1B264A
+"DesertsOfKharak64.exe"+1B263D: F3 0F 10 43 3C        -  movss xmm0,[rbx+3C]
+"DesertsOfKharak64.exe"+1B2642: 0F 2E 40 0C           -  ucomiss xmm0,[rax+0C]
+"DesertsOfKharak64.exe"+1B2646: 7A 02                 -  jp DesertsOfKharak64.exe+1B264A
+"DesertsOfKharak64.exe"+1B2648: 74 27                 -  je DesertsOfKharak64.exe+1B2671
+"DesertsOfKharak64.exe"+1B264A: 8B 00                 -  mov eax,[rax]
+"DesertsOfKharak64.exe"+1B264C: BA 02 00 00 00        -  mov edx,00000002
+"DesertsOfKharak64.exe"+1B2651: 48 8B CB              -  mov rcx,rbx
+// ---------- INJECTING HERE ----------
+"DesertsOfKharak64.exe"+1B2654: 89 43 30              -  mov [rbx+30],eax
+"DesertsOfKharak64.exe"+1B2657: 41 8B 43 04           -  mov eax,[r11+04]
+// ---------- DONE INJECTING  ----------
+"DesertsOfKharak64.exe"+1B265B: 89 43 34              -  mov [rbx+34],eax
+"DesertsOfKharak64.exe"+1B265E: 41 8B 43 08           -  mov eax,[r11+08]
+"DesertsOfKharak64.exe"+1B2662: 89 43 38              -  mov [rbx+38],eax
+"DesertsOfKharak64.exe"+1B2665: 41 8B 43 0C           -  mov eax,[r11+0C]
+"DesertsOfKharak64.exe"+1B2669: 89 43 3C              -  mov [rbx+3C],eax
+"DesertsOfKharak64.exe"+1B266C: E8 EF E0 FF FF        -  call DesertsOfKharak64.exe+1B0760
+"DesertsOfKharak64.exe"+1B2671: 48 83 C4 50           -  add rsp,50
+"DesertsOfKharak64.exe"+1B2675: 5B                    -  pop rbx
+"DesertsOfKharak64.exe"+1B2676: C3                    -  ret 
+"DesertsOfKharak64.exe"+1B2677: CC                    -  int 3 
+}
+</AssemblerScript>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
@@ -1287,6 +1287,28 @@ dealloc(newmem)
         <Byte>D3</Byte>
         <Byte>48</Byte>
         <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call rsi</Description>
+      <AddressString>mono.dll+124085</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>C4</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>D6</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D6</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8D</Byte>
+        <Byte>40</Byte>
+        <Byte>01</Byte>
       </After>
     </CodeEntry>
   </CheatCodes>
