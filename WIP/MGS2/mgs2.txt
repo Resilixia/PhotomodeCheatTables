@@ -1,4 +1,18 @@
 
+89 06 8B 47 ?? 89 46 ?? 5F 5E 5B 8B E5 5D
+rot matrix write:
+pcsx2.exe+1327B4 - 8B 07                 - mov eax,[edi]
+pcsx2.exe+1327B6 - 89 06                 - mov [esi],eax
+pcsx2.exe+1327B8 - 8B 47 04              - mov eax,[edi+04]
+pcsx2.exe+1327BB - 89 46 04              - mov [esi+04],eax
+pcsx2.exe+1327BE - 5F                    - pop edi
+pcsx2.exe+1327BF - 5E                    - pop esi
+pcsx2.exe+1327C0 - 5B                    - pop ebx
+pcsx2.exe+1327C1 - 8B E5                 - mov esp,ebp
+pcsx2.exe+1327C3 - 5D                    - pop ebp
+
+
+
 300F708E - 83 E1 F0              - and ecx,-10 { 240 }
 300F7091 - 89 C8                 - mov eax,ecx
 300F7093 - C1 E8 0C              - shr eax,0C { 12 }

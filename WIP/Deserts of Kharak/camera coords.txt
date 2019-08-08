@@ -180,3 +180,1391 @@ BBI.Unity.Game.World:UserCamera:set_Rotation+3c- 41 FF D3              - call r1
 BBI.Unity.Game.World:UserCamera:set_Rotation+3f- 48 83 C4 30           - add rsp,30 { 48 }
 BBI.Unity.Game.World:UserCamera:set_Rotation+43- C9                    - leave 
 BBI.Unity.Game.World:UserCamera:set_Rotation+44- C3                    - ret 
+
+
+function calling set_position
+11EACE9D - 00 00                 - add [rax],al
+11EACE9F - 00 55 48              - add [rbp+48],dl
+11EACEA2 - 8B EC                 - mov ebp,esp
+11EACEA4 - 57                    - push rdi
+11EACEA5 - 48 81 EC 98000000     - sub rsp,00000098 { 152 }
+11EACEAC - 48 8B F9              - mov rdi,rcx
+11EACEAF - 48 89 95 70FFFFFF     - mov [rbp-00000090],rdx
+11EACEB6 - 48 8B CD              - mov rcx,rbp
+11EACEB9 - 48 81 C1 78FFFFFF     - add rcx,FFFFFF78 { -136 }
+11EACEC0 - 48 8B D7              - mov rdx,rdi
+11EACEC3 - 48 83 EC 20           - sub rsp,20 { 32 }
+11EACEC7 - 49 BB C074482000000000 - mov r11,00000000204874C0 { (-326416299) }
+11EACED1 - 41 FF D3              - call r11
+11EACED4 - 48 83 C4 20           - add rsp,20 { 32 }
+11EACED8 - 48 8B CD              - mov rcx,rbp
+11EACEDB - 48 83 C1 88           - add rcx,-78 { 136 }
+11EACEDF - 48 8B D7              - mov rdx,rdi
+11EACEE2 - 48 83 EC 20           - sub rsp,20 { 32 }
+11EACEE6 - 49 BB 60BE482000000000 - mov r11,000000002048BE60 { (-326416299) }
+11EACEF0 - 41 FF D3              - call r11
+11EACEF3 - 48 83 C4 20           - add rsp,20 { 32 }
+11EACEF7 - 48 8B CF              - mov rcx,rdi
+11EACEFA - 48 83 EC 10           - sub rsp,10 { 16 }
+11EACEFE - 48 8B 45 38           - mov rax,[rbp+38]
+11EACF02 - 48 89 04 24           - mov [rsp],rax
+11EACF06 - 48 63 45 40           - movsxd  rax,dword ptr [rbp+40]
+11EACF0A - 89 44 24 08           - mov [rsp+08],eax
+11EACF0E - 48 83 EC 20           - sub rsp,20 { 32 }
+11EACF12 - 49 BB 10B0482000000000 - mov r11,000000002048B010 { (-326416299) }	<<<address of set position
+11EACF1C - 41 FF D3              - call r11				<<<call for set position
+11EACF1F - 48 83 C4 30           - add rsp,30 { 48 }
+
+
+call to above function:
+11E9E81F - 00 | 55 48              - add [rbp+48],dl
+11E9E822 - 8B EC                 - mov ebp,esp
+11E9E824 - 53                    - push rbx
+11E9E825 - 56                    - push rsi
+11E9E826 - 57                    - push rdi
+11E9E827 - 41 54                 - push r12
+11E9E829 - 41 55                 - push r13
+11E9E82B - 41 57                 - push r15
+11E9E82D - 48 81 EC 50070000     - sub rsp,00000750 { 1872 }
+11E9E834 - 4C 8B F9              - mov r15,rcx
+11E9E837 - 48 8B FA              - mov rdi,rdx
+11E9E83A - 49 8B F0              - mov rsi,r8
+11E9E83D - F3 0F11 9D 90F8FFFF   - movss [rbp-00000770],xmm3
+11E9E845 - 48 8B CD              - mov rcx,rbp
+11E9E848 - 48 81 C1 E8F8FFFF     - add rcx,FFFFF8E8 { -1816 }
+11E9E84F - 33 D2                 - xor edx,edx
+11E9E851 - 41 B8 30000000        - mov r8d,00000030 { 48 }
+11E9E857 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9E85B - 49 BB 80D5D90700000000 - mov r11,0000000007D9D580 { (686588744) }
+11E9E865 - 41 FF D3              - call r11
+11E9E868 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9E86C - C6 85 C7F8FFFF 00     - mov byte ptr [rbp-00000739],00 { 0 }
+11E9E873 - C6 85 C5F8FFFF 00     - mov byte ptr [rbp-0000073B],00 { 0 }
+11E9E87A - C6 85 C4F8FFFF 00     - mov byte ptr [rbp-0000073C],00 { 0 }
+11E9E881 - C6 85 C3F8FFFF 00     - mov byte ptr [rbp-0000073D],00 { 0 }
+11E9E888 - 33 C0                 - xor eax,eax
+11E9E88A - 48 89 85 20F9FFFF     - mov [rbp-000006E0],rax
+11E9E891 - 89 85 28F9FFFF        - mov [rbp-000006D8],eax
+11E9E897 - 48 89 85 30F9FFFF     - mov [rbp-000006D0],rax
+11E9E89E - 89 85 38F9FFFF        - mov [rbp-000006C8],eax
+11E9E8A4 - 48 89 85 40F9FFFF     - mov [rbp-000006C0],rax
+11E9E8AB - 89 85 48F9FFFF        - mov [rbp-000006B8],eax
+11E9E8B1 - 48 89 85 50F9FFFF     - mov [rbp-000006B0],rax
+11E9E8B8 - 89 85 58F9FFFF        - mov [rbp-000006A8],eax
+11E9E8BE - 48 89 85 60F9FFFF     - mov [rbp-000006A0],rax
+11E9E8C5 - 89 85 68F9FFFF        - mov [rbp-00000698],eax
+11E9E8CB - 48 89 85 70F9FFFF     - mov [rbp-00000690],rax
+11E9E8D2 - 48 89 85 78F9FFFF     - mov [rbp-00000688],rax
+11E9E8D9 - 48 89 85 80F9FFFF     - mov [rbp-00000680],rax
+11E9E8E0 - 48 89 85 88F9FFFF     - mov [rbp-00000678],rax
+11E9E8E7 - 48 89 85 90F9FFFF     - mov [rbp-00000670],rax
+11E9E8EE - 48 89 85 98F9FFFF     - mov [rbp-00000668],rax
+11E9E8F5 - 48 89 85 A0F9FFFF     - mov [rbp-00000660],rax
+11E9E8FC - 48 89 85 A8F9FFFF     - mov [rbp-00000658],rax
+11E9E903 - 48 89 85 B0F9FFFF     - mov [rbp-00000650],rax
+11E9E90A - 48 8B 07              - mov rax,[rdi]
+11E9E90D - 48 89 85 C8F8FFFF     - mov [rbp-00000738],rax
+11E9E914 - 48 63 47 08           - movsxd  rax,dword ptr [rdi+08]
+11E9E918 - 89 85 D0F8FFFF        - mov [rbp-00000730],eax
+11E9E91E - 48 8B 06              - mov rax,[rsi]
+11E9E921 - 48 89 85 D8F8FFFF     - mov [rbp-00000728],rax
+11E9E928 - 48 8B 46 08           - mov rax,[rsi+08]
+11E9E92C - 48 89 85 E0F8FFFF     - mov [rbp-00000720],rax
+11E9E933 - 48 8B CD              - mov rcx,rbp
+11E9E936 - 48 81 C1 50FAFFFF     - add rcx,FFFFFA50 { -1456 }
+11E9E93D - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9E941 - 49 BB 6073CF6900000000 - mov r11,0000000069CF7360 { (-326416299) }
+11E9E94B - 41 FF D3              - call r11
+11E9E94E - 48 83 C4 20           - add rsp,20 { 32 }
+11E9E952 - 48 8B CD              - mov rcx,rbp
+11E9E955 - 48 81 C1 18F9FFFF     - add rcx,FFFFF918 { -1768 }
+11E9E95C - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9E960 - 48 8B 85 50FAFFFF     - mov rax,[rbp-000005B0]
+11E9E967 - 48 89 04 24           - mov [rsp],rax
+11E9E96B - 48 63 85 58FAFFFF     - movsxd  rax,dword ptr [rbp-000005A8]
+11E9E972 - 89 44 24 08           - mov [rsp+08],eax
+11E9E976 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9E97A - 49 BB 1022DC0700000000 - mov r11,0000000007DC2210 { (-326416299) }
+11E9E984 - 41 FF D3              - call r11
+11E9E987 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9E98B - 49 63 87 28010000     - movsxd  rax,dword ptr [r15+00000128]
+11E9E992 - 48 8B D8              - mov rbx,rax
+11E9E995 - FF CB                 - dec ebx
+11E9E997 - 83 FB 0A              - cmp ebx,0A { 10 }
+11E9E99A - 0F83 5C0C0000         - jae 11E9F5FC { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+ddc }
+11E9E9A0 - 48 8B C3              - mov rax,rbx
+11E9E9A3 - C1 E0 03              - shl eax,03 { 3 }
+11E9E9A6 - 8B C8                 - mov ecx,eax
+11E9E9A8 - 48 B8 2012EA1100000000 - mov rax,0000000011EA1220 { (11E9E9BA) }
+11E9E9B2 - 48 03 C1              - add rax,rcx
+11E9E9B5 - 48 8B 00              - mov rax,[rax]
+11E9E9B8 - FF E0                 - jmp rax
+11E9E9BA - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9E9C2 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9E9C6 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9E9CA - 49 8B CF              - mov rcx,r15
+11E9E9CD - 48 8B D7              - mov rdx,rdi
+11E9E9D0 - 4C 8B C6              - mov r8,rsi
+11E9E9D3 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9E9D7 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9E9DB - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9E9E1 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9E9E5 - 49 BB 1612EA1100000000 - mov r11,0000000011EA1216 { (232) }
+11E9E9EF - 41 FF D3              - call r11
+11E9E9F2 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9E9F6 - 49 8D 87 44010000     - lea rax,[r15+00000144]
+11E9E9FD - 48 8B 8D 18F9FFFF     - mov rcx,[rbp-000006E8]
+11E9EA04 - 48 89 08              - mov [rax],rcx
+11E9EA07 - E9 060F0000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9EA0C - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9EA14 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9EA18 - 49 8B CF              - mov rcx,r15
+11E9EA1B - 48 8B D7              - mov rdx,rdi
+11E9EA1E - 4C 8B C6              - mov r8,rsi
+11E9EA21 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9EA25 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9EA29 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EA2D - 49 BB 0C12EA1100000000 - mov r11,0000000011EA120C { (-1846677528) }
+11E9EA37 - 41 FF D3              - call r11
+11E9EA3A - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EA3E - 49 8B 8F 90000000     - mov rcx,[r15+00000090]
+11E9EA45 - 33 D2                 - xor edx,edx
+11E9EA47 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EA4B - 49 BB 0D4EDF0700000000 - mov r11,0000000007DF4E0D { (232) }
+11E9EA55 - 41 FF D3              - call r11
+11E9EA58 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EA5C - 85 C0                 - test eax,eax
+11E9EA5E - 0F84 77000000         - je 11E9EADB { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+2bb }
+11E9EA64 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9EA6C - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9EA70 - 48 8B C5              - mov rax,rbp
+11E9EA73 - 48 05 C7F8FFFF        - add rax,FFFFF8C7 { -1849 }
+11E9EA79 - 49 8B CF              - mov rcx,r15
+11E9EA7C - 48 8B D7              - mov rdx,rdi
+11E9EA7F - 4C 8B C6              - mov r8,rsi
+11E9EA82 - 50                    - push rax
+11E9EA83 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9EA87 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9EA8B - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9EA8F - 48 8B 85 D8F8FFFF     - mov rax,[rbp-00000728]
+11E9EA96 - 48 89 04 24           - mov [rsp],rax
+11E9EA9A - 48 8B 85 E0F8FFFF     - mov rax,[rbp-00000720]
+11E9EAA1 - 48 89 44 24 08        - mov [rsp+08],rax
+11E9EAA6 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9EAAA - 48 8B 85 C8F8FFFF     - mov rax,[rbp-00000738]
+11E9EAB1 - 48 89 04 24           - mov [rsp],rax
+11E9EAB5 - 48 63 85 D0F8FFFF     - movsxd  rax,dword ptr [rbp-00000730]
+11E9EABC - 89 44 24 08           - mov [rsp+08],eax
+11E9EAC0 - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9EAC6 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EACA - 49 BB E411EA1100000000 - mov r11,0000000011EA11E4 { (-1846667288) }
+11E9EAD4 - 41 FF D3              - call r11
+11E9EAD7 - 48 83 C4 50           - add rsp,50 { 80 }
+11E9EADB - 49 8D 87 38010000     - lea rax,[r15+00000138]
+11E9EAE2 - 48 8B 08              - mov rcx,[rax]
+11E9EAE5 - 48 89 4D 30           - mov [rbp+30],rcx
+11E9EAE9 - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9EAED - 89 45 38              - mov [rbp+38],eax
+11E9EAF0 - 49 8D 87 44010000     - lea rax,[r15+00000144]
+11E9EAF7 - 48 8B 8D 18F9FFFF     - mov rcx,[rbp-000006E8]
+11E9EAFE - 48 89 08              - mov [rax],rcx
+11E9EB01 - E9 0C0E0000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9EB06 - 49 8D 87 44010000     - lea rax,[r15+00000144]
+11E9EB0D - 48 8B 00              - mov rax,[rax]
+11E9EB10 - 48 89 85 60FAFFFF     - mov [rbp-000005A0],rax
+11E9EB17 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9EB1F - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9EB23 - 49 8B CF              - mov rcx,r15
+11E9EB26 - 48 8B D7              - mov rdx,rdi
+11E9EB29 - 4C 8B C6              - mov r8,rsi
+11E9EB2C - F2 0F10 D8            - movsd xmm3,xmm0
+11E9EB30 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9EB34 - FF B5 60FAFFFF        - push [rbp-000005A0]
+11E9EB3A - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9EB40 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EB44 - 49 BB 0212EA1100000000 - mov r11,0000000011EA1202 { (232) }
+11E9EB4E - 41 FF D3              - call r11
+11E9EB51 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9EB55 - 49 8D 87 44010000     - lea rax,[r15+00000144]
+11E9EB5C - 48 8B 8D 18F9FFFF     - mov rcx,[rbp-000006E8]
+11E9EB63 - 48 89 08              - mov [rax],rcx
+11E9EB66 - E9 A70D0000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9EB6B - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9EB73 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9EB77 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9EB7B - 49 8B CF              - mov rcx,r15
+11E9EB7E - 48 8B D7              - mov rdx,rdi
+11E9EB81 - 4C 8B C6              - mov r8,rsi
+11E9EB84 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9EB88 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9EB8C - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9EB92 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EB96 - 49 BB 7012EA1100000000 - mov r11,0000000011EA1270 { (-326416299) }
+11E9EBA0 - 41 FF D3              - call r11
+11E9EBA3 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9EBA7 - 85 C0                 - test eax,eax
+11E9EBA9 - 0F84 C9000000         - je 11E9EC78 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+458 }
+11E9EBAF - 49 8B 8F 90000000     - mov rcx,[r15+00000090]
+11E9EBB6 - 33 D2                 - xor edx,edx
+11E9EBB8 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EBBC - 49 BB E04EDF0700000000 - mov r11,0000000007DF4EE0 { (-326416299) }
+11E9EBC6 - 41 FF D3              - call r11
+11E9EBC9 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EBCD - 85 C0                 - test eax,eax
+11E9EBCF - 0F84 55000000         - je 11E9EC2A { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+40a }
+11E9EBD5 - 48 8B CD              - mov rcx,rbp
+11E9EBD8 - 48 81 C1 68FAFFFF     - add rcx,FFFFFA68 { -1432 }
+11E9EBDF - 49 8B D7              - mov rdx,r15
+11E9EBE2 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EBE6 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9EBF0 - 41 FF D3              - call r11
+11E9EBF3 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EBF7 - 4D 8B 87 90000000     - mov r8,[r15+00000090]
+11E9EBFE - 49 8B CF              - mov rcx,r15
+11E9EC01 - BA 07000000           - mov edx,00000007 { 7 }
+11E9EC06 - 4C 8B CF              - mov r9,rdi
+11E9EC09 - 56                    - push rsi
+11E9EC0A - FF B5 68FAFFFF        - push [rbp-00000598]
+11E9EC10 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EC14 - 49 BB 3DBE482000000000 - mov r11,000000002048BE3D { (232) }
+11E9EC1E - 41 FF D3              - call r11
+11E9EC21 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9EC25 - E9 9C240000           - jmp 11EA10C6 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+28a6 }
+11E9EC2A - 48 8B CD              - mov rcx,rbp
+11E9EC2D - 48 81 C1 70FAFFFF     - add rcx,FFFFFA70 { -1424 }
+11E9EC34 - 49 8B D7              - mov rdx,r15
+11E9EC37 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EC3B - 49 BB E0BB482000000000 - mov r11,000000002048BBE0 { (-326416299) }
+11E9EC45 - 41 FF D3              - call r11
+11E9EC48 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EC4C - 49 8B CF              - mov rcx,r15
+11E9EC4F - 33 D2                 - xor edx,edx
+11E9EC51 - 45 33 C0              - xor r8d,r8d
+11E9EC54 - 4C 8B CF              - mov r9,rdi
+11E9EC57 - 56                    - push rsi
+11E9EC58 - FF B5 70FAFFFF        - push [rbp-00000590]
+11E9EC5E - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EC62 - 49 BB D0BE482000000000 - mov r11,000000002048BED0 { (-326416299) }
+11E9EC6C - 41 FF D3              - call r11
+11E9EC6F - 48 83 C4 30           - add rsp,30 { 48 }
+11E9EC73 - E9 4E240000           - jmp 11EA10C6 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+28a6 }
+11E9EC78 - 48 8B 07              - mov rax,[rdi]
+11E9EC7B - 48 89 85 78FAFFFF     - mov [rbp-00000588],rax
+11E9EC82 - 48 63 47 08           - movsxd  rax,dword ptr [rdi+08]
+11E9EC86 - 89 85 80FAFFFF        - mov [rbp-00000580],eax
+11E9EC8C - 49 8D 87 10010000     - lea rax,[r15+00000110]
+11E9EC93 - 48 8B 08              - mov rcx,[rax]
+11E9EC96 - 48 89 8D 88FAFFFF     - mov [rbp-00000578],rcx
+11E9EC9D - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9ECA1 - 89 85 90FAFFFF        - mov [rbp-00000570],eax
+11E9ECA7 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9ECAF - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9ECB3 - 48 8B CD              - mov rcx,rbp
+11E9ECB6 - 48 81 C1 98FAFFFF     - add rcx,FFFFFA98 { -1384 }
+11E9ECBD - F2 0F10 C8            - movsd xmm1,xmm0
+11E9ECC1 - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9ECC5 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9ECC9 - 48 8B 85 88FAFFFF     - mov rax,[rbp-00000578]
+11E9ECD0 - 48 89 04 24           - mov [rsp],rax
+11E9ECD4 - 48 63 85 90FAFFFF     - movsxd  rax,dword ptr [rbp-00000570]
+11E9ECDB - 89 44 24 08           - mov [rsp+08],eax
+11E9ECDF - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9ECE3 - 49 BB 66F5D76900000000 - mov r11,0000000069D7F566 { (232) }
+11E9ECED - 41 FF D3              - call r11
+11E9ECF0 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9ECF4 - 48 8B CD              - mov rcx,rbp
+11E9ECF7 - 48 81 C1 A8FAFFFF     - add rcx,FFFFFAA8 { -1368 }
+11E9ECFE - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9ED02 - 48 8B 85 98FAFFFF     - mov rax,[rbp-00000568]
+11E9ED09 - 48 89 04 24           - mov [rsp],rax
+11E9ED0D - 48 63 85 A0FAFFFF     - movsxd  rax,dword ptr [rbp-00000560]
+11E9ED14 - 89 44 24 08           - mov [rsp+08],eax
+11E9ED18 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9ED1C - 48 8B 85 78FAFFFF     - mov rax,[rbp-00000588]
+11E9ED23 - 48 89 04 24           - mov [rsp],rax
+11E9ED27 - 48 63 85 80FAFFFF     - movsxd  rax,dword ptr [rbp-00000580]
+11E9ED2E - 89 44 24 08           - mov [rsp+08],eax
+11E9ED32 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9ED36 - 49 BB 4CBAD76900000000 - mov r11,0000000069D7BA4C { (-1538936856) }
+11E9ED40 - 41 FF D3              - call r11
+11E9ED43 - 48 83 C4 40           - add rsp,40 { 64 }
+11E9ED47 - 48 8B 85 A8FAFFFF     - mov rax,[rbp-00000558]
+11E9ED4E - 48 89 07              - mov [rdi],rax
+11E9ED51 - 48 63 85 B0FAFFFF     - movsxd  rax,dword ptr [rbp-00000550]
+11E9ED58 - 89 47 08              - mov [rdi+08],eax
+11E9ED5B - E9 B20B0000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9ED60 - 49 8B 8F 90000000     - mov rcx,[r15+00000090]
+11E9ED67 - 33 D2                 - xor edx,edx
+11E9ED69 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9ED6D - 49 BB 588DDF0700000000 - mov r11,0000000007DF8D58 { (-1670208536) }
+11E9ED77 - 41 FF D3              - call r11
+11E9ED7A - 48 83 C4 20           - add rsp,20 { 32 }
+11E9ED7E - 85 C0                 - test eax,eax
+11E9ED80 - 0F84 4E000000         - je 11E9EDD4 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+5b4 }
+11E9ED86 - 48 8B CD              - mov rcx,rbp
+11E9ED89 - 48 81 C1 B8FAFFFF     - add rcx,FFFFFAB8 { -1352 }
+11E9ED90 - 49 8B D7              - mov rdx,r15
+11E9ED93 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9ED97 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9EDA1 - 41 FF D3              - call r11
+11E9EDA4 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EDA8 - 49 8B CF              - mov rcx,r15
+11E9EDAB - 33 D2                 - xor edx,edx
+11E9EDAD - 45 33 C0              - xor r8d,r8d
+11E9EDB0 - 4C 8B CF              - mov r9,rdi
+11E9EDB3 - 56                    - push rsi
+11E9EDB4 - FF B5 B8FAFFFF        - push [rbp-00000548]
+11E9EDBA - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EDBE - 49 BB 3DBE482000000000 - mov r11,000000002048BE3D { (232) }
+11E9EDC8 - 41 FF D3              - call r11
+11E9EDCB - 48 83 C4 30           - add rsp,30 { 48 }
+11E9EDCF - E9 3E0B0000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9EDD4 - 48 8B CD              - mov rcx,rbp
+11E9EDD7 - 48 81 C1 C0FAFFFF     - add rcx,FFFFFAC0 { -1344 }
+11E9EDDE - 49 8B D7              - mov rdx,r15
+11E9EDE1 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EDE5 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9EDEF - 41 FF D3              - call r11
+11E9EDF2 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9EDF6 - 48 8B D5              - mov rdx,rbp
+11E9EDF9 - 48 81 C2 E8F8FFFF     - add rdx,FFFFF8E8 { -1816 }
+11E9EE00 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9EE04 - 49 8B CF              - mov rcx,r15
+11E9EE07 - FF B5 C0FAFFFF        - push [rbp-00000540]
+11E9EE0D - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EE11 - 49 8B 07              - mov rax,[r15]
+11E9EE14 - 90                    - nop 
+11E9EE15 - 90                    - nop 
+11E9EE16 - 90                    - nop 
+11E9EE17 - FF 90 90000000        - call qword ptr [rax+00000090]
+11E9EE1D - 48 83 C4 30           - add rsp,30 { 48 }
+11E9EE21 - 40 88 85 C6F8FFFF     - mov [rbp-0000073A],al
+11E9EE28 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9EE30 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9EE34 - 48 8B C5              - mov rax,rbp
+11E9EE37 - 48 05 C5F8FFFF        - add rax,FFFFF8C5 { -1851 }
+11E9EE3D - 49 8B CF              - mov rcx,r15
+11E9EE40 - 48 8B D7              - mov rdx,rdi
+11E9EE43 - 4C 8B C6              - mov r8,rsi
+11E9EE46 - 50                    - push rax
+11E9EE47 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9EE4B - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9EE4F - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9EE53 - 48 8B 85 D8F8FFFF     - mov rax,[rbp-00000728]
+11E9EE5A - 48 89 04 24           - mov [rsp],rax
+11E9EE5E - 48 8B 85 E0F8FFFF     - mov rax,[rbp-00000720]
+11E9EE65 - 48 89 44 24 08        - mov [rsp+08],rax
+11E9EE6A - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9EE6E - 48 8B 85 C8F8FFFF     - mov rax,[rbp-00000738]
+11E9EE75 - 48 89 04 24           - mov [rsp],rax
+11E9EE79 - 48 63 85 D0F8FFFF     - movsxd  rax,dword ptr [rbp-00000730]
+11E9EE80 - 89 44 24 08           - mov [rsp+08],eax
+11E9EE84 - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9EE8A - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EE8E - 49 BB E411EA1100000000 - mov r11,0000000011EA11E4 { (-1846667288) }
+11E9EE98 - 41 FF D3              - call r11
+11E9EE9B - 48 83 C4 50           - add rsp,50 { 80 }
+11E9EE9F - 0FB6 85 C5F8FFFF      - movzx eax,byte ptr [rbp-0000073B]
+11E9EEA6 - 85 C0                 - test eax,eax
+11E9EEA8 - 0F84 640A0000         - je 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9EEAE - B8 607F7407           - mov eax,07747F60 { (0) }
+11E9EEB3 - 48 0FB6 00            - movzx rax,byte ptr [rax]
+11E9EEB7 - 85 C0                 - test eax,eax
+11E9EEB9 - 0F85 23010000         - jne 11E9EFE2 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+7c2 }
+11E9EEBF - 49 8B DF              - mov rbx,r15
+11E9EEC2 - 48 89 BD A0F8FFFF     - mov [rbp-00000760],rdi
+11E9EEC9 - 48 89 B5 98F8FFFF     - mov [rbp-00000768],rsi
+11E9EED0 - 48 8B 85 18F9FFFF     - mov rax,[rbp-000006E8]
+11E9EED7 - 48 89 85 B8F9FFFF     - mov [rbp-00000648],rax
+11E9EEDE - 0FB6 85 C6F8FFFF      - movzx eax,byte ptr [rbp-0000073A]
+11E9EEE5 - 85 C0                 - test eax,eax
+11E9EEE7 - 0F85 49000000         - jne 11E9EF36 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+716 }
+11E9EEED - 49 8D 87 38010000     - lea rax,[r15+00000138]
+11E9EEF4 - 48 8B 08              - mov rcx,[rax]
+11E9EEF7 - 48 89 8D C8FAFFFF     - mov [rbp-00000538],rcx
+11E9EEFE - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9EF02 - 89 85 D0FAFFFF        - mov [rbp-00000530],eax
+11E9EF08 - 48 8B 85 B8F9FFFF     - mov rax,[rbp-00000648]
+11E9EF0F - 48 89 85 C0F9FFFF     - mov [rbp-00000640],rax
+11E9EF16 - 48 8B 85 C8FAFFFF     - mov rax,[rbp-00000538]
+11E9EF1D - 48 89 85 C8F9FFFF     - mov [rbp-00000638],rax
+11E9EF24 - 48 63 85 D0FAFFFF     - movsxd  rax,dword ptr [rbp-00000530]
+11E9EF2B - 89 85 D0F9FFFF        - mov [rbp-00000630],eax
+11E9EF31 - E9 46000000           - jmp 11E9EF7C { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+75c }
+11E9EF36 - 48 8B C5              - mov rax,rbp
+11E9EF39 - 48 05 E8F8FFFF        - add rax,FFFFF8E8 { -1816 }
+11E9EF3F - 48 8B 08              - mov rcx,[rax]
+11E9EF42 - 48 89 8D D8FAFFFF     - mov [rbp-00000528],rcx
+11E9EF49 - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9EF4D - 89 85 E0FAFFFF        - mov [rbp-00000520],eax
+11E9EF53 - 48 8B 85 B8F9FFFF     - mov rax,[rbp-00000648]
+11E9EF5A - 48 89 85 C0F9FFFF     - mov [rbp-00000640],rax
+11E9EF61 - 48 8B 85 D8FAFFFF     - mov rax,[rbp-00000528]
+11E9EF68 - 48 89 85 C8F9FFFF     - mov [rbp-00000638],rax
+11E9EF6F - 48 63 85 E0FAFFFF     - movsxd  rax,dword ptr [rbp-00000520]
+11E9EF76 - 89 85 D0F9FFFF        - mov [rbp-00000630],eax
+11E9EF7C - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9EF84 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9EF88 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9EF8C - 48 8B CB              - mov rcx,rbx
+11E9EF8F - 48 8B 95 A0F8FFFF     - mov rdx,[rbp-00000760]
+11E9EF96 - 4C 8B 85 98F8FFFF     - mov r8,[rbp-00000768]
+11E9EF9D - F2 0F10 D8            - movsd xmm3,xmm0
+11E9EFA1 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9EFA5 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9EFA9 - 48 8B 85 C8F9FFFF     - mov rax,[rbp-00000638]
+11E9EFB0 - 48 89 04 24           - mov [rsp],rax
+11E9EFB4 - 48 63 85 D0F9FFFF     - movsxd  rax,dword ptr [rbp-00000630]
+11E9EFBB - 89 44 24 08           - mov [rsp+08],eax
+11E9EFBF - FF B5 C0F9FFFF        - push [rbp-00000640]
+11E9EFC5 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EFC9 - 49 BB DA11EA1100000000 - mov r11,0000000011EA11DA { (8680) }
+11E9EFD3 - 41 FF D3              - call r11
+11E9EFD6 - 48 83 C4 40           - add rsp,40 { 64 }
+11E9EFDA - 85 C0                 - test eax,eax
+11E9EFDC - 0F85 30090000         - jne 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9EFE2 - 48 8B CD              - mov rcx,rbp
+11E9EFE5 - 48 81 C1 E8FAFFFF     - add rcx,FFFFFAE8 { -1304 }
+11E9EFEC - 49 8B D7              - mov rdx,r15
+11E9EFEF - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9EFF3 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9EFFD - 41 FF D3              - call r11
+11E9F000 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F004 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9F008 - 49 8B CF              - mov rcx,r15
+11E9F00B - BA 07000000           - mov edx,00000007 { 7 }
+11E9F010 - 4C 8B C7              - mov r8,rdi
+11E9F013 - 4C 8B CE              - mov r9,rsi
+11E9F016 - FF B5 E8FAFFFF        - push [rbp-00000518]
+11E9F01C - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F020 - 49 BB D011EA1100000000 - mov r11,0000000011EA11D0 { (-1846662168) }
+11E9F02A - 41 FF D3              - call r11
+11E9F02D - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F031 - E9 DC080000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F036 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F03E - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F042 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9F046 - 49 8B CF              - mov rcx,r15
+11E9F049 - 48 8B D7              - mov rdx,rdi
+11E9F04C - 4C 8B C6              - mov r8,rsi
+11E9F04F - F2 0F10 D8            - movsd xmm3,xmm0
+11E9F053 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9F057 - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9F05D - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F061 - 49 BB EE11EA1100000000 - mov r11,0000000011EA11EE { (3560) }
+11E9F06B - 41 FF D3              - call r11
+11E9F06E - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F072 - 85 C0                 - test eax,eax
+11E9F074 - 0F84 98080000         - je 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F07A - 48 8B CD              - mov rcx,rbp
+11E9F07D - 48 81 C1 F0FAFFFF     - add rcx,FFFFFAF0 { -1296 }
+11E9F084 - 49 8B D7              - mov rdx,r15
+11E9F087 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F08B - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F095 - 41 FF D3              - call r11
+11E9F098 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F09C - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9F0A0 - 49 8B CF              - mov rcx,r15
+11E9F0A3 - 33 D2                 - xor edx,edx
+11E9F0A5 - 4C 8B C7              - mov r8,rdi
+11E9F0A8 - 4C 8B CE              - mov r9,rsi
+11E9F0AB - FF B5 F0FAFFFF        - push [rbp-00000510]
+11E9F0B1 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F0B5 - 49 BB D011EA1100000000 - mov r11,0000000011EA11D0 { (-1846662168) }
+11E9F0BF - 41 FF D3              - call r11
+11E9F0C2 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F0C6 - E9 47080000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F0CB - 49 8D 87 38010000     - lea rax,[r15+00000138]
+11E9F0D2 - 48 8B 08              - mov rcx,[rax]
+11E9F0D5 - 48 89 4D 30           - mov [rbp+30],rcx
+11E9F0D9 - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9F0DD - 89 45 38              - mov [rbp+38],eax
+11E9F0E0 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F0E8 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F0EC - 48 8B C5              - mov rax,rbp
+11E9F0EF - 48 05 C4F8FFFF        - add rax,FFFFF8C4 { -1852 }
+11E9F0F5 - 49 8B CF              - mov rcx,r15
+11E9F0F8 - 48 8B D7              - mov rdx,rdi
+11E9F0FB - 4C 8B C6              - mov r8,rsi
+11E9F0FE - 50                    - push rax
+11E9F0FF - F2 0F10 D8            - movsd xmm3,xmm0
+11E9F103 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9F107 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F10B - 48 8B 85 D8F8FFFF     - mov rax,[rbp-00000728]
+11E9F112 - 48 89 04 24           - mov [rsp],rax
+11E9F116 - 48 8B 85 E0F8FFFF     - mov rax,[rbp-00000720]
+11E9F11D - 48 89 44 24 08        - mov [rsp+08],rax
+11E9F122 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F126 - 48 8B 85 C8F8FFFF     - mov rax,[rbp-00000738]
+11E9F12D - 48 89 04 24           - mov [rsp],rax
+11E9F131 - 48 63 85 D0F8FFFF     - movsxd  rax,dword ptr [rbp-00000730]
+11E9F138 - 89 44 24 08           - mov [rsp+08],eax
+11E9F13C - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9F142 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F146 - 49 BB E411EA1100000000 - mov r11,0000000011EA11E4 { (-1846667288) }
+11E9F150 - 41 FF D3              - call r11
+11E9F153 - 48 83 C4 50           - add rsp,50 { 80 }
+11E9F157 - 85 C0                 - test eax,eax
+11E9F159 - 0F85 49000000         - jne 11E9F1A8 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+988 }
+11E9F15F - 48 8B CD              - mov rcx,rbp
+11E9F162 - 48 81 C1 F8FAFFFF     - add rcx,FFFFFAF8 { -1288 }
+11E9F169 - 49 8B D7              - mov rdx,r15
+11E9F16C - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F170 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F17A - 41 FF D3              - call r11
+11E9F17D - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F181 - 49 8B CF              - mov rcx,r15
+11E9F184 - 33 D2                 - xor edx,edx
+11E9F186 - 45 33 C0              - xor r8d,r8d
+11E9F189 - 4C 8B CF              - mov r9,rdi
+11E9F18C - 56                    - push rsi
+11E9F18D - FF B5 F8FAFFFF        - push [rbp-00000508]
+11E9F193 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F197 - 49 BB 3DBE482000000000 - mov r11,000000002048BE3D { (232) }
+11E9F1A1 - 41 FF D3              - call r11
+11E9F1A4 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F1A8 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F1B0 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F1B4 - 49 8B CF              - mov rcx,r15
+11E9F1B7 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9F1BB - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9F1BF - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F1C3 - 49 BB C611EA1100000000 - mov r11,0000000011EA11C6 { (13800) }
+11E9F1CD - 41 FF D3              - call r11
+11E9F1D0 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F1D4 - 4C 8B E8              - mov r13,rax
+11E9F1D7 - 49 63 87 28010000     - movsxd  rax,dword ptr [r15+00000128]
+11E9F1DE - 44 3B E8              - cmp r13d,eax
+11E9F1E1 - 0F84 2B070000         - je 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F1E7 - 48 8B CD              - mov rcx,rbp
+11E9F1EA - 48 81 C1 00FBFFFF     - add rcx,FFFFFB00 { -1280 }
+11E9F1F1 - 49 8B D7              - mov rdx,r15
+11E9F1F4 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F1F8 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F202 - 41 FF D3              - call r11
+11E9F205 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F209 - 49 8B CF              - mov rcx,r15
+11E9F20C - 49 8B D5              - mov rdx,r13
+11E9F20F - 45 33 C0              - xor r8d,r8d
+11E9F212 - 4C 8B CF              - mov r9,rdi
+11E9F215 - 56                    - push rsi
+11E9F216 - FF B5 00FBFFFF        - push [rbp-00000500]
+11E9F21C - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F220 - 49 BB 3DBE482000000000 - mov r11,000000002048BE3D { (232) }
+11E9F22A - 41 FF D3              - call r11
+11E9F22D - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F231 - E9 DC060000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F236 - 49 8B 8F 90000000     - mov rcx,[r15+00000090]
+11E9F23D - 33 D2                 - xor edx,edx
+11E9F23F - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F243 - 49 BB 0D4EDF0700000000 - mov r11,0000000007DF4E0D { (232) }
+11E9F24D - 41 FF D3              - call r11
+11E9F250 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F254 - 85 C0                 - test eax,eax
+11E9F256 - 0F84 8C000000         - je 11E9F2E8 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+ac8 }
+11E9F25C - 49 8D 87 38010000     - lea rax,[r15+00000138]
+11E9F263 - 48 8B 08              - mov rcx,[rax]
+11E9F266 - 48 89 4D 30           - mov [rbp+30],rcx
+11E9F26A - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9F26E - 89 45 38              - mov [rbp+38],eax
+11E9F271 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F279 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F27D - 48 8B C5              - mov rax,rbp
+11E9F280 - 48 05 C3F8FFFF        - add rax,FFFFF8C3 { -1853 }
+11E9F286 - 49 8B CF              - mov rcx,r15
+11E9F289 - 48 8B D7              - mov rdx,rdi
+11E9F28C - 4C 8B C6              - mov r8,rsi
+11E9F28F - 50                    - push rax
+11E9F290 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9F294 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9F298 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F29C - 48 8B 85 D8F8FFFF     - mov rax,[rbp-00000728]
+11E9F2A3 - 48 89 04 24           - mov [rsp],rax
+11E9F2A7 - 48 8B 85 E0F8FFFF     - mov rax,[rbp-00000720]
+11E9F2AE - 48 89 44 24 08        - mov [rsp+08],rax
+11E9F2B3 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F2B7 - 48 8B 85 C8F8FFFF     - mov rax,[rbp-00000738]
+11E9F2BE - 48 89 04 24           - mov [rsp],rax
+11E9F2C2 - 48 63 85 D0F8FFFF     - movsxd  rax,dword ptr [rbp-00000730]
+11E9F2C9 - 89 44 24 08           - mov [rsp+08],eax
+11E9F2CD - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9F2D3 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F2D7 - 49 BB E411EA1100000000 - mov r11,0000000011EA11E4 { (-1846667288) }
+11E9F2E1 - 41 FF D3              - call r11
+11E9F2E4 - 48 83 C4 50           - add rsp,50 { 80 }
+11E9F2E8 - 48 8B CD              - mov rcx,rbp
+11E9F2EB - 48 81 C1 08FBFFFF     - add rcx,FFFFFB08 { -1272 }
+11E9F2F2 - 49 8B D7              - mov rdx,r15
+11E9F2F5 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F2F9 - 49 BB 54D8E91100000000 - mov r11,0000000011E9D854 { (-1842894872) }
+11E9F303 - 41 FF D3              - call r11
+11E9F306 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F30A - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F312 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F316 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9F31A - 49 8B CF              - mov rcx,r15
+11E9F31D - 48 8B D7              - mov rdx,rdi
+11E9F320 - 4C 8B C6              - mov r8,rsi
+11E9F323 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9F327 - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9F32B - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F32F - 48 8B 85 08FBFFFF     - mov rax,[rbp-000004F8]
+11E9F336 - 48 89 04 24           - mov [rsp],rax
+11E9F33A - 48 63 85 10FBFFFF     - movsxd  rax,dword ptr [rbp-000004F0]
+11E9F341 - 89 44 24 08           - mov [rsp+08],eax
+11E9F345 - FF B5 18F9FFFF        - push [rbp-000006E8]
+11E9F34B - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F34F - 49 BB DA11EA1100000000 - mov r11,0000000011EA11DA { (8680) }
+11E9F359 - 41 FF D3              - call r11
+11E9F35C - 48 83 C4 40           - add rsp,40 { 64 }
+11E9F360 - 85 C0                 - test eax,eax
+11E9F362 - 0F85 AA050000         - jne 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F368 - 49 8B 8F 90000000     - mov rcx,[r15+00000090]
+11E9F36F - 33 D2                 - xor edx,edx
+11E9F371 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F375 - 49 BB 0D4EDF0700000000 - mov r11,0000000007DF4E0D { (232) }
+11E9F37F - 41 FF D3              - call r11
+11E9F382 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F386 - 85 C0                 - test eax,eax
+11E9F388 - 0F84 55000000         - je 11E9F3E3 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+bc3 }
+11E9F38E - 48 8B CD              - mov rcx,rbp
+11E9F391 - 48 81 C1 18FBFFFF     - add rcx,FFFFFB18 { -1256 }
+11E9F398 - 49 8B D7              - mov rdx,r15
+11E9F39B - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F39F - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F3A9 - 41 FF D3              - call r11
+11E9F3AC - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F3B0 - 4D 8B 87 90000000     - mov r8,[r15+00000090]
+11E9F3B7 - 49 8B CF              - mov rcx,r15
+11E9F3BA - BA 07000000           - mov edx,00000007 { 7 }
+11E9F3BF - 4C 8B CF              - mov r9,rdi
+11E9F3C2 - 56                    - push rsi
+11E9F3C3 - FF B5 18FBFFFF        - push [rbp-000004E8]
+11E9F3C9 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F3CD - 49 BB 3DBE482000000000 - mov r11,000000002048BE3D { (232) }
+11E9F3D7 - 41 FF D3              - call r11
+11E9F3DA - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F3DE - E9 2F050000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F3E3 - 48 8B CD              - mov rcx,rbp
+11E9F3E6 - 48 81 C1 20FBFFFF     - add rcx,FFFFFB20 { -1248 }
+11E9F3ED - 49 8B D7              - mov rdx,r15
+11E9F3F0 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F3F4 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F3FE - 41 FF D3              - call r11
+11E9F401 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F405 - 49 8B CF              - mov rcx,r15
+11E9F408 - 33 D2                 - xor edx,edx
+11E9F40A - 45 33 C0              - xor r8d,r8d
+11E9F40D - 4C 8B CF              - mov r9,rdi
+11E9F410 - 56                    - push rsi
+11E9F411 - FF B5 20FBFFFF        - push [rbp-000004E0]
+11E9F417 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F41B - 49 BB 3DBE482000000000 - mov r11,000000002048BE3D { (232) }
+11E9F425 - 41 FF D3              - call r11
+11E9F428 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F42C - E9 E1040000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F431 - 48 8B CD              - mov rcx,rbp
+11E9F434 - 48 81 C1 28FBFFFF     - add rcx,FFFFFB28 { -1240 }
+11E9F43B - 49 8B D7              - mov rdx,r15
+11E9F43E - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F442 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F44C - 41 FF D3              - call r11
+11E9F44F - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F453 - 49 8D 87 44010000     - lea rax,[r15+00000144]
+11E9F45A - 48 8B 8D 28FBFFFF     - mov rcx,[rbp-000004D8]
+11E9F461 - 48 89 08              - mov [rax],rcx
+11E9F464 - 49 8B 87 98000000     - mov rax,[r15+00000098]
+11E9F46B - 83 38 00              - cmp dword ptr [rax],00 { 0 }
+11E9F46E - 48 63 40 30           - movsxd  rax,dword ptr [rax+30]
+11E9F472 - 83 E0 08              - and eax,08 { 8 }
+11E9F475 - 83 F8 08              - cmp eax,08 { 8 }
+11E9F478 - 40 0F94 C0            - sete al
+11E9F47C - 48 0FB6 C0            - movzx rax,al
+11E9F480 - 85 C0                 - test eax,eax
+11E9F482 - 0F84 8C000000         - je 11E9F514 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+cf4 }
+11E9F488 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F490 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F494 - 49 8B CF              - mov rcx,r15
+11E9F497 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9F49B - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9F49F - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F4A3 - 49 BB C611EA1100000000 - mov r11,0000000011EA11C6 { (13800) }
+11E9F4AD - 41 FF D3              - call r11
+11E9F4B0 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F4B4 - 4C 8B E0              - mov r12,rax
+11E9F4B7 - 49 63 87 28010000     - movsxd  rax,dword ptr [r15+00000128]
+11E9F4BE - 44 3B E0              - cmp r12d,eax
+11E9F4C1 - 0F84 4D000000         - je 11E9F514 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+cf4 }
+11E9F4C7 - 48 8B CD              - mov rcx,rbp
+11E9F4CA - 48 81 C1 30FBFFFF     - add rcx,FFFFFB30 { -1232 }
+11E9F4D1 - 49 8B D7              - mov rdx,r15
+11E9F4D4 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F4D8 - 49 BB 46B7482000000000 - mov r11,000000002048B746 { (232) }
+11E9F4E2 - 41 FF D3              - call r11
+11E9F4E5 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F4E9 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9F4ED - 49 8B CF              - mov rcx,r15
+11E9F4F0 - 49 8B D4              - mov rdx,r12
+11E9F4F3 - 4C 8B C7              - mov r8,rdi
+11E9F4F6 - 4C 8B CE              - mov r9,rsi
+11E9F4F9 - FF B5 30FBFFFF        - push [rbp-000004D0]
+11E9F4FF - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F503 - 49 BB D011EA1100000000 - mov r11,0000000011EA11D0 { (-1846662168) }
+11E9F50D - 41 FF D3              - call r11
+11E9F510 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F514 - 48 8B 07              - mov rax,[rdi]
+11E9F517 - 48 89 85 38FBFFFF     - mov [rbp-000004C8],rax
+11E9F51E - 48 63 47 08           - movsxd  rax,dword ptr [rdi+08]
+11E9F522 - 89 85 40FBFFFF        - mov [rbp-000004C0],eax
+11E9F528 - 49 8D 87 10010000     - lea rax,[r15+00000110]
+11E9F52F - 48 8B 08              - mov rcx,[rax]
+11E9F532 - 48 89 8D 48FBFFFF     - mov [rbp-000004B8],rcx
+11E9F539 - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9F53D - 89 85 50FBFFFF        - mov [rbp-000004B0],eax
+11E9F543 - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F54B - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F54F - 48 8B CD              - mov rcx,rbp
+11E9F552 - 48 81 C1 58FBFFFF     - add rcx,FFFFFB58 { -1192 }
+11E9F559 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9F55D - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9F561 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F565 - 48 8B 85 48FBFFFF     - mov rax,[rbp-000004B8]
+11E9F56C - 48 89 04 24           - mov [rsp],rax
+11E9F570 - 48 63 85 50FBFFFF     - movsxd  rax,dword ptr [rbp-000004B0]
+11E9F577 - 89 44 24 08           - mov [rsp+08],eax
+11E9F57B - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F57F - 49 BB 66F5D76900000000 - mov r11,0000000069D7F566 { (232) }
+11E9F589 - 41 FF D3              - call r11
+11E9F58C - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F590 - 48 8B CD              - mov rcx,rbp
+11E9F593 - 48 81 C1 68FBFFFF     - add rcx,FFFFFB68 { -1176 }
+11E9F59A - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F59E - 48 8B 85 58FBFFFF     - mov rax,[rbp-000004A8]
+11E9F5A5 - 48 89 04 24           - mov [rsp],rax
+11E9F5A9 - 48 63 85 60FBFFFF     - movsxd  rax,dword ptr [rbp-000004A0]
+11E9F5B0 - 89 44 24 08           - mov [rsp+08],eax
+11E9F5B4 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F5B8 - 48 8B 85 38FBFFFF     - mov rax,[rbp-000004C8]
+11E9F5BF - 48 89 04 24           - mov [rsp],rax
+11E9F5C3 - 48 63 85 40FBFFFF     - movsxd  rax,dword ptr [rbp-000004C0]
+11E9F5CA - 89 44 24 08           - mov [rsp+08],eax
+11E9F5CE - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F5D2 - 49 BB 4CBAD76900000000 - mov r11,0000000069D7BA4C { (-1538936856) }
+11E9F5DC - 41 FF D3              - call r11
+11E9F5DF - 48 83 C4 40           - add rsp,40 { 64 }
+11E9F5E3 - 48 8B 85 68FBFFFF     - mov rax,[rbp-00000498]
+11E9F5EA - 48 89 07              - mov [rdi],rax
+11E9F5ED - 48 63 85 70FBFFFF     - movsxd  rax,dword ptr [rbp-00000490]
+11E9F5F4 - 89 47 08              - mov [rdi+08],eax
+11E9F5F7 - E9 16030000           - jmp 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F5FC - 48 8B CD              - mov rcx,rbp
+11E9F5FF - 48 81 C1 78FBFFFF     - add rcx,FFFFFB78 { -1160 }
+11E9F606 - 49 8B D7              - mov rdx,r15
+11E9F609 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F60D - 49 BB E0BB482000000000 - mov r11,000000002048BBE0 { (-326416299) }
+11E9F617 - 41 FF D3              - call r11
+11E9F61A - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F61E - 49 8D 87 44010000     - lea rax,[r15+00000144]
+11E9F625 - 48 8B 8D 78FBFFFF     - mov rcx,[rbp-00000488]
+11E9F62C - 48 89 08              - mov [rax],rcx
+11E9F62F - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F637 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F63B - 49 8B CF              - mov rcx,r15
+11E9F63E - F2 0F10 C8            - movsd xmm1,xmm0
+11E9F642 - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9F646 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F64A - 49 BB 80C7EA1100000000 - mov r11,0000000011EAC780 { (-326416299) }
+11E9F654 - 41 FF D3              - call r11
+11E9F657 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F65B - 48 8B 07              - mov rax,[rdi]
+11E9F65E - 48 89 85 80FBFFFF     - mov [rbp-00000480],rax
+11E9F665 - 48 63 47 08           - movsxd  rax,dword ptr [rdi+08]
+11E9F669 - 89 85 88FBFFFF        - mov [rbp-00000478],eax
+11E9F66F - 49 8D 87 10010000     - lea rax,[r15+00000110]
+11E9F676 - 48 8B 08              - mov rcx,[rax]
+11E9F679 - 48 89 8D 90FBFFFF     - mov [rbp-00000470],rcx
+11E9F680 - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9F684 - 89 85 98FBFFFF        - mov [rbp-00000468],eax
+11E9F68A - F3 0F10 85 90F8FFFF   - movss xmm0,[rbp-00000770]
+11E9F692 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F696 - 48 8B CD              - mov rcx,rbp
+11E9F699 - 48 81 C1 A0FBFFFF     - add rcx,FFFFFBA0 { -1120 }
+11E9F6A0 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9F6A4 - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9F6A8 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F6AC - 48 8B 85 90FBFFFF     - mov rax,[rbp-00000470]
+11E9F6B3 - 48 89 04 24           - mov [rsp],rax
+11E9F6B7 - 48 63 85 98FBFFFF     - movsxd  rax,dword ptr [rbp-00000468]
+11E9F6BE - 89 44 24 08           - mov [rsp+08],eax
+11E9F6C2 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F6C6 - 49 BB 70F5D76900000000 - mov r11,0000000069D7F570 { (-326416299) }
+11E9F6D0 - 41 FF D3              - call r11
+11E9F6D3 - 48 83 C4 30           - add rsp,30 { 48 }
+11E9F6D7 - 48 8B CD              - mov rcx,rbp
+11E9F6DA - 48 81 C1 B0FBFFFF     - add rcx,FFFFFBB0 { -1104 }
+11E9F6E1 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F6E5 - 48 8B 85 A0FBFFFF     - mov rax,[rbp-00000460]
+11E9F6EC - 48 89 04 24           - mov [rsp],rax
+11E9F6F0 - 48 63 85 A8FBFFFF     - movsxd  rax,dword ptr [rbp-00000458]
+11E9F6F7 - 89 44 24 08           - mov [rsp+08],eax
+11E9F6FB - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F6FF - 48 8B 85 80FBFFFF     - mov rax,[rbp-00000480]
+11E9F706 - 48 89 04 24           - mov [rsp],rax
+11E9F70A - 48 63 85 88FBFFFF     - movsxd  rax,dword ptr [rbp-00000478]
+11E9F711 - 89 44 24 08           - mov [rsp+08],eax
+11E9F715 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F719 - 49 BB 50F6D76900000000 - mov r11,0000000069D7F650 { (-326416299) }
+11E9F723 - 41 FF D3              - call r11
+11E9F726 - 48 83 C4 40           - add rsp,40 { 64 }
+11E9F72A - 48 8B 85 B0FBFFFF     - mov rax,[rbp-00000450]
+11E9F731 - 48 89 07              - mov [rdi],rax
+11E9F734 - 48 63 85 B8FBFFFF     - movsxd  rax,dword ptr [rbp-00000448]
+11E9F73B - 89 47 08              - mov [rdi+08],eax
+11E9F73E - 48 8B 07              - mov rax,[rdi]
+11E9F741 - 48 89 85 C0FBFFFF     - mov [rbp-00000440],rax
+11E9F748 - 48 63 47 08           - movsxd  rax,dword ptr [rdi+08]
+11E9F74C - 89 85 C8FBFFFF        - mov [rbp-00000438],eax
+11E9F752 - 48 8B 06              - mov rax,[rsi]
+11E9F755 - 48 89 85 D0FBFFFF     - mov [rbp-00000430],rax
+11E9F75C - 48 8B 46 08           - mov rax,[rsi+08]
+11E9F760 - 48 89 85 D8FBFFFF     - mov [rbp-00000428],rax
+11E9F767 - 48 8B CD              - mov rcx,rbp
+11E9F76A - 48 81 C1 E0FBFFFF     - add rcx,FFFFFBE0 { -1056 }
+11E9F771 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F775 - 49 BB 60B2DB0700000000 - mov r11,0000000007DBB260 { (-326416299) }
+11E9F77F - 41 FF D3              - call r11
+11E9F782 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F786 - 48 8B CD              - mov rcx,rbp
+11E9F789 - 48 81 C1 F0FBFFFF     - add rcx,FFFFFBF0 { -1040 }
+11E9F790 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F794 - 48 8B 85 E0FBFFFF     - mov rax,[rbp-00000420]
+11E9F79B - 48 89 04 24           - mov [rsp],rax
+11E9F79F - 48 63 85 E8FBFFFF     - movsxd  rax,dword ptr [rbp-00000418]
+11E9F7A6 - 89 44 24 08           - mov [rsp+08],eax
+11E9F7AA - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F7AE - 48 8B 85 D0FBFFFF     - mov rax,[rbp-00000430]
+11E9F7B5 - 48 89 04 24           - mov [rsp],rax
+11E9F7B9 - 48 8B 85 D8FBFFFF     - mov rax,[rbp-00000428]
+11E9F7C0 - 48 89 44 24 08        - mov [rsp+08],rax
+11E9F7C5 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F7C9 - 49 BB 90923A2000000000 - mov r11,00000000203A9290 { (-326416299) }
+11E9F7D3 - 41 FF D3              - call r11
+11E9F7D6 - 48 83 C4 40           - add rsp,40 { 64 }
+11E9F7DA - 33 C0                 - xor eax,eax
+11E9F7DC - 48 89 85 D8F9FFFF     - mov [rbp-00000628],rax
+11E9F7E3 - 48 89 85 E0F9FFFF     - mov [rbp-00000620],rax
+11E9F7EA - 48 89 85 E8F9FFFF     - mov [rbp-00000618],rax
+11E9F7F1 - 48 8B CD              - mov rcx,rbp
+11E9F7F4 - 48 81 C1 D8F9FFFF     - add rcx,FFFFF9D8 { -1576 }
+11E9F7FB - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F7FF - 48 8B 85 F0FBFFFF     - mov rax,[rbp-00000410]
+11E9F806 - 48 89 04 24           - mov [rsp],rax
+11E9F80A - 48 63 85 F8FBFFFF     - movsxd  rax,dword ptr [rbp-00000408]
+11E9F811 - 89 44 24 08           - mov [rsp+08],eax
+11E9F815 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9F819 - 48 8B 85 C0FBFFFF     - mov rax,[rbp-00000440]
+11E9F820 - 48 89 04 24           - mov [rsp],rax
+11E9F824 - 48 63 85 C8FBFFFF     - movsxd  rax,dword ptr [rbp-00000438]
+11E9F82B - 89 44 24 08           - mov [rsp+08],eax
+11E9F82F - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F833 - 49 BB 60CDEA1100000000 - mov r11,0000000011EACD60 { (-326416299) }
+11E9F83D - 41 FF D3              - call r11
+11E9F840 - 48 83 C4 40           - add rsp,40 { 64 }
+11E9F844 - 48 8B 85 D8F9FFFF     - mov rax,[rbp-00000628]
+11E9F84B - 48 89 85 00FCFFFF     - mov [rbp-00000400],rax
+11E9F852 - 48 8B 85 E0F9FFFF     - mov rax,[rbp-00000620]
+11E9F859 - 48 89 85 08FCFFFF     - mov [rbp-000003F8],rax
+11E9F860 - 48 8B 85 E8F9FFFF     - mov rax,[rbp-00000618]
+11E9F867 - 48 89 85 10FCFFFF     - mov [rbp-000003F0],rax
+11E9F86E - 48 8B D5              - mov rdx,rbp
+11E9F871 - 48 81 C2 E8F8FFFF     - add rdx,FFFFF8E8 { -1816 }
+11E9F878 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9F87C - 49 8B CF              - mov rcx,r15
+11E9F87F - 48 83 EC 18           - sub rsp,18 { 24 }
+11E9F883 - 48 8B 85 00FCFFFF     - mov rax,[rbp-00000400]
+11E9F88A - 48 89 04 24           - mov [rsp],rax
+11E9F88E - 48 8B 85 08FCFFFF     - mov rax,[rbp-000003F8]
+11E9F895 - 48 89 44 24 08        - mov [rsp+08],rax
+11E9F89A - 48 8B 85 10FCFFFF     - mov rax,[rbp-000003F0]
+11E9F8A1 - 48 89 44 24 10        - mov [rsp+10],rax
+11E9F8A6 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F8AA - 49 BB D0CDEA1100000000 - mov r11,0000000011EACDD0 { (-326416299) }
+11E9F8B4 - 41 FF D3              - call r11
+11E9F8B7 - 48 83 C4 40           - add rsp,40 { 64 }
+11E9F8BB - 85 C0                 - test eax,eax
+11E9F8BD - 0F84 4F000000         - je 11E9F912 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+10f2 }
+11E9F8C3 - 48 8B C5              - mov rax,rbp
+11E9F8C6 - 48 05 E8F8FFFF        - add rax,FFFFF8E8 { -1816 }
+11E9F8CC - 48 8B 08              - mov rcx,[rax]
+11E9F8CF - 48 89 8D 18FCFFFF     - mov [rbp-000003E8],rcx
+11E9F8D6 - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9F8DA - 89 85 20FCFFFF        - mov [rbp-000003E0],eax
+11E9F8E0 - 49 8D 87 38010000     - lea rax,[r15+00000138]
+11E9F8E7 - 48 8B 8D 18FCFFFF     - mov rcx,[rbp-000003E8]
+11E9F8EE - 48 89 08              - mov [rax],rcx
+11E9F8F1 - 48 63 8D 20FCFFFF     - movsxd  rcx,dword ptr [rbp-000003E0]
+11E9F8F8 - 89 48 08              - mov [rax+08],ecx
+11E9F8FB - 48 8B C5              - mov rax,rbp
+11E9F8FE - 48 05 E8F8FFFF        - add rax,FFFFF8E8 { -1816 }
+11E9F904 - 48 8B 08              - mov rcx,[rax]
+11E9F907 - 48 89 4D 30           - mov [rbp+30],rcx
+11E9F90B - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9F90F - 89 45 38              - mov [rbp+38],eax
+11E9F912 - 49 63 87 28010000     - movsxd  rax,dword ptr [r15+00000128]
+11E9F919 - 83 F8 09              - cmp eax,09 { 9 }
+11E9F91C - 0F84 C0010000         - je 11E9FAE2 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+12c2 }
+11E9F922 - F3 41 0F10 87 00010000  - movss xmm0,[r15+00000100]
+11E9F92B - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F92F - F3 41 0F10 8F 04010000  - movss xmm1,[r15+00000104]
+11E9F938 - F3 0F5A C9            - cvtss2sd xmm1,xmm1
+11E9F93C - F2 0F5C C1            - subsd xmm0,xmm1
+11E9F940 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9F945 - F3 44 0F11 7D 9C      - movss [rbp-64],xmm15
+11E9F94B - 49 8B 47 30           - mov rax,[r15+30]
+11E9F94F - 48 8B 40 48           - mov rax,[rax+48]
+11E9F953 - F3 0F10 40 1C         - movss xmm0,[rax+1C]
+11E9F958 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F95C - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9F961 - F3 44 0F11 BD BCF8FFFF  - movss [rbp-00000744],xmm15
+11E9F96A - F3 41 0F10 87 04010000  - movss xmm0,[r15+00000104]
+11E9F973 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F977 - F2 0F11 85 80F8FFFF   - movsd [rbp-00000780],xmm0
+11E9F97F - F3 0F10 45 9C         - movss xmm0,[rbp-64]
+11E9F984 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9F988 - F3 0F10 8D BCF8FFFF   - movss xmm1,[rbp-00000744]
+11E9F990 - F3 0F5A C9            - cvtss2sd xmm1,xmm1
+11E9F994 - 66 0F57 0D 64170000   - xorpd xmm1,[11EA1100] { (0) }
+11E9F99C - F3 0F10 95 BCF8FFFF   - movss xmm2,[rbp-00000744]
+11E9F9A4 - F3 0F5A D2            - cvtss2sd xmm2,xmm2
+11E9F9A8 - F2 0F5A D2            - cvtsd2ss xmm2,xmm2
+11E9F9AC - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9F9B0 - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+11E9F9B4 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9F9B8 - 49 BB 50B7482000000000 - mov r11,000000002048B750 { (418153288) }
+11E9F9C2 - 41 FF D3              - call r11
+11E9F9C5 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9F9C9 - F3 0F5A C8            - cvtss2sd xmm1,xmm0
+11E9F9CD - F2 0F10 85 80F8FFFF   - movsd xmm0,[rbp-00000780]
+11E9F9D5 - F3 0F10 95 BCF8FFFF   - movss xmm2,[rbp-00000744]
+11E9F9DD - F3 0F5A D2            - cvtss2sd xmm2,xmm2
+11E9F9E1 - F2 0F5E CA            - divsd xmm1,xmm2
+11E9F9E5 - F3 0F10 15 03170000   - movss xmm2,[11EA10F0] { (1.00) }
+11E9F9ED - F3 0F5A D2            - cvtss2sd xmm2,xmm2
+11E9F9F1 - F2 44 0F5A FA         - cvtsd2ss xmm15,xmm2
+11E9F9F6 - F3 44 0F11 BD BCF8FFFF  - movss [rbp-00000744],xmm15
+11E9F9FF - F3 0F10 95 BCF8FFFF   - movss xmm2,[rbp-00000744]
+11E9FA07 - F3 0F5A D2            - cvtss2sd xmm2,xmm2
+11E9FA0B - F2 0F59 CA            - mulsd xmm1,xmm2
+11E9FA0F - F3 0F10 95 90F8FFFF   - movss xmm2,[rbp-00000770]
+11E9FA17 - F3 0F5A D2            - cvtss2sd xmm2,xmm2
+11E9FA1B - F2 0F59 CA            - mulsd xmm1,xmm2
+11E9FA1F - F2 0F58 C1            - addsd xmm0,xmm1
+11E9FA23 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9FA28 - F3 44 0F11 BD B8F8FFFF  - movss [rbp-00000748],xmm15
+11E9FA31 - F3 0F10 45 9C         - movss xmm0,[rbp-64]
+11E9FA36 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9FA3A - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+11E9FA3E - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9FA42 - 49 BB 80B6D46900000000 - mov r11,0000000069D4B680 { (418153288) }
+11E9FA4C - 41 FF D3              - call r11
+11E9FA4F - 48 83 C4 20           - add rsp,20 { 32 }
+11E9FA53 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9FA57 - F2 0F11 85 88F8FFFF   - movsd [rbp-00000778],xmm0
+11E9FA5F - F3 41 0F10 87 00010000  - movss xmm0,[r15+00000100]
+11E9FA68 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9FA6C - F3 0F10 8D B8F8FFFF   - movss xmm1,[rbp-00000748]
+11E9FA74 - F3 0F5A C9            - cvtss2sd xmm1,xmm1
+11E9FA78 - F2 0F5C C1            - subsd xmm0,xmm1
+11E9FA7C - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+<<<start of function at 9FA80 according to cheatengine
+11E9FA80 - 48 83 EC 20           - sub rsp,20 { 32 }						
+11E9FA84 - 49 BB 80B6D46900000000 - mov r11,0000000069D4B680 { (418153288) }
+11E9FA8E - 41 FF D3              - call r11
+11E9FA91 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9FA95 - F3 0F5A C8            - cvtss2sd xmm1,xmm0
+11E9FA99 - F2 0F10 85 88F8FFFF   - movsd xmm0,[rbp-00000778]
+11E9FAA1 - 66 0F2F C8            - comisd xmm1,xmm0
+11E9FAA5 - 7A 06                 - jp 11E9FAAD { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+128d }
+11E9FAA7 - 0F84 1B000000         - je 11E9FAC8 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+12a8 }
+11E9FAAD - F3 41 0F10 87 00010000  - movss xmm0,[r15+00000100]
+11E9FAB6 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9FABA - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9FABF - F3 44 0F11 BD B8F8FFFF  - movss [rbp-00000748],xmm15
+11E9FAC8 - F3 0F10 85 B8F8FFFF   - movss xmm0,[rbp-00000748]
+11E9FAD0 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9FAD4 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9FAD9 - F3 45 0F11 BF 04010000  - movss [r15+00000104],xmm15
+11E9FAE2 - 49 8B 87 98000000     - mov rax,[r15+00000098]
+11E9FAE9 - 48 85 C0              - test rax,rax
+11E9FAEC - 40 0F94 C0            - sete al
+11E9FAF0 - 48 0FB6 C0            - movzx rax,al
+11E9FAF4 - 85 C0                 - test eax,eax
+11E9FAF6 - 40 0F94 C0            - sete al
+11E9FAFA - 48 0FB6 C0            - movzx rax,al
+11E9FAFE - 85 C0                 - test eax,eax
+11E9FB00 - 0F84 24000000         - je 11E9FB2A { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+130a }
+11E9FB06 - 49 8B 87 98000000     - mov rax,[r15+00000098]
+11E9FB0D - 83 38 00              - cmp dword ptr [rax],00 { 0 }
+11E9FB10 - 48 63 40 30           - movsxd  rax,dword ptr [rax+30]
+11E9FB14 - 83 E0 10              - and eax,10 { 16 }
+11E9FB17 - 83 F8 10              - cmp eax,10 { 16 }
+11E9FB1A - 40 0F94 C0            - sete al
+11E9FB1E - 48 0FB6 C0            - movzx rax,al
+11E9FB22 - 85 C0                 - test eax,eax
+11E9FB24 - 0F84 4B140000         - je 11EA0F75 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+2755 }
+11E9FB2A - 49 63 87 28010000     - movsxd  rax,dword ptr [r15+00000128]
+11E9FB31 - 83 F8 09              - cmp eax,09 { 9 }
+11E9FB34 - 0F84 3B140000         - je 11EA0F75 { ->BBI.Unity.Game.World:UserCamera:MutateCameraPositionOrientation+2755 }
+11E9FB3A - 48 8B CD              - mov rcx,rbp
+11E9FB3D - 48 81 C1 28FCFFFF     - add rcx,FFFFFC28 { -984 }
+11E9FB44 - 49 8B D7              - mov rdx,r15
+11E9FB47 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9FB4B - 49 BB E0BB482000000000 - mov r11,000000002048BBE0 { (-326416299) }
+11E9FB55 - 41 FF D3              - call r11
+11E9FB58 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9FB5C - 48 8B 07              - mov rax,[rdi]
+11E9FB5F - 48 89 85 30FCFFFF     - mov [rbp-000003D0],rax
+11E9FB66 - 48 63 47 08           - movsxd  rax,dword ptr [rdi+08]
+11E9FB6A - 89 85 38FCFFFF        - mov [rbp-000003C8],eax
+11E9FB70 - 48 8B 06              - mov rax,[rsi]
+11E9FB73 - 48 89 85 40FCFFFF     - mov [rbp-000003C0],rax
+11E9FB7A - 48 8B 46 08           - mov rax,[rsi+08]
+11E9FB7E - 48 89 85 48FCFFFF     - mov [rbp-000003B8],rax
+11E9FB85 - 48 8B D5              - mov rdx,rbp
+11E9FB88 - 48 81 C2 E8F8FFFF     - add rdx,FFFFF8E8 { -1816 }
+11E9FB8F - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9FB93 - 49 8B CF              - mov rcx,r15
+11E9FB96 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9FB9A - 48 8B 85 40FCFFFF     - mov rax,[rbp-000003C0]
+11E9FBA1 - 48 89 04 24           - mov [rsp],rax
+11E9FBA5 - 48 8B 85 48FCFFFF     - mov rax,[rbp-000003B8]
+11E9FBAC - 48 89 44 24 08        - mov [rsp+08],rax
+11E9FBB1 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9FBB5 - 48 8B 85 30FCFFFF     - mov rax,[rbp-000003D0]
+11E9FBBC - 48 89 04 24           - mov [rsp],rax
+11E9FBC0 - 48 63 85 38FCFFFF     - movsxd  rax,dword ptr [rbp-000003C8]
+11E9FBC7 - 89 44 24 08           - mov [rsp+08],eax
+11E9FBCB - FF B5 28FCFFFF        - push [rbp-000003D8]
+11E9FBD1 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9FBD5 - 49 BB A0CEEA1100000000 - mov r11,0000000011EACEA0 { (-326416299) }	address of start of above function
+11E9FBDF - 41 FF D3              - call r11						<<call to above function
+11E9FBE2 - 48 83 C4 50           - add rsp,50 { 80 }
+
+Start of function that calls above function
+11E9C050 - 55                    - push rbp
+11E9C051 - 48 8B EC              - mov rbp,rsp
+11E9C054 - 56                    - push rsi
+11E9C055 - 57                    - push rdi
+11E9C056 - 41 57                 - push r15
+11E9C058 - 48 81 EC B8030000     - sub rsp,000003B8 { 952 }
+11E9C05F - 48 8B F1              - mov rsi,rcx
+11E9C062 - 33 C0                 - xor eax,eax
+11E9C064 - 48 89 85 B0FCFFFF     - mov [rbp-00000350],rax
+11E9C06B - 89 85 B8FCFFFF        - mov [rbp-00000348],eax
+11E9C071 - 48 89 85 C0FCFFFF     - mov [rbp-00000340],rax
+11E9C078 - 48 89 85 C8FCFFFF     - mov [rbp-00000338],rax
+11E9C07F - 48 89 85 D0FCFFFF     - mov [rbp-00000330],rax
+11E9C086 - 89 85 D8FCFFFF        - mov [rbp-00000328],eax
+11E9C08C - 48 8B CD              - mov rcx,rbp
+11E9C08F - 48 81 C1 E0FCFFFF     - add rcx,FFFFFCE0 { -800 }
+11E9C096 - 33 D2                 - xor edx,edx
+11E9C098 - 41 B8 30000000        - mov r8d,00000030 { 48 }
+11E9C09E - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C0A2 - 49 BB 80D5D90700000000 - mov r11,0000000007D9D580 { (686588744) }
+11E9C0AC - 41 FF D3              - call r11
+11E9C0AF - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C0B3 - 48 8B CD              - mov rcx,rbp
+11E9C0B6 - 48 81 C1 10FDFFFF     - add rcx,FFFFFD10 { -752 }
+11E9C0BD - 33 D2                 - xor edx,edx
+11E9C0BF - 41 B8 40000000        - mov r8d,00000040 { 64 }
+11E9C0C5 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C0C9 - 49 BB 80D5D90700000000 - mov r11,0000000007D9D580 { (686588744) }
+11E9C0D3 - 41 FF D3              - call r11
+11E9C0D6 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C0DA - 48 8B CD              - mov rcx,rbp
+11E9C0DD - 48 81 C1 50FDFFFF     - add rcx,FFFFFD50 { -688 }
+11E9C0E4 - 33 D2                 - xor edx,edx
+11E9C0E6 - 41 B8 40000000        - mov r8d,00000040 { 64 }
+11E9C0EC - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C0F0 - 49 BB 80D5D90700000000 - mov r11,0000000007D9D580 { (686588744) }
+11E9C0FA - 41 FF D3              - call r11
+11E9C0FD - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C101 - 33 C0                 - xor eax,eax
+11E9C103 - 48 89 85 90FDFFFF     - mov [rbp-00000270],rax
+11E9C10A - 89 85 98FDFFFF        - mov [rbp-00000268],eax
+11E9C110 - 48 89 85 A0FDFFFF     - mov [rbp-00000260],rax
+11E9C117 - 89 85 A8FDFFFF        - mov [rbp-00000258],eax
+11E9C11D - 48 89 85 B0FDFFFF     - mov [rbp-00000250],rax
+11E9C124 - 89 85 B8FDFFFF        - mov [rbp-00000248],eax
+11E9C12A - 48 8B CE              - mov rcx,rsi
+11E9C12D - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C131 - 49 BB 90D8E91100000000 - mov r11,0000000011E9D890 { (-326416299) }
+11E9C13B - 41 FF D3              - call r11
+11E9C13E - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C142 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C146 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C14B - F3 44 0F11 BD 98FCFFFF  - movss [rbp-00000368],xmm15
+11E9C154 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C158 - 49 BB 4081D66900000000 - mov r11,0000000069D68140 { (-326416299) }
+11E9C162 - 41 FF D3              - call r11
+11E9C165 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C169 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C16D - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C172 - F3 44 0F11 BE 08010000  - movss [rsi+00000108],xmm15
+11E9C17B - F3 0F10 85 98FCFFFF   - movss xmm0,[rbp-00000368]
+11E9C183 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C187 - 66 0F57 C9            - xorpd xmm1,xmm1
+11E9C18B - 66 0F2F C8            - comisd xmm1,xmm0
+11E9C18F - 0F82 05000000         - jb 11E9C19A { ->BBI.Unity.Game.World:UserCamera:LateUpdate+14a }
+11E9C195 - E9 B7150000           - jmp 11E9D751 { ->BBI.Unity.Game.World:UserCamera:LateUpdate+1701 }
+11E9C19A - 48 8B 8E 90000000     - mov rcx,[rsi+00000090]
+11E9C1A1 - 33 D2                 - xor edx,edx
+11E9C1A3 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C1A7 - 49 BB 00A1DF0700000000 - mov r11,0000000007DFA100 { (-326416299) }
+11E9C1B1 - 41 FF D3              - call r11
+11E9C1B4 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C1B8 - 85 C0                 - test eax,eax
+11E9C1BA - 0F85 41000000         - jne 11E9C201 { ->BBI.Unity.Game.World:UserCamera:LateUpdate+1b1 }
+11E9C1C0 - 48 8B 86 90000000     - mov rax,[rsi+00000090]
+11E9C1C7 - 48 8B C8              - mov rcx,rax
+11E9C1CA - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C1CE - 83 38 00              - cmp dword ptr [rax],00 { 0 }
+11E9C1D1 - 49 BB D696DF0700000000 - mov r11,0000000007DF96D6 { (232) }
+11E9C1DB - 41 FF D3              - call r11
+11E9C1DE - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C1E2 - 48 8B C8              - mov rcx,rax
+11E9C1E5 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C1E9 - 83 38 00              - cmp dword ptr [rax],00 { 0 }
+11E9C1EC - 49 BB B096D06900000000 - mov r11,0000000069D096B0 { (-1419162648) }
+11E9C1F6 - 41 FF D3              - call r11
+11E9C1F9 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C1FD - 85 C0                 - test eax,eax
+11E9C1FF - 75 1A                 - jne 11E9C21B { ->BBI.Unity.Game.World:UserCamera:LateUpdate+1cb }
+11E9C201 - 48 8B CE              - mov rcx,rsi
+11E9C204 - 33 D2                 - xor edx,edx
+11E9C206 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C20A - 49 BB 20DB482000000000 - mov r11,000000002048DB20 { (-326416299) }
+11E9C214 - 41 FF D3              - call r11
+11E9C217 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C21B - 48 8B CD              - mov rcx,rbp
+11E9C21E - 48 81 C1 B0FCFFFF     - add rcx,FFFFFCB0 { -848 }
+11E9C225 - 48 8B D6              - mov rdx,rsi
+11E9C228 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C22C - 49 BB C074482000000000 - mov r11,00000000204874C0 { (-326416299) }
+11E9C236 - 41 FF D3              - call r11
+11E9C239 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C23D - 48 8B CD              - mov rcx,rbp
+11E9C240 - 48 81 C1 C0FCFFFF     - add rcx,FFFFFCC0 { -832 }
+11E9C247 - 48 8B D6              - mov rdx,rsi
+11E9C24A - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C24E - 49 BB 60BE482000000000 - mov r11,000000002048BE60 { (-326416299) }
+11E9C258 - 41 FF D3              - call r11
+11E9C25B - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C25F - 48 8B CE              - mov rcx,rsi
+11E9C262 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C266 - 48 8B 06              - mov rax,[rsi]
+11E9C269 - 90                    - nop 
+11E9C26A - 90                    - nop 
+11E9C26B - 90                    - nop 
+11E9C26C - FF 90 D8000000        - call qword ptr [rax+000000D8]
+11E9C272 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C276 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C27A - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C27F - F3 44 0F11 7D D4      - movss [rbp-2C],xmm15
+11E9C285 - F3 0F10 85 98FCFFFF   - movss xmm0,[rbp-00000368]
+11E9C28D - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C291 - 48 8B CE              - mov rcx,rsi
+11E9C294 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9C298 - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9C29C - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C2A0 - 49 BB 20DBE91100000000 - mov r11,0000000011E9DB20 { (-326416299) }
+11E9C2AA - 41 FF D3              - call r11
+11E9C2AD - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C2B1 - 48 8B CE              - mov rcx,rsi
+11E9C2B4 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C2B8 - 49 BB 20DDE91100000000 - mov r11,0000000011E9DD20 { (-326416299) }
+11E9C2C2 - 41 FF D3              - call r11
+11E9C2C5 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C2C9 - 48 8D 86 38010000     - lea rax,[rsi+00000138]
+11E9C2D0 - 48 8B 08              - mov rcx,[rax]
+11E9C2D3 - 48 89 8D D0FCFFFF     - mov [rbp-00000330],rcx
+11E9C2DA - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9C2DE - 89 85 D8FCFFFF        - mov [rbp-00000328],eax
+11E9C2E4 - 48 8B CD              - mov rcx,rbp
+11E9C2E7 - 48 81 C1 08FEFFFF     - add rcx,FFFFFE08 { -504 }
+11E9C2EE - 48 8B D6              - mov rdx,rsi
+11E9C2F1 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C2F5 - 49 BB E0BB482000000000 - mov r11,000000002048BBE0 { (-326416299) }
+11E9C2FF - 41 FF D3              - call r11
+11E9C302 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C306 - 48 8B D5              - mov rdx,rbp
+11E9C309 - 48 81 C2 E0FCFFFF     - add rdx,FFFFFCE0 { -800 }
+11E9C310 - 48 83 EC 08           - sub rsp,08 { 8 }
+11E9C314 - 48 8B CE              - mov rcx,rsi
+11E9C317 - FF B5 08FEFFFF        - push [rbp-000001F8]
+11E9C31D - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C321 - 48 8B 06              - mov rax,[rsi]
+11E9C324 - 90                    - nop 
+11E9C325 - 90                    - nop 
+11E9C326 - 90                    - nop 
+11E9C327 - FF 90 90000000        - call qword ptr [rax+00000090]
+11E9C32D - 48 83 C4 30           - add rsp,30 { 48 }
+11E9C331 - 85 C0                 - test eax,eax
+11E9C333 - 0F84 1D000000         - je 11E9C356 { ->BBI.Unity.Game.World:UserCamera:LateUpdate+306 }
+11E9C339 - 48 8B C5              - mov rax,rbp
+11E9C33C - 48 05 E0FCFFFF        - add rax,FFFFFCE0 { -800 }
+11E9C342 - 48 8B 08              - mov rcx,[rax]
+11E9C345 - 48 89 8D D0FCFFFF     - mov [rbp-00000330],rcx
+11E9C34C - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+11E9C350 - 89 85 D8FCFFFF        - mov [rbp-00000328],eax
+11E9C356 - 48 8B CD              - mov rcx,rbp
+11E9C359 - 48 81 C1 90FDFFFF     - add rcx,FFFFFD90 { -624 }
+11E9C360 - 48 8B D6              - mov rdx,rsi
+11E9C363 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C367 - 49 BB B0E3E91100000000 - mov r11,0000000011E9E3B0 { (-326416299) }
+11E9C371 - 41 FF D3              - call r11
+11E9C374 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C378 - 48 8B CD              - mov rcx,rbp
+11E9C37B - 48 81 C1 90FDFFFF     - add rcx,FFFFFD90 { -624 }
+11E9C382 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C386 - 49 BB A0EFD76900000000 - mov r11,0000000069D7EFA0 { (418153288) }
+11E9C390 - 41 FF D3              - call r11
+11E9C393 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C397 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C39B - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+11E9C39F - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C3A3 - 49 BB 80B5D46900000000 - mov r11,0000000069D4B580 { (-326416299) }
+11E9C3AD - 41 FF D3              - call r11
+11E9C3B0 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C3B4 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C3B8 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C3BD - F3 44 0F11 BD ACFCFFFF  - movss [rbp-00000354],xmm15
+11E9C3C6 - F3 0F10 85 ACFCFFFF   - movss xmm0,[rbp-00000354]
+11E9C3CE - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C3D2 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C3D7 - F3 44 0F11 BD 94FCFFFF  - movss [rbp-0000036C],xmm15
+11E9C3E0 - F3 0F10 85 94FCFFFF   - movss xmm0,[rbp-0000036C]
+11E9C3E8 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C3EC - F3 0F10 8D 94FCFFFF   - movss xmm1,[rbp-0000036C]
+11E9C3F4 - F3 0F5A C9            - cvtss2sd xmm1,xmm1
+11E9C3F8 - 48 33 C0              - xor rax,rax
+11E9C3FB - 66 0F2F C1            - comisd xmm0,xmm1
+11E9C3FF - 7A 04                 - jp 11E9C405 { ->BBI.Unity.Game.World:UserCamera:LateUpdate+3b5 }
+11E9C401 - 40 0F94 C0            - sete al
+11E9C405 - 85 C0                 - test eax,eax
+11E9C407 - 40 0F94 C0            - sete al
+11E9C40B - 48 0FB6 C0            - movzx rax,al
+11E9C40F - 85 C0                 - test eax,eax
+11E9C411 - 0F84 88000000         - je 11E9C49F { ->BBI.Unity.Game.World:UserCamera:LateUpdate+44f }
+11E9C417 - F3 0F10 85 ACFCFFFF   - movss xmm0,[rbp-00000354]
+11E9C41F - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C423 - F2 0F11 85 88FCFFFF   - movsd [rbp-00000378],xmm0
+11E9C42B - B9 98158316           - mov ecx,16831598 { (078E6028) }
+11E9C430 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C434 - 49 BB 2025D80700000000 - mov r11,0000000007D82520 { (-326416299) }
+11E9C43E - 41 FF D3              - call r11
+11E9C441 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C445 - 48 8B D0              - mov rdx,rax
+11E9C448 - F2 0F10 85 88FCFFFF   - movsd xmm0,[rbp-00000378]
+11E9C450 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C455 - F3 44 0F11 7A 10      - movss [rdx+10],xmm15
+11E9C45B - B9 002F09AE           - mov ecx,AE092F00 { (077BB1C0) }
+11E9C460 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C464 - 49 BB D11AD80700000000 - mov r11,0000000007D81AD1 { (232) }
+11E9C46E - 41 FF D3              - call r11
+11E9C471 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C475 - 48 8B C8              - mov rcx,rax
+11E9C478 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C47C - 49 BB 5D7CDF0700000000 - mov r11,0000000007DF7C5D { (232) }
+11E9C486 - 41 FF D3              - call r11
+11E9C489 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C48D - 66 0F57 C0            - xorpd xmm0,xmm0
+11E9C491 - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C496 - F3 44 0F11 BD ACFCFFFF  - movss [rbp-00000354],xmm15
+11E9C49F - 48 8B 46 28           - mov rax,[rsi+28]
+11E9C4A3 - 48 8B 40 10           - mov rax,[rax+10]
+11E9C4A7 - F3 0F10 85 ACFCFFFF   - movss xmm0,[rbp-00000354]
+11E9C4AF - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C4B3 - 48 8B C8              - mov rcx,rax
+11E9C4B6 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9C4BA - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9C4BE - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C4C2 - 83 38 00              - cmp dword ptr [rax],00 { 0 }
+11E9C4C5 - 49 BB A039D76900000000 - mov r11,0000000069D739A0 { (-326416299) }
+11E9C4CF - 41 FF D3              - call r11
+11E9C4D2 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C4D6 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C4DA - F2 44 0F5A F8         - cvtsd2ss xmm15,xmm0
+11E9C4DF - F3 44 0F11 BD A8FCFFFF  - movss [rbp-00000358],xmm15
+11E9C4E8 - 48 8B 46 68           - mov rax,[rsi+68]
+11E9C4EC - 48 89 85 80FCFFFF     - mov [rbp-00000380],rax
+11E9C4F3 - F3 0F10 85 A8FCFFFF   - movss xmm0,[rbp-00000358]
+11E9C4FB - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C4FF - F3 0F10 0D F9120000   - movss xmm1,[11E9D800] { (1.00) }
+11E9C507 - F3 0F5A C9            - cvtss2sd xmm1,xmm1
+11E9C50B - F3 0F10 15 DD120000   - movss xmm2,[11E9D7F0] { (340282346638528860000000000000000000000.00) }
+11E9C513 - F3 0F5A D2            - cvtss2sd xmm2,xmm2
+11E9C517 - F2 0F5A D2            - cvtsd2ss xmm2,xmm2
+11E9C51B - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9C51F - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+11E9C523 - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C527 - 49 BB 50B7482000000000 - mov r11,000000002048B750 { (418153288) }
+11E9C531 - 41 FF D3              - call r11
+11E9C534 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C538 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C53C - 48 8B 85 80FCFFFF     - mov rax,[rbp-00000380]
+11E9C543 - 48 8B C8              - mov rcx,rax
+11E9C546 - F2 0F10 C8            - movsd xmm1,xmm0
+11E9C54A - F2 0F5A C9            - cvtsd2ss xmm1,xmm1
+11E9C54E - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C552 - 83 38 00              - cmp dword ptr [rax],00 { 0 }
+11E9C555 - 49 BB 5073482000000000 - mov r11,0000000020487350 { (-326416299) }
+11E9C55F - 41 FF D3              - call r11
+11E9C562 - 48 83 C4 20           - add rsp,20 { 32 }
+11E9C566 - 48 8B D5              - mov rdx,rbp
+11E9C569 - 48 81 C2 B0FCFFFF     - add rdx,FFFFFCB0 { -848 }
+11E9C570 - 4C 8B C5              - mov r8,rbp
+11E9C573 - 49 81 C0 C0FCFFFF     - add r8,FFFFFCC0 { -832 }
+11E9C57A - F3 0F10 85 98FCFFFF   - movss xmm0,[rbp-00000368]
+11E9C582 - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+11E9C586 - 48 8B CE              - mov rcx,rsi
+11E9C589 - F2 0F10 D8            - movsd xmm3,xmm0
+11E9C58D - F2 0F5A DB            - cvtsd2ss xmm3,xmm3
+11E9C591 - 48 83 EC 10           - sub rsp,10 { 16 }
+11E9C595 - 48 8B 85 D0FCFFFF     - mov rax,[rbp-00000330]
+11E9C59C - 48 89 04 24           - mov [rsp],rax
+11E9C5A0 - 48 63 85 D8FCFFFF     - movsxd  rax,dword ptr [rbp-00000328]
+11E9C5A7 - 89 44 24 08           - mov [rsp+08],eax
+11E9C5AB - 48 83 EC 20           - sub rsp,20 { 32 }
+11E9C5AF - 49 BB 20E8E91100000000 - mov r11,0000000011E9E820 { (-326416299) }		<<Address
+11E9C5B9 - 41 FF D3              - call r11			<<<call 
+11E9C5BC - 48 83 C4 30           - add rsp,30 { 48 }
+
+
+function that calls above function:
+System:Object:runtime_invoke_void__this__ - 55                    - push rbp
+System:Object:runtime_invoke_void__this__+1- 48 8B EC              - mov rbp,rsp
+System:Object:runtime_invoke_void__this__+4- 48 83 EC 60           - sub rsp,60 { 96 }
+System:Object:runtime_invoke_void__this__+8- 48 89 4D C0           - mov [rbp-40],rcx
+System:Object:runtime_invoke_void__this__+c- 4C 89 45 B0           - mov [rbp-50],r8
+System:Object:runtime_invoke_void__this__+10- 4C 89 4D A8           - mov [rbp-58],r9
+System:Object:runtime_invoke_void__this__+14- 48 C7 45 D0 00000000  - mov qword ptr [rbp-30],00000000 { 0 }
+System:Object:runtime_invoke_void__this__+1c- 48 C7 45 C8 00000000  - mov qword ptr [rbp-38],00000000 { 0 }
+System:Object:runtime_invoke_void__this__+24- 48 8B 45 B0           - mov rax,[rbp-50]
+System:Object:runtime_invoke_void__this__+28- 48 85 C0              - test rax,rax
+System:Object:runtime_invoke_void__this__+2b- 74 0B                 - je System:Object:runtime_invoke_void__this__+38
+System:Object:runtime_invoke_void__this__+2d- 48 8B 45 B0           - mov rax,[rbp-50]
+System:Object:runtime_invoke_void__this__+31- 48 C7 00 00000000     - mov qword ptr [rax],00000000 { 0 }
+System:Object:runtime_invoke_void__this__+38- 48 B8 7041616EFB7F0000 - mov rax,00007FFB6E614170 { (0) }
+System:Object:runtime_invoke_void__this__+42- 8B 00                 - mov eax,[rax]
+System:Object:runtime_invoke_void__this__+44- 85 C0                 - test eax,eax
+System:Object:runtime_invoke_void__this__+46- 74 15                 - je System:Object:runtime_invoke_void__this__+5d
+System:Object:runtime_invoke_void__this__+48- 48 83 EC 20           - sub rsp,20 { 32 }
+System:Object:runtime_invoke_void__this__+4c- 49 BB 9A00D80700000000 - mov r11,0000000007D8009A { (232) }
+System:Object:runtime_invoke_void__this__+56- 41 FF D3              - call r11
+System:Object:runtime_invoke_void__this__+59- 48 83 C4 20           - add rsp,20 { 32 }
+System:Object:runtime_invoke_void__this__+5d- 48 8B 4D C0           - mov rcx,[rbp-40]
+System:Object:runtime_invoke_void__this__+61- 48 83 EC 20           - sub rsp,20 { 32 }
+System:Object:runtime_invoke_void__this__+65- 48 8B 45 A8           - mov rax,[rbp-58]	<<address
+System:Object:runtime_invoke_void__this__+69- FF D0                 - call rax			<<call here
+System:Object:runtime_invoke_void__this__+6b- 48 83 C4 20           - add rsp,20 { 32 }

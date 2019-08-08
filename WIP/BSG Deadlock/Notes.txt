@@ -292,3 +292,60 @@ bloom setting struct:
 1E9A3516 - C9                    - leave 
 1E9A3517 - C3                    - ret 
 
+AOB for write call
+E8 x x x x 83 C4 x 8B 87 x x x x 83 EC x 6A 00 50 E8 x x x x 83 C4 x 85 C0 74 x 8B 87 x x x x 83 EC x 50 39 00 E8 x x x x 83 C4 x 85 C0 74 x 8B 87 x x x x 83 EC x 50 39 00 E8 x x x x 83 C4 x
+
+OrbitCamera:LateUpdate+2df - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+2e2 - 8B 87 98000000        - mov eax,[edi+00000098]
+OrbitCamera:LateUpdate+2e8 - 83 EC 08              - sub esp,08 { 8 }
+OrbitCamera:LateUpdate+2eb - 6A 00                 - push 00 { 0 }
+OrbitCamera:LateUpdate+2ed - 50                    - push eax
+OrbitCamera:LateUpdate+2ee - E8 DD6C03EA           - call UnityEngine:Object:op_Inequality
+OrbitCamera:LateUpdate+2f3 - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+2f6 - 85 C0                 - test eax,eax
+OrbitCamera:LateUpdate+2f8 - 74 2C                 - je OrbitCamera:LateUpdate+326
+OrbitCamera:LateUpdate+2fa - 8B 87 98000000        - mov eax,[edi+00000098]
+OrbitCamera:LateUpdate+300 - 83 EC 0C              - sub esp,0C { 12 }
+OrbitCamera:LateUpdate+303 - 50                    - push eax
+OrbitCamera:LateUpdate+304 - 39 00                 - cmp [eax],eax
+OrbitCamera:LateUpdate+306 - E8 95E70FEA           - call UnityEngine:Behaviour:get_enabled
+OrbitCamera:LateUpdate+30b - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+30e - 85 C0                 - test eax,eax
+OrbitCamera:LateUpdate+310 - 74 14                 - je OrbitCamera:LateUpdate+326
+OrbitCamera:LateUpdate+312 - 8B 87 98000000        - mov eax,[edi+00000098]
+OrbitCamera:LateUpdate+318 - 83 EC 0C              - sub esp,0C { 12 }
+OrbitCamera:LateUpdate+31b - 50                    - push eax
+OrbitCamera:LateUpdate+31c - 39 00                 - cmp [eax],eax
+OrbitCamera:LateUpdate+31e - E8 6D510000           - call CameraFocusAgent:UpdateCameraComponent
+OrbitCamera:LateUpdate+323 - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+326 - 8B 87 94000000        - mov eax,[edi+00000094]
+OrbitCamera:LateUpdate+32c - 83 EC 08              - sub esp,08 { 8 }
+OrbitCamera:LateUpdate+32f - 6A 00                 - push 00 { 0 }
+OrbitCamera:LateUpdate+331 - 50                    - push eax
+OrbitCamera:LateUpdate+332 - E8 996C03EA           - call UnityEngine:Object:op_Inequality
+OrbitCamera:LateUpdate+337 - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+33a - 85 C0                 - test eax,eax
+OrbitCamera:LateUpdate+33c - 74 2C                 - je OrbitCamera:LateUpdate+36a
+OrbitCamera:LateUpdate+33e - 8B 87 94000000        - mov eax,[edi+00000094]
+OrbitCamera:LateUpdate+344 - 83 EC 0C              - sub esp,0C { 12 }
+OrbitCamera:LateUpdate+347 - 50                    - push eax
+OrbitCamera:LateUpdate+348 - 39 00                 - cmp [eax],eax
+OrbitCamera:LateUpdate+34a - E8 51E70FEA           - call UnityEngine:Behaviour:get_enabled
+OrbitCamera:LateUpdate+34f - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+352 - 85 C0                 - test eax,eax
+OrbitCamera:LateUpdate+354 - 74 14                 - je OrbitCamera:LateUpdate+36a
+OrbitCamera:LateUpdate+356 - 8B 87 94000000        - mov eax,[edi+00000094]
+OrbitCamera:LateUpdate+35c - 83 EC 0C              - sub esp,0C { 12 }
+OrbitCamera:LateUpdate+35f - 50                    - push eax
+OrbitCamera:LateUpdate+360 - 39 00                 - cmp [eax],eax
+OrbitCamera:LateUpdate+362 - E8 79530000           - call CameraCollisionAgent:UpdateCameraComponent			<<< nop this call
+OrbitCamera:LateUpdate+367 - 83 C4 10              - add esp,10 { 16 }
+OrbitCamera:LateUpdate+36a - 0FB6 87 CD000000      - movzx eax,byte ptr [edi+000000CD]
+OrbitCamera:LateUpdate+371 - 85 C0                 - test eax,eax
+OrbitCamera:LateUpdate+373 - 0F84 5B000000         - je OrbitCamera:LateUpdate+3d4
+OrbitCamera:LateUpdate+379 - C6 87 CD000000 00     - mov byte ptr [edi+000000CD],00 { 0 }
+OrbitCamera:LateUpdate+380 - 8B 87 9C000000        - mov eax,[edi+0000009C]
+OrbitCamera:LateUpdate+386 - 83 EC 08              - sub esp,08 { 8 }
+OrbitCamera:LateUpdate+389 - 6A 00                 - push 00 { 0 }
+OrbitCamera:LateUpdate+38b - 50                    - push eax
+OrbitCamera:LateUpdate+38c - E8 3F6C03EA           - call UnityEngine:Object:op_Inequality

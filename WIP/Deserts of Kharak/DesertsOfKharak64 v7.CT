@@ -4,7 +4,6 @@
     <CheatEntry>
       <ID>25</ID>
       <Description>"&gt;&gt; DISABLE CAMERA (REQUIRED FOR IGCS)"</Description>
-      <Options moManualExpandCollapse="1"/>
       <LastState/>
       <Color>FF0000</Color>
       <VariableType>Auto Assembler Script</VariableType>
@@ -87,152 +86,6 @@ unregistersymbol(writeNOPquat)
           <DeactivateSound>Deactivate</DeactivateSound>
         </Hotkey>
       </Hotkeys>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>62</ID>
-          <Description>"x"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-C20</Offset>
-          </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>37</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>39</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>1</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>63</ID>
-          <Description>"y"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-C1C</Offset>
-          </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>105</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>103</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>1</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>64</ID>
-          <Description>"z"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-c18</Offset>
-          </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>38</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>40</Key>
-              </Keys>
-              <Value>5</Value>
-              <ID>1</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>58</ID>
-          <Description>"qx"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-C30</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>59</ID>
-          <Description>"qy"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-C2C</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>60</ID>
-          <Description>"qz"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-C28</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>61</ID>
-          <Description>"qw"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>-C24</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>2693</ID>
-          <Description>"FOV"</Description>
-          <VariableType>Float</VariableType>
-          <Address>_fov</Address>
-          <Offsets>
-            <Offset>284</Offset>
-          </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Decrease Value</Action>
-              <Keys>
-                <Key>107</Key>
-              </Keys>
-              <Value>0.5</Value>
-              <ID>0</ID>
-            </Hotkey>
-            <Hotkey>
-              <Action>Increase Value</Action>
-              <Keys>
-                <Key>109</Key>
-              </Keys>
-              <Value>0.5</Value>
-              <ID>1</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
-      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>65</ID>
@@ -714,6 +567,150 @@ dealloc(newmem)
 "DesertsOfKharak64.exe"+1B2677: CC                    -  int 3 
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2693</ID>
+          <Description>"FOV"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>284</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>107</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>109</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>62</ID>
+          <Description>"x"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-C20</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>37</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>39</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>63</ID>
+          <Description>"y"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-C1C</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>105</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>103</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>64</ID>
+          <Description>"z"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-c18</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>38</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>40</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>58</ID>
+          <Description>"qx"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-C30</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>59</ID>
+          <Description>"qy"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-C2C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>60</ID>
+          <Description>"qz"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-C28</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>61</ID>
+          <Description>"qw"</Description>
+          <VariableType>Float</VariableType>
+          <Address>_fov</Address>
+          <Offsets>
+            <Offset>-C24</Offset>
+          </Offsets>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
