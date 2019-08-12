@@ -1,3 +1,26 @@
+timestop:
+DesertsOfKharak64.GlobalCallbacks::Get+1070 - 48 8D 8B A8000000     - lea rcx,[rbx+000000A8]
+DesertsOfKharak64.GlobalCallbacks::Get+1077 - 8B 90 CC000000        - mov edx,[rax+000000CC]	<<<< timevalue read
+DesertsOfKharak64.GlobalCallbacks::Get+107D - 0F14 F6               - unpcklps xmm6,xmm6
+DesertsOfKharak64.GlobalCallbacks::Get+1080 - 4C 8D 44 24 20        - lea r8,[rsp+20]
+DesertsOfKharak64.GlobalCallbacks::Get+1085 - 0F5A C6               - vcvtps2pd xmm0,xmm6
+DesertsOfKharak64.GlobalCallbacks::Get+1088 - F2 0F11 44 24 20      - movsd [rsp+20],xmm0
+DesertsOfKharak64.GlobalCallbacks::Get+108E - 89 93 C0000000        - mov [rbx+000000C0],edx
+DesertsOfKharak64.GlobalCallbacks::Get+1094 - 8B 93 A0000000        - mov edx,[rbx+000000A0]
+DesertsOfKharak64.GlobalCallbacks::Get+109A - 48 8B 83 98000000     - mov rax,[rbx+00000098]
+DesertsOfKharak64.GlobalCallbacks::Get+10A1 - F2 0F10 83 90000000   - movsd xmm0,[rbx+00000090]
+DesertsOfKharak64.GlobalCallbacks::Get+10A9 - FF 83 88000000        - inc [rbx+00000088]
+DesertsOfKharak64.GlobalCallbacks::Get+10AF - 89 51 10              - mov [rcx+10],edx
+
+
+
+rbx+01D0
+
+OR
+
+rbx+0258
+
+
 quaternion write 1
 DesertsOfKharak64.Transform::CopyTRSNoNotification+DD - F3 0F5C D0            - subss xmm2,xmm0
 DesertsOfKharak64.Transform::CopyTRSNoNotification+E1 - 41 0F28 C0            - movaps xmm0,xmm8

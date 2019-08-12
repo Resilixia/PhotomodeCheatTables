@@ -1,0 +1,14 @@
+shadow of war ansel nops:
+ShadowOfWar.exe+119AFFC - 33 C0                 - xor eax,eax
+ShadowOfWar.exe+119AFFE - 48 85 D2              - test rdx,rdx
+ShadowOfWar.exe+119B001 - 74 20                 - je ShadowOfWar.exe+119B023		<<<<
+ShadowOfWar.exe+119B003 - 38 02                 - cmp [rdx],al
+ShadowOfWar.exe+119B005 - 74 1C                 - je ShadowOfWar.exe+119B023		<<<<
+ShadowOfWar.exe+119B007 - 39 05 B7C28901        - cmp [ShadowOfWar.exe+2A372C4],eax { (1) }
+ShadowOfWar.exe+119B00D - 0F9F C0               - setg al
+ShadowOfWar.exe+119B010 - 88 42 30              - mov [rdx+30],al
+ShadowOfWar.exe+119B013 - 0FB6 42 31            - movzx eax,byte ptr [rdx+31]
+ShadowOfWar.exe+119B017 - 0FBA E8 00            - bts eax,00 { 0 }
+ShadowOfWar.exe+119B01B - 88 42 31              - mov [rdx+31],al
+ShadowOfWar.exe+119B01E - B8 01000000           - mov eax,00000001 { 1 }
+ShadowOfWar.exe+119B023 - C3                    - ret 
