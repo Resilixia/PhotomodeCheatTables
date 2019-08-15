@@ -14,8 +14,12 @@ db 90 90
 ShadowOfWar.exe+119B005:
 db 90 90
 
+ShadowOfWar.exe+1C8C7A2:
+db 90 90 90 90 90 90
 
- 
+ShadowOfWar.exe+1C8C7CE:
+db 90 90 90 90 90 90
+
  
 [DISABLE]
 //code from here till the end of the code will be used to disable the cheat
@@ -24,6 +28,12 @@ je ShadowOfWar.exe+119B023
 
 ShadowOfWar.exe+119B005:
 je ShadowOfWar.exe+119B023
+
+ShadowOfWar.exe+1C8C7A2:
+call qword ptr [ShadowOfWar.exe+1D92DB0]
+
+ShadowOfWar.exe+1C8C7CE:
+call qword ptr [ShadowOfWar.exe+1D92DA0]
 </AssemblerScript>
     </CheatEntry>
   </CheatEntries>
