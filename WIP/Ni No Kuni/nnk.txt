@@ -1,0 +1,78 @@
+nI NO KUNI:
+player coords:
+NinoKuni_WotWW_Remastered.exe+42A124 - 0F11 22               - movups [rdx],xmm4
+NinoKuni_WotWW_Remastered.exe+42A127 - 44 0F11 42 10         - movups [rdx+10],xmm8
+NinoKuni_WotWW_Remastered.exe+42A12C - 44 0F28 44 24 20      - movaps xmm8,[rsp+20]
+NinoKuni_WotWW_Remastered.exe+42A132 - 44 0F11 4A 20         - movups [rdx+20],xmm9
+NinoKuni_WotWW_Remastered.exe+42A137 - 44 0F28 4C 24 10      - movaps xmm9,[rsp+10]
+NinoKuni_WotWW_Remastered.exe+42A13D - 44 0F11 52 30         - movups [rdx+30],xmm10	<<<< player coord write
+NinoKuni_WotWW_Remastered.exe+42A142 - 44 0F28 14 24         - movaps xmm10,[rsp]
+NinoKuni_WotWW_Remastered.exe+42A147 - 48 83 C4 58           - add rsp,58 { 88 }
+NinoKuni_WotWW_Remastered.exe+42A14B - C3                    - ret 
+
+a camera:
+NinoKuni_WotWW_Remastered.exe+945D40 - 41 0F28 00            - movaps xmm0,[r8]
+NinoKuni_WotWW_Remastered.exe+945D44 - 66 0F7F 81 A0010000   - movdqa [rcx+000001A0],xmm0	<<< cam coords
+NinoKuni_WotWW_Remastered.exe+945D4C - 41 0F28 09            - movaps xmm1,[r9]
+NinoKuni_WotWW_Remastered.exe+945D50 - 66 0F7F 89 B0010000   - movdqa [rcx+000001B0],xmm1
+
+
+maincam:
+NinoKuni_WotWW_Remastered.exe+5B5CDC - 66 0F6F CF            - movdqa xmm1,xmm7
+NinoKuni_WotWW_Remastered.exe+5B5CE0 - 66 0FDF FE            - pandn xmm7,xmm6
+NinoKuni_WotWW_Remastered.exe+5B5CE4 - 66 0FDF CD            - pandn xmm1,xmm5
+NinoKuni_WotWW_Remastered.exe+5B5CE8 - 0F28 74 24 30         - movaps xmm6,[rsp+30]
+NinoKuni_WotWW_Remastered.exe+5B5CED - 0F28 C4               - movaps xmm0,xmm4
+NinoKuni_WotWW_Remastered.exe+5B5CF0 - 0FC6 05 D84B7B00 FA   - shufps xmm0,[NinoKuni_WotWW_Remastered.exe+D6A8D0],-06 { 250,(1.00) }
+NinoKuni_WotWW_Remastered.exe+5B5CF8 - 66 0F7F 12            - movdqa [rdx],xmm2	<<matrix row 1
+NinoKuni_WotWW_Remastered.exe+5B5CFC - 66 0F7F 4A 10         - movdqa [rdx+10],xmm1 <<matrix row 2
+NinoKuni_WotWW_Remastered.exe+5B5D01 - 66 0F7F 7A 20         - movdqa [rdx+20],xmm7 <<matrix row 3
+NinoKuni_WotWW_Remastered.exe+5B5D06 - 0F28 7C 24 20         - movaps xmm7,[rsp+20]
+NinoKuni_WotWW_Remastered.exe+5B5D0B - 0FC6 E0 C4            - shufps xmm4,xmm0,-3C { 196 }
+NinoKuni_WotWW_Remastered.exe+5B5D0F - 66 0F7F 62 30         - movdqa [rdx+30],xmm4  <<<coords
+NinoKuni_WotWW_Remastered.exe+5B5D14 - 48 83 C4 48           - add rsp,48 { 72 }
+NinoKuni_WotWW_Remastered.exe+5B5D18 - C3                    - ret 
+
+
+NinoKuni_WotWW_Remastered.exe+ABFEB8 - 0FB7 87 7A4A0000      - movzx eax,word ptr [rdi+00004A7A]
+NinoKuni_WotWW_Remastered.exe+ABFEBF - 48 8D AF 30240000     - lea rbp,[rdi+00002430]
+NinoKuni_WotWW_Remastered.exe+ABFEC6 - 66 89 87 764A0000     - mov [rdi+00004A76],ax
+NinoKuni_WotWW_Remastered.exe+ABFECD - 0F57 F6               - xorps xmm6,xmm6
+NinoKuni_WotWW_Remastered.exe+ABFED0 - 0FB7 87 784A0000      - movzx eax,word ptr [rdi+00004A78]
+NinoKuni_WotWW_Remastered.exe+ABFED7 - 0F28 FE               - movaps xmm7,xmm6
+NinoKuni_WotWW_Remastered.exe+ABFEDA - 66 89 87 744A0000     - mov [rdi+00004A74],ax
+NinoKuni_WotWW_Remastered.exe+ABFEE1 - 44 0F28 C6            - movaps xmm8,xmm6
+NinoKuni_WotWW_Remastered.exe+ABFEE5 - 48 8B 05 ECF65D00     - mov rax,[NinoKuni_WotWW_Remastered.exe+109F5D8] { (23A8CFD4080) }
+NinoKuni_WotWW_Remastered.exe+ABFEEC - F3 44 0F10 48 18      - movss xmm9,[rax+18]		<<<timescale?animation? read
+NinoKuni_WotWW_Remastered.exe+ABFEF2 - F3 44 0F5C 48 14      - subss xmm9,[rax+14]
+NinoKuni_WotWW_Remastered.exe+ABFEF8 - F3 44 0F59 48 24      - mulss xmm9,[rax+24]
+NinoKuni_WotWW_Remastered.exe+ABFEFE - F3 44 0F58 48 14      - addss xmm9,dword ptr [rax+14]
+NinoKuni_WotWW_Remastered.exe+ABFF04 - 66 44 3B B7 704A0000  - cmp r14w,[rdi+00004A70]
+NinoKuni_WotWW_Remastered.exe+ABFF0C - 0F83 6A010000         - jae NinoKuni_WotWW_Remastered.exe+AC007C
+NinoKuni_WotWW_Remastered.exe+ABFF12 - 48 89 9C 24 80000000  - mov [rsp+00000080],rbx
+NinoKuni_WotWW_Remastered.exe+ABFF1A - 4C 89 BC 24 88000000  - mov [rsp+00000088],r15
+NinoKuni_WotWW_Remastered.exe+ABFF22 - 41 BF 01080000        - mov r15d,00000801 { 2049 }
+NinoKuni_WotWW_Remastered.exe+ABFF28 - 0F1F 84 00 00000000   - nop [rax+rax+00000000]
+
+
+NinoKuni_WotWW_Remastered.exe+66269C - 48 39 35 DD1B7200     - cmp [NinoKuni_WotWW_Remastered.exe+D84280],rsi { (7FF7A631A470) }
+NinoKuni_WotWW_Remastered.exe+6626A3 - 0F94 C2               - sete dl
+NinoKuni_WotWW_Remastered.exe+6626A6 - 48 83 C2 03           - add rdx,03 { 3 }
+NinoKuni_WotWW_Remastered.exe+6626AA - E8 C1D44A00           - call NinoKuni_WotWW_Remastered.exe+B0FB70
+NinoKuni_WotWW_Remastered.exe+6626AF - 0F2F D8               - comiss xmm3,xmm0
+NinoKuni_WotWW_Remastered.exe+6626B2 - 48 8B 0D 1FCFA300     - mov rcx,[NinoKuni_WotWW_Remastered.exe+109F5D8] { (23A8CFD4080) }
+NinoKuni_WotWW_Remastered.exe+6626B9 - 48 8B 74 24 40        - mov rsi,[rsp+40]
+NinoKuni_WotWW_Remastered.exe+6626BE - F3 0F10 51 18         - movss xmm2,[rcx+18]
+NinoKuni_WotWW_Remastered.exe+6626C3 - F3 0F5C 51 14         - subss xmm2,[rcx+14]
+NinoKuni_WotWW_Remastered.exe+6626C8 - F3 0F11 61 18         - movss [rcx+18],xmm4		<<<timescale write
+NinoKuni_WotWW_Remastered.exe+6626CD - F3 0F59 51 24         - mulss xmm2,[rcx+24]
+NinoKuni_WotWW_Remastered.exe+6626D2 - F3 0F58 51 14         - addss xmm2,dword ptr [rcx+14]
+NinoKuni_WotWW_Remastered.exe+6626D7 - F3 0F11 51 14         - movss [rcx+14],xmm2
+NinoKuni_WotWW_Remastered.exe+6626DC - F3 0F11 41 20         - movss [rcx+20],xmm0
+NinoKuni_WotWW_Remastered.exe+6626E1 - C7 41 1C 00000000     - mov [rcx+1C],00000000 { 0 }
+NinoKuni_WotWW_Remastered.exe+6626E8 - C7 41 24 00000000     - mov [rcx+24],00000000 { 0 }
+NinoKuni_WotWW_Remastered.exe+6626EF - 72 07                 - jb NinoKuni_WotWW_Remastered.exe+6626F8
+NinoKuni_WotWW_Remastered.exe+6626F1 - C7 41 24 0000803F     - mov [rcx+24],3F800000 { 1.00 }
+NinoKuni_WotWW_Remastered.exe+6626F8 - 33 C0                 - xor eax,eax
+NinoKuni_WotWW_Remastered.exe+6626FA - 48 83 C4 48           - add rsp,48 { 72 }
+NinoKuni_WotWW_Remastered.exe+6626FE - C3                    - ret 

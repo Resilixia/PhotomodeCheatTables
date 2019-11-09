@@ -1,0 +1,1822 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>236</ID>
+      <Description>"------------------------------------------------------------------------------------------------------------------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>746</ID>
+      <Description>"Camera Script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Nino2.exe
+  Version: 
+  Date   : 2019-10-04
+  Author : skall
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Camstructure,Nino2.exe,41 89 00 48 8B CB) // should be unique
+alloc(newmem,$1000,"Nino2.exe"+475442)
+
+label(code)
+label(return)
+label(pCamstruct)
+registersymbol(pCamstruct)
+
+newmem:
+
+code:
+  //mov [r8],eax
+  mov [pCamstruct],r8
+  mov rcx,rbx
+  //mov eax,[rdx+1C]
+  //mov [r8+04],eax
+  //mov eax,[rdx+2C]
+  //mov [r8+08],eax
+  jmp return
+
+pCamstruct:
+dq 0
+
+Camstructure:
+  jmp newmem
+  nop F
+return:
+registersymbol(Camstructure)
+
+[DISABLE]
+
+Camstructure:
+  db 41 89 00 48 8B CB
+  mov eax,[rdx+1C]
+  mov [r8+04],eax
+  mov eax,[rdx+2C]
+  mov [r8+08],eax
+
+unregistersymbol(Camstructure)
+unregistersymbol(pCamstruct)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+475442
+
+"Nino2.exe"+47541E: 0F B7 49 02           -  movzx ecx,word ptr [rcx+02]
+"Nino2.exe"+475422: 66 23 CE              -  and cx,si
+"Nino2.exe"+475425: EB 02                 -  jmp Nino2.exe+475429
+"Nino2.exe"+475427: 8B CF                 -  mov ecx,edi
+"Nino2.exe"+475429: 0F B7 83 AA 02 00 00  -  movzx eax,word ptr [rbx+000002AA]
+"Nino2.exe"+475430: 66 23 C6              -  and ax,si
+"Nino2.exe"+475433: 66 3B C1              -  cmp ax,cx
+"Nino2.exe"+475436: 74 49                 -  je Nino2.exe+475481
+"Nino2.exe"+475438: 8B 42 0C              -  mov eax,[rdx+0C]
+"Nino2.exe"+47543B: 4C 8D 83 30 02 00 00  -  lea r8,[rbx+00000230]
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+475442: 41 89 00              -  mov [r8],eax
+"Nino2.exe"+475445: 48 8B CB              -  mov rcx,rbx
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+475448: 8B 42 1C              -  mov eax,[rdx+1C]
+"Nino2.exe"+47544B: 41 89 40 04           -  mov [r8+04],eax
+"Nino2.exe"+47544F: 8B 42 2C              -  mov eax,[rdx+2C]
+"Nino2.exe"+475452: 41 89 40 08           -  mov [r8+08],eax
+"Nino2.exe"+475456: E8 D5 FD FF FF        -  call Nino2.exe+475230
+"Nino2.exe"+47545B: 48 8B 83 90 00 00 00  -  mov rax,[rbx+00000090]
+"Nino2.exe"+475462: 48 85 C0              -  test rax,rax
+"Nino2.exe"+475465: 74 07                 -  je Nino2.exe+47546E
+"Nino2.exe"+475467: 0F B7 78 02           -  movzx edi,word ptr [rax+02]
+"Nino2.exe"+47546B: 66 23 FE              -  and di,si
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>45</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>747</ID>
+          <Description>"X"</Description>
+          <VariableType>Float</VariableType>
+          <Address>pCamstruct</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>100</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>102</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>748</ID>
+          <Description>"Y"</Description>
+          <VariableType>Float</VariableType>
+          <Address>pCamstruct</Address>
+          <Offsets>
+            <Offset>04</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>104</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>101</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>749</ID>
+          <Description>"Z"</Description>
+          <VariableType>Float</VariableType>
+          <Address>pCamstruct</Address>
+          <Offsets>
+            <Offset>08</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>97</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>99</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>757</ID>
+      <Description>"HUD Script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Nino2.exe
+  Version: 
+  Date   : 2019-10-31
+  Author : skall
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(HUD,Nino2.exe,80 BA 44 61 00 00 00 74 56) // should be unique
+alloc(newmem,$1000,"Nino2.exe"+52EC09)
+
+label(code)
+label(return)
+label(pHUD)
+registersymbol(pHUD)
+
+newmem:
+
+code:
+  cmp byte ptr [rdx+00006144],00
+  mov [pHUD],rdx
+  jmp return
+
+pHUD:
+dq 0
+
+HUD:
+  jmp newmem
+  nop 2
+return:
+registersymbol(HUD)
+
+[DISABLE]
+
+HUD:
+  db 80 BA 44 61 00 00 00
+
+unregistersymbol(HUD)
+unregistersymbol(pHUD)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+52EC09
+
+"Nino2.exe"+52EBED: CC                                -  int 3 
+"Nino2.exe"+52EBEE: CC                                -  int 3 
+"Nino2.exe"+52EBEF: CC                                -  int 3 
+"Nino2.exe"+52EBF0: 40 53                             -  push rbx
+"Nino2.exe"+52EBF2: 48 83 EC 20                       -  sub rsp,20
+"Nino2.exe"+52EBF6: 48 8B D9                          -  mov rbx,rcx
+"Nino2.exe"+52EBF9: E8 72 00 00 00                    -  call Nino2.exe+52EC70
+"Nino2.exe"+52EBFE: 84 C0                             -  test al,al
+"Nino2.exe"+52EC00: 74 66                             -  je Nino2.exe+52EC68
+"Nino2.exe"+52EC02: 48 8B 15 77 8F D5 00              -  mov rdx,[Nino2.exe+1287B80]
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+52EC09: 80 BA 44 61 00 00 00              -  cmp byte ptr [rdx+00006144],00
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+52EC10: 74 56                             -  je Nino2.exe+52EC68
+"Nino2.exe"+52EC12: 0F B7 82 40 61 00 00              -  movzx eax,word ptr [rdx+00006140]
+"Nino2.exe"+52EC19: B9 00 02 00 00                    -  mov ecx,00000200
+"Nino2.exe"+52EC1E: 66 3B C1                          -  cmp ax,cx
+"Nino2.exe"+52EC21: 73 45                             -  jae Nino2.exe+52EC68
+"Nino2.exe"+52EC23: 0F 10 43 70                       -  movups xmm0,[rbx+70]
+"Nino2.exe"+52EC27: 0F B7 C0                          -  movzx eax,ax
+"Nino2.exe"+52EC2A: 48 8D 0C 40                       -  lea rcx,[rax+rax*2]
+"Nino2.exe"+52EC2E: 48 03 C9                          -  add rcx,rcx
+"Nino2.exe"+52EC31: 0F 11 84 CA 80 00 00 00           -  movups [rdx+rcx*8+00000080],xmm0
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>758</ID>
+          <Description>"No description"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>pHUD</Address>
+          <Offsets>
+            <Offset>6144</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>192</Key>
+              </Keys>
+              <Value>0</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>220</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1052</ID>
+      <Description>"NO NPC"</Description>
+      <LastState Value="0" RealAddress="7FF7CBB71390"/>
+      <VariableType>Byte</VariableType>
+      <Address>Nino2.exe+1321390</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>734</ID>
+      <Description>"------------------------------------------------------------------------------------------------------------------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>448</ID>
+      <Description>"------------------------------------------------------------------------------------------------------------------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>243</ID>
+      <Description>"------------------------------------------------------------------------------------------------------------------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1053</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Nino2.exe
+  Version: 
+  Date   : 2019-10-31
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+aobscanmodule(INJECT,Nino2.exe,F3 0F 11 35 ?? ?? ?? ?? F3 0F 11 3D ?? ?? ?? ?? E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 1D) // should be unique
+
+INJECT:
+db 90 90 90 90 90 90 90 90
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db F3 0F 11 35 35 16 8B 00
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+9D6287
+
+"Nino2.exe"+9D6263: 48 85 C9                 -  test rcx,rcx
+"Nino2.exe"+9D6266: 74 05                    -  je Nino2.exe+9D626D
+"Nino2.exe"+9D6268: E8 33 70 19 00           -  call Nino2.exe+B6D2A0
+"Nino2.exe"+9D626D: 48 8B 0D EC 15 8B 00     -  mov rcx,[Nino2.exe+1287860]
+"Nino2.exe"+9D6274: 48 85 C9                 -  test rcx,rcx
+"Nino2.exe"+9D6277: 74 09                    -  je Nino2.exe+9D6282
+"Nino2.exe"+9D6279: 48 8B 01                 -  mov rax,[rcx]
+"Nino2.exe"+9D627C: 0F 28 CE                 -  movaps xmm1,xmm6
+"Nino2.exe"+9D627F: FF 50 08                 -  call qword ptr [rax+08]
+"Nino2.exe"+9D6282: E8 89 00 19 00           -  call Nino2.exe+B66310
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+9D6287: F3 0F 11 35 35 16 8B 00  -  movss [Nino2.exe+12878C4],xmm6
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+9D628F: F3 0F 11 3D 5D 16 8B 00  -  movss [Nino2.exe+12878F4],xmm7
+"Nino2.exe"+9D6297: E8 04 7B 9D FF           -  call Nino2.exe+3ADDA0
+"Nino2.exe"+9D629C: E8 3F 7C 9D FF           -  call Nino2.exe+3ADEE0
+"Nino2.exe"+9D62A1: 48 8B 1D 78 B7 94 00     -  mov rbx,[Nino2.exe+1321A20]
+"Nino2.exe"+9D62A8: 0F 28 B4 24 F0 00 00 00  -  movaps xmm6,[rsp+000000F0]
+"Nino2.exe"+9D62B0: 48 85 DB                 -  test rbx,rbx
+"Nino2.exe"+9D62B3: 74 20                    -  je Nino2.exe+9D62D5
+"Nino2.exe"+9D62B5: 8B 53 3C                 -  mov edx,[rbx+3C]
+"Nino2.exe"+9D62B8: 85 D2                    -  test edx,edx
+"Nino2.exe"+9D62BA: 74 10                    -  je Nino2.exe+9D62CC
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>96</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of movss [r15+00355864],xmm6</Description>
+      <AddressString>Nino2.exe+B52D37</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>3C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>B7</Byte>
+        <Byte>64</Byte>
+        <Byte>58</Byte>
+        <Byte>35</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>06</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss xmm11,[r15+00355864]</Description>
+      <AddressString>Nino2.exe+B52B35</AddressString>
+      <Before>
+        <Byte>BF</Byte>
+        <Byte>68</Byte>
+        <Byte>58</Byte>
+        <Byte>35</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>9F</Byte>
+        <Byte>64</Byte>
+        <Byte>58</Byte>
+        <Byte>35</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>91</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r15+00355868],xmm6</Description>
+      <AddressString>Nino2.exe+B52CDA</AddressString>
+      <Before>
+        <Byte>45</Byte>
+        <Byte>84</Byte>
+        <Byte>ED</Byte>
+        <Byte>75</Byte>
+        <Byte>11</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>B7</Byte>
+        <Byte>68</Byte>
+        <Byte>58</Byte>
+        <Byte>35</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>C6</Byte>
+        <Byte>87</Byte>
+        <Byte>70</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdx+34],xmm7</Description>
+      <AddressString>Nino2.exe+822A0A</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4A</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>7A</Byte>
+        <Byte>34</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+000000C8],eax</Description>
+      <AddressString>Nino2.exe+1DC244</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>C8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+000000D0],eax</Description>
+      <AddressString>Nino2.exe+1DC24D</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>D0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>14</Byte>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rcx+00000258]</Description>
+      <AddressString>Nino2.exe+476BE1</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>24</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>81</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>28</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rsi+00000258],xmm5</Description>
+      <AddressString>Nino2.exe+7D0465</AddressString>
+      <Before>
+        <Byte>A6</Byte>
+        <Byte>54</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>AE</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>96</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rsi+00000254],xmm4</Description>
+      <AddressString>Nino2.exe+7D045D</AddressString>
+      <Before>
+        <Byte>9E</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>A6</Byte>
+        <Byte>54</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>AE</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rdx]</Description>
+      <AddressString>Nino2.exe+1DC230</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+000000C0],eax</Description>
+      <AddressString>Nino2.exe+1DC232</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>8B</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movsd [rbx],xmm0</Description>
+      <AddressString>Nino2.exe+4803BA</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>03</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+        <Byte>89</Byte>
+        <Byte>43</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rbx+08],eax</Description>
+      <AddressString>Nino2.exe+4803C1</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>43</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C3</Byte>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov eax,[rax+08]</Description>
+      <AddressString>Nino2.exe+4803BE</AddressString>
+      <Before>
+        <Byte>30</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rax,rbx</Description>
+      <AddressString>Nino2.exe+4803C4</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C3</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>70</Byte>
+        <Byte>5B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdx+04],xmm3</Description>
+      <AddressString>Nino2.exe+7CF21C</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>D0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>5A</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>52</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdx+08],xmm2</Description>
+      <AddressString>Nino2.exe+7CF271</AddressString>
+      <Before>
+        <Byte>74</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>52</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>04</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+08],xmm0</Description>
+      <AddressString>Nino2.exe+7CF792</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>47</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>9B</Byte>
+        <Byte>68</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [r8+08],eax</Description>
+      <AddressString>Nino2.exe+475452</AddressString>
+      <Before>
+        <Byte>40</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>2C</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>89</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>D5</Byte>
+        <Byte>FD</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+28],xmm13</Description>
+      <AddressString>Nino2.exe+39DF65</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>77</Byte>
+        <Byte>24</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>6F</Byte>
+        <Byte>28</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4B</Byte>
+        <Byte>04</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rdi+20],xmm0</Description>
+      <AddressString>Nino2.exe+39DF21</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>40</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>47</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>48</Byte>
+        <Byte>30</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+1C],xmm9</Description>
+      <AddressString>Nino2.exe+39DFF4</AddressString>
+      <Before>
+        <Byte>98</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4F</Byte>
+        <Byte>1C</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4B</Byte>
+        <Byte>B8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rdi+10],xmm1</Description>
+      <AddressString>Nino2.exe+39DF19</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4F</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>40</Byte>
+        <Byte>20</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r8],xmm2</Description>
+      <AddressString>Nino2.exe+4752C8</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>42</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r8],xmm0</Description>
+      <AddressString>Nino2.exe+4752EC</AddressString>
+      <Before>
+        <Byte>81</Byte>
+        <Byte>30</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+        <Byte>34</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r8+04],xmm1</Description>
+      <AddressString>Nino2.exe+4752FF</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>48</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>48</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>81</Byte>
+        <Byte>38</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r8+04],xmm1</Description>
+      <AddressString>Nino2.exe+4752CD</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>48</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>C4</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r8+08],xmm0</Description>
+      <AddressString>Nino2.exe+47531A</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [r8+08],xmm0</Description>
+      <AddressString>Nino2.exe+4752DB</AddressString>
+      <Before>
+        <Byte>C4</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>C3</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>40</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C2</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [Nino2.exe+12878C4],xmm6</Description>
+      <AddressString>Nino2.exe+9D6287</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>19</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>35</Byte>
+        <Byte>35</Byte>
+        <Byte>16</Byte>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>3D</Byte>
+        <Byte>5D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rdx,[Nino2.exe+1287B80]</Description>
+      <AddressString>Nino2.exe+52EC02</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+        <Byte>74</Byte>
+        <Byte>66</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>15</Byte>
+        <Byte>77</Byte>
+        <Byte>8F</Byte>
+        <Byte>D5</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>BA</Byte>
+        <Byte>44</Byte>
+        <Byte>61</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp byte ptr [rdx+00006144],00</Description>
+      <AddressString>Nino2.exe+52EC09</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>77</Byte>
+        <Byte>8F</Byte>
+        <Byte>D5</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>80</Byte>
+        <Byte>BA</Byte>
+        <Byte>44</Byte>
+        <Byte>61</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>56</Byte>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>82</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movzx eax,word ptr [rdx+00006140]</Description>
+      <AddressString>Nino2.exe+52EC12</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+        <Byte>56</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>82</Byte>
+        <Byte>40</Byte>
+        <Byte>61</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>B9</Byte>
+        <Byte>00</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of je Nino2.exe+52EC68</Description>
+      <AddressString>Nino2.exe+52EC00</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>66</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>15</Byte>
+        <Byte>77</Byte>
+        <Byte>8F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov ecx,00000200</Description>
+      <AddressString>Nino2.exe+52EC19</AddressString>
+      <Before>
+        <Byte>82</Byte>
+        <Byte>40</Byte>
+        <Byte>61</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>B9</Byte>
+        <Byte>00</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>3B</Byte>
+        <Byte>C1</Byte>
+        <Byte>73</Byte>
+        <Byte>45</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm0,[rbx+70]</Description>
+      <AddressString>Nino2.exe+52EC23</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>3B</Byte>
+        <Byte>C1</Byte>
+        <Byte>73</Byte>
+        <Byte>45</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>43</Byte>
+        <Byte>70</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>C0</Byte>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of lea rcx,[rax+rax*2]</Description>
+      <AddressString>Nino2.exe+52EC2A</AddressString>
+      <Before>
+        <Byte>43</Byte>
+        <Byte>70</Byte>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>0C</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>03</Byte>
+        <Byte>C9</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rdx+rcx*8+00000080],xmm0</Description>
+      <AddressString>Nino2.exe+52EC31</AddressString>
+      <Before>
+        <Byte>0C</Byte>
+        <Byte>40</Byte>
+        <Byte>48</Byte>
+        <Byte>03</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>84</Byte>
+        <Byte>CA</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>8B</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups xmm1,[rbx+00000080]</Description>
+      <AddressString>Nino2.exe+52EC39</AddressString>
+      <Before>
+        <Byte>CA</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>8B</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8C</Byte>
+        <Byte>CA</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movups [rdx+rcx*8+00000090],xmm1</Description>
+      <AddressString>Nino2.exe+52EC40</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8C</Byte>
+        <Byte>CA</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F2</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>83</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of test al,al</Description>
+      <AddressString>Nino2.exe+52EBFE</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>72</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>66</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>15</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call Nino2.exe+52EC70</Description>
+      <AddressString>Nino2.exe+52EBF9</AddressString>
+      <Before>
+        <Byte>EC</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>72</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+        <Byte>74</Byte>
+        <Byte>66</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp word ptr [rdx+00000270],00</Description>
+      <AddressString>Nino2.exe+52ECC8</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+        <Byte>74</Byte>
+        <Byte>19</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>83</Byte>
+        <Byte>BA</Byte>
+        <Byte>70</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>0F</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CA</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rcx,[rdx+000000C0]</Description>
+      <AddressString>Nino2.exe+52ECB8</AddressString>
+      <Before>
+        <Byte>45</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+        <Byte>75</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8A</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>4C</Byte>
+        <Byte>C9</Byte>
+        <Byte>CD</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov rcx,[rdx+000000C0]</Description>
+      <AddressString>Nino2.exe+52EC9D</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>75</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8A</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>27</Byte>
+        <Byte>20</Byte>
+        <Byte>CB</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of test r8l,01</Description>
+      <AddressString>Nino2.exe+52EC85</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>42</Byte>
+        <Byte>78</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>F6</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>56</Byte>
+        <Byte>41</Byte>
+        <Byte>F6</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movzx r8d,word ptr [rdx+78]</Description>
+      <AddressString>Nino2.exe+52EC80</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>D2</Byte>
+        <Byte>74</Byte>
+        <Byte>61</Byte>
+      </Before>
+      <Actual>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>42</Byte>
+        <Byte>78</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>F6</Byte>
+        <Byte>C0</Byte>
+        <Byte>01</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [Nino2.exe+12878F4],xmm7</Description>
+      <AddressString>Nino2.exe+9D628F</AddressString>
+      <Before>
+        <Byte>35</Byte>
+        <Byte>35</Byte>
+        <Byte>16</Byte>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>3D</Byte>
+        <Byte>5D</Byte>
+        <Byte>16</Byte>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>04</Byte>
+        <Byte>7B</Byte>
+        <Byte>9D</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call qword ptr [rax+08]</Description>
+      <AddressString>Nino2.exe+9D627F</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>19</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of call Nino2.exe+B66310</Description>
+      <AddressString>Nino2.exe+9D6282</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>CE</Byte>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>19</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>35</Byte>
+        <Byte>35</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov byte ptr [rbx+000001A3],00</Description>
+      <AddressString>Nino2.exe+AC1475</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>CB</Byte>
+        <Byte>9F</Byte>
+        <Byte>A1</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>83</Byte>
+        <Byte>A3</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E9</Byte>
+        <Byte>D6</Byte>
+        <Byte>0F</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov word ptr [rbx+000001A2],0102</Description>
+      <AddressString>Nino2.exe+4DC5F9</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+        <Byte>0B</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>C7</Byte>
+        <Byte>83</Byte>
+        <Byte>A2</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>02</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>26</Byte>
+        <Byte>8B</Byte>
+        <Byte>15</Byte>
+        <Byte>D2</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp byte ptr [rbp+000001A3],00</Description>
+      <AddressString>Nino2.exe+521A37</AddressString>
+      <Before>
+        <Byte>C2</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>2C</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>80</Byte>
+        <Byte>BD</Byte>
+        <Byte>A3</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>75</Byte>
+        <Byte>1F</Byte>
+        <Byte>45</Byte>
+        <Byte>84</Byte>
+        <Byte>F6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of cmp byte ptr [rbx+000001A3],00</Description>
+      <AddressString>Nino2.exe+4D8418</AddressString>
+      <Before>
+        <Byte>E9</Byte>
+        <Byte>FA</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>80</Byte>
+        <Byte>BB</Byte>
+        <Byte>A3</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>97</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov byte ptr [rax+00000080],01</Description>
+      <AddressString>Nino2.exe+B43571</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>2F</Byte>
+        <Byte>95</Byte>
+        <Byte>E8</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>80</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8D</Byte>
+        <Byte>F0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"Nino2.exe"+1DC232</Address>
+      <Comment>X
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Nino2.exe"+1DC23B</Address>
+      <Comment>Y
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"Nino2.exe"+1DC244</Address>
+      <Comment>Z
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
