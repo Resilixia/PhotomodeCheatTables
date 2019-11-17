@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <Files>
+    <timestop.CEA Encoding="Ascii85">rB(N+n=MlFV]a)zFpB!%$WF4^7hWP?A$1kuD$Sb{RbV!=BQ7rB##Pl^;9:-wiSKL6Qdb{==97:nmji!4TwIKU$n[qA:WZu1lX=.td6[OU,WSUm7B@3]oDQN^QK}m_Ne7[?C/H_T(49bR(9!,=cHRg0*T538d!UdjxV=pXS{w8[5)/lA[G3Z2or-;,*eWucUwKkyTZFE/9mY1x%1N*FZ#m5e9}Feq.Brm$vTqYp#g=$l.*G[sNttrT[MxK9qAJ8]i^S7rH)=uKbn@0NUBh=^+jE?D[Vwq%GS5wJ!z]rdy[c,vn:5pKxYcVuhc+{wut}vL9k$^5Q(G-A/5[cS!Dmc^U+CIkd(_keOI7ADr4?x^mSxaPDbON=?/nWg$s0f5Rjg=WO$q6(j,2bG22(b02Q//Iw*?I1#pI1ah=7[pr{}i6=LLTt^@o39@f/g9M)zXnBND)h45QD1_1:y$?MScNo+X!A7I*r%Yif:d69ar3[SZE*L,b^r$#TGMiMQ#1r2^fRvY7WPg-r+A1CfAWhYzl%frUV@Sy@@LCaeNmFrG/N7fE1/@FHv1K.VO7v@8GA?Ok2i=9Y@mo*5t,^eQ{0S#4SDbIXEN35dPUN0EVud{5Xlqae$]clgMu82sRfdpxg!sZDv8,yO%9Kp2970AU$_:+y3^vPxmzR4]@[]Up#=U^y32i]JggU^h0(81n1(TFrNK51*d@VCzH?kCp$3.8v-h^PyeyCZj0WiheqB:/Ix_4RTK8u#IdT.?Os^9MZw@z$UyMrz*qpgvg^{];n!4u;A92f/OY{D$e=s0u}0)0$bl#ShA{yO.ub}rZ5,.:F])b*geS2sl9gR)[_xF(-,NMP:?89m0F2,T(.^5yCvS5P@+g0RVy)hAcn(WV]!lH$J9zwuGVDP+L,zLtROrC@#}1-1czX@#M;1}C{$[)]]yl.Zs#8</timestop.CEA>
+    <fov.CEA Encoding="Ascii85">tyW!c.zktRXC)f@)W)zbagy-_[}Q+5JEdAdm9F+$p}{WXVP$)+,Yq9ve_);I#siKM;{@ujLI{@9d,xbs=j7.H[u/3BpN-v5^/7Z-SyZgTEM?UNp?Tnz]4=rj(6svek5nN6Gz+rF5dl#[NcG^1[7)2#P.A(fi4jrkv,cJ%/!nj9R*dT[rZiQ4Q3*Z,$C}crwX09YfpyjI/?B#?QPRA4N,XsGHfwg@t4SEqWRTNxpJ*8[OgFz5xMEZ{$6[fgDR;5!KVe]XdMasgg+D4jZYVYg+cTkaL/oA7NK#cq4/]f=Lc#Dz!L2_{+EFZuiej6:@P55r_DTY/e-hH}Npqck4?lVo3sKNg$*n=GCEOJ[rYTVteC=WuM.)!,2t7rJ@@s4O%3z)au*I:lP18D_MHQ=XO1/kPFqD8}/iI_uBP#fLx7:qM%L+[A?HO2+o}{=Mg!3{uZy?4T9+tb6h3O+,9bQA*t*U7=G@{(xmez;3jP0Na)=v4p!hI1^HP}V?^o@zUcXulmQ;:5AV#94mxlNMl9BCGVt+f8amPY{IrY}rWk_Ev{VU$q0VMD^RAuEp1HbhnK;g0r#mB29O,Mj#9xx,MG;@MB^+k_nx-ijPLkgkZ6OEGOub)QvSVHf5P*BEXc^0ZKC.@PL;+;Ar0c^-or[xW]8+{;*Li^RI+p6kFOa9xZ(5bb:,5S+SHV8stt3;S7}j[1DC#?/p9X1:DJXb#LF*FIj+PWd(XsH3VN-*/o=YHj4b,DL}sS88,LqfIz;K^RnhZw+a(q:V=l@7CyVzAia?QgLX3:uf,0f1@H?Zi_a6MYFwS3!TYp)+$F8ZP6P[@KAzPpBWdP,rcAlvV3*v7vDv@:fJl[S:=z]M-W]ZuXs}8lo.laXe_Z;ssnE%-05siq2y:H$tUHee$GQOyT]BogWo[{a$8R8/=%9i:Y9V(=[?sn8[9p3IFN}LSf+)I[M%1NMILWuPGXT_dy}0jRM,9c^Fge@W+sJ3w$M##bph-+s/Wj!@@#6C8ZKM!aoK89r?9UA#(1,N=)_O68s6FO?y;2jr]3Zs@q=8gN(8=$M@07juJu,Dzi_NW8%uOM4=rJEO+%XS8fhE$Fpk0HC?mA{;b#[3+M%d*cl[S}SJLnO*9=KN</fov.CEA>
+  </Files>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"quaternion"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$lua}
+local halfDegToRad = 0.5 * math.pi / 180
+prevYaw = 0
+prevPitch = 0
+prevRoll = 0
+
+function calcQuaternion(rotMemory, yaw, pitch, roll)
+    --print("calcQuaternion")
+	pitch = pitch * halfDegToRad
+    yaw = yaw * halfDegToRad
+    roll = roll * halfDegToRad
+
+    local camPtr = readPointer(rotMemory+80)
+    local sinX = math.sin(yaw)
+    local cosX = math.cos(yaw)
+    local sinY = math.sin(pitch)
+    local cosY = math.cos(pitch)
+    local sinZ = math.sin(roll)
+    local cosZ = math.cos(roll)
+
+    local w = cosY * cosX * cosZ + sinY * sinX * sinZ
+    local x = cosY * sinX * cosZ + sinY * cosX * sinZ
+    local y = sinY * cosX * cosZ - cosY * sinX * sinZ
+    local z = cosY * cosX * sinZ - sinY * sinX * cosZ
+
+    writeFloat(rotMemory + 16, x)
+    writeFloat(rotMemory + 20, y)
+    writeFloat(rotMemory + 24, z)
+    writeFloat(rotMemory + 28, w)
+
+    writeFloat(camPtr + 32, x)
+    writeFloat(camPtr + 36, y)
+    writeFloat(camPtr + 40, z)
+    writeFloat(camPtr + 44, w)
+end
+
+
+function timer_tick(timer)
+         local rotMemory = getAddressSafe("rotMemory")
+         if rotMemory == nil then
+            return
+         end
+
+         local initialized = readInteger(rotMemory+76)
+         if initialized == 0 then
+            local camPtr = readPointer(rotMemory+80)
+            if camPtr ~= 0 then
+               --initCamera(camPtr, rotMemory)
+               writeInteger(rotMemory+76, 1)
+            end
+            return
+         end
+
+         local yaw = readFloat(rotMemory)
+         local pitch = readFloat(rotMemory+4)
+         local roll = readFloat(rotMemory+8)
+
+         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
+            return
+         end
+
+         calcQuaternion(rotMemory, yaw, pitch, roll)
+
+         prevYaw = yaw
+         prevPitch = pitch
+         prevRoll = roll
+end
+
+function init()
+         --print("init")
+         if timer == nil then
+            print("Creating timer")
+            timer = createTimer(nil, false)
+            timer.setInterval(10)
+            timer.OnTimer = timer_tick
+         else
+             timer.setEnabled(true)
+         end
+end
+
+function deinit()
+         --print("deinit"))
+         timer.setEnabled(false)
+end
+
+{$asm}
+[ENABLE]
+globalalloc(rotMemory, 0x100, "Nino2.exe"+475856)
+{$lua}
+init()
+
+{$asm}
+[DISABLE]
+{$lua}
+deinit()
+{$asm}
+dealloc(rotMemory)
+
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"camPtr"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+50</Address>
+          <Offsets>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Pitch"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>38</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>40</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"Yaw"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+4</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>37</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>39</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Roll"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+8</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>97</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>99</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"qx"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+10</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Camera"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+globalalloc(rotMemory, 0x100, "Nino2.exe"+475856)
+aobscanmodule(_camBase,Nino2.exe,66 0F 7F 4B 20) // should be unique
+alloc(newmem,$1000,"Nino2.exe"+475858)
+registersymbol(_camBase)
+
+registersymbol(cambase)
+label(cambase)
+
+label(code)
+label(return)
+
+aobscanmodule(_coordNOP,Nino2.exe,00 75 ?? 0F 2E 7E ?? 75 ?? 0F 2E 76 ?? 74 ?? F3 44 0F 11 46 ??)
+registersymbol(_coordNOP)
+
+rotMemory+4C:
+db 00 00 00 00
+
+newmem:
+code:
+  mov [cambase], rbx
+  mov [rotMemory+50], rbx
+  //movdqa [rbx+20],xmm1
+  jmp return
+
+cambase:
+dq 0
+
+_camBase:
+  jmp newmem
+return:
+
+_coordNOP+F:
+db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_camBase:
+  db 66 0F 7F 4B 20
+
+_coordNOP+F:
+db F3 44 0F 11 46 30 F3 0F 11 7E 34 F3 0F 11 76 38
+
+rotMemory:
+db 00 00 00 00 00 00 00 00 00 00 00 00
+
+unregistersymbol(cambase)
+unregistersymbol(_coordNOP)
+unregistersymbol(_camBase)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+475858
+
+"Nino2.exe"+475825: 44 0F 28 84 24 90 00 00 00     -  movaps xmm8,[rsp+00000090]
+"Nino2.exe"+47582E: 0F 28 BC 24 A0 00 00 00        -  movaps xmm7,[rsp+000000A0]
+"Nino2.exe"+475836: 0F 28 B4 24 B0 00 00 00        -  movaps xmm6,[rsp+000000B0]
+"Nino2.exe"+47583E: 48 39 43 20                    -  cmp [rbx+20],rax
+"Nino2.exe"+475842: 75 14                          -  jne Nino2.exe+475858
+"Nino2.exe"+475844: 66 0F 6F C1                    -  movdqa xmm0,xmm1
+"Nino2.exe"+475848: 66 0F 73 D8 08                 -  psrldq ,xmm008
+"Nino2.exe"+47584D: 66 48 0F 7E C0                 -  movq rax,xmm0
+"Nino2.exe"+475852: 48 39 43 28                    -  cmp [rbx+28],rax
+"Nino2.exe"+475856: 74 45                          -  je Nino2.exe+47589D
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+475858: 66 0F 7F 4B 20                 -  movdqa [rbx+20],xmm1
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+47585D: 48 8B 93 90 00 00 00           -  mov rdx,[rbx+00000090]
+"Nino2.exe"+475864: 48 85 D2                       -  test rdx,rdx
+"Nino2.exe"+475867: 74 14                          -  je Nino2.exe+47587D
+"Nino2.exe"+475869: 0F B7 42 02                    -  movzx eax,word ptr [rdx+02]
+"Nino2.exe"+47586D: 8D 48 01                       -  lea ecx,[rax+01]
+"Nino2.exe"+475870: 66 33 C8                       -  xor cx,ax
+"Nino2.exe"+475873: 66 23 CF                       -  and cx,di
+"Nino2.exe"+475876: 66 33 C8                       -  xor cx,ax
+"Nino2.exe"+475879: 66 89 4A 02                    -  mov [rdx+02],cx
+"Nino2.exe"+47587D: 48 8B 93 A0 00 00 00           -  mov rdx,[rbx+000000A0]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"qx"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"qy"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>24</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"qz"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>28</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"qw"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>2C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"X"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>30</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>100</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>102</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"Y"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>34</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>105</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>103</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Z"</Description>
+          <VariableType>Float</VariableType>
+          <Address>cambase</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>104</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>101</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"Timestop"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(_DelatTime,Nino2.exe,F3 0F 11 35 ?? ?? ?? ?? F3 0F 11 3D ?? ?? ?? ?? E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 1D) // should be unique
+registersymbol(_DelatTime)
+
+alloc(newmem,$1000,"Nino2.exe"+9D6287)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //movss [Nino2.exe+12878C4],xmm6
+  mov [Nino2.exe+12878C4],(float)0.001
+  jmp return
+
+_DelatTime:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_DelatTime:
+  db F3 0F 11 35 35 16 8B 00
+
+unregistersymbol(_DelatTime)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+9D6287
+
+"Nino2.exe"+9D6263: 48 85 C9                 -  test rcx,rcx
+"Nino2.exe"+9D6266: 74 05                    -  je Nino2.exe+9D626D
+"Nino2.exe"+9D6268: E8 33 70 19 00           -  call Nino2.exe+B6D2A0
+"Nino2.exe"+9D626D: 48 8B 0D EC 15 8B 00     -  mov rcx,[Nino2.exe+1287860]
+"Nino2.exe"+9D6274: 48 85 C9                 -  test rcx,rcx
+"Nino2.exe"+9D6277: 74 09                    -  je Nino2.exe+9D6282
+"Nino2.exe"+9D6279: 48 8B 01                 -  mov rax,[rcx]
+"Nino2.exe"+9D627C: 0F 28 CE                 -  movaps xmm1,xmm6
+"Nino2.exe"+9D627F: FF 50 08                 -  call qword ptr [rax+08]
+"Nino2.exe"+9D6282: E8 89 00 19 00           -  call Nino2.exe+B66310
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+9D6287: F3 0F 11 35 35 16 8B 00  -  movss [Nino2.exe+12878C4],xmm6
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+9D628F: F3 0F 11 3D 5D 16 8B 00  -  movss [Nino2.exe+12878F4],xmm7
+"Nino2.exe"+9D6297: E8 04 7B 9D FF           -  call Nino2.exe+3ADDA0
+"Nino2.exe"+9D629C: E8 3F 7C 9D FF           -  call Nino2.exe+3ADEE0
+"Nino2.exe"+9D62A1: 48 8B 1D 78 B7 94 00     -  mov rbx,[Nino2.exe+1321A20]
+"Nino2.exe"+9D62A8: 0F 28 B4 24 F0 00 00 00  -  movaps xmm6,[rsp+000000F0]
+"Nino2.exe"+9D62B0: 48 85 DB                 -  test rbx,rbx
+"Nino2.exe"+9D62B3: 74 20                    -  je Nino2.exe+9D62D5
+"Nino2.exe"+9D62B5: 8B 53 3C                 -  mov edx,[rbx+3C]
+"Nino2.exe"+9D62B8: 85 D2                    -  test edx,edx
+"Nino2.exe"+9D62BA: 74 10                    -  je Nino2.exe+9D62CC
+}
+
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Activate</Action>
+          <Keys>
+            <Key>96</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+        <Hotkey>
+          <Action>Deactivate</Action>
+          <Keys>
+            <Key>110</Key>
+          </Keys>
+          <ID>1</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>207BB3848D8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>207C36769E8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>207C36769EC</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of movss [rcx+00000254],xmm1</Description>
+      <AddressString>Nino2.exe+117861</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>74</Byte>
+        <Byte>0F</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>89</Byte>
+        <Byte>54</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>81</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [rcx+00000250],eax</Description>
+      <AddressString>Nino2.exe+117898</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>81</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C1</Byte>
+        <Byte>50</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+00000504],xmm0</Description>
+      <AddressString>Nino2.exe+B40246</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>D3</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>87</Byte>
+        <Byte>04</Byte>
+        <Byte>05</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>97</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>rotMemory</Name>
+      <Address>7FF609270000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

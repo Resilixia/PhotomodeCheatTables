@@ -1,0 +1,56 @@
+[ENABLE]
+aobscanmodule(_DelatTime,Nino2.exe,F3 0F 11 35 ?? ?? ?? ?? F3 0F 11 3D ?? ?? ?? ?? E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 1D) // should be unique
+registersymbol(_DelatTime)
+
+alloc(newmem,$1000,"Nino2.exe"+9D6287)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //movss [Nino2.exe+12878C4],xmm6
+  mov [Nino2.exe+12878C4],(float)0.0
+  jmp return
+
+_DelatTime:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_DelatTime:
+  db F3 0F 11 35 35 16 8B 00
+
+unregistersymbol(_DelatTime)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+9D6287
+
+"Nino2.exe"+9D6263: 48 85 C9                 -  test rcx,rcx
+"Nino2.exe"+9D6266: 74 05                    -  je Nino2.exe+9D626D
+"Nino2.exe"+9D6268: E8 33 70 19 00           -  call Nino2.exe+B6D2A0
+"Nino2.exe"+9D626D: 48 8B 0D EC 15 8B 00     -  mov rcx,[Nino2.exe+1287860]
+"Nino2.exe"+9D6274: 48 85 C9                 -  test rcx,rcx
+"Nino2.exe"+9D6277: 74 09                    -  je Nino2.exe+9D6282
+"Nino2.exe"+9D6279: 48 8B 01                 -  mov rax,[rcx]
+"Nino2.exe"+9D627C: 0F 28 CE                 -  movaps xmm1,xmm6
+"Nino2.exe"+9D627F: FF 50 08                 -  call qword ptr [rax+08]
+"Nino2.exe"+9D6282: E8 89 00 19 00           -  call Nino2.exe+B66310
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+9D6287: F3 0F 11 35 35 16 8B 00  -  movss [Nino2.exe+12878C4],xmm6
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+9D628F: F3 0F 11 3D 5D 16 8B 00  -  movss [Nino2.exe+12878F4],xmm7
+"Nino2.exe"+9D6297: E8 04 7B 9D FF           -  call Nino2.exe+3ADDA0
+"Nino2.exe"+9D629C: E8 3F 7C 9D FF           -  call Nino2.exe+3ADEE0
+"Nino2.exe"+9D62A1: 48 8B 1D 78 B7 94 00     -  mov rbx,[Nino2.exe+1321A20]
+"Nino2.exe"+9D62A8: 0F 28 B4 24 F0 00 00 00  -  movaps xmm6,[rsp+000000F0]
+"Nino2.exe"+9D62B0: 48 85 DB                 -  test rbx,rbx
+"Nino2.exe"+9D62B3: 74 20                    -  je Nino2.exe+9D62D5
+"Nino2.exe"+9D62B5: 8B 53 3C                 -  mov edx,[rbx+3C]
+"Nino2.exe"+9D62B8: 85 D2                    -  test edx,edx
+"Nino2.exe"+9D62BA: 74 10                    -  je Nino2.exe+9D62CC
+}

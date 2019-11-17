@@ -1,0 +1,83 @@
+{$lua}
+local halfDegToRad = 0.5 * math.pi / 180
+prevYaw = 0
+prevPitch = 0
+prevRoll = 0
+
+function calcQuaternion(rotMemory, yaw, pitch, roll)
+    --print("calcQuaternion")
+	pitch = pitch * halfDegToRad
+    yaw = yaw * halfDegToRad
+    roll = roll * halfDegToRad
+
+    local sinX = math.sin(pitch)
+    local cosX = math.cos(pitch)
+    local sinY = math.sin(yaw)
+    local cosY = math.cos(yaw)
+    local sinZ = math.sin(roll)
+    local cosZ = math.cos(roll)
+
+    local w = cosY * cosX * cosZ + sinY * sinX * sinZ
+    local x = cosY * sinX * cosZ + sinY * cosX * sinZ
+    local y = sinY * cosX * cosZ - cosY * sinX * sinZ
+    local z = cosY * cosX * sinZ - sinY * sinX * cosZ
+
+    writeFloat(rotMemory + 16, x)
+    writeFloat(rotMemory + 20, y)
+    writeFloat(rotMemory + 24, z)
+    writeFloat(rotMemory + 28, w)
+end
+
+
+function timer_tick(timer)
+         --print("timer_tick")
+         local rotMemory = getAddressSafe("rotMemory")
+         if rotMemory == nil then
+            return
+         end
+
+         local yaw = readFloat(rotMemory)
+         local pitch = readFloat(rotMemory+4)
+         local roll = readFloat(rotMemory+8)
+
+         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
+            return
+         end
+
+         calcQuaternion(rotMemory, yaw, pitch, roll)
+
+         prevYaw = yaw
+         prevPitch = pitch
+         prevRoll = roll
+end
+
+function init()
+         --print("init")
+         if timer == nil then
+            print("Creating timer")
+            timer = createTimer(nil, false)
+            timer.setInterval(10)
+            timer.OnTimer = timer_tick
+         else
+             timer.setEnabled(true)
+         end
+end
+
+function deinit()
+         --print("deinit")
+         timer.setEnabled(false)
+end
+
+
+{$asm}
+[ENABLE]
+globalalloc(rotMemory, 0x50, "dirtrally2.exe"+958980)
+{$lua}
+init()
+
+{$asm}
+[DISABLE]
+{$lua}
+deinit()
+{$asm}
+dealloc(rotMemory)

@@ -1,0 +1,83 @@
+[ENABLE]
+aobscanmodule(_FOV,Nino2.exe,0F 28 83 60 01 00 00 0F 29) // should be unique
+alloc(newmem,$1000,"Nino2.exe"+B3DAF8)
+registersymbol(hfov)
+label(return)
+
+alloc(OGhfov,4) // Allocate memory (4 bytes) for the h FoV value
+registersymbol(OGhfov) // Register symbol so we can reference in CE
+
+alloc(OGvfov,4) // Allocate memory (4 bytes) for the h FoV value
+registersymbol(OGvfov) // Register symbol so we can reference in CE
+
+
+newmem:
+  mov [hfov],rbx
+  movaps xmm0,[rbx+00000160]
+
+  mov [rbx+6E0],(float)1.778
+  movss xmm14,[rbx+6E0]
+  movss xmm15,[rbx+160]
+  mulss xmm14,xmm15
+  movss [rbx+174],xmm14
+  jmp return
+
+hfov:
+dq 0
+
+OGhfov:
+dq (float)1.36
+
+OGvfov:
+dq (float)2.41
+
+_FOV:
+  jmp newmem
+  nop 2
+return:
+registersymbol(_FOV)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_FOV:
+  db 0F 28 83 60 01 00 00
+
+[hfov]+160:
+readmem(OGhfov,4)
+
+[hfov]+174:
+readmem(OGvfov,4)
+
+unregistersymbol(OGhfov)
+unregistersymbol(OGvfov)
+unregistersymbol(hfov)
+unregistersymbol(_FOV)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+B3DAF8
+
+"Nino2.exe"+B3DACB: 80 BB AC 02 00 00 00        -  cmp byte ptr [rbx+000002AC],00
+"Nino2.exe"+B3DAD2: 75 15                       -  jne Nino2.exe+B3DAE9
+"Nino2.exe"+B3DAD4: 80 BB A0 02 00 00 00        -  cmp byte ptr [rbx+000002A0],00
+"Nino2.exe"+B3DADB: 75 1B                       -  jne Nino2.exe+B3DAF8
+"Nino2.exe"+B3DADD: 0F 57 C0                    -  xorps xmm0,xmm0
+"Nino2.exe"+B3DAE0: 0F 2F 83 9C 02 00 00        -  comiss xmm0,[rbx+0000029C]
+"Nino2.exe"+B3DAE7: 72 0F                       -  jb Nino2.exe+B3DAF8
+"Nino2.exe"+B3DAE9: 48 8B CB                    -  mov rcx,rbx
+"Nino2.exe"+B3DAEC: E8 2F 75 93 FF              -  call Nino2.exe+475020
+"Nino2.exe"+B3DAF1: C6 83 AC 02 00 00 00        -  mov byte ptr [rbx+000002AC],00
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+B3DAF8: 0F 28 83 60 01 00 00        -  movaps xmm0,[rbx+00000160]
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+B3DAFF: 0F 29 87 80 00 00 00        -  movaps [rdi+00000080],xmm0
+"Nino2.exe"+B3DB06: 0F 28 8B 70 01 00 00        -  movaps xmm1,[rbx+00000170]
+"Nino2.exe"+B3DB0D: 0F 29 8F 90 00 00 00        -  movaps [rdi+00000090],xmm1
+"Nino2.exe"+B3DB14: 0F 28 83 80 01 00 00        -  movaps xmm0,[rbx+00000180]
+"Nino2.exe"+B3DB1B: 0F 29 87 A0 00 00 00        -  movaps [rdi+000000A0],xmm0
+"Nino2.exe"+B3DB22: 0F 28 8B 90 01 00 00        -  movaps xmm1,[rbx+00000190]
+"Nino2.exe"+B3DB29: 48 8B 5C 24 30              -  mov rbx,[rsp+30]
+"Nino2.exe"+B3DB2E: 0F 29 8F B0 00 00 00        -  movaps [rdi+000000B0],xmm1
+"Nino2.exe"+B3DB35: 48 83 C4 20                 -  add rsp,20
+"Nino2.exe"+B3DB39: 5F                          -  pop rdi
+}

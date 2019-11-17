@@ -1,0 +1,179 @@
+//Ghostinthecamera
+[ENABLE]
+globalalloc(rotMemory, 0x100, Nino2.exe+39DF0A)
+aobscanmodule(_CameraStruct,Nino2.exe,0F 11 07 4C 8D 9C 24 B8 00 00 00) // should be unique
+registersymbol(_CameraStruct)
+alloc(newmem,$1000,"Nino2.exe"+39DF0A)
+registersymbol(camerabase)
+label(code1)
+label(wrongcam)
+label(return1)
+label(code2)
+label(wrongcam2)
+label(return2)
+label(code3)
+label(wrongcam3)
+label(return3)
+
+rotMemory+4C:
+db 00 00 00 00
+
+newmem:
+
+code1:
+  cmp r15,1
+  jne wrongcam
+  mov [camerabase],rdi
+  mov [rotMemory+50],rdi
+  push rcx
+  mov cl, [rotMemory+4C]
+  test cl,cl
+  je skip
+
+  mov ecx,[rotMemory+10]
+  mov [rdi],ecx
+  mov ecx,[rotMemory+14]
+  mov [rdi+4],ecx
+  mov ecx,[rotMemory+18]
+  mov [rdi+8],ecx
+
+  mov ecx,[rotMemory+1C]
+  mov [rdi+10],ecx
+  mov ecx,[rotMemory+20]
+  mov [rdi+14],ecx
+  mov ecx,[rotMemory+24]
+  mov [rdi+18],ecx
+
+  mov ecx,[rotMemory+28]
+  mov [rdi+20],ecx
+  mov ecx,[rotMemory+2C]
+  mov [rdi+24],ecx
+  mov ecx,[rotMemory+30]
+  mov [rdi+28],ecx
+
+  mov ecx,[rotMemory+34]
+  mov [rdi+C],ecx
+  mov ecx,[rotMemory+38]
+  mov [rdi+1C],ecx
+  mov ecx,[rotMemory+3C]
+  mov [rdi+2C],ecx
+
+skip:
+  pop rcx
+
+  //movups [rdi],xmm0
+  lea r11,[rsp+000000B8]
+  movups xmm1,[rax+10]
+  //movups [rdi+10],xmm1
+  movups xmm0,[rax+20]
+ //movups [rdi+20],xmm0
+  jmp return1
+wrongcam:
+  movups [rdi],xmm0
+  lea r11,[rsp+000000B8]
+  movups xmm1,[rax+10]
+  movups [rdi+10],xmm1
+  movups xmm0,[rax+20]
+  movups [rdi+20],xmm0
+  jmp return1
+
+code2:
+  cmp r15,1
+  jne wrongcam2
+  jmp return2
+wrongcam2:
+  movss [rdi+04],xmm11
+  movss [rdi],xmm7
+  movss [rdi+08],xmm10
+  movss [rdi+10],xmm8
+  movss [rdi+14],xmm9
+  movss [rdi+18],xmm6
+  movss [rdi+20],xmm12
+  movss [rdi+24],xmm14
+  movss [rdi+28],xmm13
+  jmp return2
+
+code3:
+ cmp r15,1
+ jne wrongcam3
+ //movss [rdi+0C],xmm11
+ movaps xmm11,[r11-68]
+ xorps xmm9,xmm0
+ //movss [rdi+1C],xmm9
+ movaps xmm9,[r11-48]
+ xorps xmm14,xmm0
+ //movss [rdi+2C],xmm14
+ jmp return3
+wrongcam3:
+  movss [rdi+0C],xmm11
+  movaps xmm11,[r11-68]
+  xorps xmm9,xmm0
+  movss [rdi+1C],xmm9
+  movaps xmm9,[r11-48]
+  xorps xmm14,xmm0
+  movss [rdi+2C],xmm14
+  jmp return3
+
+
+camerabase:
+dq 0
+
+_CameraStruct:
+  jmp code1
+  db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+return1:
+
+_CameraStruct+2E:
+  jmp code2
+  db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+return2:
+
+_CameraStruct+DB:
+  jmp code3
+  db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+return3:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_CameraStruct:
+db 0F 11 07 4C 8D 9C 24 B8 00 00 00 0F 10 48 10 0F 11 4F 10 0F 10 40 20 0F 11 47 20
+
+_CameraStruct+2E:
+db F3 44 0F 11 5F 04 F3 0F 11 3F F3 44 0F 11 57 08 F3 44 0F 11 47 10 F3 44 0F 11 4F 14 F3 0F 11 77 18 F3 44 0F 11 67 20 F3 44 0F 11 77 24 F3 44 0F 11 6F 28
+
+_CameraStruct+DB:
+db F3 44 0F 11 5F 0C 45 0F 28 5B 98 44 0F 57 C8 F3 44 0F 11 4F 1C 45 0F 28 4B B8 44 0F 57 F0 F3 44 0F 11 77 2C
+
+unregistersymbol(camerabase)
+unregistersymbol(_CameraStruct)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+39DF0A
+
+"Nino2.exe"+39DEDE: F3 44 0F 59 CF           -  mulss xmm9,xmm7
+"Nino2.exe"+39DEE3: F3 44 0F 5C C0           -  subss xmm8,xmm0
+"Nino2.exe"+39DEE8: 41 0F 28 C2              -  movaps xmm0,xmm10
+"Nino2.exe"+39DEEC: F3 41 0F 59 C4           -  mulss xmm0,xmm12
+"Nino2.exe"+39DEF1: F3 44 0F 5C C8           -  subss xmm9,xmm0
+"Nino2.exe"+39DEF6: 41 0F 28 C6              -  movaps xmm0,xmm14
+"Nino2.exe"+39DEFA: F3 0F 59 C7              -  mulss xmm0,xmm7
+"Nino2.exe"+39DEFE: F3 0F 5C F0              -  subss xmm6,xmm0
+"Nino2.exe"+39DF02: E8 99 C7 E3 FF           -  call Nino2.exe+1DA6A0
+"Nino2.exe"+39DF07: 0F 10 00                 -  movups xmm0,[rax]
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+39DF0A: 0F 11 07                 -  movups [rdi],xmm0
+"Nino2.exe"+39DF0D: 4C 8D 9C 24 B8 00 00 00  -  lea r11,[rsp+000000B8]
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+39DF15: 0F 10 48 10              -  movups xmm1,[rax+10]
+"Nino2.exe"+39DF19: 0F 11 4F 10              -  movups [rdi+10],xmm1
+"Nino2.exe"+39DF1D: 0F 10 40 20              -  movups xmm0,[rax+20]
+"Nino2.exe"+39DF21: 0F 11 47 20              -  movups [rdi+20],xmm0
+"Nino2.exe"+39DF25: 0F 10 48 30              -  movups xmm1,[rax+30]
+"Nino2.exe"+39DF29: 48 8B C7                 -  mov rax,rdi
+"Nino2.exe"+39DF2C: F3 0F 10 05 EC C6 A4 00  -  movss xmm0,[Nino2.exe+DEA620]
+"Nino2.exe"+39DF34: 0F 11 4F 30              -  movups [rdi+30],xmm1
+"Nino2.exe"+39DF38: F3 44 0F 11 5F 04        -  movss [rdi+04],xmm11
+"Nino2.exe"+39DF3E: F3 0F 11 3F              -  movss [rdi],xmm7
+}

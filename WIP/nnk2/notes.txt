@@ -1,0 +1,23 @@
+nnk2
+Nino2.exe+11787E - 48 89 74 24 18        - mov [rsp+18],rsi
+Nino2.exe+117883 - 57                    - push rdi
+Nino2.exe+117884 - 48 83 EC 20           - sub rsp,20 { 32 }
+Nino2.exe+117888 - 8B 81 54020000        - mov eax,[rcx+00000254]
+Nino2.exe+11788E - 48 8D 91 50010000     - lea rdx,[rcx+00000150]
+Nino2.exe+117895 - 48 8B D9              - mov rbx,rcx
+Nino2.exe+117898 - 89 81 50020000        - mov [rcx+00000250],eax			<<potench timestop
+Nino2.exe+11789E - 48 83 C1 50           - add rcx,50 { 80 }
+Nino2.exe+1178A2 - 41 B8 00010000        - mov r8d,00000100 { 256 }
+Nino2.exe+1178A8 - E8 53B75600           - call Nino2.exe+683000
+Nino2.exe+1178AD - 48 8D 7B 08           - lea rdi,[rbx+08]
+Nino2.exe+1178B1 - 48 8D 73 28           - lea rsi,[rbx+28]
+
+Nino2.exe+117847 - 49 63 C0              - movsxd  rax,r8d
+Nino2.exe+11784A - F3 0F11 54 81 28      - movss [rcx+rax*4+28],xmm2
+Nino2.exe+117850 - C6 81 58020000 01     - mov byte ptr [rcx+00000258],01 { 1 }
+Nino2.exe+117857 - C3                    - ret 
+Nino2.exe+117858 - 0F2E 89 54020000      - ucomiss xmm1,[rcx+00000254]
+Nino2.exe+11785F - 74 0F                 - je Nino2.exe+117870
+Nino2.exe+117861 - F3 0F11 89 54020000   - movss [rcx+00000254],xmm1					<<potench timestop
+Nino2.exe+117869 - C6 81 58020000 01     - mov byte ptr [rcx+00000258],01 { 1 }
+Nino2.exe+117870 - C3                    - ret 

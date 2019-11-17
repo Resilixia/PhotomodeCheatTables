@@ -1,0 +1,59 @@
+//Skalledit
+[ENABLE]
+aobscanmodule(HUD,Nino2.exe,80 BA 44 61 00 00 00 74 56) // should be unique
+alloc(newmem,$1000,"Nino2.exe"+52EC09)
+
+label(return)
+label(pHUD)
+
+registersymbol(pHUD)
+registersymbol(HUD)
+
+newmem:
+  cmp byte ptr [rdx+00006144],00
+  mov [pHUD],rdx
+  jmp return
+
+pHUD:
+dq 0
+
+HUD:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+HUD:
+  db 80 BA 44 61 00 00 00
+
+unregistersymbol(HUD)
+unregistersymbol(pHUD)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Nino2.exe"+52EC09
+
+"Nino2.exe"+52EBED: CC                                -  int 3
+"Nino2.exe"+52EBEE: CC                                -  int 3
+"Nino2.exe"+52EBEF: CC                                -  int 3
+"Nino2.exe"+52EBF0: 40 53                             -  push rbx
+"Nino2.exe"+52EBF2: 48 83 EC 20                       -  sub rsp,20
+"Nino2.exe"+52EBF6: 48 8B D9                          -  mov rbx,rcx
+"Nino2.exe"+52EBF9: E8 72 00 00 00                    -  call Nino2.exe+52EC70
+"Nino2.exe"+52EBFE: 84 C0                             -  test al,al
+"Nino2.exe"+52EC00: 74 66                             -  je Nino2.exe+52EC68
+"Nino2.exe"+52EC02: 48 8B 15 77 8F D5 00              -  mov rdx,[Nino2.exe+1287B80]
+// ---------- INJECTING HERE ----------
+"Nino2.exe"+52EC09: 80 BA 44 61 00 00 00              -  cmp byte ptr [rdx+00006144],00
+// ---------- DONE INJECTING  ----------
+"Nino2.exe"+52EC10: 74 56                             -  je Nino2.exe+52EC68
+"Nino2.exe"+52EC12: 0F B7 82 40 61 00 00              -  movzx eax,word ptr [rdx+00006140]
+"Nino2.exe"+52EC19: B9 00 02 00 00                    -  mov ecx,00000200
+"Nino2.exe"+52EC1E: 66 3B C1                          -  cmp ax,cx
+"Nino2.exe"+52EC21: 73 45                             -  jae Nino2.exe+52EC68
+"Nino2.exe"+52EC23: 0F 10 43 70                       -  movups xmm0,[rbx+70]
+"Nino2.exe"+52EC27: 0F B7 C0                          -  movzx eax,ax
+"Nino2.exe"+52EC2A: 48 8D 0C 40                       -  lea rcx,[rax+rax*2]
+"Nino2.exe"+52EC2E: 48 03 C9                          -  add rcx,rcx
+"Nino2.exe"+52EC31: 0F 11 84 CA 80 00 00 00           -  movups [rdx+rcx*8+00000080],xmm0
+}
