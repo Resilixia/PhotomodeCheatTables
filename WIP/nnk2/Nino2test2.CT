@@ -114,6 +114,7 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>15</ID>
           <Description>"camPtr"</Description>
+          <LastState Value="0.2115063816" RealAddress="1F902E07140"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+50</Address>
           <Offsets>
@@ -123,6 +124,7 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>11</ID>
           <Description>"Pitch"</Description>
+          <LastState Value="0" RealAddress="7FF7A1BF0000"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory</Address>
           <Hotkeys>
@@ -147,6 +149,7 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>12</ID>
           <Description>"Yaw"</Description>
+          <LastState Value="0" RealAddress="7FF7A1BF0004"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+4</Address>
           <Hotkeys>
@@ -171,6 +174,7 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>13</ID>
           <Description>"Roll"</Description>
+          <LastState Value="0" RealAddress="7FF7A1BF0008"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+8</Address>
           <Hotkeys>
@@ -195,6 +199,7 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>14</ID>
           <Description>"qx"</Description>
+          <LastState Value="0.008723544888" RealAddress="7FF7A1BF0010"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+10</Address>
         </CheatEntry>
@@ -467,40 +472,6 @@ dealloc(newmem)
 }
 
 </AssemblerScript>
-      <Hotkeys>
-        <Hotkey>
-          <Action>Activate</Action>
-          <Keys>
-            <Key>96</Key>
-          </Keys>
-          <ID>0</ID>
-        </Hotkey>
-        <Hotkey>
-          <Action>Deactivate</Action>
-          <Keys>
-            <Key>110</Key>
-          </Keys>
-          <ID>1</ID>
-        </Hotkey>
-      </Hotkeys>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>17</ID>
-      <Description>"No description"</Description>
-      <VariableType>Float</VariableType>
-      <Address>207BB3848D8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>18</ID>
-      <Description>"No description"</Description>
-      <VariableType>Float</VariableType>
-      <Address>207C36769E8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>19</ID>
-      <Description>"No description"</Description>
-      <VariableType>Float</VariableType>
-      <Address>207C36769EC</Address>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
@@ -586,11 +557,89 @@ dealloc(newmem)
         <Byte>08</Byte>
       </After>
     </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+30],xmm10</Description>
+      <AddressString>Nino2.exe+5469FB</AddressString>
+      <Before>
+        <Byte>2E</Byte>
+        <Byte>4F</Byte>
+        <Byte>38</Byte>
+        <Byte>74</Byte>
+        <Byte>52</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>57</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>47</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+34],xmm8</Description>
+      <AddressString>Nino2.exe+546A01</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>47</Byte>
+        <Byte>34</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of movss [rdi+38],xmm9</Description>
+      <AddressString>Nino2.exe+546A07</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4F</Byte>
+        <Byte>38</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>97</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
   </CheatCodes>
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>rotMemory</Name>
-      <Address>7FF609270000</Address>
+      <Address>7FF7A1BF0000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
 </CheatTable>

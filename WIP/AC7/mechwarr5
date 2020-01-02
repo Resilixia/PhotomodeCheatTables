@@ -1,0 +1,38 @@
+MW5:
+cam?
+xyz/pitch,yaw cam:
+MechWarrior-Win64-Shipping.exe+2210331 - F2 0F11 01            - movsd [rcx],xmm0 <<x,y
+MechWarrior-Win64-Shipping.exe+2210335 - 48 8B DA              - mov rbx,rdx
+MechWarrior-Win64-Shipping.exe+2210338 - 8B 42 08              - mov eax,[rdx+08] <<z
+MechWarrior-Win64-Shipping.exe+221033B - 89 41 08              - mov [rcx+08],eax
+MechWarrior-Win64-Shipping.exe+221033E - F2 0F10 42 0C         - movsd xmm0,[rdx+0C]
+MechWarrior-Win64-Shipping.exe+2210343 - F2 0F11 41 0C         - movsd [rcx+0C],xmm0  <<pitch/yaw
+MechWarrior-Win64-Shipping.exe+2210348 - 8B 42 14              - mov eax,[rdx+14]
+MechWarrior-Win64-Shipping.exe+221034B - 89 41 14              - mov [rcx+14],eax  <<roll
+MechWarrior-Win64-Shipping.exe+221034E - 8B 42 18              - mov eax,[rdx+18]
+MechWarrior-Win64-Shipping.exe+2210351 - 89 41 18              - mov [rcx+18],eax  <<fov
+MechWarrior-Win64-Shipping.exe+2210354 - 8B 42 1C              - mov eax,[rdx+1C]
+MechWarrior-Win64-Shipping.exe+2210357 - 89 41 1C              - mov [rcx+1C],eax
+MechWarrior-Win64-Shipping.exe+221035A - 8B 42 20              - mov eax,[rdx+20]
+MechWarrior-Win64-Shipping.exe+221035D - 89 41 20              - mov [rcx+20],eax
+
+HUD:
+MechWarrior-Win64-Shipping.exe+247E3D0 - 0FB6 44 24 40         - movzx eax,byte ptr [rsp+40]		<<ret
+MechWarrior-Win64-Shipping.exe+247E3D5 - 88 44 24 40           - mov [rsp+40],al
+MechWarrior-Win64-Shipping.exe+247E3D9 - E9 3262E2FE           - jmp MechWarrior-Win64-Shipping.exe+12A4610
+MechWarrior-Win64-Shipping.exe+247E3DE - CC                    - int 3 
+MechWarrior-Win64-Shipping.exe+247E3DF - CC                    - int 3 
+MechWarrior-Win64-Shipping.exe+247E3E0 - 48 83 EC 38           - sub rsp,38 { 56 }
+MechWarrior-Win64-Shipping.exe+247E3E4 - 48 8B 02              - mov rax,[rdx]
+MechWarrior-Win64-Shipping.exe+247E3E7 - 48 89 44 24 20        - mov [rsp+20],rax
+
+slowstop:
+MechWarrior-Win64-Shipping.exe+1EBE5B8 - F3 0F10 81 64030000   - movss xmm0,[rcx+00000364]		<<<
+MechWarrior-Win64-Shipping.exe+1EBE5C0 - F3 0F59 81 60030000   - mulss xmm0,[rcx+00000360]
+MechWarrior-Win64-Shipping.exe+1EBE5C8 - F3 0F59 81 68030000   - mulss xmm0,[rcx+00000368]
+MechWarrior-Win64-Shipping.exe+1EBE5D0 - F3 0F59 83 C0000000   - mulss xmm0,[rbx+000000C0]
+MechWarrior-Win64-Shipping.exe+1EBE5D8 - 48 83 C4 20           - add rsp,20 { 32 }
+MechWarrior-Win64-Shipping.exe+1EBE5DC - 5B                    - pop rbx
+MechWarrior-Win64-Shipping.exe+1EBE5DD - C3                    - ret 
+MechWarrior-Win64-Shipping.exe+1EBE5DE - FF 90 28060000        - call qword ptr [rax+00000628]
+MechWarrior-Win64-Shipping.exe+1EBE5E4 - F3 0F59 83 C0000000   - mulss xmm0,[rbx+000000C0]

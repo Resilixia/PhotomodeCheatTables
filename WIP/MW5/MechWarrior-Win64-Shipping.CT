@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : MechWarrior-Win64-Shipping.exe
+  Version: 
+  Date   : 2020-01-01
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(INJECT,MechWarrior-Win64-Shipping.exe,F2 0F 11 01 48 8B DA) // should be unique
+registersymbol(INJECT)
+alloc(newmem,$1000,"MechWarrior-Win64-Shipping.exe"+2210331)
+registersymbol(camAddress)
+label(code)
+label(return)
+
+newmem:
+
+code:
+    push r15
+    lea r15, [rbx+1AA0]
+	cmp rcx,r15
+    je correctcam
+    jne originalcode
+/*
+test2:
+    cmp r9,r15
+    je correctcam
+	jne originalcode
+
+test2:
+	cmp r9,00
+	je test3
+	jne originalcode
+test3:
+    cmp r15,00
+	je correctcam
+	jne originalcode
+*/
+correctcam:
+    pop r15
+    mov [camAddress],rcx
+    //movsd [rcx],xmm0
+    mov rbx,rdx
+    mov eax,[rdx+08]
+	//mov [rcx+08],eax
+	movsd xmm0,[rdx+0C]
+	//movsd [rcx+0C],xmm0
+	mov eax,[rdx+14]
+	//mov [rcx+14],eax
+	mov eax,[rdx+18]
+	//mov [rcx+18],eax
+    jmp return
+originalcode:
+    pop r15
+    movsd [rcx],xmm0
+    mov rbx,rdx
+    mov eax,[rdx+08]
+	mov [rcx+08],eax
+	movsd xmm0, [rdx+0C]
+	movsd [rcx+0C],xmm0
+	mov eax,[rdx+14]
+	mov [rcx+14],eax
+	mov eax,[rdx+18]
+	mov [rcx+18],eax
+    jmp return
+
+camAddress:
+dq 0
+
+INJECT:
+  jmp newmem
+  db 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+  return:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db F2 0F 11 01 48 8B DA 8B 42 08 89 41 08 F2 0F 10 42 0C F2 0F 11 41 0C 8B 42 14 89 41 14 8B 42 18 89 41 18
+
+unregistersymbol(INJECT)
+unregistersymbol(camAddress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "MechWarrior-Win64-Shipping.exe"+2210331
+
+"MechWarrior-Win64-Shipping.exe"+221030A: EB B3                    -  jmp MechWarrior-Win64-Shipping.exe+22102BF
+"MechWarrior-Win64-Shipping.exe"+221030C: 48 8D 54 24 50           -  lea rdx,[rsp+50]
+"MechWarrior-Win64-Shipping.exe"+2210311: 48 8B C8                 -  mov rcx,rax
+"MechWarrior-Win64-Shipping.exe"+2210314: 41 FF 90 50 06 00 00     -  call qword ptr [r8+00000650]
+"MechWarrior-Win64-Shipping.exe"+221031B: E9 E9 FE FF FF           -  jmp MechWarrior-Win64-Shipping.exe+2210209
+"MechWarrior-Win64-Shipping.exe"+2210320: 48 89 5C 24 08           -  mov [rsp+08],rbx
+"MechWarrior-Win64-Shipping.exe"+2210325: 57                       -  push rdi
+"MechWarrior-Win64-Shipping.exe"+2210326: 48 83 EC 20              -  sub rsp,20
+"MechWarrior-Win64-Shipping.exe"+221032A: F2 0F 10 02              -  movsd xmm0,[rdx]
+"MechWarrior-Win64-Shipping.exe"+221032E: 48 8B F9                 -  mov rdi,rcx
+// ---------- INJECTING HERE ----------
+"MechWarrior-Win64-Shipping.exe"+2210331: F2 0F 11 01              -  movsd [rcx],xmm0
+"MechWarrior-Win64-Shipping.exe"+2210335: 48 8B DA                 -  mov rbx,rdx
+// ---------- DONE INJECTING  ----------
+"MechWarrior-Win64-Shipping.exe"+2210338: 8B 42 08                 -  mov eax,[rdx+08]
+"MechWarrior-Win64-Shipping.exe"+221033B: 89 41 08                 -  mov [rcx+08],eax
+"MechWarrior-Win64-Shipping.exe"+221033E: F2 0F 10 42 0C           -  movsd xmm0,[rdx+0C]
+"MechWarrior-Win64-Shipping.exe"+2210343: F2 0F 11 41 0C           -  movsd [rcx+0C],xmm0
+"MechWarrior-Win64-Shipping.exe"+2210348: 8B 42 14                 -  mov eax,[rdx+14]
+"MechWarrior-Win64-Shipping.exe"+221034B: 89 41 14                 -  mov [rcx+14],eax
+"MechWarrior-Win64-Shipping.exe"+221034E: 8B 42 18                 -  mov eax,[rdx+18]
+"MechWarrior-Win64-Shipping.exe"+2210351: 89 41 18                 -  mov [rcx+18],eax
+"MechWarrior-Win64-Shipping.exe"+2210354: 8B 42 1C                 -  mov eax,[rdx+1C]
+"MechWarrior-Win64-Shipping.exe"+2210357: 89 41 1C                 -  mov [rcx+1C],eax
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"x"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>37</Key>
+              </Keys>
+              <Value>10</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>39</Key>
+              </Keys>
+              <Value>10</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"y"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"z"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"pitch"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>C</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>38</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>40</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"roll"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>14</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"yaw"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"fov"</Description>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>18</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"timestop"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : MechWarrior-Win64-Shipping.exe
+  Version: 
+  Date   : 2020-01-02
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_Timestop,MechWarrior-Win64-Shipping.exe,26 F3 0F 10 81 64 03 00 00) // should be unique
+alloc(newmem,$1000,"MechWarrior-Win64-Shipping.exe"+1EBE5B8)
+registersymbol(timestop)
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [timestop],rcx
+  movss xmm0,[rcx+00000364]
+  jmp return
+
+timestop:
+dq 0
+
+_Timestop+01:
+  jmp newmem
+  nop 3
+return:
+registersymbol(_Timestop)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_Timestop+01:
+  db F3 0F 10 81 64 03 00 00
+
+unregistersymbol(_Timestop)
+unregistersymbol(timestop)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "MechWarrior-Win64-Shipping.exe"+1EBE5B8
+
+"MechWarrior-Win64-Shipping.exe"+1EBE594: 48 85 C0                 -  test rax,rax
+"MechWarrior-Win64-Shipping.exe"+1EBE597: 74 10                    -  je MechWarrior-Win64-Shipping.exe+1EBE5A9
+"MechWarrior-Win64-Shipping.exe"+1EBE599: 48 8B 40 30              -  mov rax,[rax+30]
+"MechWarrior-Win64-Shipping.exe"+1EBE59D: 48 85 C0                 -  test rax,rax
+"MechWarrior-Win64-Shipping.exe"+1EBE5A0: 74 07                    -  je MechWarrior-Win64-Shipping.exe+1EBE5A9
+"MechWarrior-Win64-Shipping.exe"+1EBE5A2: 48 8B 88 40 02 00 00     -  mov rcx,[rax+00000240]
+"MechWarrior-Win64-Shipping.exe"+1EBE5A9: 48 8B 01                 -  mov rax,[rcx]
+"MechWarrior-Win64-Shipping.exe"+1EBE5AC: 48 8D 15 F5 CF D0 01     -  lea rdx,[MechWarrior-Win64-Shipping.exe+3BCB5A8]
+"MechWarrior-Win64-Shipping.exe"+1EBE5B3: 48 3B C2                 -  cmp rax,rdx
+"MechWarrior-Win64-Shipping.exe"+1EBE5B6: 75 26                    -  jne MechWarrior-Win64-Shipping.exe+1EBE5DE
+// ---------- INJECTING HERE ----------
+"MechWarrior-Win64-Shipping.exe"+1EBE5B8: F3 0F 10 81 64 03 00 00  -  movss xmm0,[rcx+00000364]
+// ---------- DONE INJECTING  ----------
+"MechWarrior-Win64-Shipping.exe"+1EBE5C0: F3 0F 59 81 60 03 00 00  -  mulss xmm0,[rcx+00000360]
+"MechWarrior-Win64-Shipping.exe"+1EBE5C8: F3 0F 59 81 68 03 00 00  -  mulss xmm0,[rcx+00000368]
+"MechWarrior-Win64-Shipping.exe"+1EBE5D0: F3 0F 59 83 C0 00 00 00  -  mulss xmm0,[rbx+000000C0]
+"MechWarrior-Win64-Shipping.exe"+1EBE5D8: 48 83 C4 20              -  add rsp,20
+"MechWarrior-Win64-Shipping.exe"+1EBE5DC: 5B                       -  pop rbx
+"MechWarrior-Win64-Shipping.exe"+1EBE5DD: C3                       -  ret 
+"MechWarrior-Win64-Shipping.exe"+1EBE5DE: FF 90 28 06 00 00        -  call qword ptr [rax+00000628]
+"MechWarrior-Win64-Shipping.exe"+1EBE5E4: F3 0F 59 83 C0 00 00 00  -  mulss xmm0,[rbx+000000C0]
+"MechWarrior-Win64-Shipping.exe"+1EBE5EC: 48 83 C4 20              -  add rsp,20
+"MechWarrior-Win64-Shipping.exe"+1EBE5F0: 5B                       -  pop rbx
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"t1"</Description>
+          <VariableType>Float</VariableType>
+          <Address>timestop</Address>
+          <Offsets>
+            <Offset>364</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
