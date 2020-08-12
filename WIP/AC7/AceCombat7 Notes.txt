@@ -29,7 +29,7 @@ Ace7Game.exe+B19ED0C - F3 0F10 44 24 58      - movss xmm0,[rsp+58]
 
 timescale:
 "Ace7Game.exe"+E59C2A5: 48 89 D9                    -  mov rcx,rbx
-"Ace7Game.exe"+E59C2A8: F3 F3 0F 59 83 D0 04 00 00  -  mulss xmm0,[rbx+000004D0]			<<<<< this code multiplies the timescale by the value stored in rbx+4D0
+"Ace7Game.exe"+E59C2A8: F3 0F 59 83 D0 04 00 00  -  mulss xmm0,[rbx+000004D0]			<<<<< this code multiplies the timescale by the value stored in rbx+4D0
 "Ace7Game.exe"+E59C2B1: 0F 59 F0                    -  mulps xmm6,xmm0
 "Ace7Game.exe"+E59C2B4: 0F 28 CE                    -  movaps xmm1,xmm6
 "Ace7Game.exe"+E59C2B7: FF 90 28 06 00 00           -  call qword ptr [rax+00000628]

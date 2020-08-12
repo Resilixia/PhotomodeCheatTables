@@ -1,9 +1,9 @@
 MW5:
 cam?
 xyz/pitch,yaw cam:
-MechWarrior-Win64-Shipping.exe+2210331 - F2 0F11 01            - movsd [rcx],xmm0 <<x,y
+MechWarrior-Win64-Shipping.exe+2210331 - F2 0F11 01            - movsd [rcx],xmm0    <<x,y
 MechWarrior-Win64-Shipping.exe+2210335 - 48 8B DA              - mov rbx,rdx
-MechWarrior-Win64-Shipping.exe+2210338 - 8B 42 08              - mov eax,[rdx+08] <<z
+MechWarrior-Win64-Shipping.exe+2210338 - 8B 42 08              - mov eax,[rdx+08]     <<z
 MechWarrior-Win64-Shipping.exe+221033B - 89 41 08              - mov [rcx+08],eax
 MechWarrior-Win64-Shipping.exe+221033E - F2 0F10 42 0C         - movsd xmm0,[rdx+0C]
 MechWarrior-Win64-Shipping.exe+2210343 - F2 0F11 41 0C         - movsd [rcx+0C],xmm0  <<pitch/yaw
@@ -36,3 +36,7 @@ MechWarrior-Win64-Shipping.exe+1EBE5DC - 5B                    - pop rbx
 MechWarrior-Win64-Shipping.exe+1EBE5DD - C3                    - ret 
 MechWarrior-Win64-Shipping.exe+1EBE5DE - FF 90 28060000        - call qword ptr [rax+00000628]
 MechWarrior-Win64-Shipping.exe+1EBE5E4 - F3 0F59 83 C0000000   - mulss xmm0,[rbx+000000C0]
+
+RCX == 0x00000229D9A09AC0
+rbx offset = 0x1aa0
+rdi also = rcx

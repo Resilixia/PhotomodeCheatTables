@@ -149,6 +149,89 @@ dealloc(newmem2)
         </Hotkey>
       </Hotkeys>
     </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"Disable Ansel Range"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : starwarsbattlefrontii.exe
+  Version:
+  Date   : 2019-11-09
+  Author : skall
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(KillRange,starwarsbattlefrontii.exe,F3 0F 11 83 14 01 00 00 F3) // should be unique
+alloc(newmem,$1000,"starwarsbattlefrontii.exe"+433F64)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //movss [rbx+00000114],xmm0
+  //movss [rbx+00000118],xmm1
+  //movss [rbx+0000011C],xmm2
+  jmp return
+
+KillRange:
+  jmp newmem
+  nop 13
+return:
+registersymbol(KillRange)
+
+[DISABLE]
+
+KillRange:
+  db F3 0F 11 83 14 01 00 00
+  movss [rbx+00000118],xmm1
+  movss [rbx+0000011C],xmm2
+
+unregistersymbol(KillRange)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "starwarsbattlefrontii.exe"+433F64
+
+"starwarsbattlefrontii.exe"+433F32: 0F C6 C0 00              -  shufps xmm0,xmm0,00
+"starwarsbattlefrontii.exe"+433F36: 0F 5E E0                 -  divps xmm4,xmm0
+"starwarsbattlefrontii.exe"+433F39: 48 89 44 24 28           -  mov [rsp+28],rax
+"starwarsbattlefrontii.exe"+433F3E: F3 0F 10 83 58 01 00 00  -  movss xmm0,[rbx+00000158]
+"starwarsbattlefrontii.exe"+433F46: 0F 29 65 07              -  movaps [rbp+07],xmm4
+"starwarsbattlefrontii.exe"+433F4A: F3 0F 11 44 24 20        -  movss [rsp+20],xmm0
+"starwarsbattlefrontii.exe"+433F50: E8 6B BF FF FF           -  call starwarsbattlefrontii.exe+42FEC0
+"starwarsbattlefrontii.exe"+433F55: F3 0F 10 45 F7           -  movss xmm0,[rbp-09]
+"starwarsbattlefrontii.exe"+433F5A: F3 0F 10 4D FB           -  movss xmm1,[rbp-05]
+"starwarsbattlefrontii.exe"+433F5F: F3 0F 10 55 FF           -  movss xmm2,[rbp-01]
+// ---------- INJECTING HERE ----------
+"starwarsbattlefrontii.exe"+433F64: F3 0F 11 83 14 01 00 00  -  movss [rbx+00000114],xmm0
+// ---------- DONE INJECTING  ----------
+"starwarsbattlefrontii.exe"+433F6C: F3 0F 11 8B 18 01 00 00  -  movss [rbx+00000118],xmm1
+"starwarsbattlefrontii.exe"+433F74: F3 0F 11 93 1C 01 00 00  -  movss [rbx+0000011C],xmm2
+"starwarsbattlefrontii.exe"+433F7C: 48 8B CB                 -  mov rcx,rbx
+"starwarsbattlefrontii.exe"+433F7F: E8 AC 09 00 00           -  call starwarsbattlefrontii.exe+434930
+"starwarsbattlefrontii.exe"+433F84: 0F 28 74 24 70           -  movaps xmm6,[rsp+70]
+"starwarsbattlefrontii.exe"+433F89: 48 8B BC 24 80 00 00 00  -  mov rdi,[rsp+00000080]
+"starwarsbattlefrontii.exe"+433F91: 48 81 C4 88 00 00 00     -  add rsp,00000088
+"starwarsbattlefrontii.exe"+433F98: 5B                       -  pop rbx
+"starwarsbattlefrontii.exe"+433F99: 5D                       -  pop rbp
+"starwarsbattlefrontii.exe"+433F9A: C3                       -  ret
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>36</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
   </CheatEntries>
   <CheatCodes>
     <CodeEntry>

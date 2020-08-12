@@ -21,3 +21,13 @@ Nino2.exe+11785F - 74 0F                 - je Nino2.exe+117870
 Nino2.exe+117861 - F3 0F11 89 54020000   - movss [rcx+00000254],xmm1					<<potench timestop
 Nino2.exe+117869 - C6 81 58020000 01     - mov byte ptr [rcx+00000258],01 { 1 }
 Nino2.exe+117870 - C3                    - ret 
+
+
+camwrites1: 0F 11 07 4C 8D 9C 24 ?? ?? ?? ?? 0F 10
+
+camwrites2: 0F 11 4F ?? F3 44 0F 11 5F ?? F3 0F 11 3F
+
+camwrites3: F3 44 0F 11 5F ?? 45 0F 28 5B ??
+
+7FF7A2E978C4
+7FFFA97E0FC0

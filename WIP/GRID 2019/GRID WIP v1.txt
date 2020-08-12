@@ -1,0 +1,444 @@
+camera:
+proper camera - all views: 41 0F 11 86 ?? ?? ?? ?? 41 0F 11 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F B6 84 24
+Grid_dx12.exe+A2C6AC - 33 C0                 - xor eax,eax
+Grid_dx12.exe+A2C6AE - EB E7                 - jmp Grid_dx12.exe+A2C697
+Grid_dx12.exe+A2C6B0 - 48 89 5C 24 08        - mov [rsp+08],rbx
+Grid_dx12.exe+A2C6B5 - 48 89 6C 24 10        - mov [rsp+10],rbp
+Grid_dx12.exe+A2C6BA - 48 89 74 24 18        - mov [rsp+18],rsi
+Grid_dx12.exe+A2C6BF - 48 89 7C 24 20        - mov [rsp+20],rdi
+Grid_dx12.exe+A2C6C4 - 41 56                 - push r14
+Grid_dx12.exe+A2C6C6 - 48 81 EC 20020000     - sub rsp,00000220 { 544 }
+Grid_dx12.exe+A2C6CD - F2 0F10 4A 08         - movsd xmm1,[rdx+08]
+Grid_dx12.exe+A2C6D2 - 4C 8B F1              - mov r14,rcx
+Grid_dx12.exe+A2C6D5 - 66 0F5A C9            - cvtpd2ps xmm1,xmm1
+Grid_dx12.exe+A2C6D9 - 48 81 C1 70020000     - add rcx,00000270 { 624 }
+Grid_dx12.exe+A2C6E0 - 41 8B F8              - mov edi,r8d
+Grid_dx12.exe+A2C6E3 - 48 8B DA              - mov rbx,rdx
+Grid_dx12.exe+A2C6E6 - E8 95E7FFFF           - call Grid_dx12.exe+A2AE80
+Grid_dx12.exe+A2C6EB - 48 8D 4C 24 40        - lea rcx,[rsp+40]
+Grid_dx12.exe+A2C6F0 - E8 CBA3FDFF           - call Grid_dx12.exe+A06AC0
+Grid_dx12.exe+A2C6F5 - 48 8D 54 24 40        - lea rdx,[rsp+40]
+Grid_dx12.exe+A2C6FA - 49 8B CE              - mov rcx,r14
+Grid_dx12.exe+A2C6FD - E8 BE5AFFFF           - call Grid_dx12.exe+A221C0
+Grid_dx12.exe+A2C702 - 0FB6 43 02            - movzx eax,byte ptr [rbx+02]
+Grid_dx12.exe+A2C706 - 84 C0                 - test al,al
+Grid_dx12.exe+A2C708 - 74 10                 - je Grid_dx12.exe+A2C71A
+Grid_dx12.exe+A2C70A - 80 7B 05 00           - cmp byte ptr [rbx+05],00 { 0 }
+Grid_dx12.exe+A2C70E - 75 0A                 - jne Grid_dx12.exe+A2C71A
+Grid_dx12.exe+A2C710 - F2 0F10 05 28BA5700   - movsd xmm0,[Grid_dx12.exe+FA8140] { (-1.00) }
+Grid_dx12.exe+A2C718 - EB 08                 - jmp Grid_dx12.exe+A2C722
+Grid_dx12.exe+A2C71A - F2 0F10 05 86165700   - movsd xmm0,[Grid_dx12.exe+F9DDA8] { (1.00) }
+Grid_dx12.exe+A2C722 - 41 80 7E 61 00        - cmp byte ptr [r14+61],00 { 0 }
+Grid_dx12.exe+A2C727 - 74 07                 - je Grid_dx12.exe+A2C730
+Grid_dx12.exe+A2C729 - F2 0F10 4B 18         - movsd xmm1,[rbx+18]
+Grid_dx12.exe+A2C72E - EB 05                 - jmp Grid_dx12.exe+A2C735
+Grid_dx12.exe+A2C730 - F2 0F10 4B 08         - movsd xmm1,[rbx+08]
+Grid_dx12.exe+A2C735 - F2 0F59 C8            - mulsd xmm1,xmm0
+Grid_dx12.exe+A2C739 - 48 8D 4C 24 40        - lea rcx,[rsp+40]
+Grid_dx12.exe+A2C73E - 48 89 4C 24 30        - mov [rsp+30],rcx
+Grid_dx12.exe+A2C743 - F2 0F59 43 20         - mulsd xmm0,[rbx+20]
+Grid_dx12.exe+A2C748 - 49 8B 8E E0010000     - mov rcx,[r14+000001E0]
+Grid_dx12.exe+A2C74F - 89 7C 24 38           - mov [rsp+38],edi
+Grid_dx12.exe+A2C753 - F2 0F11 4C 24 20      - movsd [rsp+20],xmm1
+Grid_dx12.exe+A2C759 - 88 44 24 3C           - mov [rsp+3C],al
+Grid_dx12.exe+A2C75D - F2 0F11 44 24 28      - movsd [rsp+28],xmm0
+Grid_dx12.exe+A2C763 - 48 85 C9              - test rcx,rcx
+Grid_dx12.exe+A2C766 - 74 0E                 - je Grid_dx12.exe+A2C776
+Grid_dx12.exe+A2C768 - 48 8B 01              - mov rax,[rcx]
+Grid_dx12.exe+A2C76B - 48 8D 54 24 20        - lea rdx,[rsp+20]
+Grid_dx12.exe+A2C770 - FF 90 88000000        - call qword ptr [rax+00000088]
+Grid_dx12.exe+A2C776 - 49 8B 86 F8010000     - mov rax,[r14+000001F8]
+Grid_dx12.exe+A2C77D - 33 FF                 - xor edi,edi
+Grid_dx12.exe+A2C77F - 49 8B 9E F0010000     - mov rbx,[r14+000001F0]
+Grid_dx12.exe+A2C786 - 48 8B E8              - mov rbp,rax
+Grid_dx12.exe+A2C789 - 48 2B EB              - sub rbp,rbx
+Grid_dx12.exe+A2C78C - 8B F7                 - mov esi,edi
+Grid_dx12.exe+A2C78E - 48 83 C5 07           - add rbp,07 { 7 }
+Grid_dx12.exe+A2C792 - 48 C1 ED 03           - shr rbp,03 { 3 }
+Grid_dx12.exe+A2C796 - 48 3B D8              - cmp rbx,rax
+Grid_dx12.exe+A2C799 - 48 0F47 EF            - cmova rbp,rdi
+Grid_dx12.exe+A2C79D - 48 85 ED              - test rbp,rbp
+Grid_dx12.exe+A2C7A0 - 74 23                 - je Grid_dx12.exe+A2C7C5
+Grid_dx12.exe+A2C7A2 - 48 8B 0B              - mov rcx,[rbx]
+Grid_dx12.exe+A2C7A5 - 80 79 20 01           - cmp byte ptr [rcx+20],01 { 1 }
+Grid_dx12.exe+A2C7A9 - 75 0E                 - jne Grid_dx12.exe+A2C7B9
+Grid_dx12.exe+A2C7AB - 48 8B 01              - mov rax,[rcx]
+Grid_dx12.exe+A2C7AE - 48 8D 54 24 20        - lea rdx,[rsp+20]
+Grid_dx12.exe+A2C7B3 - FF 90 88000000        - call qword ptr [rax+00000088]
+Grid_dx12.exe+A2C7B9 - 48 83 C3 08           - add rbx,08 { 8 }
+Grid_dx12.exe+A2C7BD - 48 FF C6              - inc rsi
+Grid_dx12.exe+A2C7C0 - 48 3B F5              - cmp rsi,rbp
+Grid_dx12.exe+A2C7C3 - 75 DD                 - jne Grid_dx12.exe+A2C7A2
+Grid_dx12.exe+A2C7C5 - 48 8D 4C 24 40        - lea rcx,[rsp+40]
+Grid_dx12.exe+A2C7CA - E8 D1E5FDFF           - call Grid_dx12.exe+A0ADA0
+Grid_dx12.exe+A2C7CF - 0F28 84 24 20010000   - movaps xmm0,[rsp+00000120]
+Grid_dx12.exe+A2C7D7 - 49 8D 8E 60010000     - lea rcx,[r14+00000160]
+Grid_dx12.exe+A2C7DE - 0F28 8C 24 30010000   - movaps xmm1,[rsp+00000130]
+Grid_dx12.exe+A2C7E6 - 48 8D 94 24 40010000  - lea rdx,[rsp+00000140]
+Grid_dx12.exe+A2C7EE - 41 0F11 86 40010000   - movups [r14+00000140],xmm0			<<coords
+Grid_dx12.exe+A2C7F6 - 41 0F11 8E 50010000   - movups [r14+00000150],xmm1			<<quaternion
+Grid_dx12.exe+A2C7FE - E8 4DCCE2FF           - call Grid_dx12.exe+859450
+Grid_dx12.exe+A2C803 - 0FB6 84 24 B0010000   - movzx eax,byte ptr [rsp+000001B0]
+Grid_dx12.exe+A2C80B - 41 88 86 D0010000     - mov [r14+000001D0],al
+Grid_dx12.exe+A2C812 - 0FB6 84 24 B1010000   - movzx eax,byte ptr [rsp+000001B1]
+Grid_dx12.exe+A2C81A - 41 88 86 D1010000     - mov [r14+000001D1],al
+Grid_dx12.exe+A2C821 - 0FB6 84 24 B2010000   - movzx eax,byte ptr [rsp+000001B2]
+Grid_dx12.exe+A2C829 - 41 88 86 D2010000     - mov [r14+000001D2],al
+Grid_dx12.exe+A2C830 - 49 8B 86 28020000     - mov rax,[r14+00000228]
+Grid_dx12.exe+A2C837 - 49 8B 9E 20020000     - mov rbx,[r14+00000220]
+Grid_dx12.exe+A2C83E - 48 8B F0              - mov rsi,rax
+Grid_dx12.exe+A2C841 - 48 2B F3              - sub rsi,rbx
+Grid_dx12.exe+A2C844 - 48 83 C6 07           - add rsi,07 { 7 }
+Grid_dx12.exe+A2C848 - 48 C1 EE 03           - shr rsi,03 { 3 }
+Grid_dx12.exe+A2C84C - 48 3B D8              - cmp rbx,rax
+Grid_dx12.exe+A2C84F - 48 0F47 F7            - cmova rsi,rdi
+Grid_dx12.exe+A2C853 - 48 85 F6              - test rsi,rsi
+Grid_dx12.exe+A2C856 - 74 25                 - je Grid_dx12.exe+A2C87D
+Grid_dx12.exe+A2C858 - 0F1F 84 00 00000000   - nop [rax+rax+00000000]
+Grid_dx12.exe+A2C860 - 48 8B 0B              - mov rcx,[rbx]
+Grid_dx12.exe+A2C863 - 48 8D 54 24 20        - lea rdx,[rsp+20]
+Grid_dx12.exe+A2C868 - 48 8B 01              - mov rax,[rcx]
+Grid_dx12.exe+A2C86B - FF 90 88000000        - call qword ptr [rax+00000088]
+Grid_dx12.exe+A2C871 - 48 FF C7              - inc rdi
+Grid_dx12.exe+A2C874 - 48 8D 5B 08           - lea rbx,[rbx+08]
+Grid_dx12.exe+A2C878 - 48 3B FE              - cmp rdi,rsi
+Grid_dx12.exe+A2C87B - 75 E3                 - jne Grid_dx12.exe+A2C860
+Grid_dx12.exe+A2C87D - 4C 8D 9C 24 20020000  - lea r11,[rsp+00000220]
+Grid_dx12.exe+A2C885 - 33 C0                 - xor eax,eax
+Grid_dx12.exe+A2C887 - 49 8B 5B 10           - mov rbx,[r11+10]
+Grid_dx12.exe+A2C88B - 49 8B 6B 18           - mov rbp,[r11+18]
+Grid_dx12.exe+A2C88F - 49 8B 73 20           - mov rsi,[r11+20]
+Grid_dx12.exe+A2C893 - 49 8B 7B 28           - mov rdi,[r11+28]
+Grid_dx12.exe+A2C897 - 49 8B E3              - mov rsp,r11
+Grid_dx12.exe+A2C89A - 41 5E                 - pop r14
+Grid_dx12.exe+A2C89C - C3                    - ret 
+
+
+
+for IGCS Camera: 41 0F 28 C4 41 0F 28 CC 0F 55 44 24 ??
+Grid_dx12.exe+B1F8B2 - 41 0F28 C4            - movaps xmm0,xmm12  <<inject here and copy RSI
+Grid_dx12.exe+B1F8B6 - 41 0F28 CC            - movaps xmm1,xmm12
+Grid_dx12.exe+B1F8BA - 0F55 44 24 20         - andnps xmm0,[rsp+20]
+Grid_dx12.exe+B1F8BF - 41 0F54 FC            - andps xmm7,xmm12
+Grid_dx12.exe+B1F8C3 - 0F55 4C 24 30         - andnps xmm1,[rsp+30]
+Grid_dx12.exe+B1F8C8 - 0F29 44 24 70         - movaps [rsp+70],xmm0
+Grid_dx12.exe+B1F8CD - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1F8D1 - 0F55 44 24 40         - andnps xmm0,[rsp+40]
+Grid_dx12.exe+B1F8D6 - 0F29 45 90            - movaps [rbp-70],xmm0
+Grid_dx12.exe+B1F8DA - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1F8DE - 0F55 46 10            - andnps xmm0,[rsi+10]
+Grid_dx12.exe+B1F8E2 - 0F56 C7               - orps xmm0,xmm7
+
+
+
+camera struct read: 48 8D 81 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 8B 05 ?? ?? ?? ??
+Grid_dx12.exe+B0FE10 - 8B 05 DE972C01        - mov eax,[Grid_dx12.exe+1DD95F4] { (2) }
+Grid_dx12.exe+B0FE16 - C3                    - ret 
+Grid_dx12.exe+B0FE17 - CC                    - int 3 
+Grid_dx12.exe+B0FE18 - CC                    - int 3 
+Grid_dx12.exe+B0FE19 - CC                    - int 3 
+Grid_dx12.exe+B0FE1A - CC                    - int 3 
+Grid_dx12.exe+B0FE1B - CC                    - int 3 
+Grid_dx12.exe+B0FE1C - CC                    - int 3 
+Grid_dx12.exe+B0FE1D - CC                    - int 3 
+Grid_dx12.exe+B0FE1E - CC                    - int 3 
+Grid_dx12.exe+B0FE1F - CC                    - int 3 
+Grid_dx12.exe+B0FE20 - 48 8D 81 00010000     - lea rax,[rcx+00000100]		<<< inject here, read rax call ret from our jump
+Grid_dx12.exe+B0FE27 - C3                    - ret 
+Grid_dx12.exe+B0FE28 - CC                    - int 3 
+Grid_dx12.exe+B0FE29 - CC                    - int 3 
+Grid_dx12.exe+B0FE2A - CC                    - int 3 
+Grid_dx12.exe+B0FE2B - CC                    - int 3 
+Grid_dx12.exe+B0FE2C - CC                    - int 3 
+Grid_dx12.exe+B0FE2D - CC                    - int 3 
+Grid_dx12.exe+B0FE2E - CC                    - int 3 
+Grid_dx12.exe+B0FE2F - CC                    - int 3 
+Grid_dx12.exe+B0FE30 - 48 8B 05 B1979500     - mov rax,[Grid_dx12.NvOptimusEnablement+96BC] { (7FF773946720) }
+
+Struct intercept 2:48 8B D0 48 8D 4C 24 ?? 48 8B F0
+Grid_dx12.exe+B1F831 - 44 0F29 94 24 20010000  - movaps [rsp+00000120],xmm10
+Grid_dx12.exe+B1F83A - 44 0F29 9C 24 10010000  - movaps [rsp+00000110],xmm11
+Grid_dx12.exe+B1F843 - 44 0F29 A4 24 00010000  - movaps [rsp+00000100],xmm12
+Grid_dx12.exe+B1F84C - 44 0F29 AC 24 F0000000  - movaps [rsp+000000F0],xmm13
+Grid_dx12.exe+B1F855 - 44 0F29 B4 24 E0000000  - movaps [rsp+000000E0],xmm14
+Grid_dx12.exe+B1F85E - 44 0F29 BC 24 D0000000  - movaps [rsp+000000D0],xmm15
+Grid_dx12.exe+B1F867 - FF 90 A8000000        - call qword ptr [rax+000000A8]
+Grid_dx12.exe+B1F86D - 48 8B 4B 20           - mov rcx,[rbx+20]
+Grid_dx12.exe+B1F871 - 48 8D 54 24 50        - lea rdx,[rsp+50]
+Grid_dx12.exe+B1F876 - 48 8B 01              - mov rax,[rcx]
+Grid_dx12.exe+B1F879 - FF 50 40              - call qword ptr [rax+40]
+Grid_dx12.exe+B1F87C - 48 8B 4B 20           - mov rcx,[rbx+20]
+Grid_dx12.exe+B1F880 - 48 8B 01              - mov rax,[rcx]
+Grid_dx12.exe+B1F883 - FF 90 C0000000        - call qword ptr [rax+000000C0]
+Grid_dx12.exe+B1F889 - 48 8B D0              - mov rdx,rax			<<<inject here, read rax
+Grid_dx12.exe+B1F88C - 48 8D 4C 24 20        - lea rcx,[rsp+20]
+Grid_dx12.exe+B1F891 - 48 8B F0              - mov rsi,rax
+Grid_dx12.exe+B1F894 - E8 473954FF           - call Grid_dx12.AK::Monitor::GetTimeStamp+1930
+Grid_dx12.exe+B1F899 - 66 44 0F6F 25 8ECE4500  - movdqa xmm12,[Grid_dx12.exe+F7C730] { (0) }
+Grid_dx12.exe+B1F8A2 - 48 8D 54 24 70        - lea rdx,[rsp+70]
+Grid_dx12.exe+B1F8A7 - 0F28 3D 72CE4500      - movaps xmm7,[Grid_dx12.exe+F7C720] { (1.00) }
+Grid_dx12.exe+B1F8AE - 48 8D 4D B0           - lea rcx,[rbp-50]
+Grid_dx12.exe+B1F8B2 - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1F8B6 - 41 0F28 CC            - movaps xmm1,xmm12
+Grid_dx12.exe+B1F8BA - 0F55 44 24 20         - andnps xmm0,[rsp+20]
+Grid_dx12.exe+B1F8BF - 41 0F54 FC            - andps xmm7,xmm12
+Grid_dx12.exe+B1F8C3 - 0F55 4C 24 30         - andnps xmm1,[rsp+30]
+Grid_dx12.exe+B1F8C8 - 0F29 44 24 70         - movaps [rsp+70],xmm0
+Grid_dx12.exe+B1F8CD - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1F8D1 - 0F55 44 24 40         - andnps xmm0,[rsp+40]
+Grid_dx12.exe+B1F8D6 - 0F29 45 90            - movaps [rbp-70],xmm0
+Grid_dx12.exe+B1F8DA - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1F8DE - 0F55 46 10            - andnps xmm0,[rsi+10]
+Grid_dx12.exe+B1F8E2 - 0F56 C7               - orps xmm0,xmm7
+Grid_dx12.exe+B1F8E5 - 0F29 4D 80            - movaps [rbp-80],xmm1
+
+
+
+COORDS + quaternion write 1: 55 56 41 56 41 57 48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 0F 29 78 B8
+Grid_dx12.exe+B08875 - 44 0F55 D2            - andnps xmm10,xmm2
+Grid_dx12.exe+B08879 - 41 0F56 C2            - orps xmm0,xmm10
+Grid_dx12.exe+B0887D - 45 0F28 53 C0         - movaps xmm10,[r11-40]
+Grid_dx12.exe+B08882 - 0F11 83 90010000      - movups [rbx+00000190],xmm0
+Grid_dx12.exe+B08889 - 49 8B E3              - mov rsp,r11
+Grid_dx12.exe+B0888C - 5B                    - pop rbx
+Grid_dx12.exe+B0888D - C3                    - ret 
+Grid_dx12.exe+B0888E - CC                    - int 3 
+Grid_dx12.exe+B0888F - CC                    - int 3 
+Grid_dx12.exe+B08890 - 48 8B C4              - mov rax,rsp
+Grid_dx12.exe+B08893 - 55                    - push rbp					<<<ret
+Grid_dx12.exe+B08894 - 56                    - push rsi
+Grid_dx12.exe+B08895 - 41 56                 - push r14
+Grid_dx12.exe+B08897 - 41 57                 - push r15
+Grid_dx12.exe+B08899 - 48 8D A8 98FEFFFF     - lea rbp,[rax-00000168]
+Grid_dx12.exe+B088A0 - 48 81 EC 48020000     - sub rsp,00000248 { 584 }
+Grid_dx12.exe+B088A7 - 0F29 78 B8            - movaps [rax-48],xmm7
+Grid_dx12.exe+B088AB - 48 8B F1              - mov rsi,rcx
+Grid_dx12.exe+B088AE - 48 8B 89 90000000     - mov rcx,[rcx+00000090]
+Grid_dx12.exe+B088B5 - 4D 8B F0              - mov r14,r8
+Grid_dx12.exe+B088B8 - 44 0F29 A0 68FFFFFF   - movaps [rax-00000098],xmm12
+Grid_dx12.exe+B088C0 - 4C 8B FA              - mov r15,rdx
+Grid_dx12.exe+B088C3 - 44 0F29 B8 38FFFFFF   - movaps [rax-000000C8],xmm15
+Grid_dx12.exe+B088CB - 48 89 58 10           - mov [rax+10],rbx
+Grid_dx12.exe+B088CF - 48 89 78 18           - mov [rax+18],rdi
+
+
+COORDS Write 2: f3 0f 7f 41 ?? 48 8b d1
+Grid_dx12.exe+B17040 - 40 53                 - push rbx
+Grid_dx12.exe+B17042 - 48 81 EC 90000000     - sub rsp,00000090 { 144 }
+Grid_dx12.exe+B17049 - 0F10 02               - movups xmm0,[rdx]
+Grid_dx12.exe+B1704C - 48 8B D9              - mov rbx,rcx
+Grid_dx12.exe+B1704F - F3 0F7F 41 10         - movdqu [rcx+10],xmm0				<<nop
+Grid_dx12.exe+B17054 - 48 8B D1              - mov rdx,rcx
+Grid_dx12.exe+B17057 - 48 8D 4C 24 20        - lea rcx,[rsp+20]
+Grid_dx12.exe+B1705C - E8 7FC154FF           - call Grid_dx12.AK::Monitor::GetTimeStamp+1930
+Grid_dx12.exe+B17061 - 66 0F6F 1D C7564600   - movdqa xmm3,[Grid_dx12.exe+F7C730] { (0) }
+Grid_dx12.exe+B17069 - 48 8D 4C 24 50        - lea rcx,[rsp+50]
+Grid_dx12.exe+B1706E - 0F28 CB               - movaps xmm1,xmm3
+Grid_dx12.exe+B17071 - 0F28 C3               - movaps xmm0,xmm3
+Grid_dx12.exe+B17074 - 0F55 4C 24 30         - andnps xmm1,[rsp+30]
+Grid_dx12.exe+B17079 - 0F55 44 24 20         - andnps xmm0,[rsp+20]
+Grid_dx12.exe+B1707E - 0F29 4C 24 60         - movaps [rsp+60],xmm1
+
+Quaternion Write 1: 41 0F 11 06 48 8B 8E ?? ?? ?? ?? 48 8B 9C 24
+Grid_dx12.exe+B1DC3A - 44 0F59 C9            - mulps xmm9,xmm1
+Grid_dx12.exe+B1DC3E - 0F59 D9               - mulps xmm3,xmm1
+Grid_dx12.exe+B1DC41 - 0F28 D1               - movaps xmm2,xmm1
+Grid_dx12.exe+B1DC44 - 0FC6 D1 1B            - shufps xmm2,xmm1,1B { 27 }
+Grid_dx12.exe+B1DC48 - 0F59 C2               - mulps xmm0,xmm2
+Grid_dx12.exe+B1DC4B - 0F59 FA               - mulps xmm7,xmm2
+Grid_dx12.exe+B1DC4E - F2 0F7D D8            - hsubps xmm3,xmm0
+Grid_dx12.exe+B1DC52 - F2 44 0F7C CF         - haddps xmm9,xmm7
+Grid_dx12.exe+B1DC57 - 41 0F28 C1            - movaps xmm0,xmm9
+Grid_dx12.exe+B1DC5B - 0FC6 C3 E4            - shufps xmm0,xmm3,-1C { 228 }
+Grid_dx12.exe+B1DC5F - 41 0FC6 D9 B1         - shufps xmm3,xmm9,-4F { 177 }
+Grid_dx12.exe+B1DC64 - F2 0FD0 C3            - addsubps xmm0,xmm3
+Grid_dx12.exe+B1DC68 - 0FC6 C0 9C            - shufps xmm0,xmm0,-64 { 156 }
+Grid_dx12.exe+B1DC6C - 41 0F11 06            - movups [r14],xmm0			<<<<< nop
+Grid_dx12.exe+B1DC70 - 48 8B 8E 90000000     - mov rcx,[rsi+00000090]
+Grid_dx12.exe+B1DC77 - 48 8B 9C 24 48010000  - mov rbx,[rsp+00000148]
+Grid_dx12.exe+B1DC7F - 48 85 C9              - test rcx,rcx
+Grid_dx12.exe+B1DC82 - 0F84 D6020000         - je Grid_dx12.exe+B1DF5E
+Grid_dx12.exe+B1DC88 - 80 BE 390C0000 00     - cmp byte ptr [rsi+00000C39],00 { 0 }
+Grid_dx12.exe+B1DC8F - 0F84 C9020000         - je Grid_dx12.exe+B1DF5E
+Grid_dx12.exe+B1DC95 - 44 0F29 A4 24 B0000000  - movaps [rsp+000000B0],xmm12
+Grid_dx12.exe+B1DC9E - 48 81 C1 00220000     - add rcx,00002200 { 8704 }
+Grid_dx12.exe+B1DCA5 - 44 0F29 AC 24 A0000000  - movaps [rsp+000000A0],xmm13
+Grid_dx12.exe+B1DCAE - E8 BD060900           - call Grid_dx12.exe+BAE370
+
+another write to nop:0F 11 47 ?? E8 ?? ?? ?? ?? 0F 57 D2
+Grid_dx12.exe+B1CDAA - 0F58 C8               - addps xmm1,xmm0
+Grid_dx12.exe+B1CDAD - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1CDB1 - 0F58 CA               - addps xmm1,xmm2
+Grid_dx12.exe+B1CDB4 - 0F55 C1               - andnps xmm0,xmm1
+Grid_dx12.exe+B1CDB7 - 0F58 47 10            - addps xmm0,[rdi+10]
+Grid_dx12.exe+B1CDBB - 0F11 47 10            - movups [rdi+10],xmm0		<<<nop
+Grid_dx12.exe+B1CDBF - E8 1C6454FF           - call Grid_dx12.AK::Monitor::GetTimeStamp+1930
+Grid_dx12.exe+B1CDC4 - 0F57 D2               - xorps xmm2,xmm2
+Grid_dx12.exe+B1CDC7 - 41 0F28 C4            - movaps xmm0,xmm12
+Grid_dx12.exe+B1CDCB - 0F55 44 24 70         - andnps xmm0,[rsp+70]
+Grid_dx12.exe+B1CDD0 - 41 0F54 D4            - andps xmm2,xmm12
+Grid_dx12.exe+B1CDD4 - 41 0F28 CC            - movaps xmm1,xmm12
+Grid_dx12.exe+B1CDD8 - 0F29 54 24 20         - movaps [rsp+20],xmm2
+
+another write:0F 11 53 ?? E8 ?? ?? ?? ?? 66 0F 6F 1D ?? ?? ?? ?? 48 8D 4D ?? 0F 28
+Grid_dx12.exe+B0F3A1 - F3 0F10 C8            - movss xmm1,xmm0
+Grid_dx12.exe+B0F3A5 - 48 8B D3              - mov rdx,rbx
+Grid_dx12.exe+B0F3A8 - F3 0F10 D1            - movss xmm2,xmm1
+Grid_dx12.exe+B0F3AC - 0FC6 D2 E1            - shufps xmm2,xmm2,-1F { 225 }
+Grid_dx12.exe+B0F3B0 - 0F11 53 10            - movups [rbx+10],xmm2			<<nop
+Grid_dx12.exe+B0F3B4 - E8 273E55FF           - call Grid_dx12.AK::Monitor::GetTimeStamp+1930
+Grid_dx12.exe+B0F3B9 - 66 0F6F 1D 6FD34600   - movdqa xmm3,[Grid_dx12.exe+F7C730] { (0) }
+Grid_dx12.exe+B0F3C1 - 48 8D 4D A0           - lea rcx,[rbp-60]
+Grid_dx12.exe+B0F3C5 - 0F28 CB               - movaps xmm1,xmm3
+Grid_dx12.exe+B0F3C8 - 0F28 C3               - movaps xmm0,xmm3
+Grid_dx12.exe+B0F3CB - 0F55 4D 80            - andnps xmm1,[rbp-80]
+Grid_dx12.exe+B0F3CF - 0F55 44 24 70         - andnps xmm0,[rsp+70]
+
+Another write:F3 0F 7F 07 45 84 E4
+Grid_dx12.exe+B0B4F1 - 45 0F56 CA            - orps xmm9,xmm10
+Grid_dx12.exe+B0B4F5 - 66 44 0F7F 85 20040000  - movdqa [rbp+00000420],xmm8
+Grid_dx12.exe+B0B4FE - 48 8D 95 00040000     - lea rdx,[rbp+00000400]
+Grid_dx12.exe+B0B505 - 66 44 0F7F 8D 10040000  - movdqa [rbp+00000410],xmm9
+Grid_dx12.exe+B0B50E - 48 8D 8D F0040000     - lea rcx,[rbp+000004F0]
+Grid_dx12.exe+B0B515 - E8 762856FF           - call Grid_dx12.AK::Monitor::GetTimeStamp+C4E0
+Grid_dx12.exe+B0B51A - 0F10 00               - movups xmm0,[rax]
+Grid_dx12.exe+B0B51D - F3 0F7F 07            - movdqu [rdi],xmm0			<<< nop
+Grid_dx12.exe+B0B521 - 45 84 E4              - test r12l,r12l
+Grid_dx12.exe+B0B524 - 75 3B                 - jne Grid_dx12.exe+B0B561
+Grid_dx12.exe+B0B526 - 44 39 AB 580B0000     - cmp [rbx+00000B58],r13d
+Grid_dx12.exe+B0B52D - 75 32                 - jne Grid_dx12.exe+B0B561
+Grid_dx12.exe+B0B52F - 83 BF 08020000 FF     - cmp dword ptr [rdi+00000208],-01 { 255 }
+
+Another Write:0F 11 07 0f 28 BC 24 ?? ?? ?? ??
+Grid_dx12.exe+B1D02B - F2 0F7D D0            - hsubps xmm2,xmm0
+Grid_dx12.exe+B1D02F - F2 0F7C EB            - haddps xmm5,xmm3
+Grid_dx12.exe+B1D033 - 0F28 C5               - movaps xmm0,xmm5
+Grid_dx12.exe+B1D036 - 0FC6 C2 E4            - shufps xmm0,xmm2,-1C { 228 }
+Grid_dx12.exe+B1D03A - 0FC6 D5 B1            - shufps xmm2,xmm5,-4F { 177 }
+Grid_dx12.exe+B1D03E - F2 0FD0 C2            - addsubps xmm0,xmm2
+Grid_dx12.exe+B1D042 - 0FC6 C0 9C            - shufps xmm0,xmm0,-64 { 156 }
+Grid_dx12.exe+B1D046 - 0F11 07               - movups [rdi],xmm0			<<<nop
+Grid_dx12.exe+B1D049 - 0F28 BC 24 30010000   - movaps xmm7,[rsp+00000130]
+Grid_dx12.exe+B1D051 - 44 0F28 84 24 20010000  - movaps xmm8,[rsp+00000120]
+Grid_dx12.exe+B1D05A - 0F28 B4 24 40010000   - movaps xmm6,[rsp+00000140]
+Grid_dx12.exe+B1D062 - 44 0F28 A4 24 E0000000  - movaps xmm12,[rsp+000000E0]
+Grid_dx12.exe+B1D06B - 44 0F28 AC 24 D0000000  - movaps xmm13,[rsp+000000D0]
+Grid_dx12.exe+B1D074 - 44 0F28 B4 24 C0000000  - movaps xmm14,[rsp+000000C0]
+Grid_dx12.exe+B1D07D - 44 0F28 BC 24 B0000000  - movaps xmm15,[rsp+000000B0]
+Grid_dx12.exe+B1D086 - 4C 8D 9C 24 50010000  - lea r11,[rsp+00000150]
+
+real camera fov: 8B 02 89 01 8B 42 ?? 89 41 ?? 0F 28 42 ?? 66 0F 7F 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? (this is hfov)[89 41 ??] 8B 42 ?? (this is vfov)[89 41 ??] 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 8B 42 ?? 89 41 ?? 0F B6 42 ?? 88 41 ?? C3
+Grid_dx12.exe+859472 - 89 41 28              - mov [rcx+28],eax
+Grid_dx12.exe+859475 - 8B 42 2C              - mov eax,[rdx+2C]
+Grid_dx12.exe+859478 - 89 41 2C              - mov [rcx+2C],eax
+Grid_dx12.exe+85947B - 8B 42 30              - mov eax,[rdx+30]
+Grid_dx12.exe+85947E - 89 41 30              - mov [rcx+30],eax
+Grid_dx12.exe+859481 - 8B 42 34              - mov eax,[rdx+34]
+Grid_dx12.exe+859484 - 89 41 34              - mov [rcx+34],eax			<<hfov
+Grid_dx12.exe+859487 - 8B 42 38              - mov eax,[rdx+38]
+Grid_dx12.exe+85948A - 89 41 38              - mov [rcx+38],eax			<<vfov
+Grid_dx12.exe+85948D - 8B 42 3C              - mov eax,[rdx+3C]
+Grid_dx12.exe+859490 - 89 41 3C              - mov [rcx+3C],eax
+Grid_dx12.exe+859493 - 8B 42 40              - mov eax,[rdx+40]
+Grid_dx12.exe+859496 - 89 41 40              - mov [rcx+40],eax
+Grid_dx12.exe+859499 - 8B 42 44              - mov eax,[rdx+44]
+Grid_dx12.exe+85949C - 89 41 44              - mov [rcx+44],eax
+Grid_dx12.exe+85949F - 8B 42 48              - mov eax,[rdx+48]
+Grid_dx12.exe+8594A2 - 89 41 48              - mov [rcx+48],eax
+
+RBX, RSi, RDI, RBP are all blank when correct fov write
+R12 = 1 when correct FOV Write
+
+1A794CA9EC0 offset is rcx-160
+check rcx-160 = camera struct address then 
+
+	cmp rbx, 0
+	jne exit
+	cmp rsi, 0
+	jne exit
+	cmp rdi, 0
+	jne exit
+	cmp rbp,0
+	jne exit
+	cmp r12,1
+	jne exit
+
+fov: F3 41 0F 11 46 ?? 8B 46 ?? 41 89 46 ?? 41 C6 86 ?? ?? ?? ?? ??
++70 offset
+Grid_dx12.exe+B1D97C - 41 88 86 10020000     - mov [r14+00000210],al
+Grid_dx12.exe+B1D983 - E8 0860FFFF           - call Grid_dx12.exe+B13990
+Grid_dx12.exe+B1D988 - F3 0F10 46 24         - movss xmm0,[rsi+24]
+Grid_dx12.exe+B1D98D - 48 8D 54 24 20        - lea rdx,[rsp+20]
+Grid_dx12.exe+B1D992 - F3 0F10 3D 96334600   - movss xmm7,[Grid_dx12.exe+F80D30] { (0.02) }
+Grid_dx12.exe+B1D99A - 4D 8B C6              - mov r8,r14
+Grid_dx12.exe+B1D99D - F3 0F59 C7            - mulss xmm0,xmm7
+Grid_dx12.exe+B1D9A1 - 48 8B CE              - mov rcx,rsi
+Grid_dx12.exe+B1D9A4 - F3 41 0F11 46 70      - movss [r14+70],xmm0 <<<< fov write (fov in radians)
+Grid_dx12.exe+B1D9AA - 8B 46 20              - mov eax,[rsi+20]
+Grid_dx12.exe+B1D9AD - 41 89 46 78           - mov [r14+78],eax
+Grid_dx12.exe+B1D9B1 - 41 C6 86 20010000 00  - mov byte ptr [r14+00000120],00 { 0 }
+Grid_dx12.exe+B1D9B9 - 41 C6 86 50010000 00  - mov byte ptr [r14+00000150],00 { 0 }
+Grid_dx12.exe+B1D9C1 - E8 CAAEFEFF           - call Grid_dx12.exe+B08890
+Grid_dx12.exe+B1D9C6 - 4D 8B C6              - mov r8,r14
+Grid_dx12.exe+B1D9C9 - 48 8D 54 24 20        - lea rdx,[rsp+20]
+Grid_dx12.exe+B1D9CE - 48 8B CE              - mov rcx,rsi
+Grid_dx12.exe+B1D9D1 - E8 CAF7FFFF           - call Grid_dx12.exe+B1D1A0
+Grid_dx12.exe+B1D9D6 - 41 80 A6 10020000 FE  - and byte ptr [r14+00000210],-02 { 254 }
+Grid_dx12.exe+B1D9DE - 48 8D 54 24 20        - lea rdx,[rsp+20]
+Grid_dx12.exe+B1D9E3 - 4D 8B C6              - mov r8,r14
+Grid_dx12.exe+B1D9E6 - 48 8B CE              - mov rcx,rsi
+Grid_dx12.exe+B1D9E9 - E8 B2F1FFFF           - call Grid_dx12.exe+B1CBA0
+Grid_dx12.exe+B1D9EE - 80 3D 08C52B01 00     - cmp byte ptr [Grid_dx12.exe+1DD9EFD],00 { (0),0 }
+
+
+timescale: F3 0F 10 4B ?? 48 8B 4B ?? 
+Grid_dx12.exe+1EF113 - E8 78249500           - call Grid_dx12.exe+B41590
+Grid_dx12.exe+1EF118 - E9 ED010000           - jmp Grid_dx12.exe+1EF30A
+Grid_dx12.exe+1EF11D - 40 80 FF 02           - cmp dil,02 { 2 }
+Grid_dx12.exe+1EF121 - 0F85 E3010000         - jne Grid_dx12.exe+1EF30A
+Grid_dx12.exe+1EF127 - 84 C0                 - test al,al
+Grid_dx12.exe+1EF129 - 75 16                 - jne Grid_dx12.exe+1EF141
+Grid_dx12.exe+1EF12B - 48 8B 4B 58           - mov rcx,[rbx+58]
+Grid_dx12.exe+1EF12F - 38 41 31              - cmp [rcx+31],al
+Grid_dx12.exe+1EF132 - 74 0D                 - je Grid_dx12.exe+1EF141
+Grid_dx12.exe+1EF134 - 0F57 C9               - xorps xmm1,xmm1
+Grid_dx12.exe+1EF137 - E8 44249500           - call Grid_dx12.exe+B41580
+Grid_dx12.exe+1EF13C - E9 C9010000           - jmp Grid_dx12.exe+1EF30A
+Grid_dx12.exe+1EF141 - F3 0F10 4B 54         - movss xmm1,[rbx+54]				<<<<timescale read
+Grid_dx12.exe+1EF146 - 48 8B 4B 58           - mov rcx,[rbx+58]
+Grid_dx12.exe+1EF14A - E8 31249500           - call Grid_dx12.exe+B41580
+Grid_dx12.exe+1EF14F - E9 B6010000           - jmp Grid_dx12.exe+1EF30A
+Grid_dx12.exe+1EF154 - F3 0F10 43 18         - movss xmm0,[rbx+18]
+Grid_dx12.exe+1EF159 - 0F2E C6               - ucomiss xmm0,xmm6
+Grid_dx12.exe+1EF15C - 44 0F29 4C 24 30      - movaps [rsp+30],xmm9
+Grid_dx12.exe+1EF162 - F3 44 0F10 4B 24      - movss xmm9,[rbx+24]
+Grid_dx12.exe+1EF168 - 44 0F29 5C 24 20      - movaps [rsp+20],xmm11
+Grid_dx12.exe+1EF16E - F3 44 0F10 5B 20      - movss xmm11,[rbx+20]
+Grid_dx12.exe+1EF174 - 75 08                 - jne Grid_dx12.exe+1EF17E
+
+player car lod:
+Grid_dx12.exe+A70604 - 41 89 86 9C0A0000     - mov [r14+00000A9C],eax
+Grid_dx12.exe+A7060B - E9 FE010000           - jmp Grid_dx12.exe+A7080E
+Grid_dx12.exe+A70610 - 41 39 96 9C0A0000     - cmp [r14+00000A9C],edx
+Grid_dx12.exe+A70617 - 0F84 F6000000         - je Grid_dx12.exe+A70713
+Grid_dx12.exe+A7061D - 8B C2                 - mov eax,edx
+Grid_dx12.exe+A7061F - 48 C1 E0 06           - shl rax,06 { 6 }
+Grid_dx12.exe+A70623 - 42 80 7C 00 18 00     - cmp byte ptr [rax+r8+18],00 { 0 }
+Grid_dx12.exe+A70629 - 0F84 E4000000         - je Grid_dx12.exe+A70713
+Grid_dx12.exe+A7062F - F3 41 0F10 86 48090000  - movss xmm0,[r14+00000948]
+Grid_dx12.exe+A70638 - B0 01                 - mov al,01 { 1 }
+Grid_dx12.exe+A7063A - F3 41 0F11 86 4C090000  - movss [r14+0000094C],xmm0
+Grid_dx12.exe+A70643 - 41 88 86 A00A0000     - mov [r14+00000AA0],al
+Grid_dx12.exe+A7064A - 41 89 96 9C0A0000     - mov [r14+00000A9C],edx			<< copy 0 into r14+offset
+Grid_dx12.exe+A70651 - 84 C0                 - test al,al
+Grid_dx12.exe+A70653 - 0F84 B5010000         - je Grid_dx12.exe+A7080E
+Grid_dx12.exe+A70659 - 49 8B 46 40           - mov rax,[r14+40]
+Grid_dx12.exe+A7065D - 4C 8B A0 88000000     - mov r12,[rax+00000088]
+Grid_dx12.exe+A70664 - 4D 85 E4              - test r12,r12
+Grid_dx12.exe+A70667 - 0F84 99010000         - je Grid_dx12.exe+A70806
+Grid_dx12.exe+A7066D - 48 8B 81 58010000     - mov rax,[rcx+00000158]
+Grid_dx12.exe+A70674 - 45 33 FF              - xor r15d,r15d
+Grid_dx12.exe+A70677 - 48 2B 81 50010000     - sub rax,[rcx+00000150]
+Grid_dx12.exe+A7067E - 48 C1 F8 06           - sar rax,06 { 6 }
+Grid_dx12.exe+A70682 - 48 85 C0              - test rax,rax
+
