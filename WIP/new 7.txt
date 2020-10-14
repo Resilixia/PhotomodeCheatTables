@@ -1,0 +1,50 @@
+dead space 2 - potential camera
+deadspace2.exe+44C756 - 83 C4 14              - add esp,14 { 20 }
+deadspace2.exe+44C759 - 47                    - inc edi
+deadspace2.exe+44C75A - 89 7C 24 18           - mov [esp+18],edi
+deadspace2.exe+44C75E - 83 FF 0C              - cmp edi,0C { 12 }
+deadspace2.exe+44C761 - 0F82 79FBFFFF         - jb deadspace2.exe+44C2E0
+deadspace2.exe+44C767 - 0F28 4C 24 70         - movaps xmm1,[esp+70]
+deadspace2.exe+44C76C - 0F29 0B               - movaps [ebx],xmm1		<<coords
+deadspace2.exe+44C76F - 0F28 4C 24 60         - movaps xmm1,[esp+60]
+deadspace2.exe+44C774 - 0F29 4B 10            - movaps [ebx+10],xmm1
+deadspace2.exe+44C778 - F3 0F10 4B 24         - movss xmm1,[ebx+24]
+deadspace2.exe+44C77D - F3 0F11 4C 24 34      - movss [esp+34],xmm1
+deadspace2.exe+44C783 - 0F28 4C 24 40         - movaps xmm1,[esp+40]
+deadspace2.exe+44C788 - 0F29 4B 20            - movaps [ebx+20],xmm1	<<< rotation
+deadspace2.exe+44C78C - F3 0F10 4C 24 3C      - movss xmm1,[esp+3C]
+deadspace2.exe+44C792 - 8B 8B 98010000        - mov ecx,[ebx+00000198]
+deadspace2.exe+44C798 - F3 0F11 4B 30         - movss [ebx+30],xmm1		<<<fov
+deadspace2.exe+44C79D - F3 0F10 4C 24 10      - movss xmm1,[esp+10]
+deadspace2.exe+44C7A3 - C1 E1 04              - shl ecx,04 { 4 }
+deadspace2.exe+44C7A6 - F3 0F11 4B 34         - movss [ebx+34],xmm1
+deadspace2.exe+44C7AB - F3 0F10 4C 24 14      - movss xmm1,[esp+14]
+deadspace2.exe+44C7B1 - 8D 84 19 D8000000     - lea eax,[ecx+ebx+000000D8]
+deadspace2.exe+44C7B8 - F3 0F11 4B 38         - movss [ebx+38],xmm1
+deadspace2.exe+44C7BD - 83 38 00              - cmp dword ptr [eax],00 { 0 }
+
+Timestop
+deadspace2.exe+36F9F8 - 89 4C 24 1C           - mov [esp+1C],ecx
+deadspace2.exe+36F9FC - DF 6C 24 18           - fild qword ptr [esp+18]
+deadspace2.exe+36FA00 - 25 00000080           - and eax,80000000 { -2147483648 }
+deadspace2.exe+36FA05 - 89 44 24 1C           - mov [esp+1C],eax
+deadspace2.exe+36FA09 - 0FB7 44 24 24         - movzx eax,word ptr [esp+24]
+deadspace2.exe+36FA0E - 33 C9                 - xor ecx,ecx
+deadspace2.exe+36FA10 - 89 4C 24 18           - mov [esp+18],ecx
+deadspace2.exe+36FA14 - F3 0F10 05 F051EC01   - movss xmm0,[deadspace2.exe+1AC51F0] { (1.00) }	<<<timestop
+deadspace2.exe+36FA1C - F3 0F59 05 FCD30402   - mulss xmm0,[deadspace2.exe+1C4D3FC] { (0.03) }
+deadspace2.exe+36FA24 - DF 6C 24 18           - fild qword ptr [esp+18]
+deadspace2.exe+36FA28 - 0D 000C0000           - or eax,00000C00 { 3072 }
+deadspace2.exe+36FA2D - 89 44 24 18           - mov [esp+18],eax
+deadspace2.exe+36FA31 - F3 0F11 05 E4D30402   - movss [deadspace2.exe+1C4D3E4],xmm0 { (0.03) }
+deadspace2.exe+36FA39 - D9E0                  - fchs 
+deadspace2.exe+36FA3B - DEC1                  - faddp 
+deadspace2.exe+36FA3D - D9C0                  - fld st(0)
+deadspace2.exe+36FA3F - DD 05 388BAE01        - fld qword ptr [deadspace2.exe+16E8B38] { (0.00) }
+deadspace2.exe+36FA45 - DCC9                  - fmul st(1),st(0)
+deadspace2.exe+36FA47 - D9 6C 24 18           - fldcw [esp+18]
+deadspace2.exe+36FA4B - D9C9                  - fxch st(1)
+deadspace2.exe+36FA4D - DF 7C 24 18           - fistp qword ptr [esp+18]
+deadspace2.exe+36FA51 - 8B 44 24 18           - mov eax,[esp+18]
+deadspace2.exe+36FA55 - A3 C0D30402           - mov [deadspace2.exe+1C4D3C0],eax { (1248461) }
+

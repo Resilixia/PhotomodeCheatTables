@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Hotsampling (Leave Enabled)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// By Otis_Inf and Hattiwatti
+// Updated by ghostinthecamera
+// See for info about locations/data:
+// https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
+//////////////////////////////////////////////////////////
+// FRAMED Screenshot Community. https://framedsc.github.io
+//////////////////////////////////////////////////////////
+[ENABLE]
+aobscanmodule(writerenderres,coregame_rmdwin10_f.dll,89 84 24 84 00 00 00) // should be unique
+aobscanmodule(LostFocusPause,coregame_rmdwin10_f.dll,44 88 41 7B 48 8B 10) // should be unique
+registersymbol(writerenderres)
+registersymbol(LostFocusPause)
+alloc(newmem,$1000,"coregame_rmdwin10_f.dll"+AC54C)
+
+label(codeRenderRes)
+label(returnRenderRes)
+label(codeKeepFocus)
+label(returnKeepFocus)
+
+//--------------- own memory
+newmem:
+
+codeRenderRes:
+  // hard-write the resolution back instead of the original code which writes the results of calculations to the addresses
+  // in the stackframe. Do this at width+8 and height+8, so
+  mov [rsp+00000084],eax   // screen height. (screenwidth is at 80)
+  cvttss2si eax, [rdi+04]
+  mov [rsp+88], eax        // rendering width,
+  cvttss2si eax, [rdi+08]
+  mov [rsp+8C], eax        // rendering height
+  jmp returnRenderRes
+
+codeKeepFocus:
+  mov r8l, 01
+  mov [rcx+7B],r8l
+  mov rdx,[rax]
+  jmp returnKeepFocus
+
+//--------------- end own memory
+
+// in game dll!m
+writerenderres:
+  jmp codeRenderRes
+  nop 2
+returnRenderRes:
+
+
+// Will break in a patch
+LostFocusPause:
+  jmp codeKeepFocus
+  nop 2
+returnKeepFocus:
+
+coregame_rmdwin10_f.dll+AC4D1:
+mov r8d, 00000000
+
+coregame_rmdwin10_f.dll+ACF73:
+db e9 C7 00 00 00 90
+
+// will break in a patch
+coregame_rmdwin10_f.dll+AC926:
+db 90 90 90 90 90 90
+
+[DISABLE]
+
+writerenderres:
+  db 89 84 24 84 00 00 00
+
+LostFocusPause:
+  db 44 88 41 7B 48 8B 10
+
+coregame_rmdwin10_f.dll+AC4D1:
+mov r8d, 00000001
+
+coregame_rmdwin10_f.dll+ACF73:
+db 0F 85 BD 00 00 00
+
+// will break in a patch
+coregame_rmdwin10_f.dll+AC926:
+db FF 15 AC 38 50 00
+
+unregistersymbol(writerenderres)
+unregistersymbol(LostFocusPause)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

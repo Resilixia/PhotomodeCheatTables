@@ -1,0 +1,33 @@
+no pause on window change: "coregame_rmdwin10_f.dll"+AC26E
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+F - 44 0FB6 42 04         - movzx r8d,byte ptr [rdx+04]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+14- 48 8B D9              - mov rbx,rcx
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+17- 48 8B 05 7A435000     - mov rax,[coregame_rmdwin10_f.dll+5B05E8] { (192) }
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+1E- 44 88 41 7B           - mov [rcx+7B],r8l		<<< 01 in  r81
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+22- 48 8B 10              - mov rdx,[rax]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+25- 44 88 42 39           - mov [rdx+39],r8l
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+29- 48 8B 49 50           - mov rcx,[rcx+50]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+2D- 48 8B 01              - mov rax,[rcx]
+
+
+allow any res: "coregame_rmdwin10_f.dll"+AC4D1
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+28 - 0F10 83 80000000      - movups xmm0,[rbx+00000080]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+2F - 8B 83 F8000000        - mov eax,[rbx+000000F8]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+35 - 48 8D 54 24 20        - lea rdx,[rsp+20]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+3A - 0F10 8B 90000000      - movups xmm1,[rbx+00000090]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+41 - 41 B8 01000000        - mov r8d,00000001 { 1 }	<< change to mov r8d, 0
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+47 - 89 84 24 98000000     - mov [rsp+00000098],eax
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+4E - 0F29 44 24 20         - movaps [rsp+20],xmm0
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+53 - 48 8B CB              - mov rcx,rbx
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+56 - 0F10 83 A0000000      - movups xmm0,[rbx+000000A0]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+5D - F3 0F2C 47 04         - cvttss2si eax,[rdi+04]
+coregame_rmdwin10_f.coregame::GameWindow::handleAppEvent+62 - 0F29 4C 24 30         - movaps [rsp+30],xmm1
+
+autoadjust AR: coregame_rmdwin10_f.dll+ACF73 
+coregame_rmdwin10_f.dll+ACF65 - 45 8B C1              - mov r8d,r9d
+coregame_rmdwin10_f.dll+ACF68 - 44 89 49 64           - mov [rcx+64],r9d
+coregame_rmdwin10_f.dll+ACF6C - 89 59 68              - mov [rcx+68],ebx
+coregame_rmdwin10_f.dll+ACF6F - 44 89 49 6C           - mov [rcx+6C],r9d
+coregame_rmdwin10_f.dll+ACF73 - 0F85 BD000000         - jne coregame_rmdwin10_f.dll+AD036  <<< jmp and nop (e9 C7 00 00 00 90)
+coregame_rmdwin10_f.dll+ACF79 - 66 0F6E CB            - movd xmm1,ebx
+coregame_rmdwin10_f.dll+ACF7D - 66 41 0F6E C1         - movd xmm0,r9d
+coregame_rmdwin10_f.dll+ACF82 - 0F5B C0               - cvtdq2ps xmm0,xmm0

@@ -1,0 +1,116 @@
+dead space 1 camera:
+Dead Space.exe+357929 - 89 44 24 5C           - mov [esp+5C],eax
+Dead Space.exe+35792D - 0F57 C9               - xorps xmm1,xmm1
+Dead Space.exe+357930 - F3 0F10 64 24 64      - movss xmm4,[esp+64]
+Dead Space.exe+357936 - 8B 4C 24 68           - mov ecx,[esp+68]
+Dead Space.exe+35793A - 83 C6 0C              - add esi,0C { 12 }
+Dead Space.exe+35793D - 83 C1 01              - add ecx,01 { 1 }
+Dead Space.exe+357940 - 83 6C 24 10 01        - sub dword ptr [esp+10],01 { 1 }
+Dead Space.exe+357945 - 89 74 24 6C           - mov [esp+6C],esi
+Dead Space.exe+357949 - 89 4C 24 68           - mov [esp+68],ecx
+Dead Space.exe+35794D - 0F85 90FBFFFF         - jne "Dead Space.exe"+3574E3 { ->Dead Space.exe+3574E3 }
+Dead Space.exe+357953 - 0F28 44 24 50         - movaps xmm0,[esp+50]
+Dead Space.exe+357958 - 0F29 03               - movaps [ebx],xmm0		<< real coords
+Dead Space.exe+35795B - 0F28 44 24 20         - movaps xmm0,[esp+20]
+Dead Space.exe+357960 - 0F29 43 10            - movaps [ebx+10],xmm0	<<lookat shit
+Dead Space.exe+357964 - F3 0F10 43 24         - movss xmm0,[ebx+24]
+Dead Space.exe+357969 - F3 0F11 44 24 10      - movss [esp+10],xmm0
+Dead Space.exe+35796F - 0F28 44 24 30         - movaps xmm0,[esp+30]
+Dead Space.exe+357974 - 0F29 43 20            - movaps [ebx+20],xmm0	<<<rotation (in radians)
+Dead Space.exe+357978 - 8B 83 18010000        - mov eax,[ebx+00000118]
+Dead Space.exe+35797E - F3 0F10 44 24 14      - movss xmm0,[esp+14]
+Dead Space.exe+357984 - 8D 14 40              - lea edx,[eax+eax*2]
+Dead Space.exe+357987 - 8D 84 93 88000000     - lea eax,[ebx+edx*4+00000088]
+Dead Space.exe+35798E - F3 0F11 43 30         - movss [ebx+30],xmm0
+Dead Space.exe+357993 - 83 38 00              - cmp dword ptr [eax],00 { 0 }
+Dead Space.exe+357996 - 74 10                 - je "Dead Space.exe"+3579A8 { ->Dead Space.exe+3579A8 }
+Dead Space.exe+357998 - 8B 08                 - mov ecx,[eax]
+Dead Space.exe+35799A - 8B 51 54              - mov edx,[ecx+54]
+Dead Space.exe+35799D - 89 53 34              - mov [ebx+34],edx
+Dead Space.exe+3579A0 - 8B 08                 - mov ecx,[eax]
+Dead Space.exe+3579A2 - 8B 51 58              - mov edx,[ecx+58]
+Dead Space.exe+3579A5 - 89 53 38              - mov [ebx+38],edx
+Dead Space.exe+3579A8 - 8B 08                 - mov ecx,[eax]
+Dead Space.exe+3579AA - 85 C9                 - test ecx,ecx
+
+Dead Space.exe+63DFE0 - 8B 44 24 04           - mov eax,[esp+04]
+Dead Space.exe+63DFE4 - 8B 50 04              - mov edx,[eax+04]
+Dead Space.exe+63DFE7 - D9 40 0C              - fld dword ptr [eax+0C]
+Dead Space.exe+63DFEA - 8B 48 08              - mov ecx,[eax+08]
+Dead Space.exe+63DFED - 8B 52 0C              - mov edx,[edx+0C]
+Dead Space.exe+63DFF0 - D9 1C CA              - fstp dword ptr [edx+ecx*8]		<< scary music volume
+Dead Space.exe+63DFF3 - B8 10000000           - mov eax,00000010 { 16 }
+Dead Space.exe+63DFF8 - C3                    - ret 
+
+
+
+
+DS2 timestop
+deadspace2.exe+9C4E50 - E8 3B26FFFF           - call deadspace2.exe+9B7490
+deadspace2.exe+9C4E55 - EB 1B                 - jmp deadspace2.exe+9C4E72
+deadspace2.exe+9C4E57 - 8B 46 2C              - mov eax,[esi+2C]
+deadspace2.exe+9C4E5A - 83 F8 FF              - cmp eax,-01 { 255 }
+deadspace2.exe+9C4E5D - 74 13                 - je deadspace2.exe+9C4E72
+deadspace2.exe+9C4E5F - 8B 0D 94130202        - mov ecx,[deadspace2.exe+1C21394] { (0BB6F020) }
+deadspace2.exe+9C4E65 - 50                    - push eax
+deadspace2.exe+9C4E66 - E8 2543CCFF           - call deadspace2.exe+689190
+deadspace2.exe+9C4E6B - C7 46 2C FFFFFFFF     - mov [esi+2C],FFFFFFFF { -1 }
+deadspace2.exe+9C4E72 - 38 5E 42              - cmp [esi+42],bl  <<<<
+deadspace2.exe+9C4E75 - 74 2A                 - je deadspace2.exe+9C4EA1
+deadspace2.exe+9C4E77 - 88 5E 42              - mov [esi+42],bl
+deadspace2.exe+9C4E7A - A1 A4C00102           - mov eax,[deadspace2.exe+1C1C0A4] { (0C61F540) }
+deadspace2.exe+9C4E7F - 3B C3                 - cmp eax,ebx
+deadspace2.exe+9C4E81 - 74 0A                 - je deadspace2.exe+9C4E8D
+deadspace2.exe+9C4E83 - 8A 50 1C              - mov dl,[eax+1C]
+deadspace2.exe+9C4E86 - D0 EA                 - shr dl,1
+deadspace2.exe+9C4E88 - 80 E2 01              - and dl,01 { 1 }
+deadspace2.exe+9C4E8B - 75 45                 - jne deadspace2.exe+9C4ED2
+deadspace2.exe+9C4E8D - 38 5E 44              - cmp [esi+44],bl
+
+
+Dead Space.exe+2D0A8C - D9 1D C0F8F400        - fstp dword ptr ["Dead Space.exe"+B4F8C0] { (0.03) }
+Dead Space.exe+2D0A92 - D9C9                  - fxch st(1)
+Dead Space.exe+2D0A94 - B8 01000000           - mov eax,00000001 { 1 }
+Dead Space.exe+2D0A99 - 01 05 8C42F400        - add ["Dead Space.exe"+B4428C],eax { (000139BB) }
+Dead Space.exe+2D0A9F - 39 05 B042F400        - cmp ["Dead Space.exe"+B442B0],eax { (2) }
+Dead Space.exe+2D0AA5 - 0F84 CA010000         - je "Dead Space.exe"+2D0C75 { ->Dead Space.exe+2D0C75 }
+Dead Space.exe+2D0AAB - F3 0F10 05 CCD3D400   - movss xmm0,["Dead Space.exe"+94D3CC] { (1.00) }		<<<timescale
+Dead Space.exe+2D0AB3 - F3 0F59 05 C0F8F400   - mulss xmm0,["Dead Space.exe"+B4F8C0] { (0.03) }
+Dead Space.exe+2D0ABB - F3 0F11 44 24 18      - movss [esp+18],xmm0
+Dead Space.exe+2D0AC1 - D9 44 24 18           - fld dword ptr [esp+18]
+Dead Space.exe+2D0AC5 - D8 0D A8BEC800        - fmul dword ptr ["Dead Space.exe"+88BEA8] { (0) }
+Dead Space.exe+2D0ACB - D8C1                  - fadd st(0),st(1)
+Dead Space.exe+2D0ACD - E8 74C12200           - call "Dead Space.exe"+4FCC46 { ->Dead Space.exe+4FCC46 }
+Dead Space.exe+2D0AD2 - D9 7C 24 14           - fnstcw [esp+14]
+Dead Space.exe+2D0AD6 - 8B 0D A042F400        - mov ecx,["Dead Space.exe"+B442A0] { (0C7B5A28) }
+Dead Space.exe+2D0ADC - 8B 35 A442F400        - mov esi,["Dead Space.exe"+B442A4] { (0) }
+Dead Space.exe+2D0AE2 - 8B F8                 - mov edi,eax
+Dead Space.exe+2D0AE4 - 03 CF                 - add ecx,edi
+
+Dead Space.exe+2ED2BE - 83 78 34 01           - cmp dword ptr [eax+34],01 { 1 }
+Dead Space.exe+2ED2C2 - F3 0F59 05 4094C500   - mulss xmm0,["Dead Space.exe"+859440] { (0.50) }
+Dead Space.exe+2ED2CA - 75 0A                 - jne "Dead Space.exe"+2ED2D6 { ->Dead Space.exe+2ED2D6 }
+Dead Space.exe+2ED2CC - F3 0F10 0D 60BFC800   - movss xmm1,["Dead Space.exe"+88BF60] { (1.78) }
+Dead Space.exe+2ED2D4 - EB 08                 - jmp "Dead Space.exe"+2ED2DE { ->Dead Space.exe+2ED2DE }
+Dead Space.exe+2ED2D6 - F3 0F10 0D 5CBFC800   - movss xmm1,["Dead Space.exe"+88BF5C] { (1.33) }
+Dead Space.exe+2ED2DE - F3 0F11 4C 24 08      - movss [esp+08],xmm1
+Dead Space.exe+2ED2E4 - 0F5A C0               - cvtps2pd xmm0,xmm0
+Dead Space.exe+2ED2E7 - E8 09D04C00           - call "Dead Space.exe"+7BA2F5 { ->Dead Space.exe+7BA2F5 }
+Dead Space.exe+2ED2EC - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+Dead Space.exe+2ED2F0 - F3 0F5E 44 24 08      - divss xmm0,[esp+08]
+Dead Space.exe+2ED2F6 - F3 0F59 05 A046F400   - mulss xmm0,["Dead Space.exe"+B446A0] { (2.33) }		<<< aspect ratio
+Dead Space.exe+2ED2FE - F3 0F5A C0            - cvtss2sd xmm0,xmm0
+Dead Space.exe+2ED302 - E8 D9AF4C00           - call "Dead Space.exe"+7B82E0 { ->Dead Space.exe+7B82E0 }
+Dead Space.exe+2ED307 - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+Dead Space.exe+2ED30B - F3 0F59 05 BC88C500   - mulss xmm0,["Dead Space.exe"+8588BC] { (2.00) }
+Dead Space.exe+2ED313 - F3 0F11 44 24 0C      - movss [esp+0C],xmm0
+Dead Space.exe+2ED319 - D9 44 24 0C           - fld dword ptr [esp+0C]
+Dead Space.exe+2ED31D - 51                    - push ecx
+Dead Space.exe+2ED31E - D9 1C 24              - fstp dword ptr [esp]
+Dead Space.exe+2ED321 - 8D 44 24 14           - lea eax,[esp+14]
+
+
+071F3DF0
+07481300
+
+potential time multiplier add: 00C57AB4
