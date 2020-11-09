@@ -1,0 +1,33 @@
+ME2 slowmo
+ME2Game.exe+5070CC - FF 15 F40F2401        - call dword ptr [ME2Game.exe+E40FF4] { ->ME2Game.exe+500230 }
+ME2Game.exe+5070D2 - F3 0F10 44 24 04      - movss xmm0,[esp+04]
+ME2Game.exe+5070D8 - F3 0F10 4C 24 0C      - movss xmm1,[esp+0C]
+ME2Game.exe+5070DE - 0F2F C1               - comiss xmm0,xmm1
+ME2Game.exe+5070E1 - 5E                    - pop esi	
+ME2Game.exe+5070E2 - 72 0C                 - jb ME2Game.exe+5070F0
+ME2Game.exe+5070E4 - 8B 44 24 0C           - mov eax,[esp+0C]
+ME2Game.exe+5070E8 - F3 0F11 00            - movss [eax],xmm0		<<slomo read - not read so not usable
+ME2Game.exe+5070EC - 59                    - pop ecx
+ME2Game.exe+5070ED - C2 0800               - ret 0008 { 8 }
+ME2Game.exe+5070F0 - 8B 4C 24 0C           - mov ecx,[esp+0C]
+ME2Game.exe+5070F4 - 0F28 C1               - movaps xmm0,xmm1
+ME2Game.exe+5070F7 - F3 0F11 01            - movss [ecx],xmm0
+ME2Game.exe+5070FB - 59                    - pop ecx
+ME2Game.exe+5070FC - C2 0800               - ret 0008 { 8 }
+ME2Game.exe+5070FF - CC                    - int 3 
+
+
+ME2Game.exe+549B9C - C2 1400               - ret 0014 { 20 }
+ME2Game.exe+549B9F - CC                    - int 3 
+ME2Game.exe+549BA0 - 8B 41 44              - mov eax,[ecx+44]
+ME2Game.exe+549BA3 - 83 F8 01              - cmp eax,01 { 1 }
+ME2Game.exe+549BA6 - 75 0F                 - jne ME2Game.exe+549BB7
+ME2Game.exe+549BA8 - 8B 44 24 08           - mov eax,[esp+08]
+ME2Game.exe+549BAC - D9 00                 - fld dword ptr [eax]		<< slomo (but also a million other things not usable)
+ME2Game.exe+549BAE - 8B 4C 24 04           - mov ecx,[esp+04]
+ME2Game.exe+549BB2 - D9 19                 - fstp dword ptr [ecx]
+ME2Game.exe+549BB4 - C2 1400               - ret 0014 { 20 }
+ME2Game.exe+549BB7 - 8B 51 48              - mov edx,[ecx+48]
+ME2Game.exe+549BBA - 8B 4C 24 04           - mov ecx,[esp+04]
+ME2Game.exe+549BBE - 0FAF D0               - imul edx,eax
+ME2Game.exe+549BC1 - 8B 44 24 08           - mov eax,[esp+08]

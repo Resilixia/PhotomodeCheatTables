@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Auto Assemble script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RSG-Win64-Shipping.exe
+  Version: 
+  Date   : 2020-10-21
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the chea
+aobscanmodule(INJECT,RSG-Win64-Shipping.exe,0F B6 44 24 ?? 88 44 24 ?? E9 ?? ?? ?? ?? CC CC 48 83 EC ??) // should be uniqu
+registersymbol(INJECT)
+
+INJECT:
+db C3 90 90 90 90
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db 0F B6 44 24 40
+
+unregistersymbol(INJECT)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "RSG-Win64-Shipping.exe"+16B3EA0
+
+"RSG-Win64-Shipping.exe"+16B3E87: E8 54 87 B2 FE           -  call RSG-Win64-Shipping.exe+1DC5E0
+"RSG-Win64-Shipping.exe"+16B3E8C: 49 8B C5                 -  mov rax,r13
+"RSG-Win64-Shipping.exe"+16B3E8F: 48 81 C4 30 01 00 00     -  add rsp,00000130
+"RSG-Win64-Shipping.exe"+16B3E96: 41 5F                    -  pop r15
+"RSG-Win64-Shipping.exe"+16B3E98: 41 5E                    -  pop r14
+"RSG-Win64-Shipping.exe"+16B3E9A: 41 5D                    -  pop r13
+"RSG-Win64-Shipping.exe"+16B3E9C: 5B                       -  pop rbx
+"RSG-Win64-Shipping.exe"+16B3E9D: 5D                       -  pop rbp
+"RSG-Win64-Shipping.exe"+16B3E9E: C3                       -  ret 
+"RSG-Win64-Shipping.exe"+16B3E9F: CC                       -  int 3 
+// ---------- INJECTING HERE ----------
+"RSG-Win64-Shipping.exe"+16B3EA0: 0F B6 44 24 40           -  movzx eax,byte ptr [rsp+40]
+// ---------- DONE INJECTING  ----------
+"RSG-Win64-Shipping.exe"+16B3EA5: 88 44 24 40              -  mov [rsp+40],al
+"RSG-Win64-Shipping.exe"+16B3EA9: E9 02 8C 24 FF           -  jmp RSG-Win64-Shipping.exe+8FCAB0
+"RSG-Win64-Shipping.exe"+16B3EAE: CC                       -  int 3 
+"RSG-Win64-Shipping.exe"+16B3EAF: CC                       -  int 3 
+"RSG-Win64-Shipping.exe"+16B3EB0: 48 83 EC 48              -  sub rsp,48
+"RSG-Win64-Shipping.exe"+16B3EB4: 80 B9 93 02 00 00 00     -  cmp byte ptr [rcx+00000293],00
+"RSG-Win64-Shipping.exe"+16B3EBB: 0F 85 62 01 00 00        -  jne RSG-Win64-Shipping.exe+16B4023
+"RSG-Win64-Shipping.exe"+16B3EC1: 80 B9 94 02 00 00 00     -  cmp byte ptr [rcx+00000294],00
+"RSG-Win64-Shipping.exe"+16B3EC8: 0F 85 55 01 00 00        -  jne RSG-Win64-Shipping.exe+16B4023
+"RSG-Win64-Shipping.exe"+16B3ECE: 48 89 7C 24 40           -  mov [rsp+40],rdi
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="80000008">
+      <Description>Change of je RSG-Win64-Shipping.exe+CADD40</Description>
+      <AddressString>RSG-Win64-Shipping.exe+CADD30</AddressString>
+      <Before>
+        <Byte>40</Byte>
+        <Byte>1F</Byte>
+        <Byte>5F</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>0E</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>59</Byte>
+        <Byte>C6</Byte>
+        <Byte>25</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
