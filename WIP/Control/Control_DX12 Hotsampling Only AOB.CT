@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="31">
+<CheatTable CheatEngineTableVersion="34">
   <CheatEntries>
     <CheatEntry>
       <ID>3</ID>
       <Description>"write render res 2"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
@@ -91,7 +91,7 @@ dealloc(newmem)
     <CheatEntry>
       <ID>2</ID>
       <Description>"lost focus pause removal"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
@@ -175,7 +175,7 @@ dealloc(newmem)
     <CheatEntry>
       <ID>4</ID>
       <Description>"allow any res"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
@@ -212,7 +212,7 @@ unregistersymbol(AnyRes)
     <CheatEntry>
       <ID>5</ID>
       <Description>"Autoadjust AR"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
@@ -248,7 +248,7 @@ unregistersymbol(AutoAR)
     <CheatEntry>
       <ID>6</ID>
       <Description>"disable show window call"</Description>
-      <LastState/>
+      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
@@ -281,6 +281,37 @@ readmem(hookreturnE,6)
 //db FF 15 AC 38 50 00
 
 unregistersymbol(DisableSW)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Pause"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// By Otis_Inf and Hattiwatti
+// See for info about locations/data:
+// https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
+//////////////////////////////////////////////////////////
+// FRAMED Screenshot Community. https://framedsc.github.io
+//////////////////////////////////////////////////////////
+[ENABLE]
+// global r::Timer instance, offset 39
+// See notes for location
+[Control_DX12.exe+12A0748]+39:
+db 1
+[Control_DX12.exe+12A0748]+69:
+db 1
+
+timerAddress:
+dq 0
+
+
+[DISABLE]
+// global r::Timer instance, offset 38
+[Control_DX12.exe+12A0748]+38:
+dd 0
+[Control_DX12.exe+12A0748]+68:
+dd 0
 </AssemblerScript>
     </CheatEntry>
   </CheatEntries>

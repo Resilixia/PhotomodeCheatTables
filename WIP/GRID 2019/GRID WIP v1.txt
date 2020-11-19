@@ -442,3 +442,90 @@ Grid_dx12.exe+A70677 - 48 2B 81 50010000     - sub rax,[rcx+00000150]
 Grid_dx12.exe+A7067E - 48 C1 F8 06           - sar rax,06 { 6 }
 Grid_dx12.exe+A70682 - 48 85 C0              - test rax,rax
 
+Grid_dx12.exe+8687E6 - 49 8B F0              - mov rsi,r8
+Grid_dx12.exe+8687E9 - 48 8B FA              - mov rdi,rdx
+Grid_dx12.exe+8687EC - 48 8B D9              - mov rbx,rcx
+Grid_dx12.exe+8687EF - 0F84 55010000         - je Grid_dx12.exe+86894A
+Grid_dx12.exe+8687F5 - 0FB6 81 2A050000      - movzx eax,byte ptr [rcx+0000052A]
+Grid_dx12.exe+8687FC - 84 C0                 - test al,al
+Grid_dx12.exe+8687FE - 0F84 08010000         - je Grid_dx12.exe+86890C
+Grid_dx12.exe+868804 - C6 81 30050000 00     - mov byte ptr [rcx+00000530],00 { 0 }
+Grid_dx12.exe+86880B - 83 3D C2C5E200 01     - cmp dword ptr [Grid_dx12.exe+1694DD4],01 { (2048),1 }	<<<Relative address is location of shadow res
+Grid_dx12.exe+868812 - 0F86 DE000000         - jbe Grid_dx12.exe+8688F6
+Grid_dx12.exe+868818 - 48 8B 02              - mov rax,[rdx]
+Grid_dx12.exe+86881B - 45 33 C0              - xor r8d,r8d
+Grid_dx12.exe+86881E - 48 8B 51 70           - mov rdx,[rcx+70]
+Grid_dx12.exe+868822 - 48 8B CF              - mov rcx,rdi
+Grid_dx12.exe+868825 - FF 50 08              - call qword ptr [rax+08]
+Grid_dx12.exe+868828 - 4C 8B C6              - mov r8,rsi
+Grid_dx12.exe+86882B - 48 8B D7              - mov rdx,rdi
+Grid_dx12.exe+86882E - 48 8B CB              - mov rcx,rbx
+Grid_dx12.exe+868831 - E8 8A9BFFFF           - call Grid_dx12.exe+8623C0
+
+loadbias:
+Grid_dx12.exe+8B4E30 - 40 53                 - push rbx
+Grid_dx12.exe+8B4E32 - 48 83 EC 30           - sub rsp,30 { 48 }
+Grid_dx12.exe+8B4E36 - 48 8B C2              - mov rax,rdx
+Grid_dx12.exe+8B4E39 - 48 8B D9              - mov rbx,rcx
+Grid_dx12.exe+8B4E3C - 48 85 D2              - test rdx,rdx
+Grid_dx12.exe+8B4E3F - 0F84 8B000000         - je Grid_dx12.exe+8B4ED0
+Grid_dx12.exe+8B4E45 - 0F29 74 24 20         - movaps [rsp+20],xmm6
+Grid_dx12.exe+8B4E4A - 4C 8D 44 24 48        - lea r8,[rsp+48]
+Grid_dx12.exe+8B4E4F - F3 0F10 35 29436D00   - movss xmm6,[Grid_dx12.exe+F89180] { (1.00) }
+Grid_dx12.exe+8B4E57 - 48 8D 15 020E7A00     - lea rdx,[Grid_dx12.exe+1055C60] { ("lodBias") }
+Grid_dx12.exe+8B4E5E - 48 8B C8              - mov rcx,rax
+Grid_dx12.exe+8B4E61 - C7 44 24 48 0000803F  - mov [rsp+48],3F800000 { 1.00 }
+Grid_dx12.exe+8B4E69 - E8 B2D60A00           - call Grid_dx12.exe+962520
+Grid_dx12.exe+8B4E6E - 84 C0                 - test al,al
+Grid_dx12.exe+8B4E70 - B0 01                 - mov al,01 { 1 }
+Grid_dx12.exe+8B4E72 - 74 51                 - je Grid_dx12.exe+8B4EC5
+Grid_dx12.exe+8B4E74 - F3 0F10 4C 24 48      - movss xmm1,[rsp+48]
+Grid_dx12.exe+8B4E7A - 0F28 C1               - movaps xmm0,xmm1
+Grid_dx12.exe+8B4E7D - F3 0F11 8B 18020000   - movss [rbx+00000218],xmm1
+Grid_dx12.exe+8B4E85 - F3 0F59 C1            - mulss xmm0,xmm1
+Grid_dx12.exe+8B4E89 - F3 0F11 8B 1C020000   - movss [rbx+0000021C],xmm1
+Grid_dx12.exe+8B4E91 - F3 0F11 8B 24020000   - movss [rbx+00000224],xmm1
+Grid_dx12.exe+8B4E99 - F3 0F5E F0            - divss xmm6,xmm0
+Grid_dx12.exe+8B4E9D - F3 0F11 8B 20020000   - movss [rbx+00000220],xmm1
+Grid_dx12.exe+8B4EA5 - F3 0F11 B3 28020000   - movss [rbx+00000228],xmm6
+Grid_dx12.exe+8B4EAD - F3 0F11 B3 2C020000   - movss [rbx+0000022C],xmm6
+Grid_dx12.exe+8B4EB5 - F3 0F11 B3 34020000   - movss [rbx+00000234],xmm6
+Grid_dx12.exe+8B4EBD - F3 0F11 B3 30020000   - movss [rbx+00000230],xmm6
+Grid_dx12.exe+8B4EC5 - 0F28 74 24 20         - movaps xmm6,[rsp+20]
+Grid_dx12.exe+8B4ECA - 48 83 C4 30           - add rsp,30 { 48 }
+Grid_dx12.exe+8B4ECE - 5B                    - pop rbx
+Grid_dx12.exe+8B4ECF - C3                    - ret 
+
+
+pause byte
+Grid_dx12.exe+A20570 - 0FB6 42 10            - movzx eax,byte ptr [rdx+10]
+Grid_dx12.exe+A20574 - 88 41 70              - mov [rcx+70],al		<<<write
+Grid_dx12.exe+A20577 - 33 C0                 - xor eax,eax
+
+pause byte read:
+Grid_dx12.exe+A31E60 - 48 8B 4B 28           - mov rcx,[rbx+28]
+Grid_dx12.exe+A31E64 - 48 85 C9              - test rcx,rcx
+Grid_dx12.exe+A31E67 - 74 06                 - je Grid_dx12.exe+A31E6F
+Grid_dx12.exe+A31E69 - 48 8B 01              - mov rax,[rcx]
+Grid_dx12.exe+A31E6C - FF 50 18              - call qword ptr [rax+18]
+Grid_dx12.exe+A31E6F - E8 8CA9DDFF           - call Grid_dx12.exe+80C800
+Grid_dx12.exe+A31E74 - 84 C0                 - test al,al
+Grid_dx12.exe+A31E76 - 74 05                 - je Grid_dx12.exe+A31E7D
+Grid_dx12.exe+A31E78 - E8 63AADDFF           - call Grid_dx12.exe+80C8E0
+Grid_dx12.exe+A31E7D - 48 8B 4B 30           - mov rcx,[rbx+30]
+Grid_dx12.exe+A31E81 - E8 7A74D6FF           - call Grid_dx12.exe+799300
+Grid_dx12.exe+A31E86 - 0FB6 43 70            - movzx eax,byte ptr [rbx+70]		<<read pause byte
+Grid_dx12.exe+A31E8A - 48 8B 8B 80000000     - mov rcx,[rbx+00000080]
+Grid_dx12.exe+A31E91 - 88 83 28010000        - mov [rbx+00000128],al
+Grid_dx12.exe+A31E97 - 0FB6 43 71            - movzx eax,byte ptr [rbx+71]
+Grid_dx12.exe+A31E9B - 88 83 29010000        - mov [rbx+00000129],al
+Grid_dx12.exe+A31EA1 - E8 2A65CEFF           - call Grid_dx12.exe+7183D0
+Grid_dx12.exe+A31EA6 - 48 8B 4B 78           - mov rcx,[rbx+78]
+Grid_dx12.exe+A31EAA - E8 A162CEFF           - call Grid_dx12.exe+718150
+Grid_dx12.exe+A31EAF - E9 9CFDFFFF           - jmp Grid_dx12.exe+A31C50
+Grid_dx12.exe+A31EB4 - 48 8D 15 BD9E8D00     - lea rdx,[Grid_dx12.exe+130BD78] { ("exiting...
+") }
+Grid_dx12.exe+A31EBB - 48 8D 0D 82325D00     - lea rcx,[Grid_dx12.exe+1005144] { ("ENGINE") }
+Grid_dx12.exe+A31EC2 - E8 F910CAFF           - call Grid_dx12.exe+6D2FC0
+
+
