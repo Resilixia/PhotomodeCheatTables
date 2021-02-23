@@ -1,0 +1,3787 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4155</ID>
+      <Description>"TIMESTOP"</Description>
+      <LastState/>
+      <Color>0000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ffxiiiimg.exe
+  Version: 
+  Date   : 2020-07-26
+  Author : skall
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Timestop,ffxiiiimg.exe,E8 B9 12 00 00 83) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //call ffxiiiimg.exe+A8B910
+  jmp return
+
+Timestop:
+  jmp newmem
+return:
+registersymbol(Timestop)
+
+[DISABLE]
+
+Timestop:
+  db E8 B9 12 00 00
+
+unregistersymbol(Timestop)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ffxiiiimg.exe"+A8A652
+
+"ffxiiiimg.exe"+A8A62C: B8 22 00 00 00                 -  mov eax,00000022
+"ffxiiiimg.exe"+A8A631: C1 E0 03                       -  shl eax,03
+"ffxiiiimg.exe"+A8A634: 8B 88 98 7D 66 02              -  mov ecx,[eax+ffxiiiimg.exe+2267D98]
+"ffxiiiimg.exe"+A8A63A: 89 8D 38 FE FF FF              -  mov [ebp-000001C8],ecx
+"ffxiiiimg.exe"+A8A640: 8D 55 F8                       -  lea edx,[ebp-08]
+"ffxiiiimg.exe"+A8A643: 52                             -  push edx
+"ffxiiiimg.exe"+A8A644: 8B 85 3C FE FF FF              -  mov eax,[ebp-000001C4]
+"ffxiiiimg.exe"+A8A64A: 50                             -  push eax
+"ffxiiiimg.exe"+A8A64B: 8B 8D 38 FE FF FF              -  mov ecx,[ebp-000001C8]
+"ffxiiiimg.exe"+A8A651: 51                             -  push ecx
+// ---------- INJECTING HERE ----------
+"ffxiiiimg.exe"+A8A652: E8 B9 12 00 00                 -  call ffxiiiimg.exe+A8B910
+// ---------- DONE INJECTING  ----------
+"ffxiiiimg.exe"+A8A657: 83 C4 0C                       -  add esp,0C
+"ffxiiiimg.exe"+A8A65A: 8D 4D A0                       -  lea ecx,[ebp-60]
+"ffxiiiimg.exe"+A8A65D: E8 3E 10 00 00                 -  call ffxiiiimg.exe+A8B6A0
+"ffxiiiimg.exe"+A8A662: 8B 0D 4C E3 83 02              -  mov ecx,[ffxiiiimg.exe+243E34C]
+"ffxiiiimg.exe"+A8A668: E8 D3 2D 00 00                 -  call ffxiiiimg.exe+A8D440
+"ffxiiiimg.exe"+A8A66D: 8D 4D 88                       -  lea ecx,[ebp-78]
+"ffxiiiimg.exe"+A8A670: E8 9B 0F 00 00                 -  call ffxiiiimg.exe+A8B610
+"ffxiiiimg.exe"+A8A675: BA 5D 00 00 00                 -  mov edx,0000005D
+"ffxiiiimg.exe"+A8A67A: C1 E2 03                       -  shl edx,03
+"ffxiiiimg.exe"+A8A67D: 8B 82 98 7D 66 02              -  mov eax,[edx+ffxiiiimg.exe+2267D98]
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>96</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>55</ID>
+      <Description>"Enable FIRST! (HOME to enable, END to disable)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$lua}
+local degToRad = math.pi / 180
+prevYaw = 0
+prevPitch = 0
+prevRoll = 0
+
+function calcCurrentEyePos(rotMemory)
+    local xAxis = {}
+    local yAxis = {}
+    local zAxis = {}
+    local pos = {}
+
+    xAxis[1] = readFloat(rotMemory+16)
+    xAxis[2] = readFloat(rotMemory+20)
+    xAxis[3] = readFloat(rotMemory+24)
+    pos[1] = readFloat(rotMemory+52)
+
+    yAxis[1] = readFloat(rotMemory+28)
+    yAxis[2] = readFloat(rotMemory+32)
+    yAxis[3] = readFloat(rotMemory+36)
+    pos[2] = readFloat(rotMemory+56)
+
+    zAxis[1] = readFloat(rotMemory+40)
+    zAxis[2] = readFloat(rotMemory+44)
+    zAxis[3] = readFloat(rotMemory+48)
+    pos[3] = readFloat(rotMemory+60)
+
+    local realPos = {}
+    realPos[1] = pos[1] * xAxis[1] + pos[2] * yAxis[1] + pos[3] * zAxis[1]
+    realPos[2] = pos[1] * xAxis[2] + pos[2] * yAxis[2] + pos[3] * zAxis[2]
+    realPos[3] = pos[1] * xAxis[3] + pos[2] * yAxis[3] + pos[3] * zAxis[3]
+
+    realPos[1] = -1 * realPos[1]
+    realPos[2] = -1 * realPos[2]
+    realPos[3] = -1 * realPos[3]
+
+    return realPos
+end
+
+function initCamera(cameraPtr, rotMemory)
+    local xAxis = {}
+    local yAxis = {}
+    local zAxis = {}
+    local pos = {}
+
+    --print("fuckshitpiss")
+
+    xAxis[1] = readFloat(cameraPtr+0)
+    xAxis[2] = readFloat(cameraPtr+16)
+    xAxis[3] = readFloat(cameraPtr+32)
+    pos[1] = readFloat(cameraPtr+48)
+
+    yAxis[1] = readFloat(cameraPtr+4)
+    yAxis[2] = readFloat(cameraPtr+20)
+    yAxis[3] = readFloat(cameraPtr+36)
+    pos[2] = readFloat(cameraPtr+52)
+
+    zAxis[1] = readFloat(cameraPtr+8)
+    zAxis[2] = readFloat(cameraPtr+24)
+    zAxis[3] = readFloat(cameraPtr+40)
+    pos[3] = readFloat(cameraPtr+56)
+
+    local realPos = {}
+    realPos[1] = pos[1] * xAxis[1] + pos[2] * yAxis[1] + pos[3] * zAxis[1]
+    realPos[2] = pos[1] * xAxis[2] + pos[2] * yAxis[2] + pos[3] * zAxis[2]
+    realPos[3] = pos[1] * xAxis[3] + pos[2] * yAxis[3] + pos[3] * zAxis[3]
+
+    writeFloat(rotMemory + 16, 1)
+    writeFloat(rotMemory + 20, 0)
+    writeFloat(rotMemory + 24, 0)
+    writeFloat(rotMemory + 28, 0)
+    writeFloat(rotMemory + 32, 1)
+    writeFloat(rotMemory + 36, 0)
+    writeFloat(rotMemory + 40, 0)
+    writeFloat(rotMemory + 44, 0)
+    writeFloat(rotMemory + 48, 1)
+
+    writeFloat(rotMemory + 52, realPos[1])
+    writeFloat(rotMemory + 56, realPos[2])
+    writeFloat(rotMemory + 60, realPos[3])
+
+    writeFloat(rotMemory + 64, -realPos[1])
+    writeFloat(rotMemory + 68, -realPos[2])
+    writeFloat(rotMemory + 72, -realPos[3])
+
+end
+
+function calcDot(vec1, vec2)
+    return vec1[1]*vec2[1] + vec1[2]*vec2[2] + vec1[3]*vec2[3]
+end
+
+function calcQuaternion(rotMemory, yaw, pitch, roll)
+	pitch = pitch * degToRad
+    yaw = yaw * degToRad
+    roll = roll * degToRad
+
+    local sx = math.sin(pitch)
+    local cx = math.cos(pitch)
+    local sy = math.sin(yaw)
+    local cy = math.cos(yaw)
+    local sz = math.sin(roll)
+    local cz = math.cos(roll)
+
+    local xAxis = {cy*cz, -cy*sz, sy}
+    local yAxis = {sx*sy*cz + cx*sz,-sx*sy*sz + cx*cz,-sx*cy}
+    local zAxis = {-cx*sy*cz + sx*sz,cx*sy*sz+sx*cz,cx*cy}
+
+    local eyePos = calcCurrentEyePos(rotMemory)
+    --print(xAxis[1] .. ' ' .. xAxis[2] .. ' ' .. xAxis[3])
+    local coord = {-calcDot(xAxis,eyePos),-calcDot(yAxis,eyePos),-calcDot(zAxis,eyePos)}
+
+    --xyz2
+    --local r11 = cy*cz
+    --local r12 = -cy*sz
+    --local r13 = sy
+    --local r21 = sx*sy*cz + cx*sz
+    --local r22 = -sx*sy*sz + cx*cz
+    --local r23 = -sx*cy
+    --local r31 = -cx*sy*cz + sx*sz
+    --local r32 = cx*sy*sz+sx*cz
+    --local r33 = cx*cy
+
+    --xzy
+    --local r11 = cz*cy
+    --local r12 = -sz
+    --local r13 = cz*sy
+    --local r21 = cx*sz*cy + sx*cy
+    --local r22 = cx*cz
+    --local r23 = cx*sz*sy-sx*cy
+    --local r31 = -sx*sz*cy-cx*sy
+    --local r32 = sx*cz
+    --local r33 = sx*sz*sy+cx*cy
+
+    --xzy2
+    --local r11 = cz*cy
+    --local r12 = -sz
+    --local r13 = cz*sy
+    --local r21 = cx*sz*cy + sx*cy
+    --local r22 = cx*cz
+    --local r23 = cx*sz*sy-sx*cy
+    --local r31 = -sx*sz*cy-cx*sy
+    --local r32 = sx*cz
+    --local r33 = sx*sz*sy+cx*cy
+
+    ---zxy
+    --local r11 = -sz*sx*sy+cz*cy
+    --local r12 = -sz*cx
+    --local r13 = sz*sx*sy+cz*sy
+    --local r21 = cz*sx*sy+sz*cy
+    --local r22 = cz*cx
+    --local r23 = -cz*cx*cy+sz*sy
+    --local r31 = -cx*sy
+    --local r32 = sx
+    --local r33 = cx*cy
+
+    --zyx
+    --local r11 = cz * cy
+    --local r12 = cz*sy*sx - sz*cx
+    --local r13 = cz*sy*cx + sz*sx
+    --local r21 = sz*cy
+    --local r22 = sz*sy*sx + cz*cx
+    --local r23 = sz*sy*cx - cz*sx
+    --local r31 = -sy
+    --local r32 = cy*sx
+    --local r33 = cy*cx
+
+    --yxz
+    --local r11 = sy*sx*sz + cy+cz
+    --local r12 = sy*sx*cz - cy*sz
+    --local r13 = sy*cx
+    --local r21 = cx*sz
+    --local r22 = cx*cz
+    --local r23 = -sx
+    --local r31 = cy*sx*sz - sy*cz
+    --local r32 = cy*sx*cz + sy*sz
+    --local r33 = cy*cx
+
+    --yxz2
+    --local r11 = sy*sx*sz + cy+cz
+    --local r12 = cx*sz
+    --local r13 = cy*sx*sz - sy*cz
+    --local r21 = sy*sx*cz - cy*sz
+    --local r22 = cx*cz
+    --local r23 = cy*sx*cz + sy*sz
+    --local r31 = sy*cx
+    --local r32 = -sx
+    --local r33 = cy*cx
+
+
+    --local w = cosY * cosX * cosZ + sinY * sinX * sinZ
+    --local x = cosY * sinX * cosZ + sinY * cosX * sinZ
+    --local y = sinY * cosX * cosZ - cosY * sinX * sinZ
+    --local z = cosY * cosX * sinZ - sinY * sinX * cosZ
+
+    writeFloat(rotMemory + 16, xAxis[1])
+    writeFloat(rotMemory + 20, xAxis[2])
+    writeFloat(rotMemory + 24, xAxis[3])
+    writeFloat(rotMemory + 28, yAxis[1])
+    writeFloat(rotMemory + 32, yAxis[2])
+    writeFloat(rotMemory + 36, yAxis[3])
+    writeFloat(rotMemory + 40, zAxis[1])
+    writeFloat(rotMemory + 44, zAxis[2])
+    writeFloat(rotMemory + 48, zAxis[3])
+    writeFloat(rotMemory + 52, coord[1])
+    writeFloat(rotMemory + 56, coord[2])
+    writeFloat(rotMemory + 60, coord[3])
+end
+
+function printShit()
+         print("Shit")
+end
+
+function timer_tick(timer)
+         local rotMemory = getAddressSafe("rotMemory")
+         if rotMemory == nil then
+            return
+         end
+
+         local initialized = readInteger(rotMemory+76)
+         if initialized == 0 then
+            local camPtr = readPointer(rotMemory+80)
+            if initialized == 0 then
+               initCamera(camPtr, rotMemory)
+               writeInteger(rotMemory+76, 1)
+            end
+            return
+         end
+
+         local yaw = readFloat(rotMemory)
+         local pitch = readFloat(rotMemory+4)
+         local roll = readFloat(rotMemory+8)
+
+         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
+            return
+         end
+
+         calcQuaternion(rotMemory, yaw, pitch, roll)
+
+         prevYaw = yaw
+         prevPitch = pitch
+         prevRoll = roll
+end
+
+function init()
+         --print("init")
+         if timer == nil then
+            print("Creating timer")
+            timer = createTimer(nil, false)
+            timer.setInterval(10)
+            timer.OnTimer = timer_tick
+         else
+             timer.OnTimer = timer_tick
+             timer.setEnabled(true)
+         end
+end
+
+function deinit()
+         --print("deinit")
+         timer.setEnabled(false)
+end
+
+
+
+{$asm}
+[ENABLE]
+globalalloc(rotMemory, 0x100, ffxiiiimg.exe+A7C72D)
+{$lua}
+init()
+
+{$asm}
+[DISABLE]
+{$lua}
+deinit()
+{$asm}
+dealloc(rotMemory)
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Activate</Action>
+          <Keys>
+            <Key>36</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+        <Hotkey>
+          <Action>Deactivate</Action>
+          <Keys>
+            <Key>35</Key>
+          </Keys>
+          <ID>1</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7229</ID>
+          <Description>"Pitch"</Description>
+          <LastState Value="19" RealAddress="44A70004"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+4</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>40</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>38</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22576</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22577</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>3</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7230</ID>
+          <Description>"Yaw"</Description>
+          <LastState Value="-4" RealAddress="44A70000"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>37</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>39</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22579</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22578</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>3</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7231</ID>
+          <Description>"Roll"</Description>
+          <LastState Value="-28" RealAddress="44A70008"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+8</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>97</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>99</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22546</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22547</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>3</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>22529</Key>
+              </Keys>
+              <Value>0</Value>
+              <ID>4</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>119</ID>
+          <Description>"X"</Description>
+          <LastState Value="-172.4082031" RealAddress="44A70034"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+34</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>102</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>100</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>102</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>100</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>3</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22533</Key>
+                <Key>22563</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>4</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22533</Key>
+                <Key>22562</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>5</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22563</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>6</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22562</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>7</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>121</ID>
+          <Description>"Y"</Description>
+          <LastState Value="298.6078796" RealAddress="44A70038"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+38</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>103</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>105</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>103</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>105</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>3</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22535</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>4</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22534</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>5</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22533</Key>
+                <Key>22534</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>6</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22533</Key>
+                <Key>22535</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>7</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>120</ID>
+          <Description>"Z"</Description>
+          <LastState Value="-496.2346802" RealAddress="44A7003C"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+3C</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>104</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>101</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>104</Key>
+              </Keys>
+              <Value>0.05</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>101</Key>
+              </Keys>
+              <Value>0.05</Value>
+              <ID>3</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22533</Key>
+                <Key>22560</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>4</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22533</Key>
+                <Key>22561</Key>
+              </Keys>
+              <Value>0.01</Value>
+              <ID>5</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>22560</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>6</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>22561</Key>
+              </Keys>
+              <Value>0.1</Value>
+              <ID>7</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7235</ID>
+          <Description>"r11"</Description>
+          <LastState Value="0.8807967901" RealAddress="44A70010"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+10</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7236</ID>
+          <Description>"r12"</Description>
+          <LastState Value="0.4683279395" RealAddress="44A70014"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+14</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7237</ID>
+          <Description>"r13"</Description>
+          <LastState Value="-0.06975647062" RealAddress="44A70018"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+18</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7238</ID>
+          <Description>"r21"</Description>
+          <LastState Value="-0.4639462531" RealAddress="44A7001C"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+1C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7239</ID>
+          <Description>"r22"</Description>
+          <LastState Value="0.8241814375" RealAddress="44A70020"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+20</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7240</ID>
+          <Description>"r23"</Description>
+          <LastState Value="-0.3247750998" RealAddress="44A70024"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+24</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7241</ID>
+          <Description>"r31"</Description>
+          <LastState Value="-0.09460926056" RealAddress="44A70028"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+28</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7242</ID>
+          <Description>"r32"</Description>
+          <LastState Value="0.3184241056" RealAddress="44A7002C"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+2C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7243</ID>
+          <Description>"r33"</Description>
+          <LastState Value="0.9432153106" RealAddress="44A70030"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+30</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7249</ID>
+          <Description>"Initialized Var"</Description>
+          <LastState Value="00000001" RealAddress="44A7004C"/>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>rotMemory+4C</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7154</ID>
+      <Description>"CENTRAL Camera - Work during TIMESTOP. Rotations are not calculated at all. "</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7254</ID>
+          <Description>"Fov Disable"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(_fov,ffxiiiimg.exe,48 89 45 F0 8B 4D 08 8B 55 F0 8B 01 89 02 8B 41 04) // should be unique
+registersymbol(_fov)
+
+_fov+0C:
+db 90 90
+
+_fov+39:
+db 90 90 90
+
+
+[DISABLE]
+_fov+0C:
+db 89 02
+
+_fov+39:
+db 89 51 04
+
+unregistersymbol(_fov)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+A7C76A
+
+ffxiiiimg.exe+A7C750: 55        - push ebp
+ffxiiiimg.exe+A7C751: 8B EC     - mov ebp,esp
+ffxiiiimg.exe+A7C753: 83 EC 14  - sub esp,14
+ffxiiiimg.exe+A7C756: 89 4D EC  - mov [ebp-14],ecx
+ffxiiiimg.exe+A7C759: 8B 45 EC  - mov eax,[ebp-14]
+ffxiiiimg.exe+A7C75C: 83 C0 48  - add eax,48
+ffxiiiimg.exe+A7C75F: 89 45 F0  - mov [ebp-10],eax
+ffxiiiimg.exe+A7C762: 8B 4D 08  - mov ecx,[ebp+08]
+ffxiiiimg.exe+A7C765: 8B 55 F0  - mov edx,[ebp-10]
+ffxiiiimg.exe+A7C768: 8B 01     - mov eax,[ecx]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+A7C76A: 89 02     - mov [edx],eax
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+A7C76C: 8B 41 04  - mov eax,[ecx+04]
+ffxiiiimg.exe+A7C76F: 89 42 04  - mov [edx+04],eax
+ffxiiiimg.exe+A7C772: 8B 41 08  - mov eax,[ecx+08]
+ffxiiiimg.exe+A7C775: 89 42 08  - mov [edx+08],eax
+ffxiiiimg.exe+A7C778: 8B 49 0C  - mov ecx,[ecx+0C]
+ffxiiiimg.exe+A7C77B: 89 4A 0C  - mov [edx+0C],ecx
+ffxiiiimg.exe+A7C77E: 8B 55 F0  - mov edx,[ebp-10]
+ffxiiiimg.exe+A7C781: 83 C2 10  - add edx,10
+ffxiiiimg.exe+A7C784: 89 55 FC  - mov [ebp-04],edx
+ffxiiiimg.exe+A7C787: 8B 45 08  - mov eax,[ebp+08]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7244</ID>
+          <Description>"Camera - enable script to use"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ffxiiiimg.exe
+  Version: 
+  Date   : 2021-02-21
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(rotationMatrix,ffxiiiimg.exe,8B 01 89 02 8B 41 04 89 42 04 8B 41 08 89 42 08 8B 49 0C 89 4A 0C 8B 55 F0 83 C2 10 89 55 FC 8B 45 08 83 C0 10 8B 4D FC 8B 10 89 11 8B 50 04 89 51 04 8B 50 08 89 51 08 8B 40 0C 89 41 0C 8B 4D F0 83 C1 20 89 4D F8 8B 55 08 83 C2 20 8B 45 F8 8B 0A 89 08 8B 4A 04 89 48 04 8B 4A 08 89 48 08 8B 52 0C 89 50 0C 8B 45 F0 83 C0 30 89 45 F4 8B 4D 08 83 C1 30 8B 55 F4 8B 01 89 02 8B 41 04 89 42 04 8B 41 08 89 42 08 8B 49 0C 89 4A 0C 8B 55 EC C6 82 AD 00 00 00 01 8B E5 5D C2 04 00 CC CC CC CC CC CC CC CC CC CC 55 8B EC 83 EC 14 89 4D EC 8B 45 EC 83 C0 48 89 45 F0 8B 4D 08 8B 55 F0 8B 01 89 02 8B 41 04 89 42 04 8B 41 08 89 42 08) // should be unique
+globalalloc(rotMemory, 0x100, "ffxiiiimg.exe"+A7C72D)
+alloc(newmem,$1000)
+registersymbol(rotationMatrix)
+registersymbol(rotateA)
+
+registersymbol(hfov)
+registersymbol(fovscalar)
+
+
+alloc(OGhfov,4) // Allocate memory (4 bytes) for the h FoV value
+registersymbol(OGhfov) // Register symbol so we can reference in CE
+
+alloc(OGvfov,4) // Allocate memory (4 bytes) for the h FoV value
+registersymbol(OGvfov) // Register symbol so we can reference in CE
+
+//label(skip)
+
+//label(return)
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+newmem:
+  //push eax
+  //mov al, [rotMemory+4C]
+  //test al,01
+  //jne skip
+  //mov al,00
+
+//skip:
+  //pop eax
+
+  mov [rotateA],edx
+  mov [rotMemory+50],edx
+  /*
+  mov eax,[ecx]
+  mov [edx],eax
+  mov eax,[ecx+04]
+  mov [edx+04],eax
+  mov eax,[ecx+08]
+  mov [edx+08],eax
+  mov ecx,[ecx+0C]
+  mov [edx+0C],ecx
+  jmp return
+*/
+
+//Row 1
+  //mov eax,[ecx]
+  mov eax,[rotMemory+10]  //we want our own value so just replace the ecx
+  mov [edx],eax
+
+  //mov eax,[ecx+04]
+  mov eax,[rotMemory+1C]
+  mov [edx+04],eax
+
+  //mov eax,[ecx+08]
+  mov eax,[rotMemory+28]
+  mov [edx+08],eax
+
+  mov ecx,[ecx+0C] //can leave this as is as it is 0
+  mov [edx+0C],ecx
+  mov edx,[ebp-10]
+  add edx,10
+  mov [ebp-04],edx
+  mov eax,[ebp+08]
+  add eax,10
+  mov ecx,[ebp-04]
+
+//Row 2
+  //mov edx,[eax]
+  mov edx,[rotMemory+14]
+  mov [ecx],edx
+
+  //mov edx,[eax+04]
+  mov edx,[rotMemory+20]
+  mov [ecx+04],edx
+
+  //mov edx,[eax+08]
+  mov edx,[rotMemory+2C]
+  mov [ecx+08],edx
+
+  mov eax,[eax+0C]
+  mov [ecx+0C],eax
+
+  mov ecx,[ebp-10]
+  add ecx,20
+  mov [ebp-08],ecx
+  mov edx,[ebp+08]
+  add edx,20
+  mov eax,[ebp-08]
+
+//Row 3
+  //mov ecx,[edx]
+  mov ecx,[rotMemory+18]
+  mov [eax],ecx
+
+  //mov ecx,[edx+04]
+  mov ecx,[rotMemory+24]
+  mov [eax+04],ecx
+
+  //mov ecx,[edx+08]
+  mov ecx,[rotMemory+30]
+  mov [eax+08],ecx
+
+  mov edx,[edx+0C]
+  mov [eax+0C],edx
+  mov eax,[ebp-10]
+  add eax,30
+  mov [ebp-0C],eax
+  mov ecx,[ebp+08]
+  add ecx,30
+  mov edx,[ebp-0C]
+
+//coords
+  //mov eax,[ecx]
+  mov eax,[rotMemory+34]
+  mov [edx],eax
+
+  //mov eax,[ecx+04]
+  mov eax,[rotMemory+38]
+  mov [edx+04],eax
+
+  //mov eax,[ecx+08]
+  mov eax,[rotMemory+3C]
+  mov [edx+08],eax
+
+  mov ecx,[ecx+0C]
+  mov [edx+0C],ecx
+
+
+  mov [hfov], edx
+
+  movss xmm4,[fovscalar]
+  movss xmm5,[edx+10]
+  mulss xmm4,xmm5
+  movss [edx+24],xmm4
+
+
+  pop eax
+  jmp rotationMatrix+8E
+
+
+
+
+rotateA:
+dq 0
+
+hfov:
+dq 0
+
+OGhfov:
+dq (float)1.63
+
+OGvfov:
+dq (float)2.90
+
+fovscalar:
+dd (float)1.779
+
+rotationMatrix:
+  jmp newmem
+  nop 2
+//return:
+
+
+[DISABLE]
+rotMemory+4C:
+db 00 00 00 00
+//code from here till the end of the code will be used to disable the cheat
+rotationMatrix:
+db 8B 01 89 02 8B 41 04
+
+[hfov]+10:
+readmem(OGhfov,4)
+
+[hfov]+24:
+readmem(OGvfov,4)
+
+unregistersymbol(OGhfov)
+unregistersymbol(OGvfov)
+unregistersymbol(rotationMatrix)
+unregistersymbol(rotateA)
+unregistersymbol(hfov)
+unregistersymbol(fovscalar)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+A7C6A8
+
+ffxiiiimg.exe+A7C68F: CC        - int 3 
+ffxiiiimg.exe+A7C690: 55        - push ebp
+ffxiiiimg.exe+A7C691: 8B EC     - mov ebp,esp
+ffxiiiimg.exe+A7C693: 83 EC 14  - sub esp,14
+ffxiiiimg.exe+A7C696: 89 4D EC  - mov [ebp-14],ecx
+ffxiiiimg.exe+A7C699: 8B 45 EC  - mov eax,[ebp-14]
+ffxiiiimg.exe+A7C69C: 83 C0 08  - add eax,08
+ffxiiiimg.exe+A7C69F: 89 45 F0  - mov [ebp-10],eax
+ffxiiiimg.exe+A7C6A2: 8B 4D 08  - mov ecx,[ebp+08]
+ffxiiiimg.exe+A7C6A5: 8B 55 F0  - mov edx,[ebp-10]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+A7C6A8: 8B 01     - mov eax,[ecx]
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+A7C6AA: 89 02     - mov [edx],eax
+ffxiiiimg.exe+A7C6AC: 8B 41 04  - mov eax,[ecx+04]
+ffxiiiimg.exe+A7C6AF: 89 42 04  - mov [edx+04],eax
+ffxiiiimg.exe+A7C6B2: 8B 41 08  - mov eax,[ecx+08]
+ffxiiiimg.exe+A7C6B5: 89 42 08  - mov [edx+08],eax
+ffxiiiimg.exe+A7C6B8: 8B 49 0C  - mov ecx,[ecx+0C]
+ffxiiiimg.exe+A7C6BB: 89 4A 0C  - mov [edx+0C],ecx
+ffxiiiimg.exe+A7C6BE: 8B 55 F0  - mov edx,[ebp-10]
+ffxiiiimg.exe+A7C6C1: 83 C2 10  - add edx,10
+ffxiiiimg.exe+A7C6C4: 89 55 FC  - mov [ebp-04],edx
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>7246</ID>
+              <Description>"r11"</Description>
+              <LastState Value="-0.7705062032" RealAddress="187FFB98"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>rotateA</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7247</ID>
+              <Description>"r12"</Description>
+              <LastState Value="-0.03472515568" RealAddress="187FFB9C"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>rotateA</Address>
+              <Offsets>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7248</ID>
+              <Description>"r13"</Description>
+              <LastState Value="-0.6364859939" RealAddress="187FFBA0"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>rotateA</Address>
+              <Offsets>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7255</ID>
+              <Description>"hfov"</Description>
+              <LastState Value="1.65707159" RealAddress="187FFBD8"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>hfov</Address>
+              <Offsets>
+                <Offset>10</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>107</Key>
+                  </Keys>
+                  <Value>0.1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>109</Key>
+                  </Keys>
+                  <Value>0.1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7250</ID>
+              <Description>"Cam Address Pointer"</Description>
+              <LastState Value="187FFB98" RealAddress="44A70050"/>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>rotMemory+50</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7251</ID>
+      <Description>"not this one"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(fuckthisHUDlikeabitch,ffxiiiimg.exe,FF D2 EB DE 6A 00) // should be unique
+registersymbol(fuckthisHUDlikeabitch)
+
+fuckthisHUDlikeabitch:
+db 90 90 90 90
+
+
+
+[DISABLE]
+fuckthisHUDlikeabitch:
+  db FF D2 EB DE
+
+unregistersymbol(fuckthisHUDlikeabitch)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+4D87C3
+
+ffxiiiimg.exe+4D87A8: 8B 42 14     - mov eax,[edx+14]
+ffxiiiimg.exe+4D87AB: 89 45 FC     - mov [ebp-04],eax
+ffxiiiimg.exe+4D87AE: 83 7D FC 00  - cmp dword ptr [ebp-04],00
+ffxiiiimg.exe+4D87B2: 74 13        - je ffxiiiimg.exe+4D87C7
+ffxiiiimg.exe+4D87B4: 8B 4D 08     - mov ecx,[ebp+08]
+ffxiiiimg.exe+4D87B7: 51           - push ecx
+ffxiiiimg.exe+4D87B8: 8B 55 FC     - mov edx,[ebp-04]
+ffxiiiimg.exe+4D87BB: 8B 02        - mov eax,[edx]
+ffxiiiimg.exe+4D87BD: 8B 4D FC     - mov ecx,[ebp-04]
+ffxiiiimg.exe+4D87C0: 8B 50 08     - mov edx,[eax+08]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+4D87C3: FF D2        - call edx
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+4D87C5: EB DE        - jmp ffxiiiimg.exe+4D87A5
+ffxiiiimg.exe+4D87C7: 6A 00        - push 00
+ffxiiiimg.exe+4D87C9: 8B 45 F4     - mov eax,[ebp-0C]
+ffxiiiimg.exe+4D87CC: 8B 10        - mov edx,[eax]
+ffxiiiimg.exe+4D87CE: 8B 4D F4     - mov ecx,[ebp-0C]
+ffxiiiimg.exe+4D87D1: 8B 42 34     - mov eax,[edx+34]
+ffxiiiimg.exe+4D87D4: FF D0        - call eax
+ffxiiiimg.exe+4D87D6: 8B E5        - mov esp,ebp
+ffxiiiimg.exe+4D87D8: 5D           - pop ebp
+ffxiiiimg.exe+4D87D9: C2 04 00     - ret 0004
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7252</ID>
+      <Description>"not this one"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(fuckinglittlehandfucker,ffxiiiimg.exe,FF D0 8B E5 5D C2 04 00 CC CC CC CC 55 8B EC 83 EC 08 89 4D F8 8B 45 F8 8B 4D 08 89 88 C8 00 00 00 8B 55 F8 8B 42 08 89 45 FC EB 09 8B 4D FC 8B 51 14 89 55 FC 83 7D FC 00 74 0E 8B 45 08 50 8B 4D FC E8 C5 FF FF FF EB E3 8B E5) // should be unique
+registersymbol(fuckinglittlehandfucker)
+
+fuckinglittlehandfucker-11:
+db 90 90 90 90
+
+
+fuckinglittlehandfucker:
+db 90 90
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+fuckinglittlehandfucker:
+db FF D0
+
+fuckinglittlehandfucker-11:
+db FF D2 EB DE
+
+unregistersymbol(fuckinglittlehandfucker)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+60B8FF
+
+ffxiiiimg.exe+60B8E3: E8 28 D9 EE FF  - call ffxiiiimg.exe+4F9210
+ffxiiiimg.exe+60B8E8: 8B 55 08        - mov edx,[ebp+08]
+ffxiiiimg.exe+60B8EB: 52              - push edx
+ffxiiiimg.exe+60B8EC: 8B 45 B0        - mov eax,[ebp-50]
+ffxiiiimg.exe+60B8EF: 8B 48 34        - mov ecx,[eax+34]
+ffxiiiimg.exe+60B8F2: 8B 55 B0        - mov edx,[ebp-50]
+ffxiiiimg.exe+60B8F5: 8B 42 34        - mov eax,[edx+34]
+ffxiiiimg.exe+60B8F8: 8B 11           - mov edx,[ecx]
+ffxiiiimg.exe+60B8FA: 8B C8           - mov ecx,eax
+ffxiiiimg.exe+60B8FC: 8B 42 08        - mov eax,[edx+08]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+60B8FF: FF D0           - call eax
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+60B901: 8B E5           - mov esp,ebp
+ffxiiiimg.exe+60B903: 5D              - pop ebp
+ffxiiiimg.exe+60B904: C2 04 00        - ret 0004
+ffxiiiimg.exe+60B907: CC              - int 3 
+ffxiiiimg.exe+60B908: CC              - int 3 
+ffxiiiimg.exe+60B909: CC              - int 3 
+ffxiiiimg.exe+60B90A: CC              - int 3 
+ffxiiiimg.exe+60B90B: CC              - int 3 
+ffxiiiimg.exe+60B90C: CC              - int 3 
+ffxiiiimg.exe+60B90D: CC              - int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7253</ID>
+      <Description>"This is it"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+
+aobscanmodule(pleasebetheHUD,ffxiiiimg.exe,FF D0 8B 4D FC E8 74) // should be unique
+registersymbol(pleasebetheHUD)
+
+pleasebetheHUD:
+db 90 90
+
+
+[DISABLE]
+
+pleasebetheHUD:
+db FF D0
+
+unregistersymbol(pleasebetheHUD)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+4E3B62
+
+ffxiiiimg.exe+4E3B44: 83 C4 04           - add esp,04
+ffxiiiimg.exe+4E3B47: 8B 45 E4           - mov eax,[ebp-1C]
+ffxiiiimg.exe+4E3B4A: 8B 48 28           - mov ecx,[eax+28]
+ffxiiiimg.exe+4E3B4D: 51                 - push ecx
+ffxiiiimg.exe+4E3B4E: 8B 55 E4           - mov edx,[ebp-1C]
+ffxiiiimg.exe+4E3B51: 8B 42 24           - mov eax,[edx+24]
+ffxiiiimg.exe+4E3B54: 8B 4D E4           - mov ecx,[ebp-1C]
+ffxiiiimg.exe+4E3B57: 8B 49 24           - mov ecx,[ecx+24]
+ffxiiiimg.exe+4E3B5A: 8B 10              - mov edx,[eax]
+ffxiiiimg.exe+4E3B5C: 8B 82 FC 00 00 00  - mov eax,[edx+000000FC]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+4E3B62: FF D0              - call eax
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+4E3B64: 8B 4D FC           - mov ecx,[ebp-04]
+ffxiiiimg.exe+4E3B67: E8 74 00 00 00     - call ffxiiiimg.exe+4E3BE0
+ffxiiiimg.exe+4E3B6C: 8B E5              - mov esp,ebp
+ffxiiiimg.exe+4E3B6E: 5D                 - pop ebp
+ffxiiiimg.exe+4E3B6F: C2 04 00           - ret 0004
+ffxiiiimg.exe+4E3B72: CC                 - int 3 
+ffxiiiimg.exe+4E3B73: CC                 - int 3 
+ffxiiiimg.exe+4E3B74: CC                 - int 3 
+ffxiiiimg.exe+4E3B75: CC                 - int 3 
+ffxiiiimg.exe+4E3B76: CC                 - int 3 
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>46</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7256</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1.777777791" RealAddress="010CB154"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>010CB154</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7257</ID>
+      <Description>"No description"</Description>
+      <LastState Value="1280" RealAddress="47804E70"/>
+      <VariableType>Float</VariableType>
+      <Address>47804E70</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [esp+0000025C],ecx</Description>
+      <AddressString>ffxiiiimg.exe+21DB9E</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>EC</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>5C</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [esp+00000258],eax</Description>
+      <AddressString>ffxiiiimg.exe+21DB90</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>E8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>EC</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+000000F0],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+21DB51</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>F0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>F0</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+00000140],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+21DAF4</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [esp+00000250],edx</Description>
+      <AddressString>ffxiiiimg.exe+21DA65</AddressString>
+      <Before>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>11</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>94</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [esp+00000258],edx</Description>
+      <AddressString>ffxiiiimg.exe+21DA79</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>94</Byte>
+        <Byte>24</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [esp+00000258],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+21DA38</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>AC</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>58</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>9C</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [eax],ecx</Description>
+      <AddressString>ffxiiiimg.exe+3C1A0C</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>0A</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4A</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [ecx],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+3A8BB0</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>40</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>0C</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+3C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E34D8</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+        <Byte>10</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>3C</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>09</Byte>
+        <Byte>81</Byte>
+        <Byte>4E</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ecx],edx</Description>
+      <AddressString>ffxiiiimg.exe+134BF9</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>11</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>51</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+34],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E34C8</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>34</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>34</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ecx+08],edx</Description>
+      <AddressString>ffxiiiimg.exe+134B8C</AddressString>
+      <Before>
+        <Byte>51</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ecx],edx</Description>
+      <AddressString>ffxiiiimg.exe+134B81</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>F0</Byte>
+        <Byte>8B</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>11</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>51</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+6C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E352D</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>2C</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>6C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+0C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E3491</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+14],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E349C</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>14</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+1C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E34A7</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>1C</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>1C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+24],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E34B2</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+2C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E34BD</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>2C</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>2C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+0000012C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E35D4</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>81</Byte>
+        <Byte>2C</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>83</Byte>
+        <Byte>89</Byte>
+        <Byte>4E</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call ffxiiiimg.exe+A8B610</Description>
+      <AddressString>ffxiiiimg.exe+A8A613</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+        <Byte>8D</Byte>
+        <Byte>4D</Byte>
+        <Byte>A0</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>F8</Byte>
+        <Byte>0F</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>B9</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[ffxiiiimg.exe+246DE04]</Description>
+      <AddressString>ffxiiiimg.exe+A8B6A9</AddressString>
+      <Before>
+        <Byte>EC</Byte>
+        <Byte>20</Byte>
+        <Byte>89</Byte>
+        <Byte>4D</Byte>
+        <Byte>E0</Byte>
+      </Before>
+      <Actual>
+        <Byte>A1</Byte>
+        <Byte>04</Byte>
+        <Byte>DE</Byte>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>8A</Byte>
+        <Byte>48</Byte>
+        <Byte>24</Byte>
+        <Byte>88</Byte>
+        <Byte>4D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[ffxiiiimg.exe+246DE04]</Description>
+      <AddressString>ffxiiiimg.exe+A8B6BC</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>85</Byte>
+        <Byte>D2</Byte>
+        <Byte>74</Byte>
+        <Byte>2D</Byte>
+      </Before>
+      <Actual>
+        <Byte>A1</Byte>
+        <Byte>04</Byte>
+        <Byte>DE</Byte>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>8A</Byte>
+        <Byte>48</Byte>
+        <Byte>26</Byte>
+        <Byte>88</Byte>
+        <Byte>4D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je ffxiiiimg.exe+A8B6E9</Description>
+      <AddressString>ffxiiiimg.exe+A8B6BA</AddressString>
+      <Before>
+        <Byte>B6</Byte>
+        <Byte>55</Byte>
+        <Byte>FF</Byte>
+        <Byte>85</Byte>
+        <Byte>D2</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>2D</Byte>
+      </Actual>
+      <After>
+        <Byte>A1</Byte>
+        <Byte>04</Byte>
+        <Byte>DE</Byte>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je ffxiiiimg.exe+A8B6E9</Description>
+      <AddressString>ffxiiiimg.exe+A8B6CD</AddressString>
+      <Before>
+        <Byte>B6</Byte>
+        <Byte>55</Byte>
+        <Byte>FE</Byte>
+        <Byte>85</Byte>
+        <Byte>D2</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>1A</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>2C</Byte>
+        <Byte>1E</Byte>
+        <Byte>5B</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call ffxiiiimg.exe+3D500</Description>
+      <AddressString>ffxiiiimg.exe+A8B6CF</AddressString>
+      <Before>
+        <Byte>FE</Byte>
+        <Byte>85</Byte>
+        <Byte>D2</Byte>
+        <Byte>74</Byte>
+        <Byte>1A</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>2C</Byte>
+        <Byte>1E</Byte>
+        <Byte>5B</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>E0</Byte>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call ffxiiiimg.exe+A8B6F0</Description>
+      <AddressString>ffxiiiimg.exe+A8B6E1</AddressString>
+      <Before>
+        <Byte>0C</Byte>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>E0</Byte>
+        <Byte>52</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ebp-20],ecx</Description>
+      <AddressString>ffxiiiimg.exe+A8B6A6</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>EC</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>4D</Byte>
+        <Byte>E0</Byte>
+      </Actual>
+      <After>
+        <Byte>A1</Byte>
+        <Byte>04</Byte>
+        <Byte>DE</Byte>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ebp-01],cl</Description>
+      <AddressString>ffxiiiimg.exe+A8B6B1</AddressString>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+        <Byte>8A</Byte>
+        <Byte>48</Byte>
+        <Byte>24</Byte>
+      </Before>
+      <Actual>
+        <Byte>88</Byte>
+        <Byte>4D</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>55</Byte>
+        <Byte>FF</Byte>
+        <Byte>85</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ebp-02],cl</Description>
+      <AddressString>ffxiiiimg.exe+A8B6C4</AddressString>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+        <Byte>8A</Byte>
+        <Byte>48</Byte>
+        <Byte>26</Byte>
+      </Before>
+      <Actual>
+        <Byte>88</Byte>
+        <Byte>4D</Byte>
+        <Byte>FE</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>55</Byte>
+        <Byte>FE</Byte>
+        <Byte>85</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[ffxiiiimg.exe+246DE04]</Description>
+      <AddressString>ffxiiiimg.exe+A8B6F6</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>EC</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>A1</Byte>
+        <Byte>04</Byte>
+        <Byte>DE</Byte>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>48</Byte>
+        <Byte>24</Byte>
+        <Byte>85</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je ffxiiiimg.exe+A8B723</Description>
+      <AddressString>ffxiiiimg.exe+A8B701</AddressString>
+      <Before>
+        <Byte>B6</Byte>
+        <Byte>48</Byte>
+        <Byte>24</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>08</Byte>
+        <Byte>52</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov edx,[ffxiiiimg.exe+246DE04]</Description>
+      <AddressString>ffxiiiimg.exe+A8B710</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>14</Byte>
+        <Byte>6B</Byte>
+        <Byte>C9</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>15</Byte>
+        <Byte>04</Byte>
+        <Byte>DE</Byte>
+        <Byte>86</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>03</Byte>
+        <Byte>4A</Byte>
+        <Byte>28</Byte>
+        <Byte>E8</Byte>
+        <Byte>22</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jmp ffxiiiimg.exe+A8B72A</Description>
+      <AddressString>ffxiiiimg.exe+A8B721</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>89</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>07</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ebp-0C],eax</Description>
+      <AddressString>ffxiiiimg.exe+A8B71E</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>22</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>07</Byte>
+        <Byte>C7</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ebp-0C],00000000</Description>
+      <AddressString>ffxiiiimg.exe+A8B723</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>EB</Byte>
+        <Byte>07</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[ebp-0C]</Description>
+      <AddressString>ffxiiiimg.exe+A8B72A</AddressString>
+      <Before>
+        <Byte>F4</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+        <Byte>5D</Byte>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call ffxiiiimg.exe+A88A40</Description>
+      <AddressString>ffxiiiimg.exe+A8B5DC</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>F8</Byte>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>F8</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>5F</Byte>
+        <Byte>D4</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+        <Byte>83</Byte>
+        <Byte>E0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call ffxiiiimg.exe+A8A090</Description>
+      <AddressString>ffxiiiimg.exe+A91A44</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>5C</Byte>
+        <Byte>E3</Byte>
+        <Byte>83</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>47</Byte>
+        <Byte>86</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>06</Byte>
+        <Byte>FF</Byte>
+        <Byte>15</Byte>
+        <Byte>B8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of cmp eax,01</Description>
+      <AddressString>ffxiiiimg.exe+A792D3</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>34</Byte>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Before>
+      <Actual>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>02</Byte>
+        <Byte>EB</Byte>
+        <Byte>B3</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je ffxiiiimg.exe+A792DA</Description>
+      <AddressString>ffxiiiimg.exe+A792D6</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>B3</Byte>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jmp ffxiiiimg.exe+A7928D</Description>
+      <AddressString>ffxiiiimg.exe+A792D8</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>01</Byte>
+        <Byte>74</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>B3</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+        <Byte>8B</Byte>
+        <Byte>11</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+04],eax</Description>
+      <AddressString>ffxiiiimg.exe+A7C76F</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>02</Byte>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>08</Byte>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+08],eax</Description>
+      <AddressString>ffxiiiimg.exe+A7C775</AddressString>
+      <Before>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>49</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>4A</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ecx+0C],eax</Description>
+      <AddressString>ffxiiiimg.exe+117C6A</AddressString>
+      <Before>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+00000310],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+580E2</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+00000270],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+581A3</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+00000140],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+FBF9C</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+000001D0],xmm3</Description>
+      <AddressString>ffxiiiimg.exe+571B5</AddressString>
+      <Before>
+        <Byte>14</Byte>
+        <Byte>D0</Byte>
+        <Byte>0F</Byte>
+        <Byte>14</Byte>
+        <Byte>DA</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>9C</Byte>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+00000370],xmm1</Description>
+      <AddressString>ffxiiiimg.exe+929D0</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>15</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [esp+000000F0],xmm1</Description>
+      <AddressString>ffxiiiimg.exe+4D465</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>DB</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>F0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6F</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ecx+0C],eax</Description>
+      <AddressString>ffxiiiimg.exe+117BE9</AddressString>
+      <Before>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>08</Byte>
+        <Byte>83</Byte>
+        <Byte>C1</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [esp+0000034C],eax</Description>
+      <AddressString>ffxiiiimg.exe+929FD</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+        <Byte>4C</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>4C</Byte>
+        <Byte>03</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ffxiiiimg.exe+24349F8],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+83A1BA</AddressString>
+      <Before>
+        <Byte>C8</Byte>
+        <Byte>4A</Byte>
+        <Byte>83</Byte>
+        <Byte>02</Byte>
+        <Byte>0D</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>05</Byte>
+        <Byte>F8</Byte>
+        <Byte>49</Byte>
+        <Byte>83</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [edx+0C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8DD138</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>42</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+0C],ecx</Description>
+      <AddressString>ffxiiiimg.exe+891A8F</AddressString>
+      <Before>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>49</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>4A</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>95</Byte>
+        <Byte>18</Byte>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+0C],ecx</Description>
+      <AddressString>ffxiiiimg.exe+AE2216</AddressString>
+      <Before>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>49</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>4A</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>95</Byte>
+        <Byte>54</Byte>
+        <Byte>FC</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [esp+48],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+92EAC</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>08</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>48</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+50],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+92E73</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [esp+70],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+92E53</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx],eax</Description>
+      <AddressString>ffxiiiimg.exe+67A1F7</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>E0</Byte>
+        <Byte>0F</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>E4</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+04],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E3486</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [eax+0C],edx</Description>
+      <AddressString>ffxiiiimg.exe+A7C7CB</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>52</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F0</Byte>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx],eax</Description>
+      <AddressString>ffxiiiimg.exe+A7C7E2</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+04],eax</Description>
+      <AddressString>ffxiiiimg.exe+A7C7E7</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>02</Byte>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>08</Byte>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+08],eax</Description>
+      <AddressString>ffxiiiimg.exe+A7C7ED</AddressString>
+      <Before>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>49</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>4A</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+0C],ecx</Description>
+      <AddressString>ffxiiiimg.exe+A7C7F3</AddressString>
+      <Before>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>49</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>4A</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>EC</Byte>
+        <Byte>C6</Byte>
+        <Byte>82</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [eax],ecx</Description>
+      <AddressString>ffxiiiimg.exe+A7C7BA</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F8</Byte>
+        <Byte>8B</Byte>
+        <Byte>0A</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4A</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx],eax</Description>
+      <AddressString>ffxiiiimg.exe+134BD1</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>F8</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movups [edi+20],xmm2</Description>
+      <AddressString>nvd3dum.dll+9C6EE8</AddressString>
+      <Before>
+        <Byte>31</Byte>
+        <Byte>20</Byte>
+        <Byte>83</Byte>
+        <Byte>C1</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>57</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>58</Byte>
+        <Byte>30</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+64],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E3522</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>64</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+4C],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E3501</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>4C</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+44],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E34F6</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>41</Byte>
+        <Byte>44</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx],eax</Description>
+      <AddressString>ffxiiiimg.exe+19414A</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>FC</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [eax],ecx</Description>
+      <AddressString>ffxiiiimg.exe+809F61</AddressString>
+      <Before>
+        <Byte>45</Byte>
+        <Byte>FC</Byte>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+08],eax</Description>
+      <AddressString>ffxiiiimg.exe+56E2F</AddressString>
+      <Before>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[ecx+08]</Description>
+      <AddressString>ffxiiiimg.exe+5A983</AddressString>
+      <Before>
+        <Byte>40</Byte>
+        <Byte>0C</Byte>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>49</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>0C</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[edx+08]</Description>
+      <AddressString>ffxiiiimg.exe+56DAC</AddressString>
+      <Before>
+        <Byte>0C</Byte>
+        <Byte>8B</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>68</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4A</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>68</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[ecx+08]</Description>
+      <AddressString>ffxiiiimg.exe+558A5</AddressString>
+      <Before>
+        <Byte>0C</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>49</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>18</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov ecx,[edx+08]</Description>
+      <AddressString>ffxiiiimg.exe+1A59EB</AddressString>
+      <Before>
+        <Byte>4A</Byte>
+        <Byte>04</Byte>
+        <Byte>89</Byte>
+        <Byte>48</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>4A</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>52</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [eax+08],ecx</Description>
+      <AddressString>ffxiiiimg.exe+3C1A17</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>4A</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>48</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>52</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [eax+0C],edx</Description>
+      <AddressString>ffxiiiimg.exe+3C1A1D</AddressString>
+      <Before>
+        <Byte>E4</Byte>
+        <Byte>E5</Byte>
+        <Byte>99</Byte>
+        <Byte>47</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>EC</Byte>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [ecx+04],edx</Description>
+      <AddressString>ffxiiiimg.exe+3C19E9</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>11</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>51</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+        <Byte>89</Byte>
+        <Byte>51</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+0000025C],ecx</Description>
+      <AddressString>ffxiiiimg.exe+2AB04B</AddressString>
+      <Before>
+        <Byte>C1</Byte>
+        <Byte>01</Byte>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>FC</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>8A</Byte>
+        <Byte>5C</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+        <Byte>5D</Byte>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call edx</Description>
+      <AddressString>ffxiiiimg.exe+4D8798</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D2</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call edx</Description>
+      <AddressString>ffxiiiimg.exe+4D87C3</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D2</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>DE</Byte>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of jmp ffxiiiimg.exe+4D87A5</Description>
+      <AddressString>ffxiiiimg.exe+4D87C5</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>DE</Byte>
+      </Actual>
+      <After>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+60B8FF</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+        <Byte>5D</Byte>
+        <Byte>C2</Byte>
+        <Byte>04</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+AE6BAE</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>D4</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>D4</Byte>
+        <Byte>0F</Byte>
+        <Byte>BF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+4D87D4</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>34</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+        <Byte>5D</Byte>
+        <Byte>C2</Byte>
+        <Byte>04</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call ffxiiiimg.exe+4F9210</Description>
+      <AddressString>ffxiiiimg.exe+60B8E3</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>51</Byte>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>28</Byte>
+        <Byte>D9</Byte>
+        <Byte>EE</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>08</Byte>
+        <Byte>52</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+4E3B62</AddressString>
+      <Before>
+        <Byte>82</Byte>
+        <Byte>FC</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+        <Byte>E8</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movss [ecx+00000134],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E329E</AddressString>
+      <Before>
+        <Byte>4E</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>81</Byte>
+        <Byte>34</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C2</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movq [ecx+00000114],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E3596</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>81</Byte>
+        <Byte>14</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movq [ecx+00000124],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E35C6</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>81</Byte>
+        <Byte>24</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movss [eax+00000254],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+2B7F80</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>6C</Byte>
+        <Byte>05</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>80</Byte>
+        <Byte>54</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>rotMemory</Name>
+      <Address>44A70000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

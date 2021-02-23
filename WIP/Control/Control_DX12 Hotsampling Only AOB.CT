@@ -2,11 +2,18 @@
 <CheatTable CheatEngineTableVersion="34">
   <CheatEntries>
     <CheatEntry>
-      <ID>3</ID>
-      <Description>"write render res 2"</Description>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// By Otis_Inf and Hattiwatti
+      <ID>13</ID>
+      <Description>"Hotsampling"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"write render res 2"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
 // See for info about locations/data:
 // https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
@@ -87,13 +94,13 @@ dealloc(newmem)
 "coregame_rmdwin10_f.dll"+AC56E: CC                          -  int 3 
 }
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>2</ID>
-      <Description>"lost focus pause removal"</Description>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// By Otis_Inf and Hattiwatti
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"lost focus pause removal"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
 // See for info about locations/data:
 // https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
@@ -171,13 +178,13 @@ dealloc(newmem)
 "coregame_rmdwin10_f.dll"+AC298: 75 78                          -  jne coregame_rmdwin10_f.dll+AC312
 }
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>4</ID>
-      <Description>"allow any res"</Description>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// By Otis_Inf and Hattiwatti
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"allow any res"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
 // See for info about locations/data:
 // https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
@@ -208,13 +215,13 @@ mov r8d, 00000001
 
 unregistersymbol(AnyRes)
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>5</ID>
-      <Description>"Autoadjust AR"</Description>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// By Otis_Inf and Hattiwatti
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"Autoadjust AR"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
 // See for info about locations/data:
 // https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
@@ -241,16 +248,17 @@ db e9 C7 00 00 00 90
 AutoAR:
 readmem(hookreturnD,6)
 //db 0F 85 BD 00 00 00
-
+unregistersymbol(hookreturnD)
 unregistersymbol(AutoAR)
+dealloc(hookreturnD)
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>6</ID>
-      <Description>"disable show window call"</Description>
-      <LastState Activated="1"/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>// By Otis_Inf and Hattiwatti
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"disable show window call"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// By Otis_Inf and Hattiwatti
 // Updated by ghostinthecamera
 // See for info about locations/data:
 // https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
@@ -280,8 +288,12 @@ DisableSW:
 readmem(hookreturnE,6)
 //db FF 15 AC 38 50 00
 
+dealloc(hookreturnE)
+unregistersymbol(hookreturnE)
 unregistersymbol(DisableSW)
 </AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>7</ID>
@@ -313,6 +325,363 @@ dd 0
 [Control_DX12.exe+12A0748]+68:
 dd 0
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>106</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"Debug Cam"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// By Otis_Inf and Hattiwatti
+// See for info about locations/data:
+// https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
+//////////////////////////////////////////////////////////
+// FRAMED Screenshot Community. https://framedsc.github.io
+//////////////////////////////////////////////////////////
+[ENABLE]
+alloc(enableFreeCamThread,248)
+aobscanmodule(interceptFreeCamFoV,Control_DX12.exe,0F 10 43 70 0F 58 C3) // should be unique
+//aobscanmodule(interceptCurrentCamByte,Control_DX12.exe,48 8B x x E8 x x x x 48 8D 15 x x x x 48 8B 0D x x x x)
+//registersymbol(interceptCurrentCamByte)
+alloc(newmem,$1000,"Control_DX12.exe"+3163BC)
+label(code)
+label(return)
+registersymbol(interceptFreeCamFoV)
+label(freeCameraStructAddress)
+registersymbol(freeCameraStructAddress)
+label(originalCameraCoords)
+registersymbol(originalCameraCoords)
+alloc(rotSpeed,4)
+registersymbol(rotSpeed)
+
+// Create a thread to call a couple of functions, then stop
+createthread(enableFreeCamThread)
+
+enableFreeCamThread:
+  // first pull the current camera state from the cache. Using code from coregame_rmdwin10_f.coregame::CameraComponentState::getPosition
+  mov rsi, Control_DX12.exe
+  mov rcx, [rsi+012A06D8]                // hardcoded static address. See notes.
+  mov rbx,[rcx+28]
+  mov rdi,rdx
+  call coregame_rmdwin10_f.coregame::TransformComponentState::getTypeIDStatic
+  // then obtain the camera object address
+  mov edx,eax
+  mov rcx,rbx
+  call rl_rmdwin10_f.r::GameObjectState::getComponentByTypeId
+  // then read the coords and cache them. Coords are at offset D0 (see getPosition)
+  mov rcx, originalCameraCoords
+  mov ebx, [rax+D0]
+  mov [rcx], ebx
+  mov ebx, [rax+D4]
+  mov [rcx+4], ebx
+  mov ebx, [rax+D8]
+  mov [rcx+8], ebx
+
+  // enable freecam
+  mov eax, 1
+  mov [Control_DX12.exe+12A060C], eax
+  call input_rmdwin10_f.input::InputManager::getInstance
+  mov rcx, rax
+  mov dl, 1
+  call input_rmdwin10_f.input::InputManager::setFreeCameraWithoutPlayerControls
+  // we'll leave the cache write to the interception of the FoV below.
+  ret
+
+// this is memory used to intercept the freecam fov.
+newmem:
+code:
+  mov [freeCameraStructAddress], rbx
+
+  pop rcx,
+  mov edx,[rotSpeed]
+  mov [rbx+8C],edx
+  push rcx
+
+  movups xmm0,[rbx+70]
+  addps xmm0,xmm3
+  movups [rbx+70],xmm0
+  cmp byte [coordsReset], 1
+  je done
+  // write back the cached coords.
+  push rcx
+  push edx
+  mov rcx, originalCameraCoords
+  mov edx, [rcx]
+  mov [rbx+70], edx
+  mov edx, [rcx+4]
+  mov [rbx+74], edx
+  mov edx, [rcx+8]
+  mov [rbx+78], rdx
+  pop edx
+  // set flag
+  mov cl, 01
+  mov [coordsReset], cl
+  pop rcx
+done:
+  jmp return
+
+freeCameraStructAddress:
+dq 0
+
+originalCameraCoords:
+dd 0 0 0
+
+coordsReset:
+db 0
+
+rotSpeed:
+dd (float)0.01
+
+interceptFreeCamFoV:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+
+// hide outlines. Contributed by Pigeon
+Control_DX12.exe+1BC76A:
+ db E9 92 00 00 00 90         // jmp instead of je
+
+[DISABLE]
+alloc(disableFreeCamThread,248)
+createthread(disableFreeCamThread)
+
+disableFreeCamThread:
+  xor eax, eax
+  mov [Control_DX12.exe+12A060C], eax
+  call input_rmdwin10_f.input::InputManager::getInstance
+  mov rcx, rax
+  mov dl, 0
+  call input_rmdwin10_f.input::InputManager::setFreeCameraWithoutPlayerControls
+  ret
+
+interceptFreeCamFoV:
+  movups xmm0,[rbx+70]
+  addps xmm0,xmm3
+  movups [rbx+70],xmm0
+
+Control_DX12.exe+1BC76A:
+  db 0F 84 91 00 00 00
+
+unregistersymbol(freeCameraStructAddress)
+unregistersymbol(interceptFreeCamFoV)
+unregistersymbol(originalCameraCoords)
+dealloc(newmem)
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>45</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Freecam FoV (NUMPAD-/+ Speed: +CTRL. Reset: CRTL-ALT-NUMPAD)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>freeCameraStructAddress</Address>
+          <Offsets>
+            <Offset>-20</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>107</Key>
+              </Keys>
+              <Value>0.05</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>109</Key>
+              </Keys>
+              <Value>0.05</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>18</Key>
+                <Key>109</Key>
+              </Keys>
+              <Value>1.1344</Value>
+              <ID>2</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Rotation speed (F9: 0.04, for mouse. CTRL-F9: 0.7, for controller)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>freeCameraStructAddress</Address>
+          <Offsets>
+            <Offset>8C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"No description"</Description>
+          <LastState Value="0.009999999776" RealAddress="7FF6362510F8"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>rotSpeed</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>187</Key>
+              </Keys>
+              <Value>0.005</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>189</Key>
+              </Keys>
+              <Value>0.005</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"HUD Toggle"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// By Otis_Inf and Hattiwatti
+// See for info about locations/data:
+// https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
+//////////////////////////////////////////////////////////
+// FRAMED Screenshot Community. https://framedsc.github.io
+//////////////////////////////////////////////////////////
+[ENABLE]
+CoherentGTCore.WebCore::GraphicsLayer::setOpacity:
+  // set opacity for all objects in any UI to 0. This method is called on many objects so this is
+  // the easiest way without enumerating them all
+  xorps xmm1,xmm1
+  movss [rcx+00000168],xmm1
+  ret
+
+
+[DISABLE]
+CoherentGTCore.WebCore::GraphicsLayer::setOpacity:
+  // resume as normal
+  movss [rcx+00000168],xmm1
+  ret
+  int 3
+  int 3
+  int 3
+
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>46</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"Gameplay FOV"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// By Otis_Inf and Hattiwatti
+// See for info about locations/data:
+// https://github.com/FransBouma/InjectableGenericCameraSystem/blob/master/Notes/Control.txt
+//////////////////////////////////////////////////////////
+// FRAMED Screenshot Community. https://framedsc.github.io
+//////////////////////////////////////////////////////////
+[ENABLE]
+aobscanmodule(FoVInterception,Control_DX12.exe,F3 0F 59 43 10) // should be unique
+alloc(newmem,$1000,"Control_DX12.exe"+1FA3B2)
+
+label(code)
+label(return)
+registersymbol(FoVInterception)
+label(fovAddress)
+registerSymbol(fovAddress)
+
+newmem:
+
+code:
+  mulss xmm0,[rbx+10]
+  mov [fovAddress], rbx
+  jmp return
+
+fovAddress:
+dq 0
+
+FoVInterception:
+  jmp newmem
+return:
+
+
+[DISABLE]
+
+FoVInterception:
+  db F3 0F 59 43 10
+
+unregistersymbol(FoVInterception)
+dealloc(newmem)
+
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"Gameplay Fov"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>fovAddress</Address>
+          <Offsets>
+            <Offset>10</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>36</Key>
+              </Keys>
+              <Value>1.5</Value>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"DoF"</Description>
+      <LastState Value="1" RealAddress="7FFBEECA213E"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Byte</VariableType>
+      <Address>rend::RenderOptions::RenderDepthOfField</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>

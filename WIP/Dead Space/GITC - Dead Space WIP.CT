@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="31">
+<CheatTable CheatEngineTableVersion="34">
   <CheatEntries>
+    <CheatEntry>
+      <ID>65</ID>
+      <Description>"by GHOSTINTHECAMERA - WIP"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>0000FF</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>66</ID>
+      <Description>"www.ghostinthecamera.co.uk"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>0000FF</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>67</ID>
+      <Description>""</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
     <CheatEntry>
       <ID>64</ID>
       <Description>"Timestop"</Description>
@@ -38,7 +58,6 @@ dd (float)1.00
         <CheatEntry>
           <ID>48</ID>
           <Description>"Timescale Value"</Description>
-          <LastState Value="1" RealAddress="00D4D3CC"/>
           <VariableType>Float</VariableType>
           <Address>00D4D3CC</Address>
         </CheatEntry>
@@ -356,7 +375,6 @@ dealloc(newmem)
       <DropDownList DisplayValueAsItem="1">1.778:16:9
 2.333:21:9
 </DropDownList>
-      <LastState Value="1.798742175" RealAddress="00F446A0"/>
       <VariableType>Float</VariableType>
       <Address>00F446A0</Address>
     </CheatEntry>
