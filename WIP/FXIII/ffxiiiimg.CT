@@ -70,19 +70,10 @@ dealloc(newmem)
 "ffxiiiimg.exe"+A8A67D: 8B 82 98 7D 66 02              -  mov eax,[edx+ffxiiiimg.exe+2267D98]
 }
 </AssemblerScript>
-      <Hotkeys>
-        <Hotkey>
-          <Action>Toggle Activation</Action>
-          <Keys>
-            <Key>96</Key>
-          </Keys>
-          <ID>0</ID>
-        </Hotkey>
-      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>55</ID>
-      <Description>"Enable FIRST! (HOME to enable, END to disable) Can Leave Enabled"</Description>
+      <Description>"Enable FIRST! (HOME to enable, END to disable)"</Description>
       <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{$lua}
@@ -306,7 +297,7 @@ function timer_tick(timer)
          local initialized = readInteger(rotMemory+76)
          if initialized == 0 then
             local camPtr = readPointer(rotMemory+80)
-            if camPtr ~= 0 then
+            if initialized == 0 then
                initCamera(camPtr, rotMemory)
                writeInteger(rotMemory+76, 1)
             end
@@ -361,27 +352,10 @@ deinit()
 {$asm}
 dealloc(rotMemory)
 </AssemblerScript>
-      <Hotkeys>
-        <Hotkey>
-          <Action>Activate</Action>
-          <Keys>
-            <Key>36</Key>
-          </Keys>
-          <ID>0</ID>
-        </Hotkey>
-        <Hotkey>
-          <Action>Deactivate</Action>
-          <Keys>
-            <Key>35</Key>
-          </Keys>
-          <ID>1</ID>
-        </Hotkey>
-      </Hotkeys>
       <CheatEntries>
         <CheatEntry>
           <ID>7229</ID>
           <Description>"Pitch"</Description>
-          <LastState Value="0" RealAddress="047C0204"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+4</Address>
           <Hotkeys>
@@ -422,7 +396,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7230</ID>
           <Description>"Yaw"</Description>
-          <LastState Value="0" RealAddress="047C0200"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory</Address>
           <Hotkeys>
@@ -463,7 +436,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7231</ID>
           <Description>"Roll"</Description>
-          <LastState Value="0" RealAddress="047C0208"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+8</Address>
           <Hotkeys>
@@ -512,7 +484,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>119</ID>
           <Description>"X"</Description>
-          <LastState Value="0" RealAddress="047C0234"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+34</Address>
           <Hotkeys>
@@ -589,7 +560,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>121</ID>
           <Description>"Y"</Description>
-          <LastState Value="0" RealAddress="047C0238"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+38</Address>
           <Hotkeys>
@@ -666,7 +636,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>120</ID>
           <Description>"Z"</Description>
-          <LastState Value="0" RealAddress="047C023C"/>
           <VariableType>Float</VariableType>
           <Address>rotMemory+3C</Address>
           <Hotkeys>
@@ -743,7 +712,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7235</ID>
           <Description>"r11"</Description>
-          <LastState Value="0" RealAddress="047C0210"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+10</Address>
@@ -751,7 +719,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7236</ID>
           <Description>"r12"</Description>
-          <LastState Value="0" RealAddress="047C0214"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+14</Address>
@@ -759,7 +726,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7237</ID>
           <Description>"r13"</Description>
-          <LastState Value="0" RealAddress="047C0218"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+18</Address>
@@ -767,7 +733,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7238</ID>
           <Description>"r21"</Description>
-          <LastState Value="0" RealAddress="047C021C"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+1C</Address>
@@ -775,7 +740,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7239</ID>
           <Description>"r22"</Description>
-          <LastState Value="0" RealAddress="047C0220"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+20</Address>
@@ -783,7 +747,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7240</ID>
           <Description>"r23"</Description>
-          <LastState Value="0" RealAddress="047C0224"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+24</Address>
@@ -791,7 +754,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7241</ID>
           <Description>"r31"</Description>
-          <LastState Value="0" RealAddress="047C0228"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+28</Address>
@@ -799,7 +761,6 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7242</ID>
           <Description>"r32"</Description>
-          <LastState Value="0" RealAddress="047C022C"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+2C</Address>
@@ -807,15 +768,14 @@ dealloc(rotMemory)
         <CheatEntry>
           <ID>7243</ID>
           <Description>"r33"</Description>
-          <LastState Value="0" RealAddress="047C0230"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMemory+30</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>7249</ID>
-          <Description>"No description"</Description>
-          <LastState Value="0" RealAddress="047C024C"/>
+          <Description>"Initialized Var"</Description>
+          <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>rotMemory+4C</Address>
@@ -828,6 +788,61 @@ dealloc(rotMemory)
       <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
+        <CheatEntry>
+          <ID>7254</ID>
+          <Description>"Fov Disable"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(_fov,ffxiiiimg.exe,48 89 45 F0 8B 4D 08 8B 55 F0 8B 01 89 02 8B 41 04) // should be unique
+registersymbol(_fov)
+
+_fov+0C:
+db 90 90
+
+_fov+39:
+db 90 90 90
+
+
+[DISABLE]
+_fov+0C:
+db 89 02
+
+_fov+39:
+db 89 51 04
+
+unregistersymbol(_fov)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+A7C76A
+
+ffxiiiimg.exe+A7C750: 55        - push ebp
+ffxiiiimg.exe+A7C751: 8B EC     - mov ebp,esp
+ffxiiiimg.exe+A7C753: 83 EC 14  - sub esp,14
+ffxiiiimg.exe+A7C756: 89 4D EC  - mov [ebp-14],ecx
+ffxiiiimg.exe+A7C759: 8B 45 EC  - mov eax,[ebp-14]
+ffxiiiimg.exe+A7C75C: 83 C0 48  - add eax,48
+ffxiiiimg.exe+A7C75F: 89 45 F0  - mov [ebp-10],eax
+ffxiiiimg.exe+A7C762: 8B 4D 08  - mov ecx,[ebp+08]
+ffxiiiimg.exe+A7C765: 8B 55 F0  - mov edx,[ebp-10]
+ffxiiiimg.exe+A7C768: 8B 01     - mov eax,[ecx]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+A7C76A: 89 02     - mov [edx],eax
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+A7C76C: 8B 41 04  - mov eax,[ecx+04]
+ffxiiiimg.exe+A7C76F: 89 42 04  - mov [edx+04],eax
+ffxiiiimg.exe+A7C772: 8B 41 08  - mov eax,[ecx+08]
+ffxiiiimg.exe+A7C775: 89 42 08  - mov [edx+08],eax
+ffxiiiimg.exe+A7C778: 8B 49 0C  - mov ecx,[ecx+0C]
+ffxiiiimg.exe+A7C77B: 89 4A 0C  - mov [edx+0C],ecx
+ffxiiiimg.exe+A7C77E: 8B 55 F0  - mov edx,[ebp-10]
+ffxiiiimg.exe+A7C781: 83 C2 10  - add edx,10
+ffxiiiimg.exe+A7C784: 89 55 FC  - mov [ebp-04],edx
+ffxiiiimg.exe+A7C787: 8B 45 08  - mov eax,[ebp+08]
+}
+</AssemblerScript>
+        </CheatEntry>
         <CheatEntry>
           <ID>7244</ID>
           <Description>"Camera - enable script to use"</Description>
@@ -851,12 +866,52 @@ globalalloc(rotMemory, 0x100, "ffxiiiimg.exe"+A7C72D)
 alloc(newmem,$1000)
 registersymbol(rotationMatrix)
 registersymbol(rotateA)
+
+registersymbol(hfov)
+registersymbol(fovscalar)
+
+
+alloc(OGhfov,4) // Allocate memory (4 bytes) for the h FoV value
+registersymbol(OGhfov) // Register symbol so we can reference in CE
+
+alloc(OGvfov,4) // Allocate memory (4 bytes) for the h FoV value
+registersymbol(OGvfov) // Register symbol so we can reference in CE
+
 //label(skip)
+
+//label(return)
+rotMemory+4C:
+db 00 00 00 00
 
 rotMemory+4C:
 db 00 00 00 00
 
-//label(return)
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
+
+rotMemory+4C:
+db 00 00 00 00
 
 newmem:
   //push eax
@@ -964,8 +1019,17 @@ newmem:
 
   mov ecx,[ecx+0C]
   mov [edx+0C],ecx
-  pop eax
 
+
+  mov [hfov], edx
+
+  movss xmm4,[fovscalar]
+  movss xmm5,[edx+10]
+  mulss xmm4,xmm5
+  movss [edx+24],xmm4
+
+
+  pop eax
   jmp rotationMatrix+8E
 
 
@@ -974,19 +1038,43 @@ newmem:
 rotateA:
 dq 0
 
+hfov:
+dq 0
+
+OGhfov:
+dq (float)1.63
+
+OGvfov:
+dq (float)2.90
+
+fovscalar:
+dd (float)1.779
+
 rotationMatrix:
   jmp newmem
   nop 2
-return:
+//return:
 
 
 [DISABLE]
+rotMemory+4C:
+db 00 00 00 00
 //code from here till the end of the code will be used to disable the cheat
 rotationMatrix:
-  db 8B 01 89 02 8B 41 04
+db 8B 01 89 02 8B 41 04
 
+[hfov]+10:
+readmem(OGhfov,4)
+
+[hfov]+24:
+readmem(OGvfov,4)
+
+unregistersymbol(OGhfov)
+unregistersymbol(OGvfov)
 unregistersymbol(rotationMatrix)
 unregistersymbol(rotateA)
+unregistersymbol(hfov)
+unregistersymbol(fovscalar)
 dealloc(newmem)
 
 {
@@ -1048,9 +1136,213 @@ ffxiiiimg.exe+A7C6C4: 89 55 FC  - mov [ebp-04],edx
                 <Offset>8</Offset>
               </Offsets>
             </CheatEntry>
+            <CheatEntry>
+              <ID>7255</ID>
+              <Description>"hfov"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>hfov</Address>
+              <Offsets>
+                <Offset>10</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>107</Key>
+                  </Keys>
+                  <Value>0.1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>109</Key>
+                  </Keys>
+                  <Value>0.1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7250</ID>
+              <Description>"Cam Address Pointer"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>rotMemory+50</Address>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
       </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7251</ID>
+      <Description>"not this one"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(fuckthisHUDlikeabitch,ffxiiiimg.exe,FF D2 EB DE 6A 00) // should be unique
+registersymbol(fuckthisHUDlikeabitch)
+
+fuckthisHUDlikeabitch:
+db 90 90 90 90
+
+
+
+[DISABLE]
+fuckthisHUDlikeabitch:
+  db FF D2 EB DE
+
+unregistersymbol(fuckthisHUDlikeabitch)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+4D87C3
+
+ffxiiiimg.exe+4D87A8: 8B 42 14     - mov eax,[edx+14]
+ffxiiiimg.exe+4D87AB: 89 45 FC     - mov [ebp-04],eax
+ffxiiiimg.exe+4D87AE: 83 7D FC 00  - cmp dword ptr [ebp-04],00
+ffxiiiimg.exe+4D87B2: 74 13        - je ffxiiiimg.exe+4D87C7
+ffxiiiimg.exe+4D87B4: 8B 4D 08     - mov ecx,[ebp+08]
+ffxiiiimg.exe+4D87B7: 51           - push ecx
+ffxiiiimg.exe+4D87B8: 8B 55 FC     - mov edx,[ebp-04]
+ffxiiiimg.exe+4D87BB: 8B 02        - mov eax,[edx]
+ffxiiiimg.exe+4D87BD: 8B 4D FC     - mov ecx,[ebp-04]
+ffxiiiimg.exe+4D87C0: 8B 50 08     - mov edx,[eax+08]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+4D87C3: FF D2        - call edx
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+4D87C5: EB DE        - jmp ffxiiiimg.exe+4D87A5
+ffxiiiimg.exe+4D87C7: 6A 00        - push 00
+ffxiiiimg.exe+4D87C9: 8B 45 F4     - mov eax,[ebp-0C]
+ffxiiiimg.exe+4D87CC: 8B 10        - mov edx,[eax]
+ffxiiiimg.exe+4D87CE: 8B 4D F4     - mov ecx,[ebp-0C]
+ffxiiiimg.exe+4D87D1: 8B 42 34     - mov eax,[edx+34]
+ffxiiiimg.exe+4D87D4: FF D0        - call eax
+ffxiiiimg.exe+4D87D6: 8B E5        - mov esp,ebp
+ffxiiiimg.exe+4D87D8: 5D           - pop ebp
+ffxiiiimg.exe+4D87D9: C2 04 00     - ret 0004
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7252</ID>
+      <Description>"not this one"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(fuckinglittlehandfucker,ffxiiiimg.exe,FF D0 8B E5 5D C2 04 00 CC CC CC CC 55 8B EC 83 EC 08 89 4D F8 8B 45 F8 8B 4D 08 89 88 C8 00 00 00 8B 55 F8 8B 42 08 89 45 FC EB 09 8B 4D FC 8B 51 14 89 55 FC 83 7D FC 00 74 0E 8B 45 08 50 8B 4D FC E8 C5 FF FF FF EB E3 8B E5) // should be unique
+registersymbol(fuckinglittlehandfucker)
+
+fuckinglittlehandfucker-11:
+db 90 90 90 90
+
+
+fuckinglittlehandfucker:
+db 90 90
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+fuckinglittlehandfucker:
+db FF D0
+
+fuckinglittlehandfucker-11:
+db FF D2 EB DE
+
+unregistersymbol(fuckinglittlehandfucker)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+60B8FF
+
+ffxiiiimg.exe+60B8E3: E8 28 D9 EE FF  - call ffxiiiimg.exe+4F9210
+ffxiiiimg.exe+60B8E8: 8B 55 08        - mov edx,[ebp+08]
+ffxiiiimg.exe+60B8EB: 52              - push edx
+ffxiiiimg.exe+60B8EC: 8B 45 B0        - mov eax,[ebp-50]
+ffxiiiimg.exe+60B8EF: 8B 48 34        - mov ecx,[eax+34]
+ffxiiiimg.exe+60B8F2: 8B 55 B0        - mov edx,[ebp-50]
+ffxiiiimg.exe+60B8F5: 8B 42 34        - mov eax,[edx+34]
+ffxiiiimg.exe+60B8F8: 8B 11           - mov edx,[ecx]
+ffxiiiimg.exe+60B8FA: 8B C8           - mov ecx,eax
+ffxiiiimg.exe+60B8FC: 8B 42 08        - mov eax,[edx+08]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+60B8FF: FF D0           - call eax
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+60B901: 8B E5           - mov esp,ebp
+ffxiiiimg.exe+60B903: 5D              - pop ebp
+ffxiiiimg.exe+60B904: C2 04 00        - ret 0004
+ffxiiiimg.exe+60B907: CC              - int 3 
+ffxiiiimg.exe+60B908: CC              - int 3 
+ffxiiiimg.exe+60B909: CC              - int 3 
+ffxiiiimg.exe+60B90A: CC              - int 3 
+ffxiiiimg.exe+60B90B: CC              - int 3 
+ffxiiiimg.exe+60B90C: CC              - int 3 
+ffxiiiimg.exe+60B90D: CC              - int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7253</ID>
+      <Description>"This is it"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+
+aobscanmodule(pleasebetheHUD,ffxiiiimg.exe,FF D0 8B 4D FC E8 74) // should be unique
+registersymbol(pleasebetheHUD)
+
+pleasebetheHUD:
+db 90 90
+
+
+[DISABLE]
+
+pleasebetheHUD:
+db FF D0
+
+unregistersymbol(pleasebetheHUD)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ffxiiiimg.exe+4E3B62
+
+ffxiiiimg.exe+4E3B44: 83 C4 04           - add esp,04
+ffxiiiimg.exe+4E3B47: 8B 45 E4           - mov eax,[ebp-1C]
+ffxiiiimg.exe+4E3B4A: 8B 48 28           - mov ecx,[eax+28]
+ffxiiiimg.exe+4E3B4D: 51                 - push ecx
+ffxiiiimg.exe+4E3B4E: 8B 55 E4           - mov edx,[ebp-1C]
+ffxiiiimg.exe+4E3B51: 8B 42 24           - mov eax,[edx+24]
+ffxiiiimg.exe+4E3B54: 8B 4D E4           - mov ecx,[ebp-1C]
+ffxiiiimg.exe+4E3B57: 8B 49 24           - mov ecx,[ecx+24]
+ffxiiiimg.exe+4E3B5A: 8B 10              - mov edx,[eax]
+ffxiiiimg.exe+4E3B5C: 8B 82 FC 00 00 00  - mov eax,[edx+000000FC]
+// ---------- INJECTING HERE ----------
+ffxiiiimg.exe+4E3B62: FF D0              - call eax
+// ---------- DONE INJECTING  ----------
+ffxiiiimg.exe+4E3B64: 8B 4D FC           - mov ecx,[ebp-04]
+ffxiiiimg.exe+4E3B67: E8 74 00 00 00     - call ffxiiiimg.exe+4E3BE0
+ffxiiiimg.exe+4E3B6C: 8B E5              - mov esp,ebp
+ffxiiiimg.exe+4E3B6E: 5D                 - pop ebp
+ffxiiiimg.exe+4E3B6F: C2 04 00           - ret 0004
+ffxiiiimg.exe+4E3B72: CC                 - int 3 
+ffxiiiimg.exe+4E3B73: CC                 - int 3 
+ffxiiiimg.exe+4E3B74: CC                 - int 3 
+ffxiiiimg.exe+4E3B75: CC                 - int 3 
+ffxiiiimg.exe+4E3B76: CC                 - int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7256</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>010CB154</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7257</ID>
+      <Description>"No description"</Description>
+      <VariableType>Float</VariableType>
+      <Address>47804E70</Address>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
@@ -3137,6 +3429,302 @@ ffxiiiimg.exe+A7C6C4: 89 55 FC  - mov [ebp-04],edx
         <Byte>CC</Byte>
       </After>
     </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call edx</Description>
+      <AddressString>ffxiiiimg.exe+4D8798</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D2</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call edx</Description>
+      <AddressString>ffxiiiimg.exe+4D87C3</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D2</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>DE</Byte>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jmp ffxiiiimg.exe+4D87A5</Description>
+      <AddressString>ffxiiiimg.exe+4D87C5</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>EB</Byte>
+        <Byte>DE</Byte>
+      </Actual>
+      <After>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>F4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+60B8FF</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+        <Byte>5D</Byte>
+        <Byte>C2</Byte>
+        <Byte>04</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+AE6BAE</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>D4</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>D4</Byte>
+        <Byte>0F</Byte>
+        <Byte>BF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+4D87D4</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>F4</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>34</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>E5</Byte>
+        <Byte>5D</Byte>
+        <Byte>C2</Byte>
+        <Byte>04</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call ffxiiiimg.exe+4F9210</Description>
+      <AddressString>ffxiiiimg.exe+60B8E3</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>51</Byte>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>28</Byte>
+        <Byte>D9</Byte>
+        <Byte>EE</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>08</Byte>
+        <Byte>52</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call eax</Description>
+      <AddressString>ffxiiiimg.exe+4E3B62</AddressString>
+      <Before>
+        <Byte>82</Byte>
+        <Byte>FC</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D0</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>4D</Byte>
+        <Byte>FC</Byte>
+        <Byte>E8</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [ecx+00000134],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E329E</AddressString>
+      <Before>
+        <Byte>4E</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>81</Byte>
+        <Byte>34</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C2</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+00000114],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E3596</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>81</Byte>
+        <Byte>14</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movq [ecx+00000124],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+8E35C6</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>D6</Byte>
+        <Byte>81</Byte>
+        <Byte>24</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>7E</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [eax+00000254],xmm0</Description>
+      <AddressString>ffxiiiimg.exe+2B7F80</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>6C</Byte>
+        <Byte>05</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>80</Byte>
+        <Byte>54</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>8C</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
   </CheatCodes>
-  <UserdefinedSymbols/>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>rotMemory</Name>
+      <Address>44A70000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
 </CheatTable>
