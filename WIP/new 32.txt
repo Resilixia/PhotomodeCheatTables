@@ -1,0 +1,55 @@
+ffxiii-2:
+
+potential timestop (no it kills everything so no camera):
+ffxiii2img.exe+8D650C - 52                    - push edx
+ffxiii2img.exe+8D650D - 56                    - push esi
+ffxiii2img.exe+8D650E - 6A 00                 - push 00 { 0 }
+ffxiii2img.exe+8D6510 - FF D1                 - call ecx				<<nop this
+ffxiii2img.exe+8D6512 - 8B 7C 24 20           - mov edi,[esp+20]
+ffxiii2img.exe+8D6516 - 83 C4 0C              - add esp,0C { 12 }
+ffxiii2img.exe+8D6519 - E9 52FFFFFF           - jmp ffxiii2img.exe+8D6470
+ffxiii2img.exe+8D651E - 33 C9                 - xor ecx,ecx
+ffxiii2img.exe+8D6520 - 87 4D 00              - xchg [ebp+00],ecx
+ffxiii2img.exe+8D6523 - 83 FB FF              - cmp ebx,-01 { 255 }
+
+camera:
+ffxiii2img.exe+6E83C0 - F3 0F7E 44 24 04      - movq xmm0,[esp+04]
+ffxiii2img.exe+6E83C6 - 66 0FD6 41 04         - movq [ecx+04],xmm0	//write first pair of floats of first row of matrix
+ffxiii2img.exe+6E83CB - F3 0F7E 44 24 0C      - movq xmm0,[esp+0C]
+ffxiii2img.exe+6E83D1 - 66 0FD6 41 0C         - movq [ecx+0C],xmm0	//wrie second pair of floats of first row
+ffxiii2img.exe+6E83D6 - F3 0F7E 44 24 14      - movq xmm0,[esp+14]
+ffxiii2img.exe+6E83DC - 66 0FD6 41 14         - movq [ecx+14],xmm0	//write first pair of floats for second row of matrix
+ffxiii2img.exe+6E83E1 - F3 0F7E 44 24 1C      - movq xmm0,[esp+1C]
+ffxiii2img.exe+6E83E7 - 66 0FD6 41 1C         - movq [ecx+1C],xmm0	//write second pair of floats for second row 
+ffxiii2img.exe+6E83EC - F3 0F7E 44 24 24      - movq xmm0,[esp+24]
+ffxiii2img.exe+6E83F2 - 66 0FD6 41 24         - movq [ecx+24],xmm0	//write first pair of floats for third row of matrix
+ffxiii2img.exe+6E83F7 - F3 0F7E 44 24 2C      - movq xmm0,[esp+2C]
+ffxiii2img.exe+6E83FD - 66 0FD6 41 2C         - movq [ecx+2C],xmm0	//write second pair of floats for third row of matrix
+ffxiii2img.exe+6E8402 - F3 0F7E 44 24 34      - movq xmm0,[esp+34]
+ffxiii2img.exe+6E8408 - 66 0FD6 41 34         - movq [ecx+34],xmm0	//write X Y coords
+ffxiii2img.exe+6E840D - F3 0F7E 44 24 3C      - movq xmm0,[esp+3C]
+ffxiii2img.exe+6E8413 - B8 00100000           - mov eax,00001000 { 4096 }
+ffxiii2img.exe+6E8418 - 66 0FD6 41 3C         - movq [ecx+3C],xmm0  // Write Z coords
+ffxiii2img.exe+6E841D - 66 09 81 54010000     - or [ecx+00000154],ax
+ffxiii2img.exe+6E8424 - C2 4000               - ret 0040 { 64 }
+
+fov:
+ffxiii2img.exe+6E8430 - F3 0F7E 44 24 04      - movq xmm0,[esp+04]
+ffxiii2img.exe+6E8436 - 66 0FD6 41 44         - movq [ecx+44],xmm0		//vertical fov
+ffxiii2img.exe+6E843B - F3 0F7E 44 24 0C      - movq xmm0,[esp+0C]
+ffxiii2img.exe+6E8441 - 66 0FD6 41 4C         - movq [ecx+4C],xmm0
+ffxiii2img.exe+6E8446 - F3 0F7E 44 24 14      - movq xmm0,[esp+14]
+ffxiii2img.exe+6E844C - 66 0FD6 41 54         - movq [ecx+54],xmm0		//horiztonal fov
+ffxiii2img.exe+6E8451 - F3 0F7E 44 24 1C      - movq xmm0,[esp+1C]
+ffxiii2img.exe+6E8457 - 66 0FD6 41 5C         - movq [ecx+5C],xmm0
+ffxiii2img.exe+6E845C - F3 0F7E 44 24 24      - movq xmm0,[esp+24]
+ffxiii2img.exe+6E8462 - 66 0FD6 41 64         - movq [ecx+64],xmm0
+ffxiii2img.exe+6E8467 - F3 0F7E 44 24 2C      - movq xmm0,[esp+2C]
+ffxiii2img.exe+6E846D - 66 0FD6 41 6C         - movq [ecx+6C],xmm0
+ffxiii2img.exe+6E8472 - F3 0F7E 44 24 34      - movq xmm0,[esp+34]
+ffxiii2img.exe+6E8478 - 66 0FD6 41 74         - movq [ecx+74],xmm0
+ffxiii2img.exe+6E847D - F3 0F7E 44 24 3C      - movq xmm0,[esp+3C]
+ffxiii2img.exe+6E8483 - B8 00200000           - mov eax,00002000 { 8192 }
+ffxiii2img.exe+6E8488 - 66 0FD6 41 7C         - movq [ecx+7C],xmm0
+ffxiii2img.exe+6E848D - 66 09 81 54010000     - or [ecx+00000154],ax
+ffxiii2img.exe+6E8494 - C2 4000               - ret 0040 { 64 }
