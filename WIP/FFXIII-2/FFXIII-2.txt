@@ -1,4 +1,22 @@
 ffxiii-2:
+COUNTER READ:
+ffxiii2img.exe+4ECACF - C7 41 08 01000000     - mov [ecx+08],00000001 { 1 }
+ffxiii2img.exe+4ECAD6 - F3 0F11 41 48         - movss [ecx+48],xmm0
+ffxiii2img.exe+4ECADB - C2 0800               - ret 0008 { 8 }
+ffxiii2img.exe+4ECADE - CC                    - int 3 
+ffxiii2img.exe+4ECADF - CC                    - int 3 
+ffxiii2img.exe+4ECAE0 - 83 79 08 01           - cmp dword ptr [ecx+08],01 { 1 }
+ffxiii2img.exe+4ECAE4 - F3 0F10 64 24 04      - movss xmm4,[esp+04]
+ffxiii2img.exe+4ECAEA - F3 0F10 0D C4D0D202   - movss xmm1,[ffxiii2img.exe+1EDD0C4] { (1.00) }
+ffxiii2img.exe+4ECAF2 - 0F28 C4               - movaps xmm0,xmm4
+ffxiii2img.exe+4ECAF5 - F3 0F59 05 805C7A01   - mulss xmm0,[ffxiii2img.exe+955C80] { (1000.00) }
+ffxiii2img.exe+4ECAFD - F3 0F58 41 38         - addss xmm0,[ecx+38]
+ffxiii2img.exe+4ECB02 - F3 0F11 41 38         - movss [ecx+38],xmm0		<<< write counter
+ffxiii2img.exe+4ECB07 - 75 56                 - jne ffxiii2img.exe+4ECB5F
+ffxiii2img.exe+4ECB09 - F3 0F10 59 3C         - movss xmm3,[ecx+3C]
+ffxiii2img.exe+4ECB0E - 0F2F C3               - comiss xmm0,xmm3
+ffxiii2img.exe+4ECB11 - 72 0F                 - jb ffxiii2img.exe+4ECB22
+
 
 potential timestop (no it kills everything so no camera):
 ffxiii2img.exe+8D650C - 52                    - push edx

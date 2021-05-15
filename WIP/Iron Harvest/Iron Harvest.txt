@@ -1,0 +1,105 @@
+Iron harvest:
+quaternion:
+UnityPlayer.dll+BF559 - 66 0F70 C1 4E         - pshufd xmm0,xmm14E { 78 }
+UnityPlayer.dll+BF55E - 0F58 C1               - addps xmm0,xmm1
+UnityPlayer.dll+BF561 - 0F51 C8               - sqrtps xmm1,xmm0
+UnityPlayer.dll+BF564 - 0FC2 D8 01            - cmpps xmm3,xmm0,01 { 1 }
+UnityPlayer.dll+BF568 - 0F5E E1               - divps xmm4,xmm1
+UnityPlayer.dll+BF56B - 66 0F72 E3  1F        - psrad xmm3,1F { 31 }
+UnityPlayer.dll+BF570 - 0F28 D3               - movaps xmm2,xmm3
+UnityPlayer.dll+BF573 - 0F54 E3               - andps xmm4,xmm3
+UnityPlayer.dll+BF576 - 0F55 15 13233701      - andnps xmm2,[UnityPlayer.dll+1431890] { (0) }
+UnityPlayer.dll+BF57D - 0F56 D4               - orps xmm2,xmm4
+UnityPlayer.dll+BF580 - 0F28 C2               - movaps xmm0,xmm2
+UnityPlayer.dll+BF583 - 41 0FC2 42 10 04      - cmpps xmm0,dqword ptr [r10+10],04 { 4 }
+UnityPlayer.dll+BF589 - 0F50 C0               - movmskps eax,xmm0
+UnityPlayer.dll+BF58C - 41 0F11 52 10         - movups [r10+10],xmm2			<<quaternion write. Also writes to 7 million other things so need to filter
+UnityPlayer.dll+BF591 - 85 C0                 - test eax,eax
+UnityPlayer.dll+BF593 - 0F84 91000000         - je UnityPlayer.dll+BF62A
+UnityPlayer.dll+BF599 - 0F10 09               - movups xmm1,[rcx]
+UnityPlayer.dll+BF59C - 4C 8B 1D 3D2A7401     - mov r11,[UnityPlayer.dll+1801FE0] { (800806487) }
+UnityPlayer.dll+BF5A3 - 48 8B 0D 1E2A7401     - mov rcx,[UnityPlayer.dll+1801FC8] { (0) }
+UnityPlayer.dll+BF5AA - 4D 0B D8              - or r11,r8
+UnityPlayer.dll+BF5AD - 4C 8B 15 242A7401     - mov r10,[UnityPlayer.dll+1801FD8] { (-1346423241) }
+UnityPlayer.dll+BF5B4 - 66 49 0F7E C9         - movq r9,xmm1
+UnityPlayer.dll+BF5B9 - 49 0B CB              - or rcx,r11
+
+coords:
+UnityPlayer.dll+967616 - 0F28 54 24 30         - movaps xmm2,[rsp+30]
+UnityPlayer.dll+96761B - 0F10 0B               - movups xmm1,[rbx]
+UnityPlayer.dll+96761E - 66 0F6F C1            - movdqa xmm0,xmm1
+UnityPlayer.dll+967622 - 66 0F73 D8  08        - psrldq xmm0,08 { 8 }
+UnityPlayer.dll+967627 - 66 0F7E C0            - movd eax,xmm0
+UnityPlayer.dll+96762B - 48 8D 14 40           - lea rdx,[rax+rax*2]
+UnityPlayer.dll+96762F - 66 48 0F7E C8         - movq rax,xmm1
+UnityPlayer.dll+967634 - 48 C1 E2 04           - shl rdx,04 { 4 }
+UnityPlayer.dll+967638 - 48 03 50 18           - add rdx,[rax+18]
+UnityPlayer.dll+96763C - 0F10 02               - movups xmm0,[rdx]
+UnityPlayer.dll+96763F - 0FC2 C2 04            - cmpps xmm0,xmm2,04 { 4 }
+UnityPlayer.dll+967643 - 0F50 C0               - movmskps eax,xmm0
+UnityPlayer.dll+967646 - 0F11 12               - movups [rdx],xmm2		<<write coords. Also writes to million other things need to filter
+UnityPlayer.dll+967649 - A8 07                 - test al,07 { 7 }
+UnityPlayer.dll+96764B - 0F84 8E000000         - je UnityPlayer.dll+9676DF
+UnityPlayer.dll+967651 - 4C 8B 15 80A9E900     - mov r10,[UnityPlayer.dll+1801FD8] { (-1346423241) }
+UnityPlayer.dll+967658 - 66 49 0F7E C9         - movq r9,xmm1
+UnityPlayer.dll+96765D - 48 8B 0D 5CA9E900     - mov rcx,[UnityPlayer.dll+1801FC0] { (0) }
+UnityPlayer.dll+967664 - 66 0F6F C1            - movdqa xmm0,xmm1
+UnityPlayer.dll+967668 - 49 0B CA              - or rcx,r10
+UnityPlayer.dll+96766B - 66 0F73 D8  08        - psrldq xmm0,08 { 8 }
+UnityPlayer.dll+967670 - 66 41 0F7E C0         - movd r8d,xmm0
+UnityPlayer.dll+967675 - 49 8B 41 50           - mov rax,[r9+50]
+UnityPlayer.dll+967679 - 4A 8B 14 C0           - mov rdx,[rax+r8*8]
+UnityPlayer.dll+96767D - 49 8B 41 48           - mov rax,[r9+48]
+UnityPlayer.dll+967681 - 48 23 D1              - and rdx,rcx
+UnityPlayer.dll+967684 - 4A 09 14 C0           - or [rax+r8*8],rdx
+UnityPlayer.dll+967688 - 49 09 51 40           - or [r9+40],rdx
+
+FOV read:
+UnityPlayer.dll+5EC177 - 48 8B 10              - mov rdx,[rax]
+UnityPlayer.dll+5EC17A - FF 92 50010000        - call qword ptr [rdx+00000150]
+UnityPlayer.dll+5EC180 - F3 0F10 8B 5C010000   - movss xmm1,[rbx+0000015C]
+UnityPlayer.dll+5EC188 - 0F2E C8               - ucomiss xmm1,xmm0
+UnityPlayer.dll+5EC18B - 7A 02                 - jp UnityPlayer.dll+5EC18F
+UnityPlayer.dll+5EC18D - 74 08                 - je UnityPlayer.dll+5EC197
+UnityPlayer.dll+5EC18F - F3 0F11 8B 60010000   - movss [rbx+00000160],xmm1
+UnityPlayer.dll+5EC197 - F3 0F11 83 5C010000   - movss [rbx+0000015C],xmm0
+UnityPlayer.dll+5EC19F - 48 83 C4 20           - add rsp,20 { 32 }
+UnityPlayer.dll+5EC1A3 - 5B                    - pop rbx
+UnityPlayer.dll+5EC1A4 - C3                    - ret 
+UnityPlayer.dll+5EC1A5 - F3 0F10 83 5C010000   - movss xmm0,[rbx+0000015C]	<<reads FoV
+UnityPlayer.dll+5EC1AD - 48 83 C4 20           - add rsp,20 { 32 }
+UnityPlayer.dll+5EC1B1 - 5B                    - pop rbx
+UnityPlayer.dll+5EC1B2 - C3                    - ret 
+UnityPlayer.dll+5EC1B3 - CC                    - int 3 
+UnityPlayer.dll+5EC1B4 - CC                    - int 3 
+UnityPlayer.dll+5EC1B5 - CC                    - int 3 
+UnityPlayer.dll+5EC1B6 - CC                    - int 3 
+
+UnityPlayer.dll+5F5F47 - 0F28 B4 24 A0000000   - movaps xmm6,[rsp+000000A0]
+UnityPlayer.dll+5F5F4F - 48 81 C4 B0000000     - add rsp,000000B0 { 176 }
+UnityPlayer.dll+5F5F56 - 5B                    - pop rbx
+UnityPlayer.dll+5F5F57 - C3                    - ret 
+UnityPlayer.dll+5F5F58 - F3 0F10 05 BC42E400   - movss xmm0,[UnityPlayer.dll+143A21C] { (0.00) }
+UnityPlayer.dll+5F5F60 - 0F2F C6               - comiss xmm0,xmm6
+UnityPlayer.dll+5F5F63 - 77 0C                 - ja UnityPlayer.dll+5F5F71
+UnityPlayer.dll+5F5F65 - F3 0F10 05 C3B7EA00   - movss xmm0,[UnityPlayer.dll+14A1730] { (179.00) }
+UnityPlayer.dll+5F5F6D - F3 0F5D C6            - minss xmm0,xmm6
+UnityPlayer.dll+5F5F71 - F3 0F10 93 5C010000   - movss xmm2,[rbx+0000015C]
+UnityPlayer.dll+5F5F79 - 0F2E D0               - ucomiss xmm2,xmm0
+UnityPlayer.dll+5F5F7C - 7A 02                 - jp UnityPlayer.dll+5F5F80
+UnityPlayer.dll+5F5F7E - 74 0B                 - je UnityPlayer.dll+5F5F8B
+UnityPlayer.dll+5F5F80 - F3 0F11 83 5C010000   - movss [rbx+0000015C],xmm0		<<fov write (not necessarily needed to overwrite)
+UnityPlayer.dll+5F5F88 - 0F28 D0               - movaps xmm2,xmm0
+UnityPlayer.dll+5F5F8B - 83 BB EC040000 02     - cmp dword ptr [rbx+000004EC],02 { 2 }
+UnityPlayer.dll+5F5F92 - 66 C7 83 E8040000 0101 - mov word ptr [rbx+000004E8],0101 { 257 }
+UnityPlayer.dll+5F5F9B - 75 36                 - jne UnityPlayer.dll+5F5FD3
+UnityPlayer.dll+5F5F9D - F3 0F59 15 DFC4E300   - mulss xmm2,[UnityPlayer.dll+1432484] { (0.02) }
+UnityPlayer.dll+5F5FA5 - F3 0F10 73 44         - movss xmm6,[rbx+44]
+UnityPlayer.dll+5F5FAA - F3 0F59 35 DEC4E300   - mulss xmm6,[UnityPlayer.dll+1432490] { (0.50) }
+UnityPlayer.dll+5F5FB2 - F3 0F59 15 D6C4E300   - mulss xmm2,[UnityPlayer.dll+1432490] { (0.50) }
+UnityPlayer.dll+5F5FBA - 0F28 C2               - movaps xmm0,xmm2
+UnityPlayer.dll+5F5FBD - E8 2EF9DE00           - call UnityPlayer.dll+13E58F0
+UnityPlayer.dll+5F5FC2 - F3 0F5E F0            - divss xmm6,xmm0
+UnityPlayer.dll+5F5FC6 - 48 8B CB              - mov rcx,rbx
+UnityPlayer.dll+5F5FC9 - F3 0F11 73 50         - movss [rbx+50],xmm6
+UnityPlayer.dll+5F5FCE - E8 6DCFFEFF           - call UnityPlayer.dll+5E2F40

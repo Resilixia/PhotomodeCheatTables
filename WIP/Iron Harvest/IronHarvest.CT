@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>69</ID>
+      <Description>"ENABLE FIRST Rotation (HOME)"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$lua}
+local halfDegToRad = 0.5 * math.pi / 180
+prevYaw = 0
+prevPitch = 0
+prevRoll = 0
+
+function calcQuaternion(rotMemory, yaw, pitch, roll)
+    --print("calcQuaternion")
+	pitch = pitch * halfDegToRad
+    yaw = yaw * halfDegToRad
+    roll = roll * halfDegToRad
+
+    local sinX = math.sin(-pitch)
+    local cosX = math.cos(-pitch)
+    local sinY = math.sin(-yaw)
+    local cosY = math.cos(-yaw)
+    local sinZ = math.sin(-roll)
+    local cosZ = math.cos(-roll)
+
+    local w = cosY * cosX * cosZ + sinY * sinX * sinZ
+    local x = cosY * sinX * cosZ + sinY * cosX * sinZ
+    local y = sinY * cosX * cosZ - cosY * sinX * sinZ
+    local z = cosY * cosX * sinZ - sinY * sinX * cosZ
+
+    writeFloat(rotMemory + 16, x)
+    writeFloat(rotMemory + 20, y)
+    writeFloat(rotMemory + 24, z)
+    writeFloat(rotMemory + 28, w)
+end
+
+
+function timer_tick(timer)
+         --print("timer_tick")
+         local rotMemory = getAddressSafe("rotMemory")
+         if rotMemory == nil then
+            return
+         end
+
+         local yaw = readFloat(rotMemory)
+         local pitch = readFloat(rotMemory+4)
+         local roll = readFloat(rotMemory+8)
+
+         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
+            return
+         end
+
+         calcQuaternion(rotMemory, yaw, pitch, roll)
+
+         prevYaw = yaw
+         prevPitch = pitch
+         prevRoll = roll
+end
+
+function init()
+         --print("init")
+         if timer == nil then
+            print("Creating timer")
+            timer = createTimer(nil, false)
+            timer.setInterval(10)
+            timer.OnTimer = timer_tick
+         else
+             timer.setEnabled(true)
+         end
+end
+
+function deinit()
+         --print("deinit")
+         timer.setEnabled(false)
+end
+
+
+{$asm}
+[ENABLE]
+globalalloc(rotMemory, 0x50, "DesertsOfKharak64.exe"+1B2654)
+{$lua}
+init()
+
+{$asm}
+[DISABLE]
+{$lua}
+deinit()
+{$asm}
+dealloc(rotMemory)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>70</ID>
+          <Description>"Yaw"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>100</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>102</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>37</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>39</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>3</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>71</ID>
+          <Description>"Pitch"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+4</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>101</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>104</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>1</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>38</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>2</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>40</Key>
+              </Keys>
+              <Value>5</Value>
+              <ID>3</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>72</ID>
+          <Description>"Roll"</Description>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+8</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>99</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>97</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>73</ID>
+          <Description>"---- Quaternion ----"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys/>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"qX"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory+10</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>75</ID>
+              <Description>"qY"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory+14</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>76</ID>
+              <Description>"qZ"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory+18</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>77</ID>
+              <Description>"qW"</Description>
+              <VariableType>Float</VariableType>
+              <Address>rotMemory+1C</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>78</ID>
+      <Description>"camera"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : IronHarvest.exe
+  Version: 
+  Date   : 2021-05-03
+  Author : Hussain
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_camInject,UnityPlayer.dll,0F 11 12 A8 07 0F 84 8E) // should be unique
+alloc(newmem,$1000,_camInject)
+registersymbol(_camInject)
+registersymbol(camAddress)
+label(code)
+label(return)
+label(exit)
+
+newmem:
+
+code:
+  cmp rax,0
+  jne exit
+
+  cmp rsi,0
+  jne exit
+
+   push rax
+   mov eax,[rdx+24]
+   cmp eax,3F800000
+   pop rax
+   jne exit
+
+   push rax
+   mov eax,[rdx+2C]
+   cmp eax,0
+   pop rax
+  jne exit
+
+  push rax
+   mov eax,[rdx-58]
+   cmp eax,FFFFFFFF
+   pop rax
+  jne exit
+
+  //movups [rdx],xmm2
+  mov [camAddress],rdx
+  test al,07
+  jmp return
+exit:
+  movups [rdx],xmm2
+  test al,07
+  jmp return
+
+camAddress:
+dq 0
+
+_camInject:
+  jmp newmem
+return:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_camInject:
+  db 0F 11 12 A8 07
+
+unregistersymbol(_camInject)
+unregistersymbol(camAddress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: UnityPlayer.dll+967646
+
+UnityPlayer.dll+96761E: 66 0F 6F C1           - movdqa xmm0,xmm1
+UnityPlayer.dll+967622: 66 0F 73 D8 08        - psrldq xmm0,08
+UnityPlayer.dll+967627: 66 0F 7E C0           - movd eax,xmm0
+UnityPlayer.dll+96762B: 48 8D 14 40           - lea rdx,[rax+rax*2]
+UnityPlayer.dll+96762F: 66 48 0F 7E C8        - movq rax,xmm1
+UnityPlayer.dll+967634: 48 C1 E2 04           - shl rdx,04
+UnityPlayer.dll+967638: 48 03 50 18           - add rdx,[rax+18]
+UnityPlayer.dll+96763C: 0F 10 02              - movups xmm0,[rdx]
+UnityPlayer.dll+96763F: 0F C2 C2 04           - cmpps xmm0,xmm2,04
+UnityPlayer.dll+967643: 0F 50 C0              - movmskps eax,xmm0
+// ---------- INJECTING HERE ----------
+UnityPlayer.dll+967646: 0F 11 12              - movups [rdx],xmm2
+// ---------- DONE INJECTING  ----------
+UnityPlayer.dll+967649: A8 07                 - test al,07
+UnityPlayer.dll+96764B: 0F 84 8E 00 00 00     - je UnityPlayer.dll+9676DF
+UnityPlayer.dll+967651: 4C 8B 15 80 A9 E9 00  - mov r10,[UnityPlayer.dll+1801FD8]
+UnityPlayer.dll+967658: 66 49 0F 7E C9        - movq r9,xmm1
+UnityPlayer.dll+96765D: 48 8B 0D 5C A9 E9 00  - mov rcx,[UnityPlayer.dll+1801FC0]
+UnityPlayer.dll+967664: 66 0F 6F C1           - movdqa xmm0,xmm1
+UnityPlayer.dll+967668: 49 0B CA              - or rcx,r10
+UnityPlayer.dll+96766B: 66 0F 73 D8 08        - psrldq xmm0,08
+UnityPlayer.dll+967670: 66 41 0F 7E C0        - movd r8d,xmm0
+UnityPlayer.dll+967675: 49 8B 41 50           - mov rax,[r9+50]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>79</ID>
+          <Description>"Camera Address"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>camAddress</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>95</ID>
+          <Description>"X"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>100</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>102</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>96</ID>
+          <Description>"Y"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>97</ID>
+          <Description>"Z"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>camAddress</Address>
+          <Offsets>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>98</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>11</ByteLength>
+      <Address>UnityPlayer.dll+C3125C</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of movups [r10+10],xmm2</Description>
+      <AddressString>UnityPlayer.dll+BF58C</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>04</Byte>
+        <Byte>0F</Byte>
+        <Byte>50</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>52</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>91</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,142 @@
+read to find camera struct:
+Vanquish.exe+79C3BC - 56                    - push esi
+Vanquish.exe+79C3BD - 8B 74 24 2C           - mov esi,[esp+2C]
+Vanquish.exe+79C3C1 - 57                    - push edi
+Vanquish.exe+79C3C2 - 8B 7C 24 38           - mov edi,[esp+38]
+Vanquish.exe+79C3C6 - 57                    - push edi
+Vanquish.exe+79C3C7 - 50                    - push eax
+Vanquish.exe+79C3C8 - 8D 44 24 1C           - lea eax,[esp+1C]
+Vanquish.exe+79C3CC - 50                    - push eax
+Vanquish.exe+79C3CD - E8 4A4CE7FF           - call Vanquish.exe+61101C { ->->d3dx9_43.D3DXVec3TransformNormal }
+Vanquish.exe+79C3D2 - F3 0F10 4C 24 14      - movss xmm1,[esp+14]
+Vanquish.exe+79C3D8 - F3 0F10 47 30         - movss xmm0,[edi+30]  <<read camera struct - edi
+Vanquish.exe+79C3DD - 0F5A C0               - cvtps2pd xmm0,xmm0
+Vanquish.exe+79C3E0 - 0F5A C9               - cvtps2pd xmm1,xmm1
+Vanquish.exe+79C3E3 - F2 0F58 C1            - addsd xmm0,xmm1
+Vanquish.exe+79C3E7 - F3 0F10 4C 24 18      - movss xmm1,[esp+18]
+Vanquish.exe+79C3ED - 66 0F5A C0            - cvtpd2ps xmm0,xmm0
+Vanquish.exe+79C3F1 - F3 0F11 44 24 14      - movss [esp+14],xmm0
+Vanquish.exe+79C3F7 - F3 0F10 47 34         - movss xmm0,[edi+34]
+Vanquish.exe+79C3FC - 0F5A C0               - cvtps2pd xmm0,xmm0
+Vanquish.exe+79C3FF - 0F5A C9               - cvtps2pd xmm1,xmm1
+Vanquish.exe+79C402 - F2 0F58 C1            - addsd xmm0,xmm1
+Vanquish.exe+79C406 - F3 0F10 4C 24 1C      - movss xmm1,[esp+1C]
+Vanquish.exe+79C40C - 66 0F5A C0            - cvtpd2ps xmm0,xmm0
+Vanquish.exe+79C410 - F3 0F11 44 24 18      - movss [esp+18],xmm0
+Vanquish.exe+79C416 - F3 0F10 47 38         - movss xmm0,[edi+38]
+Vanquish.exe+79C41B - 0F5A C0               - cvtps2pd xmm0,xmm0
+Vanquish.exe+79C41E - 0F5A C9               - cvtps2pd xmm1,xmm1
+Vanquish.exe+79C421 - F2 0F58 C1            - addsd xmm0,xmm1
+Vanquish.exe+79C425 - F2 0F10 0D B07BDA00   - movsd xmm1,[Vanquish.exe+9A7BB0] { (0.00) }
+
+
+
+FOV:
+Vanquish.exe+1BBE88 - EB 16                 - jmp Vanquish.exe+1BBEA0
+Vanquish.exe+1BBE8A - F3 0F10 05 58A4D700   - movss xmm0,[Vanquish.exe+97A458] { (1.00) }
+Vanquish.exe+1BBE92 - F3 0F11 09            - movss [ecx],xmm1
+Vanquish.exe+1BBE96 - F3 0F11 41 04         - movss [ecx+04],xmm0
+Vanquish.exe+1BBE9B - F3 0F11 49 08         - movss [ecx+08],xmm1
+Vanquish.exe+1BBEA0 - F3 0F10 83 C42D0000   - movss xmm0,[ebx+00002DC4]
+Vanquish.exe+1BBEA8 - F3 0F10 93 F42A0000   - movss xmm2,[ebx+00002AF4]
+Vanquish.exe+1BBEB0 - 0F5A C0               - cvtps2pd xmm0,xmm0
+Vanquish.exe+1BBEB3 - 0F5A D2               - cvtps2pd xmm2,xmm2
+Vanquish.exe+1BBEB6 - F2 0F58 C2            - addsd xmm0,xmm2
+Vanquish.exe+1BBEBA - F3 0F10 93 802D0000   - movss xmm2,[ebx+00002D80]
+Vanquish.exe+1BBEC2 - 0F5A D2               - cvtps2pd xmm2,xmm2
+Vanquish.exe+1BBEC5 - F2 0F58 C2            - addsd xmm0,xmm2
+Vanquish.exe+1BBEC9 - 66 0F5A C0            - cvtpd2ps xmm0,xmm0
+Vanquish.exe+1BBECD - F3 0F11 83 14010000   - movss [ebx+00000114],xmm0		<<fov write
+Vanquish.exe+1BBED5 - F3 0F10 93 B02A0000   - movss xmm2,[ebx+00002AB0]
+Vanquish.exe+1BBEDD - F3 0F10 44 24 60      - movss xmm0,[esp+60]
+Vanquish.exe+1BBEE3 - 0F5A C0               - cvtps2pd xmm0,xmm0
+Vanquish.exe+1BBEE6 - 0F5A D2               - cvtps2pd xmm2,xmm2
+Vanquish.exe+1BBEE9 - F2 0F58 C2            - addsd xmm0,xmm2
+Vanquish.exe+1BBEED - F3 0F10 54 24 64      - movss xmm2,[esp+64]
+Vanquish.exe+1BBEF3 - F2 0F5A C0            - cvtsd2ss xmm0,xmm0
+Vanquish.exe+1BBEF7 - F3 0F11 83 B02A0000   - movss [ebx+00002AB0],xmm0
+Vanquish.exe+1BBEFF - F3 0F10 83 B42A0000   - movss xmm0,[ebx+00002AB4]
+Vanquish.exe+1BBF07 - 0F5A C0               - cvtps2pd xmm0,xmm0
+Vanquish.exe+1BBF0A - 8D BB B02A0000        - lea edi,[ebx+00002AB0]
+Vanquish.exe+1BBF10 - 0F5A D2               - cvtps2pd xmm2,xmm2
+Vanquish.exe+1BBF13 - F2 0F58 C2            - addsd xmm0,xmm2
+Vanquish.exe+1BBF17 - F3 0F10 54 24 68      - movss xmm2,[esp+68]
+Vanquish.exe+1BBF1D - 66 0F5A C0            - cvtpd2ps xmm0,xmm0
+
+
+
+potench camera function:
+Vanquish.exe+1B1C80 - 83 EC 08              - sub esp,08 { 8 }
+Vanquish.exe+1B1C83 - 56                    - push esi
+Vanquish.exe+1B1C84 - 8B F1                 - mov esi,ecx
+Vanquish.exe+1B1C86 - E8 35FEFFFF           - call Vanquish.exe+1B1AC0		<<nop this to kill all cams but culling
+Vanquish.exe+1B1C8B - 8B CE                 - mov ecx,esi
+Vanquish.exe+1B1C8D - E8 CEF1FFFF           - call Vanquish.exe+1B0E60
+Vanquish.exe+1B1C92 - 8D 8E 30010000        - lea ecx,[esi+00000130]
+Vanquish.exe+1B1C98 - E8 D3AF5F00           - call Vanquish.exe+7ACC70
+Vanquish.exe+1B1C9D - 8B CE                 - mov ecx,esi
+Vanquish.exe+1B1C9F - E8 FCF3FFFF           - call Vanquish.exe+1B10A0
+Vanquish.exe+1B1CA4 - F7 05 00631301 00000008 - test [Vanquish.exe+D36300],08000000 { (1024),(524801) }
+Vanquish.exe+1B1CAE - F3 0F10 86 1C010000   - movss xmm0,[esi+0000011C]
+Vanquish.exe+1B1CB6 - F3 0F11 44 24 04      - movss [esp+04],xmm0
+Vanquish.exe+1B1CBC - F3 0F10 86 18010000   - movss xmm0,[esi+00000118]
+Vanquish.exe+1B1CC4 - F3 0F11 44 24 08      - movss [esp+08],xmm0
+Vanquish.exe+1B1CCA - 75 55                 - jne Vanquish.exe+1B1D21
+Vanquish.exe+1B1CCC - F3 0F10 86 14010000   - movss xmm0,[esi+00000114]
+Vanquish.exe+1B1CD4 - 57                    - push edi
+Vanquish.exe+1B1CD5 - 51                    - push ecx
+Vanquish.exe+1B1CD6 - 8D BE 90290000        - lea edi,[esi+00002990]
+Vanquish.exe+1B1CDC - 8B CF                 - mov ecx,edi
+Vanquish.exe+1B1CDE - F3 0F11 04 24         - movss [esp],xmm0
+Vanquish.exe+1B1CE3 - E8 28634400           - call Vanquish.exe+5F8010
+Vanquish.exe+1B1CE8 - F3 0F10 44 24 08      - movss xmm0,[esp+08]
+Vanquish.exe+1B1CEE - 8D 86 50020000        - lea eax,[esi+00000250]
+Vanquish.exe+1B1CF4 - F3 0F11 86 FC290000   - movss [esi+000029FC],xmm0
+Vanquish.exe+1B1CFC - F3 0F10 44 24 0C      - movss xmm0,[esp+0C]
+Vanquish.exe+1B1D02 - 50                    - push eax
+Vanquish.exe+1B1D03 - 8D 8E 40020000        - lea ecx,[esi+00000240]
+Vanquish.exe+1B1D09 - F3 0F11 86 F8290000   - movss [esi+000029F8],xmm0
+Vanquish.exe+1B1D11 - 51                    - push ecx
+Vanquish.exe+1B1D12 - 81 C6 30020000        - add esi,00000230 { 560 }
+Vanquish.exe+1B1D18 - 56                    - push esi
+Vanquish.exe+1B1D19 - 8B CF                 - mov ecx,edi
+Vanquish.exe+1B1D1B - E8 20454400           - call Vanquish.exe+5F6240
+Vanquish.exe+1B1D20 - 5F                    - pop edi
+Vanquish.exe+1B1D21 - 5E                    - pop esi
+Vanquish.exe+1B1D22 - 83 C4 08              - add esp,08 { 8 }
+Vanquish.exe+1B1D25 - C3                    - ret 
+
+
+
+Something related to HUD possibly:
+Vanquish.exe+1804D0 - B9 30C4FD00           - mov ecx,Vanquish.exe+BDC430 { (00D8808C) }
+Vanquish.exe+1804D5 - F3 0F11 44 24 58      - movss [esp+58],xmm0
+Vanquish.exe+1804DB - E8 60130300           - call Vanquish.exe+1B1840
+Vanquish.exe+1804E0 - F3 0F10 05 D88CD700   - movss xmm0,[Vanquish.exe+978CD8] { (1.05) }
+Vanquish.exe+1804E8 - 8D 44 24 20           - lea eax,[esp+20]
+Vanquish.exe+1804EC - 50                    - push eax
+Vanquish.exe+1804ED - 8D 4C 24 44           - lea ecx,[esp+44]
+Vanquish.exe+1804F1 - 51                    - push ecx
+Vanquish.exe+1804F2 - 8D 54 24 38           - lea edx,[esp+38]
+Vanquish.exe+1804F6 - F3 0F11 05 24EFFD00   - movss [Vanquish.exe+BDEF24],xmm0 { (1.05) }
+Vanquish.exe+1804FE - C7 05 94EDFD00 01000000 - mov [Vanquish.exe+BDED94],00000001 { (0),1 }
+Vanquish.exe+180508 - 52                    - push edx
+Vanquish.exe+180509 - 8D 84 24 CC000000     - lea eax,[esp+000000CC]
+Vanquish.exe+180510 - 50                    - push eax
+Vanquish.exe+180511 - E8 FACB6100           - call Vanquish.exe+79D110	<< removes Vanquish logo from main menu
+Vanquish.exe+180516 - 8B 87 402A0000        - mov eax,[edi+00002A40]
+Vanquish.exe+18051C - 83 C4 10              - add esp,10 { 16 }
+Vanquish.exe+18051F - 85 C0                 - test eax,eax
+Vanquish.exe+180521 - 74 15                 - je Vanquish.exe+180538
+Vanquish.exe+180523 - 8D 8C 24 C0000000     - lea ecx,[esp+000000C0]
+Vanquish.exe+18052A - 51                    - push ecx
+Vanquish.exe+18052B - 6A 00                 - push 00 { 0 }
+Vanquish.exe+18052D - 05 20070000           - add eax,00000720 { 1824 }
+Vanquish.exe+180532 - 50                    - push eax
+Vanquish.exe+180533 - E8 EA0A4900           - call Vanquish.exe+611022 { ->->d3dx9_43.D3DXMatrixInverse }
+Vanquish.exe+180538 - 8B 8C 24 CC010000     - mov ecx,[esp+000001CC]
+Vanquish.exe+18053F - 5F                    - pop edi
+Vanquish.exe+180540 - 5E                    - pop esi
+Vanquish.exe+180541 - 5B                    - pop ebx
+Vanquish.exe+180542 - 33 CC                 - xor ecx,esp
+Vanquish.exe+180544 - E8 FFC46E00           - call Vanquish.exe+86CA48

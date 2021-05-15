@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>93435</ID>
+      <Description>"By ghostinthecamera"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>93417</ID>
+      <Description>"++-------------------------------------------------------------------------------------------------------------------------------++"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>93439</ID>
+      <Description>"Range Unlock (leave enabled)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RAGE2.exe
+  Version: 
+  Date   : 2021-05-08
+  Author : ghostinthecamera
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_rangeUnlock,RAGE2.exe,0F 2F Cx 76 x F3 44 0F 5E E8) // should be unique#
+aobscanmodule(_rangeUnlockVehicle,RAGE2.exe,0F 2F Cx 76 x F3 0F 5E D0 F3) // should be unique
+
+registersymbol(_rangeUnlock)
+registersymbol(_rangeUnlockVehicle)
+registersymbol(OGbytes)
+alloc(OGbytes,4)
+
+registersymbol(OGbytesV)
+alloc(OGbytesV,4)
+
+_rangeUnlock:
+db 90 90 90
+
+_rangeUnlockVehicle:
+db 90 90 90
+
+
+
+OGbytes:
+readmem(_rangeUnlock,3)
+
+OGbytesV:
+readmem(_rangeUnlockVehicle,3)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_rangeUnlock:
+readmem(OGbytes,3)
+
+_rangeUnlockVehicle:
+readmem(OGbytesV,3)
+
+unregistersymbol(OGbytesV)
+unregistersymbol(OGbytes)
+
+unregistersymbol(_rangeUnlockVehicle)
+unregistersymbol(_rangeUnlock)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: RAGE2.exe+6042CB
+
+RAGE2.exe+60429E: 0F 28 C5                 - movaps xmm0,xmm5
+RAGE2.exe+6042A1: F3 0F 59 C5              - mulss xmm0,xmm5
+RAGE2.exe+6042A5: F3 0F 58 D0              - addss xmm2,xmm0
+RAGE2.exe+6042A9: 0F 28 CB                 - movaps xmm1,xmm3
+RAGE2.exe+6042AC: F3 0F 59 CB              - mulss xmm1,xmm3
+RAGE2.exe+6042B0: F3 0F 58 D1              - addss xmm2,xmm1
+RAGE2.exe+6042B4: 0F 57 C0                 - xorps xmm0,xmm0
+RAGE2.exe+6042B7: F3 0F 51 C2              - sqrtss xmm0,xmm2
+RAGE2.exe+6042BB: F3 0F 10 15 01 0C E1 01  - movss xmm2,[RAGE2.exe+2414EC4]
+RAGE2.exe+6042C3: F3 0F 10 25 15 0F E1 01  - movss xmm4,[RAGE2.exe+24151E0]
+// ---------- INJECTING HERE ----------
+RAGE2.exe+6042CB: 0F 2F C4                 - comiss xmm0,xmm4
+// ---------- DONE INJECTING  ----------
+RAGE2.exe+6042CE: 76 4B                    - jna RAGE2.exe+60431B
+RAGE2.exe+6042D0: F3 0F 5E D0              - divss xmm2,xmm0
+RAGE2.exe+6042D4: F3 0F 5D 15 A0 11 E1 01  - minss xmm2,[RAGE2.exe+241547C]
+RAGE2.exe+6042DC: 0F 28 CA                 - movaps xmm1,xmm2
+RAGE2.exe+6042DF: F3 0F 59 CE              - mulss xmm1,xmm6
+RAGE2.exe+6042E3: 0F 28 C2                 - movaps xmm0,xmm2
+RAGE2.exe+6042E6: F3 0F 59 C5              - mulss xmm0,xmm5
+RAGE2.exe+6042EA: F3 0F 11 43 38           - movss [rbx+38],xmm0
+RAGE2.exe+6042EF: F3 0F 59 D3              - mulss xmm2,xmm3
+RAGE2.exe+6042F3: F3 0F 11 53 3C           - movss [rbx+3C],xmm2
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>96</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>93440</ID>
+      <Description>"Hud Toggle"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RAGE2.exe
+  Version: 
+  Date   : 2021-05-08
+  Author : ghostinthecamera
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_hudToggle,RAGE2.exe,E8 46 46 00 00 4C) // should be unique
+alloc(newmem,$1000,_hudToggle)
+registersymbol(_hudToggle)
+
+_hudToggle:
+db 90 90 90 90 90
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_hudToggle:
+  db E8 46 46 00 00
+
+unregistersymbol(_hudToggle)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: RAGE2.exe+18D6A95
+
+RAGE2.exe+18D6A62: 48 8D 8B C8 11 00 00     - lea rcx,[rbx+000011C8]
+RAGE2.exe+18D6A69: 4C 89 64 24 40           - mov [rsp+40],r12
+RAGE2.exe+18D6A6E: 4C 89 44 24 38           - mov [rsp+38],r8
+RAGE2.exe+18D6A73: 48 89 44 24 30           - mov [rsp+30],rax
+RAGE2.exe+18D6A78: 89 7C 24 28              - mov [rsp+28],edi
+RAGE2.exe+18D6A7C: 48 8B 45 30              - mov rax,[rbp+30]
+RAGE2.exe+18D6A80: 48 89 44 24 20           - mov [rsp+20],rax
+RAGE2.exe+18D6A85: 44 8B 4D 28              - mov r9d,[rbp+28]
+RAGE2.exe+18D6A89: 4C 8D 84 24 B0 00 00 00  - lea r8,[rsp+000000B0]
+RAGE2.exe+18D6A91: 49 8B 55 18              - mov rdx,[r13+18]
+// ---------- INJECTING HERE ----------
+RAGE2.exe+18D6A95: E8 46 46 00 00           - call RAGE2.exe+18DB0E0
+// ---------- DONE INJECTING  ----------
+RAGE2.exe+18D6A9A: 4C 8B F0                 - mov r14,rax
+RAGE2.exe+18D6A9D: 48 8B 13                 - mov rdx,[rbx]
+RAGE2.exe+18D6AA0: 48 8B CB                 - mov rcx,rbx
+RAGE2.exe+18D6AA3: FF 92 C8 00 00 00        - call qword ptr [rdx+000000C8]
+RAGE2.exe+18D6AA9: 4C 8B 10                 - mov r10,[rax]
+RAGE2.exe+18D6AAC: 45 8B CF                 - mov r9d,r15d
+RAGE2.exe+18D6AAF: 4D 8B C5                 - mov r8,r13
+RAGE2.exe+18D6AB2: 48 8B D3                 - mov rdx,rbx
+RAGE2.exe+18D6AB5: 48 8B C8                 - mov rcx,rax
+RAGE2.exe+18D6AB8: 41 FF 52 78              - call qword ptr [r10+78]
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>46</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>93583</ID>
+      <Description>"get pm Cam pointer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RAGE2.exe
+  Version: 
+  Date   : 2021-05-08
+  Author : ghostinthecamera
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_cameraPM,RAGE2.exe,F3 0F 11 73 28 F3 44) // should be unique
+alloc(newmem,$1000,_cameraPM)
+registersymbol(_cameraPM)
+registersymbol(pmCamera)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [pmCamera],rbx
+  movss [rbx+28],xmm6
+  jmp return
+
+pmCamera:
+dq 0
+
+_cameraPM:
+  jmp newmem
+return:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_cameraPM:
+  db F3 0F 11 73 28
+
+unregistersymbol(_cameraPM)
+unregistersymbol(pmCamera)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: RAGE2.exe+603DE2
+
+RAGE2.exe+603DA5: F3 0F 11 05 17 A6 B8 02     - movss [RAGE2.exe+318E3C4],xmm0
+RAGE2.exe+603DAD: 48 8D 0D 14 A6 B8 02        - lea rcx,[RAGE2.exe+318E3C8]
+RAGE2.exe+603DB4: E8 33 B8 3B 01              - call RAGE2.exe+19BF5EC
+RAGE2.exe+603DB9: F3 0F 59 3D 03 A6 B8 02     - mulss xmm7,[RAGE2.exe+318E3C4]
+RAGE2.exe+603DC1: F3 0F 59 35 FB A5 B8 02     - mulss xmm6,[RAGE2.exe+318E3C4]
+RAGE2.exe+603DC9: F3 41 0F 58 FA              - addss xmm7,xmm10
+RAGE2.exe+603DCE: F3 0F 58 7B 2C              - addss xmm7,[rbx+2C]
+RAGE2.exe+603DD3: F3 0F 11 7B 2C              - movss [rbx+2C],xmm7
+RAGE2.exe+603DD8: F3 41 0F 58 F3              - addss xmm6,xmm11
+RAGE2.exe+603DDD: F3 0F 58 73 28              - addss xmm6,[rbx+28]
+// ---------- INJECTING HERE ----------
+RAGE2.exe+603DE2: F3 0F 11 73 28              - movss [rbx+28],xmm6
+// ---------- DONE INJECTING  ----------
+RAGE2.exe+603DE7: F3 44 0F 58 85 E8 00 00 00  - addss xmm8,[rbp+000000E8]
+RAGE2.exe+603DF0: F3 44 0F 59 05 33 0D E1 01  - mulss xmm8,[RAGE2.exe+2414B2C]
+RAGE2.exe+603DF9: F3 44 0F 58 43 30           - addss xmm8,[rbx+30]
+RAGE2.exe+603DFF: F3 44 0F 11 43 30           - movss [rbx+30],xmm8
+RAGE2.exe+603E05: F3 44 0F 10 7C 24 40        - movss xmm15,[rsp+40]
+RAGE2.exe+603E0C: F3 0F 10 43 28              - movss xmm0,[rbx+28]
+RAGE2.exe+603E11: F3 0F 5F 05 77 17 E1 01     - maxss xmm0,[RAGE2.exe+2415590]
+RAGE2.exe+603E19: F3 0F 5D 05 47 11 E1 01     - minss xmm0,[RAGE2.exe+2414F68]
+RAGE2.exe+603E21: F3 0F 11 43 28              - movss [rbx+28],xmm0
+RAGE2.exe+603E26: 48 85 FF                    - test rdi,rdi
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>93584</ID>
+          <Description>"No description"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>pmCamera</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>93585</ID>
+      <Description>"Time of Day [CTRL + NUMPAD_0/2/13, CTRL  + NUMPAD_PLUS/NUMPAD_MINUS]"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>globalalloc(cheatTimeOn,4) // global variable for createThread on/off
+cheatTimeOn:
+dd 0
+
+[ENABLE]
+
+aobscanmodule(manual_time,RAGE2.exe,F3 0F 10 81 80 00 00 00 48 8B) // should be unique
+alloc(newmem,$1000,"RAGE2.exe"+8853FA)
+
+label(code)
+label(return)
+
+label(time)
+registersymbol(time)
+
+newmem:
+  cmp [time],(float)1000.0
+  jne short @f
+  movss xmm0,[rcx+00000080]
+  movss [time],xmm0
+    @@:
+    movss xmm0,[time]
+    movss [rcx+00000080],xmm0
+    jmp return
+
+code:
+  movss xmm0,[rcx+00000080]
+  jmp return
+
+time:
+dd (float)1000.0
+
+manual_time:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(manual_time)
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+{$lua}
+
+local changeTime = 0.0015
+local changeTimeFast = 0.005
+
+createNativeThread(function(daytimer2)
+  sleep(200) -- delay for giving script time to write for "cheaton" proper value
+  while readFloat("cheatTimeOn") == 0 do -- while "cheaton" value equal "0" this cheat work
+    sleep(5) -- like timer interval
+
+    if readBytes("RAGE2.exe+3067348") == 0 then -- Check for Alt-Tab
+
+      local addTime = isKeyPressed(VK_CONTROL) and isKeyPressed(VK_NUMPAD8)
+      local subTime = isKeyPressed(VK_CONTROL) and isKeyPressed(VK_NUMPAD5)
+      local addTimeFast = isKeyPressed(VK_CONTROL) and isKeyPressed(VK_MENU) and isKeyPressed(VK_NUMPAD8)
+      local subTimeFast = isKeyPressed(VK_CONTROL) and isKeyPressed(VK_MENU) and isKeyPressed(VK_NUMPAD5)
+
+-- Time Switch
+      if addTime then
+        writeFloat("time", readFloat("time") + changeTime)
+      elseif readFloat("time") &gt; 24.0001 then
+        writeFloat("time", readFloat("time") - 24.0)
+      end
+
+      if subTime then
+        writeFloat("time", readFloat("time") - changeTime)
+      elseif readFloat("time") &lt; -0.0001 then
+        writeFloat("time", readFloat("time") + 24.0)
+      end
+
+      if addTimeFast then
+        writeFloat("time", readFloat("time") + changeTimeFast)
+      elseif readFloat("time") &gt; 24.0001 then
+        writeFloat("time", readFloat("time") - 24.0)
+      end
+
+      if subTimeFast then
+        writeFloat("time", readFloat("time") - changeTimeFast)
+      elseif readFloat("time") &lt; -0.0001 then
+        writeFloat("time", readFloat("time") + 24.0)
+      end
+
+    end
+  end
+end)
+
+{$asm}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+[DISABLE]
+
+manual_time:
+  db F3 0F 10 81 80 00 00 00
+unregistersymbol(time)
+unregistersymbol(manual_time)
+dealloc(newmem)
+
+cheatTimeOn:
+dd 1
+
+{
+// ORIGINAL CODE - INJECTION POINT: "RAGE2.exe"+8853FA
+
+"RAGE2.exe"+8853C0: F3 0F 59 89 88 00 00 00     -  mulss xmm1,[rcx+00000088]
+"RAGE2.exe"+8853C8: F3 0F 59 0D AC 1F EA 01     -  mulss xmm1,[RAGE2.exe+272737C]
+"RAGE2.exe"+8853D0: 80 B9 95 00 00 00 00        -  cmp byte ptr [rcx+00000095],00
+"RAGE2.exe"+8853D7: 74 08                       -  je RAGE2.exe+8853E1
+"RAGE2.exe"+8853D9: F3 0F 59 89 8C 00 00 00     -  mulss xmm1,[rcx+0000008C]
+"RAGE2.exe"+8853E1: F3 0F 58 89 80 00 00 00     -  addss xmm1,dword ptr [rcx+00000080]
+"RAGE2.exe"+8853E9: E8 12 B0 B5 FF              -  call RAGE2.exe+3E0400
+"RAGE2.exe"+8853EE: 48 8B 0D 4B F5 7D 02        -  mov rcx,[RAGE2.exe+3064940]
+"RAGE2.exe"+8853F5: 48 85 C9                    -  test rcx,rcx
+"RAGE2.exe"+8853F8: 74 17                       -  je RAGE2.exe+885411
+// ---------- INJECTING HERE ----------
+"RAGE2.exe"+8853FA: F3 0F 10 81 80 00 00 00     -  movss xmm0,[rcx+00000080]
+// ---------- DONE INJECTING  ----------
+"RAGE2.exe"+885402: 48 8B 05 FF 26 77 02        -  mov rax,[RAGE2.exe+2FF7B08]
+"RAGE2.exe"+885409: F3 0F 11 80 E8 12 00 00     -  movss [rax+000012E8],xmm0
+"RAGE2.exe"+885411: 4C 8B 05 20 27 77 02        -  mov r8,[RAGE2.exe+2FF7B38]
+"RAGE2.exe"+885418: 4D 85 C0                    -  test r8,r8
+"RAGE2.exe"+88541B: 0F 84 E1 00 00 00           -  je RAGE2.exe+885502
+"RAGE2.exe"+885421: 49 8B 80 C0 05 00 00        -  mov rax,[r8+000005C0]
+"RAGE2.exe"+885428: 8B 0D B2 20 3B 02           -  mov ecx,[RAGE2.exe+2C374E0]
+"RAGE2.exe"+88542E: 8B 15 A8 20 3B 02           -  mov edx,[RAGE2.exe+2C374DC]
+"RAGE2.exe"+885434: 3B 90 A8 05 00 00           -  cmp edx,[rax+000005A8]
+"RAGE2.exe"+88543A: 75 1A                       -  jne RAGE2.exe+885456
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of call qword ptr [rax+78]</Description>
+      <AddressString>RAGE2.exe+38031C</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>03</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>78</Byte>
+      </Actual>
+      <After>
+        <Byte>F6</Byte>
+        <Byte>83</Byte>
+        <Byte>8A</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jne RAGE2.exe+38033F</Description>
+      <AddressString>RAGE2.exe+380326</AddressString>
+      <Before>
+        <Byte>8A</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>17</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>03</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [rbx+30],xmm6</Description>
+      <AddressString>RAGE2.exe+6020A0</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>5D</Byte>
+        <Byte>F3</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>73</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>05</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movups [rcx],xmm0</Description>
+      <AddressString>VCRUNTIME140.dll+1339</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4C</Byte>
+        <Byte>02</Byte>
+        <Byte>F0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>42</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4C</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [r8+rcx*8],xmm0</Description>
+      <AddressString>RAGE2.exe+15AE69B</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>C1</Byte>
+        <Byte>48</Byte>
+        <Byte>03</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>04</Byte>
+        <Byte>C8</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4F</Byte>
+        <Byte>10</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm0,[r8]</Description>
+      <AddressString>RAGE2.exe+1542DB0</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C2</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm1,[r8+10]</Description>
+      <AddressString>RAGE2.exe+1542DB7</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C2</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>02</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [rdx],xmm0</Description>
+      <AddressString>RAGE2.exe+1542DBC</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>02</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>4A</Byte>
+        <Byte>10</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [rdx+10],xmm1</Description>
+      <AddressString>RAGE2.exe+1542DBF</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>4A</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov rax,rdx</Description>
+      <AddressString>RAGE2.exe+1542DB4</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>C2</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm4,[RAGE2.exe+24151E0]</Description>
+      <AddressString>RAGE2.exe+6042C3</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>01</Byte>
+        <Byte>0C</Byte>
+        <Byte>E1</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>25</Byte>
+        <Byte>15</Byte>
+        <Byte>0F</Byte>
+        <Byte>E1</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C4</Byte>
+        <Byte>76</Byte>
+        <Byte>4B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm0,xmm4</Description>
+      <AddressString>RAGE2.exe+6042CB</AddressString>
+      <Before>
+        <Byte>25</Byte>
+        <Byte>15</Byte>
+        <Byte>0F</Byte>
+        <Byte>E1</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C4</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>4B</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call RAGE2.exe+18DB0E0</Description>
+      <AddressString>RAGE2.exe+18D6A95</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>46</Byte>
+        <Byte>46</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>F0</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call qword ptr [rax+000001A0]</Description>
+      <AddressString>RAGE2.exe+161B64B</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D3</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>90</Byte>
+        <Byte>A0</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>74</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call rdi</Description>
+      <AddressString>RAGE2.exe+D511D6</AddressString>
+      <Before>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>D7</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>59</Byte>
+        <Byte>03</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call qword ptr [rax+10]</Description>
+      <AddressString>RAGE2.exe+15B3BF6</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>0F</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>39</Byte>
+        <Byte>2F</Byte>
+        <Byte>74</Byte>
+        <Byte>22</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call RAGE2.exe+15B39A0</Description>
+      <AddressString>RAGE2.exe+15423B2</AddressString>
+      <Before>
+        <Byte>33</Byte>
+        <Byte>D2</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>E9</Byte>
+        <Byte>15</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call qword ptr [rax+60]</Description>
+      <AddressString>RAGE2.exe+18DB264</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>38</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>60</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>15</Byte>
+        <Byte>22</Byte>
+        <Byte>8D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [rbx+28],xmm6</Description>
+      <AddressString>RAGE2.exe+603DE2</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>73</Byte>
+        <Byte>28</Byte>
+      </Before>
+      <Actual>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>73</Byte>
+        <Byte>28</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>85</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [rbx+28],xmm0</Description>
+      <AddressString>RAGE2.exe+603E21</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>47</Byte>
+        <Byte>11</Byte>
+        <Byte>E1</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>43</Byte>
+        <Byte>28</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>FF</Byte>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jna RAGE2.exe+604276</Description>
+      <AddressString>RAGE2.exe+604250</AddressString>
+      <Before>
+        <Byte>D1</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>D4</Byte>
+      </Before>
+      <Actual>
+        <Byte>76</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm0,xmm2</Description>
+      <AddressString>RAGE2.exe+6024BD</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>23</Byte>
+        <Byte>2D</Byte>
+        <Byte>E1</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C2</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>52</Byte>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>cheatTimeOn</Name>
+      <Address>26D10E00000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
