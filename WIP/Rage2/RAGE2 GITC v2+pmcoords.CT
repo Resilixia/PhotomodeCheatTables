@@ -310,7 +310,7 @@ RAGE2.exe+60407B: 41 0F 28 CF              - movaps xmm1,xmm15
     <CheatEntry>
       <ID>93444</ID>
       <Description>"Rotation (Num 4 = Toggle, Num 6 = Slower, Num = 5, IF NEGATIVE GAME WILL CRASH)"</Description>
-      <LastState Activated="1"/>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : RAGE2.exe
   Date   : 2021-05-15
@@ -433,7 +433,6 @@ RAGE2.exe+603E21: F3 0F 11 43 28              - movss [rbx+28],xmm0
         <CheatEntry>
           <ID>93445</ID>
           <Description>"Divisor"</Description>
-          <LastState Value="2" RealAddress="7FF7C6251000"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotMult</Address>
@@ -721,7 +720,7 @@ RAGE2.exe+3E786A: CC                       - int 3
     <CheatEntry>
       <ID>93454</ID>
       <Description>"various things"</Description>
-      <LastState Activated="1"/>
+      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : RAGE2.exe
   Version: 
@@ -803,7 +802,6 @@ RAGE2.exe+745ECB: CC           - int 3
         <CheatEntry>
           <ID>93455</ID>
           <Description>"Mods/Chemical"</Description>
-          <LastState Value="3" RealAddress="20815ADAE90"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>weaponModAddress</Address>
@@ -814,13 +812,101 @@ RAGE2.exe+745ECB: CC           - int 3
         <CheatEntry>
           <ID>93456</ID>
           <Description>"Feltrite"</Description>
-          <LastState Value="255324960" RealAddress="20815ADAE30"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>weaponModAddress</Address>
           <Offsets>
             <Offset>-40</Offset>
           </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>93583</ID>
+      <Description>"get pm Cam pointer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RAGE2.exe
+  Version: 
+  Date   : 2021-05-08
+  Author : ghostinthecamera
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_cameraPM,RAGE2.exe,F3 0F 11 73 28 F3 44) // should be unique
+alloc(newmem,$1000,_cameraPM)
+registersymbol(_cameraPM)
+registersymbol(pmCamera)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [pmCamera],rbx
+  movss [rbx+28],xmm6
+  jmp return
+
+pmCamera:
+dq 0
+
+_cameraPM:
+  jmp newmem
+return:
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_cameraPM:
+  db F3 0F 11 73 28
+
+unregistersymbol(_cameraPM)
+unregistersymbol(pmCamera)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: RAGE2.exe+603DE2
+
+RAGE2.exe+603DA5: F3 0F 11 05 17 A6 B8 02     - movss [RAGE2.exe+318E3C4],xmm0
+RAGE2.exe+603DAD: 48 8D 0D 14 A6 B8 02        - lea rcx,[RAGE2.exe+318E3C8]
+RAGE2.exe+603DB4: E8 33 B8 3B 01              - call RAGE2.exe+19BF5EC
+RAGE2.exe+603DB9: F3 0F 59 3D 03 A6 B8 02     - mulss xmm7,[RAGE2.exe+318E3C4]
+RAGE2.exe+603DC1: F3 0F 59 35 FB A5 B8 02     - mulss xmm6,[RAGE2.exe+318E3C4]
+RAGE2.exe+603DC9: F3 41 0F 58 FA              - addss xmm7,xmm10
+RAGE2.exe+603DCE: F3 0F 58 7B 2C              - addss xmm7,[rbx+2C]
+RAGE2.exe+603DD3: F3 0F 11 7B 2C              - movss [rbx+2C],xmm7
+RAGE2.exe+603DD8: F3 41 0F 58 F3              - addss xmm6,xmm11
+RAGE2.exe+603DDD: F3 0F 58 73 28              - addss xmm6,[rbx+28]
+// ---------- INJECTING HERE ----------
+RAGE2.exe+603DE2: F3 0F 11 73 28              - movss [rbx+28],xmm6
+// ---------- DONE INJECTING  ----------
+RAGE2.exe+603DE7: F3 44 0F 58 85 E8 00 00 00  - addss xmm8,[rbp+000000E8]
+RAGE2.exe+603DF0: F3 44 0F 59 05 33 0D E1 01  - mulss xmm8,[RAGE2.exe+2414B2C]
+RAGE2.exe+603DF9: F3 44 0F 58 43 30           - addss xmm8,[rbx+30]
+RAGE2.exe+603DFF: F3 44 0F 11 43 30           - movss [rbx+30],xmm8
+RAGE2.exe+603E05: F3 44 0F 10 7C 24 40        - movss xmm15,[rsp+40]
+RAGE2.exe+603E0C: F3 0F 10 43 28              - movss xmm0,[rbx+28]
+RAGE2.exe+603E11: F3 0F 5F 05 77 17 E1 01     - maxss xmm0,[RAGE2.exe+2415590]
+RAGE2.exe+603E19: F3 0F 5D 05 47 11 E1 01     - minss xmm0,[RAGE2.exe+2414F68]
+RAGE2.exe+603E21: F3 0F 11 43 28              - movss [rbx+28],xmm0
+RAGE2.exe+603E26: 48 85 FF                    - test rdi,rdi
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>93584</ID>
+          <Description>"No description"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>pmCamera</Address>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>

@@ -541,7 +541,6 @@ dealloc(newmem)
         <CheatEntry>
           <ID>12</ID>
           <Description>"No description"</Description>
-          <LastState Value="0.009999999776" RealAddress="7FF6362510F8"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>Float</VariableType>
           <Address>rotSpeed</Address>
@@ -678,10 +677,81 @@ dealloc(newmem)
     <CheatEntry>
       <ID>16</ID>
       <Description>"DoF"</Description>
-      <LastState Value="1" RealAddress="7FFBEECA213E"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
       <Address>rend::RenderOptions::RenderDepthOfField</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16528</ID>
+      <Description>"Unlock All Outfits"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Control_DX11.exe
+  Version: 
+  Date   : 2020-08-27
+  Author : Zach
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,Control_DX12.exe,41 8B 46 04 48 8B 8A 38 01 00 00 89 01 48 8B CE) // should be unique
+alloc(newmem,$1000,"Control_DX12.exe"+1E4261)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [r14+04],#1
+  mov rcx,[rdx+00000138]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 6
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 41 8B 46 04 48 8B 8A 38 01 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Control_DX11.exe"+1E4261
+
+"Control_DX11.exe"+1E423B: 75 1D                    -  jne Control_DX11.exe+1E425A
+"Control_DX11.exe"+1E423D: 48 8B 8E 20 03 00 00     -  mov rcx,[rsi+00000320]
+"Control_DX11.exe"+1E4244: 48 85 C9                 -  test rcx,rcx
+"Control_DX11.exe"+1E4247: 74 11                    -  je Control_DX11.exe+1E425A
+"Control_DX11.exe"+1E4249: 48 8B 49 08              -  mov rcx,[rcx+08]
+"Control_DX11.exe"+1E424D: 45 33 C0                 -  xor r8d,r8d
+"Control_DX11.exe"+1E4250: 48 8B 01                 -  mov rax,[rcx]
+"Control_DX11.exe"+1E4253: 41 8D 50 04              -  lea edx,[r8+04]
+"Control_DX11.exe"+1E4257: FF 50 38                 -  call qword ptr [rax+38]
+"Control_DX11.exe"+1E425A: 48 8B 96 40 03 00 00     -  mov rdx,[rsi+00000340]
+// ---------- INJECTING HERE ----------
+"Control_DX11.exe"+1E4261: 41 8B 46 04              -  mov eax,[r14+04]
+"Control_DX11.exe"+1E4265: 48 8B 8A 38 01 00 00     -  mov rcx,[rdx+00000138]
+// ---------- DONE INJECTING  ----------
+"Control_DX11.exe"+1E426C: 89 01                    -  mov [rcx],eax
+"Control_DX11.exe"+1E426E: 48 8B CE                 -  mov rcx,rsi
+"Control_DX11.exe"+1E4271: 48 83 82 38 01 00 00 04  -  add qword ptr [rdx+00000138],04
+"Control_DX11.exe"+1E4279: E8 E2 1B E8 FF           -  call Control_DX11.exe+65E60
+"Control_DX11.exe"+1E427E: 48 8B 5C 24 50           -  mov rbx,[rsp+50]
+"Control_DX11.exe"+1E4283: 33 C0                    -  xor eax,eax
+"Control_DX11.exe"+1E4285: 48 8B 74 24 58           -  mov rsi,[rsp+58]
+"Control_DX11.exe"+1E428A: 48 8B 7C 24 60           -  mov rdi,[rsp+60]
+"Control_DX11.exe"+1E428F: 48 83 C4 40              -  add rsp,40
+"Control_DX11.exe"+1E4293: 41 5E                    -  pop r14
+}
+</AssemblerScript>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>

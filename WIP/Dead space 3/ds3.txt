@@ -1,0 +1,120 @@
+dead space 3
+
+deadspace3.exe+688841 - 8B EC                 - mov ebp,esp
+deadspace3.exe+688843 - 80 7D 0C 00           - cmp byte ptr [ebp+0C],00 { 0 }
+deadspace3.exe+688847 - 8B 45 08              - mov eax,[ebp+08]
+deadspace3.exe+68884A - 0F28 00               - movaps xmm0,[eax]
+deadspace3.exe+68884D - 56                    - push esi
+deadspace3.exe+68884E - 8B F1                 - mov esi,ecx
+deadspace3.exe+688850 - 0F29 46 40            - movaps [esi+40],xmm0		<< coords in static mem
+deadspace3.exe+688854 - 0F28 40 10            - movaps xmm0,[eax+10]
+deadspace3.exe+688858 - 0F29 46 50            - movaps [esi+50],xmm0
+deadspace3.exe+68885C - 0F28 40 20            - movaps xmm0,[eax+20]
+deadspace3.exe+688860 - 0F29 46 60            - movaps [esi+60],xmm0
+deadspace3.exe+688864 - 0F28 40 30            - movaps xmm0,[eax+30]
+deadspace3.exe+688868 - 0F29 46 70            - movaps [esi+70],xmm0
+deadspace3.exe+68886C - 74 0A                 - je deadspace3.exe+688878
+deadspace3.exe+68886E - 56                    - push esi
+deadspace3.exe+68886F - 50                    - push eax
+deadspace3.exe+688870 - E8 0B7FFDFF           - call deadspace3.exe+660780
+
+
+player coordsdeadspace3.exe+334373 - 0F28 0F               - movaps xmm1,[edi]
+deadspace3.exe+334376 - 8D 8E D0000000        - lea ecx,[esi+000000D0]
+deadspace3.exe+33437C - 8D 86 90000000        - lea eax,[esi+00000090]
+deadspace3.exe+334382 - 51                    - push ecx
+deadspace3.exe+334383 - 50                    - push eax
+deadspace3.exe+334384 - 0F29 08               - movaps [eax],xmm1
+deadspace3.exe+334387 - 0F29 86 B0000000      - movaps [esi+000000B0],xmm0			<< writes player character coords
+deadspace3.exe+33438E - E8 7D85CEFF           - call deadspace3.EARS::GamePadConfig::GamePadConfig+2340
+deadspace3.exe+334393 - D9 86 B0000000        - fld dword ptr [esi+000000B0]
+deadspace3.exe+334399 - D9 9E 00010000        - fstp dword ptr [esi+00000100]
+deadspace3.exe+33439F - 83 C4 08              - add esp,08 { 8 }
+deadspace3.exe+3343A2 - D9 86 B4000000        - fld dword ptr [esi+000000B4]
+deadspace3.exe+3343A8 - D9 9E 04010000        - fstp dword ptr [esi+00000104]
+deadspace3.exe+3343AE - D9 86 B8000000        - fld dword ptr [esi+000000B8]
+
+
+real camera:
+deadspace3.exe+6A6DF0 - D9EE                  - fldz 
+deadspace3.exe+6A6DF2 - D9C9                  - fxch st(1)
+deadspace3.exe+6A6DF4 - 8B 4D E4              - mov ecx,[ebp-1C]
+deadspace3.exe+6A6DF7 - 41                    - inc ecx
+deadspace3.exe+6A6DF8 - 89 4D E4              - mov [ebp-1C],ecx
+deadspace3.exe+6A6DFB - 83 F9 0C              - cmp ecx,0C { 12 }
+deadspace3.exe+6A6DFE - 0F82 15FCFFFF         - jb deadspace3.exe+6A6A19
+deadspace3.exe+6A6E04 - 0F28 45 B0            - movaps xmm0,[ebp-50]
+deadspace3.exe+6A6E08 - 0F29 06               - movaps [esi],xmm0			<<coords write
+deadspace3.exe+6A6E0B - 0F28 45 A0            - movaps xmm0,[ebp-60]
+deadspace3.exe+6A6E0F - 0F29 46 10            - movaps [esi+10],xmm0
+deadspace3.exe+6A6E13 - D9 46 24              - fld dword ptr [esi+24]
+deadspace3.exe+6A6E16 - 0F28 45 C0            - movaps xmm0,[ebp-40]
+deadspace3.exe+6A6E1A - D9 5D F8              - fstp dword ptr [ebp-08]
+deadspace3.exe+6A6E1D - D9 45 DC              - fld dword ptr [ebp-24]
+deadspace3.exe+6A6E20 - 0F29 46 20            - movaps [esi+20],xmm0 		<<rotation
+deadspace3.exe+6A6E24 - 8B 86 28020000        - mov eax,[esi+00000228]
+deadspace3.exe+6A6E2A - D9 5E 30              - fstp dword ptr [esi+30]		<<fov
+deadspace3.exe+6A6E2D - D9 45 E0              - fld dword ptr [ebp-20]
+deadspace3.exe+6A6E30 - 03 C0                 - add eax,eax
+deadspace3.exe+6A6E32 - D9 5E 34              - fstp dword ptr [esi+34]
+deadspace3.exe+6A6E35 - 8D 94 C6 68010000     - lea edx,[esi+eax*8+00000168]
+deadspace3.exe+6A6E3C - D9 45 F4              - fld dword ptr [ebp-0C]
+
+deadspace3.exe+6AD6FC - 89 4D FC              - mov [ebp-04],ecx
+deadspace3.exe+6AD6FF - 8B 77 1C              - mov esi,[edi+1C]
+deadspace3.exe+6AD702 - 03 75 FC              - add esi,[ebp-04]
+deadspace3.exe+6AD705 - 8B CE                 - mov ecx,esi
+deadspace3.exe+6AD707 - C6 86 44030000 01     - mov byte ptr [esi+00000344],01 { 1 }
+deadspace3.exe+6AD70E - E8 1D90FFFF           - call deadspace3.exe+6A6730		
+deadspace3.exe+6AD713 - 8B CE                 - mov ecx,esi
+deadspace3.exe+6AD715 - E8 A692FFFF           - call deadspace3.exe+6A69C0   <<call to camera script- nop to kill cam. ESI contains active camera
+deadspace3.exe+6AD71A - 8B CE                 - mov ecx,esi
+deadspace3.exe+6AD71C - C6 86 44030000 00     - mov byte ptr [esi+00000344],00 { 0 }
+deadspace3.exe+6AD723 - E8 F8EAFFFF           - call deadspace3.exe+6AC220
+deadspace3.exe+6AD728 - 8B CE                 - mov ecx,esi
+deadspace3.exe+6AD72A - E8 F19BFFFF           - call deadspace3.exe+6A7320
+deadspace3.exe+6AD72F - 8B 86 40030000        - mov eax,[esi+00000340]
+
+
+deadspace3.exe+6AD6E0 - 89 6C 24 04           - mov [esp+04],ebp
+deadspace3.exe+6AD6E4 - 8B EC                 - mov ebp,esp
+deadspace3.exe+6AD6E6 - 83 EC 38              - sub esp,38 { 56 }
+deadspace3.exe+6AD6E9 - 56                    - push esi
+deadspace3.exe+6AD6EA - 57                    - push edi
+deadspace3.exe+6AD6EB - 8B F9                 - mov edi,ecx
+deadspace3.exe+6AD6ED - 8B 87 74010000        - mov eax,[edi+00000174]		<<mov byte (1) into EAX. if set this to 0 it will kill camera writes, but makes lighting funky and kills torch etc
+deadspace3.exe+6AD6F3 - 33 C9                 - xor ecx,ecx
+deadspace3.exe+6AD6F5 - 89 4D F8              - mov [ebp-08],ecx
+deadspace3.exe+6AD6F8 - 3B C8                 - cmp ecx,eax
+deadspace3.exe+6AD6FA - 73 67                 - jae deadspace3.exe+6AD763
+deadspace3.exe+6AD6FC - 89 4D FC              - mov [ebp-04],ecx
+deadspace3.exe+6AD6FF - 8B 77 1C              - mov esi,[edi+1C]
+deadspace3.exe+6AD702 - 03 75 FC              - add esi,[ebp-04]
+deadspace3.exe+6AD705 - 8B CE                 - mov ecx,esi
+deadspace3.exe+6AD707 - C6 86 44030000 01     - mov byte ptr [esi+00000344],01 { 1 }
+
+timestop:
+deadspace3.exe+699CCA - 8B 55 F0              - mov edx,[ebp-10]
+deadspace3.exe+699CCD - 89 15 3C9A2A01        - mov [deadspace3.exe+EA9A3C],edx { (91068) }
+deadspace3.exe+699CD3 - D9 6D 0A              - fldcw [ebp+0A]
+deadspace3.exe+699CD6 - DD 05 9029D200        - fld qword ptr [deadspace3.exe+922990] { (1000.00) }
+deadspace3.exe+699CDC - DCF9                  - fdiv st(1),st(0)
+deadspace3.exe+699CDE - D9C9                  - fxch st(1)
+deadspace3.exe+699CE0 - D9 1D 449A2A01        - fstp dword ptr [deadspace3.exe+EA9A44] { (1519.31) }
+deadspace3.exe+699CE6 - DEF9                  - fdivp st(1),st(0)
+deadspace3.exe+699CE8 - FF 05 4C9A2A01        - inc [deadspace3.exe+EA9A4C] { (79492) }
+deadspace3.exe+699CEE - D9 1D 089B2A01        - fstp dword ptr [deadspace3.exe+EA9B08] { (0.03) }
+deadspace3.exe+699CF4 - E8 17640200           - call deadspace3.exe+6C0110
+deadspace3.exe+699CF9 - 84 C0                 - test al,al
+deadspace3.exe+699CFB - 0F85 6B010000         - jne deadspace3.exe+699E6C
+deadspace3.exe+699D01 - D9 05 64000D01        - fld dword ptr [deadspace3.exe+CD0064] { (1.00) }	<<timestop
+deadspace3.exe+699D07 - D9C0                  - fld st(0)
+deadspace3.exe+699D09 - DD 05 F0B8DB00        - fld qword ptr [deadspace3.exe+9BB8F0] { (1000000.00) }
+deadspace3.exe+699D0F - DCC9                  - fmul st(1),st(0)
+deadspace3.exe+699D11 - D9 05 089B2A01        - fld dword ptr [deadspace3.exe+EA9B08] { (0.03) }
+deadspace3.exe+699D17 - D9C0                  - fld st(0)
+deadspace3.exe+699D19 - DECB                  - fmulp st(3),st(0)
+deadspace3.exe+699D1B - DD 05 9005D200        - fld qword ptr [deadspace3.exe+920590] { (0.50) }
+deadspace3.exe+699D21 - DCC3                  - fadd st(3),st(0)
+deadspace3.exe+699D23 - D9CB                  - fxch st(3)
+deadspace3.exe+699D25 - E8 7C640E00           - call deadspace3.exe+7801A6
