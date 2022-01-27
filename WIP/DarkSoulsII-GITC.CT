@@ -1,0 +1,7329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"Timestop"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DarkSoulsII.exe
+  Version: 
+  Date   : 2021-07-11
+  Author : skall
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(timestop,DarkSoulsII.exe,E8 00 98 05 00) // should be unique
+alloc(newmem,$1000,"DarkSoulsII.exe"+AE941B)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //call DarkSoulsII.exe+B42C20
+  jmp return
+
+timestop:
+  jmp newmem
+return:
+registersymbol(timestop)
+
+[DISABLE]
+
+timestop:
+  db E8 00 98 05 00
+
+unregistersymbol(timestop)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "DarkSoulsII.exe"+AE941B
+
+"DarkSoulsII.exe"+AE93EF: 0F B6 B9 32 01 00 00     -  movzx edi,byte ptr [rcx+00000132]
+"DarkSoulsII.exe"+AE93F6: C6 81 38 01 00 00 01     -  mov byte ptr [rcx+00000138],01
+"DarkSoulsII.exe"+AE93FD: 74 0E                    -  je DarkSoulsII.exe+AE940D
+"DarkSoulsII.exe"+AE93FF: 48 8B 49 08              -  mov rcx,[rcx+08]
+"DarkSoulsII.exe"+AE9403: FF 15 D3 9F F7 00        -  call qword ptr [DarkSoulsII.exe+1A633DC]
+"DarkSoulsII.exe"+AE9409: 85 C0                    -  test eax,eax
+"DarkSoulsII.exe"+AE940B: 74 03                    -  je DarkSoulsII.exe+AE9410
+"DarkSoulsII.exe"+AE940D: 40 B7 01                 -  mov dil,01
+"DarkSoulsII.exe"+AE9410: 48 8D 8B D0 00 00 00     -  lea rcx,[rbx+000000D0]
+"DarkSoulsII.exe"+AE9417: 40 0F B6 D7              -  movzx edx,dil
+// ---------- INJECTING HERE ----------
+"DarkSoulsII.exe"+AE941B: E8 00 98 05 00           -  call DarkSoulsII.exe+B42C20
+// ---------- DONE INJECTING  ----------
+"DarkSoulsII.exe"+AE9420: 80 BB 58 01 00 00 00     -  cmp byte ptr [rbx+00000158],00
+"DarkSoulsII.exe"+AE9427: 48 8B 7C 24 30           -  mov rdi,[rsp+30]
+"DarkSoulsII.exe"+AE942C: 74 2E                    -  je DarkSoulsII.exe+AE945C
+"DarkSoulsII.exe"+AE942E: 8B 8B 54 01 00 00        -  mov ecx,[rbx+00000154]
+"DarkSoulsII.exe"+AE9434: FF C9                    -  dec ecx
+"DarkSoulsII.exe"+AE9436: 74 1C                    -  je DarkSoulsII.exe+AE9454
+"DarkSoulsII.exe"+AE9438: FF C9                    -  dec ecx
+"DarkSoulsII.exe"+AE943A: 74 0E                    -  je DarkSoulsII.exe+AE944A
+"DarkSoulsII.exe"+AE943C: FF C9                    -  dec ecx
+"DarkSoulsII.exe"+AE943E: 75 1C                    -  jne DarkSoulsII.exe+AE945C
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>223</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>562</ID>
+      <Description>"Camera pointer"</Description>
+      <Options moAlwaysHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DarkSoulsII.exe
+  Version: 
+  Date   : 2021-07-11
+  Author : skall
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+globalalloc(rotMemory, 0x100, "DarkSoulsII.exe"+B3E4A0)
+aobscanmodule(pointerCamera,DarkSoulsII.exe,0F 28 47 10 66 0F 7F 4B 20) // should be unique
+alloc(newmem,$1000,"DarkSoulsII.exe"+B3E4A0)
+registersymbol(pointerCamera)
+
+label(code)
+label(return)
+
+label(pCam)
+registersymbol(pCam)
+
+newmem:
+
+code:
+  movaps xmm0,[rdi+10]
+  mov [pCam],rdi
+  mov [rotMemory+50],rdi
+  movdqa [rbx+20],xmm1
+
+
+//one calc
+
+  movss xmm12,[rotMemory+10]
+  movss [rdi+10],xmm12
+  movss xmm12,[rotMemory+14]
+  movss [rdi+14],xmm12
+  movss xmm12,[rotMemory+18]
+  movss [rdi+18],xmm12
+
+//two calc
+
+  movss xmm12,[rotMemory+1C]
+  movss [rdi+20],xmm12
+  movss xmm12,[rotMemory+20]
+  movss [rdi+24],xmm12
+  movss xmm12,[rotMemory+24]
+  movss [rdi+28],xmm12
+
+//three calc
+
+  movss xmm12,[rotMemory+28]
+  movss [rdi+30],xmm12
+  movss xmm12,[rotMemory+2C]
+  movss [rdi+34],xmm12
+  movss xmm12,[rotMemory+30]
+  movss [rdi+38],xmm12
+
+//coords
+
+ // movss xmm12,[rotMemory+34]
+ // movss [rdi+40],xmm12
+ // movss xmm12,[rotMemory+38]
+ // movss [rdi+44],xmm12
+ // movss xmm12,[rotMemory+3C]
+ // movss [rdi+48],xmm12
+
+  jmp return
+
+pCam:
+dq 0
+
+pointerCamera:
+  jmp newmem
+  nop 4
+return:
+
+
+[DISABLE]
+rotMemory:
+db 00 00 00 00 00 00 00 00 00 00 00 00
+pointerCamera:
+  db 0F 28 47 10 66 0F 7F 4B 20
+
+unregistersymbol(pointerCamera)
+unregistersymbol(pCam)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "DarkSoulsII.exe"+B3E4A0
+
+"DarkSoulsII.exe"+B3E46A: 89 83 94 00 00 00        -  mov [rbx+00000094],eax
+"DarkSoulsII.exe"+B3E470: 8B 87 98 00 00 00        -  mov eax,[rdi+00000098]
+"DarkSoulsII.exe"+B3E476: 89 83 98 00 00 00        -  mov [rbx+00000098],eax
+"DarkSoulsII.exe"+B3E47C: 8B 87 9C 00 00 00        -  mov eax,[rdi+0000009C]
+"DarkSoulsII.exe"+B3E482: 89 83 9C 00 00 00        -  mov [rbx+0000009C],eax
+"DarkSoulsII.exe"+B3E488: 8B 87 A0 00 00 00        -  mov eax,[rdi+000000A0]
+"DarkSoulsII.exe"+B3E48E: 89 83 A0 00 00 00        -  mov [rbx+000000A0],eax
+"DarkSoulsII.exe"+B3E494: 0F 28 4F 20              -  movaps xmm1,[rdi+20]
+"DarkSoulsII.exe"+B3E498: 0F 28 57 30              -  movaps xmm2,[rdi+30]
+"DarkSoulsII.exe"+B3E49C: 0F 28 5F 40              -  movaps xmm3,[rdi+40]
+// ---------- INJECTING HERE ----------
+"DarkSoulsII.exe"+B3E4A0: 0F 28 47 10              -  movaps xmm0,[rdi+10]
+"DarkSoulsII.exe"+B3E4A4: 66 0F 7F 4B 20           -  movdqa [rbx+20],xmm1
+// ---------- DONE INJECTING  ----------
+"DarkSoulsII.exe"+B3E4A9: 66 0F 7F 53 30           -  movdqa [rbx+30],xmm2
+"DarkSoulsII.exe"+B3E4AE: 66 0F 7F 43 10           -  movdqa [rbx+10],xmm0
+"DarkSoulsII.exe"+B3E4B3: 66 0F 7F 5B 40           -  movdqa [rbx+40],xmm3
+"DarkSoulsII.exe"+B3E4B8: 48 8B 5C 24 48           -  mov rbx,[rsp+48]
+"DarkSoulsII.exe"+B3E4BD: 0F 28 74 24 20           -  movaps xmm6,[rsp+20]
+"DarkSoulsII.exe"+B3E4C2: 48 83 C4 30              -  add rsp,30
+"DarkSoulsII.exe"+B3E4C6: 5F                       -  pop rdi
+"DarkSoulsII.exe"+B3E4C7: C3                       -  ret 
+"DarkSoulsII.exe"+B3E4C8: 8B 8B D8 00 00 00        -  mov ecx,[rbx+000000D8]
+"DarkSoulsII.exe"+B3E4CE: 48 8B 83 B0 00 00 00     -  mov rax,[rbx+000000B0]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>567</ID>
+          <Description>"Row 1"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>563</ID>
+              <Description>"r1"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>566</ID>
+              <Description>"r2"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>14</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>565</ID>
+              <Description>"r3"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>18</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>564</ID>
+              <Description>"r4"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>1C</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>568</ID>
+          <Description>"Row 2"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>569</ID>
+              <Description>"r1"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>20</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>570</ID>
+              <Description>"r2"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>571</ID>
+              <Description>"r3"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>28</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>572</ID>
+              <Description>"r4"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>2C</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>573</ID>
+          <Description>"Row 3"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>574</ID>
+              <Description>"r1"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>575</ID>
+              <Description>"r2"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>576</ID>
+              <Description>"r3"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>577</ID>
+              <Description>"r4"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>578</ID>
+          <Description>"Coords"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>579</ID>
+              <Description>"X"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>40</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>102</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>100</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>580</ID>
+              <Description>"Y"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>44</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>105</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>103</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>581</ID>
+              <Description>"Z"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>48</Offset>
+              </Offsets>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>101</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>104</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>582</ID>
+              <Description>"W"</Description>
+              <VariableType>Float</VariableType>
+              <Address>pcam</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7251</ID>
+      <Description>"rotation matrix"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$lua}
+local halfDegToRad = 0.5 * math.pi / 180
+prevYaw = 0
+prevPitch = 0
+prevRoll = 0
+
+function calcQuaternion(rotMemory, yaw, pitch, roll)
+    --print("calcQuaternion")
+	pitch = pitch * halfDegToRad
+    yaw = yaw * halfDegToRad
+    roll = roll * halfDegToRad
+
+    local sx = math.sin(pitch)
+    local cx = math.cos(pitch)
+    local sy = math.sin(roll)
+    local cy = math.cos(roll)
+    local sz = math.sin(yaw)
+    local cz = math.cos(yaw)
+
+    --yzx
+    local r11 = cy*cz
+    local r12 = sz
+    local r13 = -sy*cz
+    local r21 = -cy*sz*cx+sy*sx
+    local r22 = cz*cx
+    local r23 = sy*sz*cx+cy*sx
+    local r31 = cy*sz*sx+sy*cx
+    local r32 = -cz*sx
+    local r33 = -sy*sz*sx+cy*cx
+
+    --xyz
+    --local r11 = cy*cz
+    --local r12 = sx*sy*cz + cx*sz
+    --local r13 = -cx*sy*cz + sx*sz
+    --local r21 = -cy*sz
+    --local r22 = -sx*sy*sz + cx*cz
+    --local r23 = cx*sy*sz+sx*cz
+    --local r31 = sy
+    --local r32 = -sx*cy
+    --local r33 = cx*cy
+
+    --xyz2
+    --local r11 = cy*cz
+    --local r12 = -cy*sz
+    --local r13 = sy
+    --local r21 = sx*sy*cz + cx*sz
+    --local r22 = -sx*sy*sz + cx*cz
+    --local r23 = -sx*cy
+    --local r31 = -cx*sy*cz + sx*sz
+    --local r32 = cx*sy*sz+sx*cz
+    --local r33 = cx*cy
+
+    --xzy
+    --local r11 = cz*cy
+    --local r12 = -sz
+    --local r13 = cz*sy
+    --local r21 = cx*sz*cy + sx*cy
+    --local r22 = cx*cz
+    --local r23 = cx*sz*sy-sx*cy
+    --local r31 = -sx*sz*cy-cx*sy
+    --local r32 = sx*cz
+    --local r33 = sx*sz*sy+cx*cy
+
+    --xzy2
+    --local r11 = cz*cy
+    --local r12 = -sz
+    --local r13 = cz*sy
+    --local r21 = cx*sz*cy + sx*cy
+    --local r22 = cx*cz
+    --local r23 = cx*sz*sy-sx*cy
+    --local r31 = -sx*sz*cy-cx*sy
+    --local r32 = sx*cz
+    --local r33 = sx*sz*sy+cx*cy
+
+    ---zxy
+    --local r11 = -sz*sx*sy+cz*cy
+    --local r12 = -sz*cx
+    --local r13 = sz*sx*sy+cz*sy
+    --local r21 = cz*sx*sy+sz*cy
+    --local r22 = cz*cx
+    --local r23 = -cz*cx*cy+sz*sy
+    --local r31 = -cx*sy
+    --local r32 = sx
+    --local r33 = cx*cy
+
+    --zyx
+    --local r11 = cz * cy
+    --local r12 = cz*sy*sx - sz*cx
+    --local r13 = cz*sy*cx + sz*sx
+    --local r21 = sz*cy
+    --local r22 = sz*sy*sx + cz*cx
+    --local r23 = sz*sy*cx - cz*sx
+    --local r31 = -sy
+    --local r32 = cy*sx
+    --local r33 = cy*cx
+
+    --yxz
+    --local r11 = sy*sx*sz + cy+cz
+    --local r12 = sy*sx*cz - cy*sz
+    --local r13 = sy*cx
+    --local r21 = cx*sz
+    --local r22 = cx*cz
+    --local r23 = -sx
+    --local r31 = cy*sx*sz - sy*cz
+    --local r32 = cy*sx*cz + sy*sz
+    --local r33 = cy*cx
+
+    --yxz2
+    --local r11 = sy*sx*sz + cy+cz
+    --local r12 = cx*sz
+    --local r13 = cy*sx*sz - sy*cz
+    --local r21 = sy*sx*cz - cy*sz
+    --local r22 = cx*cz
+    --local r23 = cy*sx*cz + sy*sz
+    --local r31 = sy*cx
+    --local r32 = -sx
+    --local r33 = cy*cx
+
+
+    --local w = cosY * cosX * cosZ + sinY * sinX * sinZ
+    --local x = cosY * sinX * cosZ + sinY * cosX * sinZ
+    --local y = sinY * cosX * cosZ - cosY * sinX * sinZ
+    --local z = cosY * cosX * sinZ - sinY * sinX * cosZ
+
+    writeFloat(rotMemory + 16, r11)
+    writeFloat(rotMemory + 20, r12)
+    writeFloat(rotMemory + 24, r13)
+    writeFloat(rotMemory + 28, r21)
+    writeFloat(rotMemory + 32, r22)
+    writeFloat(rotMemory + 36, r23)
+    writeFloat(rotMemory + 40, r31)
+    writeFloat(rotMemory + 44, r32)
+    writeFloat(rotMemory + 48, r33)
+end
+
+
+function timer_tick(timer)
+         --print("timer_tick")
+         local rotMemory = getAddressSafe("rotMemory")
+         if rotMemory == nil then
+            return
+         end
+
+         local yaw = readFloat(rotMemory)
+         local pitch = readFloat(rotMemory+4)
+         local roll = readFloat(rotMemory+8)
+
+         if yaw == prevYaw and pitch == prevPitch and roll == prevRoll then
+            return
+         end
+
+         calcQuaternion(rotMemory, yaw, pitch, roll)
+
+         prevYaw = yaw
+         prevPitch = pitch
+         prevRoll = roll
+end
+
+function init()
+         --print("init")
+         if timer == nil then
+            print("Creating timer")
+            timer = createTimer(nil, false)
+            timer.setInterval(10)
+            timer.OnTimer = timer_tick
+         else
+             timer.setEnabled(true)
+         end
+end
+
+function deinit()
+         --print("deinit")
+         timer.setEnabled(false)
+end
+
+
+{$asm}
+[ENABLE]
+globalalloc(rotMemory, 0x100, DarkSoulsII.exe+B3E4A0)
+{$lua}
+init()
+
+{$asm}
+[DISABLE]
+{$lua}
+deinit()
+{$asm}
+dealloc(rotMemory)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"Roll"</Description>
+          <LastState Value="0" RealAddress="7FF71A2B0000"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>97</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>99</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>58</ID>
+          <Description>"Yaw"</Description>
+          <LastState Value="0" RealAddress="7FF71A2B0008"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+8</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>37</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>39</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"Pitch"</Description>
+          <LastState Value="0" RealAddress="7FF71A2B0004"/>
+          <VariableType>Float</VariableType>
+          <Address>rotMemory+4</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>38</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>40</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7250</ID>
+      <Description>"Cam Address Pointer"</Description>
+      <LastState Value="00007FF4A6E2AE20" RealAddress="7FF71A2B0050"/>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>8 Bytes</VariableType>
+      <Address>rotMemory+50</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rcx+58],eax</Description>
+      <AddressString>DarkSoulsII.exe+36B223</AddressString>
+      <Before>
+        <Byte>4B</Byte>
+        <Byte>10</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>58</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>07</Byte>
+        <Byte>C7</Byte>
+        <Byte>40</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[rbx+00000094]</Description>
+      <AddressString>DarkSoulsII.exe+94E603</AddressString>
+      <Before>
+        <Byte>B1</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>94</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>39</Byte>
+        <Byte>83</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of cmp [rbx+00000090],eax</Description>
+      <AddressString>DarkSoulsII.exe+94E609</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>94</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>39</Byte>
+        <Byte>83</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>75</Byte>
+        <Byte>0C</Byte>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>47</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov byte ptr [rax+000000B1],01</Description>
+      <AddressString>DarkSoulsII.exe+94E5FC</AddressString>
+      <Before>
+        <Byte>0B</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>80</Byte>
+        <Byte>B1</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov rax,[rbx+18]</Description>
+      <AddressString>DarkSoulsII.exe+94E5F8</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>02</Byte>
+        <Byte>77</Byte>
+        <Byte>0B</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>80</Byte>
+        <Byte>B1</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of ja DarkSoulsII.exe+94E603</Description>
+      <AddressString>DarkSoulsII.exe+94E5F6</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>03</Byte>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>77</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>18</Byte>
+        <Byte>C6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov byte ptr [rbx+000000AF],08</Description>
+      <AddressString>DarkSoulsII.exe+952C99</AddressString>
+      <Before>
+        <Byte>32</Byte>
+        <Byte>C1</Byte>
+        <Byte>88</Byte>
+        <Byte>42</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>83</Byte>
+        <Byte>AF</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>A0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[rbx+000000A0]</Description>
+      <AddressString>DarkSoulsII.exe+952CA0</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>A0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>C0</Byte>
+        <Byte>79</Byte>
+        <Byte>07</Byte>
+        <Byte>05</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov rax,[rbx+00000090]</Description>
+      <AddressString>DarkSoulsII.exe+A32989</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>07</Byte>
+        <Byte>EB</Byte>
+        <Byte>FC</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>74</Byte>
+        <Byte>05</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,[rbx+000000E8]</Description>
+      <AddressString>DarkSoulsII.exe+A46896</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>E8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>02</Byte>
+        <Byte>74</Byte>
+        <Byte>0B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rcx+10],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+AE07EB</AddressString>
+      <Before>
+        <Byte>01</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4A</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>49</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>42</Byte>
+        <Byte>20</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rcx],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+AE07E3</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4A</Byte>
+        <Byte>10</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rcx+20],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+AE07F4</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>42</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>41</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4A</Byte>
+        <Byte>30</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rcx+30],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+AE07FD</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4A</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>49</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>C3</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rdi+rcx*8+000000A0],eax</Description>
+      <AddressString>DarkSoulsII.exe+48B7F1</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>03</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>84</Byte>
+        <Byte>CF</Byte>
+        <Byte>A0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>47</Byte>
+        <Byte>48</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+40],xmm3</Description>
+      <AddressString>DarkSoulsII.exe+B3E4B3</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>43</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>5B</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>5C</Byte>
+        <Byte>24</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm1,[DarkSoulsII.exe+10A55F0]</Description>
+      <AddressString>DarkSoulsII.exe+F48E71</AddressString>
+      <Before>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>0D</Byte>
+        <Byte>77</Byte>
+        <Byte>C7</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>72</Byte>
+        <Byte>0A</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm1,[DarkSoulsII.exe+10A4694]</Description>
+      <AddressString>DarkSoulsII.exe+F48E7B</AddressString>
+      <Before>
+        <Byte>C7</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+        <Byte>72</Byte>
+        <Byte>0A</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>0D</Byte>
+        <Byte>11</Byte>
+        <Byte>B8</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>08</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of subss xmm1,[DarkSoulsII.exe+10A4694]</Description>
+      <AddressString>DarkSoulsII.exe+F48E85</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+        <Byte>EB</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>0D</Byte>
+        <Byte>07</Byte>
+        <Byte>B8</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>2C</Byte>
+        <Byte>C1</Byte>
+        <Byte>4C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm1,xmm0</Description>
+      <AddressString>DarkSoulsII.exe+F48E6E</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C8</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>0D</Byte>
+        <Byte>77</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm4,[DarkSoulsII.exe+10A55F0]</Description>
+      <AddressString>DarkSoulsII.exe+37C625</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>89</Byte>
+        <Byte>5C</Byte>
+        <Byte>24</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>25</Byte>
+        <Byte>C3</Byte>
+        <Byte>8F</Byte>
+        <Byte>D2</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm1,[DarkSoulsII.exe+10A55F0]</Description>
+      <AddressString>DarkSoulsII.exe+A31BFA</AddressString>
+      <Before>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>0D</Byte>
+        <Byte>EE</Byte>
+        <Byte>39</Byte>
+        <Byte>67</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>72</Byte>
+        <Byte>0D</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm2,[DarkSoulsII.exe+10A55F0]</Description>
+      <AddressString>DarkSoulsII.exe+B939B6</AddressString>
+      <Before>
+        <Byte>C6</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>15</Byte>
+        <Byte>32</Byte>
+        <Byte>1C</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>15</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm10,[DarkSoulsII.exe+10A55F0]</Description>
+      <AddressString>DarkSoulsII.exe+B939BE</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>32</Byte>
+        <Byte>1C</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>15</Byte>
+        <Byte>29</Byte>
+        <Byte>1C</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>55</Byte>
+        <Byte>A0</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of divss xmm7,[DarkSoulsII.exe+10A55E4]</Description>
+      <AddressString>DarkSoulsII.exe+B93989</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>FE</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>3D</Byte>
+        <Byte>53</Byte>
+        <Byte>1C</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>FC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm0,[DarkSoulsII.exe+10B6A94]</Description>
+      <AddressString>DarkSoulsII.exe+B939F5</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>40</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>05</Byte>
+        <Byte>97</Byte>
+        <Byte>30</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>87</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+3FF26F</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0A</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>20</Byte>
+        <Byte>54</Byte>
+        <Byte>CA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>7A</Byte>
+        <Byte>07</Byte>
+        <Byte>75</Byte>
+        <Byte>05</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [rdi+000000B8],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+F0F5E0</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>87</Byte>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>10</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rdi+000000B8],00000000</Description>
+      <AddressString>DarkSoulsII.exe+F0F606</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>07</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>87</Byte>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>90</Byte>
+        <Byte>F0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm1,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+375192</AddressString>
+      <Before>
+        <Byte>8D</Byte>
+        <Byte>45</Byte>
+        <Byte>C0</Byte>
+        <Byte>EB</Byte>
+        <Byte>13</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>0D</Byte>
+        <Byte>07</Byte>
+        <Byte>F5</Byte>
+        <Byte>D2</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>45</Byte>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of divss xmm0,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+51B7A0</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>05</Byte>
+        <Byte>F8</Byte>
+        <Byte>8E</Byte>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>05</Byte>
+        <Byte>1C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm14,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+F75F7F</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>95</Byte>
+        <Byte>C6</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>35</Byte>
+        <Byte>18</Byte>
+        <Byte>E7</Byte>
+        <Byte>12</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C3</Byte>
+        <Byte>76</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm8,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+F739BD</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C6</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>05</Byte>
+        <Byte>DA</Byte>
+        <Byte>0C</Byte>
+        <Byte>13</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>2C</Byte>
+        <Byte>88</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm10,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+F75369</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>15</Byte>
+        <Byte>2E</Byte>
+        <Byte>F3</Byte>
+        <Byte>12</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>9C</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm11,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+F7A0E3</AddressString>
+      <Before>
+        <Byte>14</Byte>
+        <Byte>C4</Byte>
+        <Byte>8B</Byte>
+        <Byte>4B</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>B4</Byte>
+        <Byte>A5</Byte>
+        <Byte>12</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>74</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm7,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+F745AC</AddressString>
+      <Before>
+        <Byte>58</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>3D</Byte>
+        <Byte>EC</Byte>
+        <Byte>00</Byte>
+        <Byte>13</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>0B</Byte>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm0,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+626C5A</AddressString>
+      <Before>
+        <Byte>49</Byte>
+        <Byte>48</Byte>
+        <Byte>C1</Byte>
+        <Byte>E1</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>05</Byte>
+        <Byte>3E</Byte>
+        <Byte>DA</Byte>
+        <Byte>A7</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C8</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A46A0]</Description>
+      <AddressString>DarkSoulsII.exe+82B1A9</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>77</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>EF</Byte>
+        <Byte>94</Byte>
+        <Byte>87</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+9EC786</AddressString>
+      <Before>
+        <Byte>BF</Byte>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>4D</Byte>
+        <Byte>B7</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>05</Byte>
+        <Byte>0B</Byte>
+        <Byte>7F</Byte>
+        <Byte>6B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>0F</Byte>
+        <Byte>46</Byte>
+        <Byte>C1</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4B15BF</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>1C</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CA</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>D1</Byte>
+        <Byte>30</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>88</Byte>
+        <Byte>41</Byte>
+        <Byte>58</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm1,[DarkSoulsII.exe+10A4B14]</Description>
+      <AddressString>DarkSoulsII.exe+4B15CA</AddressString>
+      <Before>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+        <Byte>88</Byte>
+        <Byte>41</Byte>
+        <Byte>58</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>0D</Byte>
+        <Byte>42</Byte>
+        <Byte>35</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C2</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4B15A3</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>50</Byte>
+        <Byte>76</Byte>
+        <Byte>15</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>15</Byte>
+        <Byte>ED</Byte>
+        <Byte>30</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>41</Byte>
+        <Byte>1C</Byte>
+        <Byte>88</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+9F88A1</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>1A</Byte>
+        <Byte>0F</Byte>
+        <Byte>14</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>EF</Byte>
+        <Byte>BD</Byte>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>14</Byte>
+        <Byte>D1</Byte>
+        <Byte>0F</Byte>
+        <Byte>14</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+9EC679</AddressString>
+      <Before>
+        <Byte>E9</Byte>
+        <Byte>BD</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>17</Byte>
+        <Byte>80</Byte>
+        <Byte>6B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>46</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+85B366</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>BA</Byte>
+        <Byte>A5</Byte>
+        <Byte>3C</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>2A</Byte>
+        <Byte>93</Byte>
+        <Byte>84</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D6</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+AE050C</AddressString>
+      <Before>
+        <Byte>70</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>41</Byte>
+        <Byte>5C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>84</Byte>
+        <Byte>41</Byte>
+        <Byte>5C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of ucomiss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C2811E</AddressString>
+      <Before>
+        <Byte>2A</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+        <Byte>78</Byte>
+        <Byte>6A</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2E</Byte>
+        <Byte>15</Byte>
+        <Byte>73</Byte>
+        <Byte>C5</Byte>
+        <Byte>47</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>7A</Byte>
+        <Byte>0A</Byte>
+        <Byte>75</Byte>
+        <Byte>08</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B96337</AddressString>
+      <Before>
+        <Byte>C5</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>D1</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>59</Byte>
+        <Byte>E3</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C1</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B79929</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>14</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>67</Byte>
+        <Byte>AD</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C9</Byte>
+        <Byte>F3</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm0,[DarkSoulsII.exe+10A4694]</Description>
+      <AddressString>DarkSoulsII.exe+B79916</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>8A</Byte>
+        <Byte>B5</Byte>
+        <Byte>A5</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>05</Byte>
+        <Byte>76</Byte>
+        <Byte>AD</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>AD</Byte>
+        <Byte>18</Byte>
+        <Byte>CB</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4B0AB7</AddressString>
+      <Before>
+        <Byte>56</Byte>
+        <Byte>01</Byte>
+        <Byte>44</Byte>
+        <Byte>8B</Byte>
+        <Byte>C6</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>D9</Byte>
+        <Byte>3B</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B9DF50</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D3</Byte>
+        <Byte>75</Byte>
+        <Byte>0D</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>40</Byte>
+        <Byte>67</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>18</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+15D5B38]</Description>
+      <AddressString>DarkSoulsII.exe+B9DF68</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>C8</Byte>
+        <Byte>7B</Byte>
+        <Byte>A3</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>0D</Byte>
+        <Byte>C9</Byte>
+        <Byte>7B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of lea rcx,[DarkSoulsII.exe+15D5B40]</Description>
+      <AddressString>DarkSoulsII.exe+B9DF70</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>C8</Byte>
+        <Byte>7B</Byte>
+        <Byte>A3</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>0D</Byte>
+        <Byte>C9</Byte>
+        <Byte>7B</Byte>
+        <Byte>A3</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>04</Byte>
+        <Byte>24</Byte>
+        <Byte>C7</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+15D5B40]</Description>
+      <AddressString>DarkSoulsII.exe+B9DFB3</AddressString>
+      <Before>
+        <Byte>D8</Byte>
+        <Byte>30</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>85</Byte>
+        <Byte>7B</Byte>
+        <Byte>A3</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C1</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B82DFC</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>94</Byte>
+        <Byte>18</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4AEB98</AddressString>
+      <Before>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+        <Byte>44</Byte>
+        <Byte>8B</Byte>
+        <Byte>C3</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>F8</Byte>
+        <Byte>5A</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm13,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+2EA684</AddressString>
+      <Before>
+        <Byte>C7</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>2D</Byte>
+        <Byte>0B</Byte>
+        <Byte>A0</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>0A</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of subss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+BEABBA</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>F0</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>0D</Byte>
+        <Byte>D6</Byte>
+        <Byte>9A</Byte>
+        <Byte>4B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C1</Byte>
+        <Byte>76</Byte>
+        <Byte>0D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B7B646</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>15</Byte>
+        <Byte>4A</Byte>
+        <Byte>90</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>95</Byte>
+        <Byte>84</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm2,[DarkSoulsII.exe+10A4B14]</Description>
+      <AddressString>DarkSoulsII.exe+B7B632</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>65</Byte>
+        <Byte>44</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>15</Byte>
+        <Byte>DA</Byte>
+        <Byte>94</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C1</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+155DD</AddressString>
+      <Before>
+        <Byte>30</Byte>
+        <Byte>80</Byte>
+        <Byte>79</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>B3</Byte>
+        <Byte>F0</Byte>
+        <Byte>08</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>8B</Byte>
+        <Byte>F1</Byte>
+        <Byte>41</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B82C9F</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>F1</Byte>
+        <Byte>19</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>D5</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4AEEF8</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>44</Byte>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>98</Byte>
+        <Byte>57</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>53</Byte>
+        <Byte>01</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4AFFA2</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>EE</Byte>
+        <Byte>46</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B4A4B1</AddressString>
+      <Before>
+        <Byte>80</Byte>
+        <Byte>F9</Byte>
+        <Byte>0F</Byte>
+        <Byte>7D</Byte>
+        <Byte>2E</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>DF</Byte>
+        <Byte>A1</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>84</Byte>
+        <Byte>C9</Byte>
+        <Byte>78</Byte>
+        <Byte>0D</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm13,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+2ED1B2</AddressString>
+      <Before>
+        <Byte>35</Byte>
+        <Byte>0E</Byte>
+        <Byte>75</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>2D</Byte>
+        <Byte>DD</Byte>
+        <Byte>74</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>33</Byte>
+        <Byte>E4</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm15,[DarkSoulsII.exe+10A50CC]</Description>
+      <AddressString>DarkSoulsII.exe+2ED1CE</AddressString>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>4A</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>F5</Byte>
+        <Byte>7E</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>83</Byte>
+        <Byte>FD</Byte>
+        <Byte>05</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A55EC]</Description>
+      <AddressString>DarkSoulsII.exe+2ED1F5</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>E3</Byte>
+        <Byte>EF</Byte>
+        <Byte>37</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>EF</Byte>
+        <Byte>83</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>45</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rbp+50],42700000</Description>
+      <AddressString>DarkSoulsII.exe+2ED1FD</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>EF</Byte>
+        <Byte>83</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>45</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>70</Byte>
+        <Byte>42</Byte>
+      </Actual>
+      <After>
+        <Byte>C7</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rsp+40],41A00000</Description>
+      <AddressString>DarkSoulsII.exe+2ED204</AddressString>
+      <Before>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>70</Byte>
+        <Byte>42</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>A0</Byte>
+        <Byte>41</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>88</Byte>
+        <Byte>18</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm14,[DarkSoulsII.exe+10A46C0]</Description>
+      <AddressString>DarkSoulsII.exe+2ED1A9</AddressString>
+      <Before>
+        <Byte>01</Byte>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>43</Byte>
+        <Byte>09</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>0E</Byte>
+        <Byte>75</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>2D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B4B9BC</AddressString>
+      <Before>
+        <Byte>80</Byte>
+        <Byte>FA</Byte>
+        <Byte>0F</Byte>
+        <Byte>7D</Byte>
+        <Byte>32</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>D4</Byte>
+        <Byte>8C</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>84</Byte>
+        <Byte>D2</Byte>
+        <Byte>78</Byte>
+        <Byte>0D</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm2,[DarkSoulsII.exe+10A50CC]</Description>
+      <AddressString>DarkSoulsII.exe+B4BA16</AddressString>
+      <Before>
+        <Byte>8D</Byte>
+        <Byte>36</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>AE</Byte>
+        <Byte>96</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>FE</Byte>
+        <Byte>C1</Byte>
+        <Byte>41</Byte>
+        <Byte>88</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C0C0BC</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>D4</Byte>
+        <Byte>85</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>D1</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B33E08</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>73</Byte>
+        <Byte>B8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>88</Byte>
+        <Byte>08</Byte>
+        <Byte>57</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>7B</Byte>
+        <Byte>A8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B4C41D</AddressString>
+      <Before>
+        <Byte>47</Byte>
+        <Byte>44</Byte>
+        <Byte>8B</Byte>
+        <Byte>57</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>73</Byte>
+        <Byte>82</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>41</Byte>
+        <Byte>B8</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C0A5C7</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>D6</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>F0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>C9</Byte>
+        <Byte>A0</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>05</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>DF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm13,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+2FAF86</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>80</Byte>
+        <Byte>7B</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>2D</Byte>
+        <Byte>09</Byte>
+        <Byte>97</Byte>
+        <Byte>DA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>84</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+FFE490</AddressString>
+      <Before>
+        <Byte>87</Byte>
+        <Byte>94</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>FF</Byte>
+        <Byte>61</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D8</Byte>
+        <Byte>83</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+F4F614</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0C</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>7C</Byte>
+        <Byte>50</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+        <Byte>33</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm9,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B4BEF2</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>49</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>9D</Byte>
+        <Byte>87</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+2FD1D4</AddressString>
+      <Before>
+        <Byte>2D</Byte>
+        <Byte>F8</Byte>
+        <Byte>7E</Byte>
+        <Byte>DA</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>BC</Byte>
+        <Byte>74</Byte>
+        <Byte>DA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C0CA0B</AddressString>
+      <Before>
+        <Byte>50</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>38</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>85</Byte>
+        <Byte>7C</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>FE</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C0A1BD</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>D6</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>F0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>D3</Byte>
+        <Byte>A4</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>05</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>DF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C09B93</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>DD</Byte>
+        <Byte>3A</Byte>
+        <Byte>6F</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>FD</Byte>
+        <Byte>AA</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E9</Byte>
+        <Byte>E6</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+BFBF2B</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>4C</Byte>
+        <Byte>01</Byte>
+        <Byte>75</Byte>
+        <Byte>0A</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>65</Byte>
+        <Byte>87</Byte>
+        <Byte>4A</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>03</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>CE</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C11873</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>B8</Byte>
+        <Byte>23</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>1D</Byte>
+        <Byte>2E</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>2D</Byte>
+        <Byte>1E</Byte>
+        <Byte>2C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm5,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+C1187B</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>1D</Byte>
+        <Byte>2E</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>2D</Byte>
+        <Byte>1E</Byte>
+        <Byte>2C</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>C6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+AF349E</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>76</Byte>
+        <Byte>16</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>F2</Byte>
+        <Byte>11</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>2B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4B14]</Description>
+      <AddressString>DarkSoulsII.exe+AF3496</AddressString>
+      <Before>
+        <Byte>25</Byte>
+        <Byte>FE</Byte>
+        <Byte>11</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>76</Byte>
+        <Byte>16</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>F2</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm4,[DarkSoulsII.exe+10A4694]</Description>
+      <AddressString>DarkSoulsII.exe+AF348E</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>38</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>25</Byte>
+        <Byte>FE</Byte>
+        <Byte>11</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>76</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm11,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B93903</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>95</Byte>
+        <Byte>6D</Byte>
+        <Byte>09</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>8C</Byte>
+        <Byte>0D</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>58</Byte>
+        <Byte>45</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B95F89</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>07</Byte>
+        <Byte>E7</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+AF2FDE</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>B6</Byte>
+        <Byte>16</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>B2</Byte>
+        <Byte>16</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>2B</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B92039</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>57</Byte>
+        <Byte>26</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B95717</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>79</Byte>
+        <Byte>EF</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B95B50</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>40</Byte>
+        <Byte>EB</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B959F9</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>97</Byte>
+        <Byte>EC</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B9589B</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>65</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>F5</Byte>
+        <Byte>ED</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B92D70</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>20</Byte>
+        <Byte>19</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B94C88</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>6E</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>08</Byte>
+        <Byte>FA</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>5B</Byte>
+        <Byte>E4</Byte>
+        <Byte>0F</Byte>
+        <Byte>5B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm9,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8C426</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>07</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>69</Byte>
+        <Byte>82</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>5E</Byte>
+        <Byte>7C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8E845</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D6</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>4B</Byte>
+        <Byte>5E</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8E467</AddressString>
+      <Before>
+        <Byte>47</Byte>
+        <Byte>50</Byte>
+        <Byte>45</Byte>
+        <Byte>8B</Byte>
+        <Byte>CD</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>28</Byte>
+        <Byte>62</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C1</Byte>
+        <Byte>E0</Byte>
+        <Byte>02</Byte>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+C18D9A</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>46</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>0E</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>F6</Byte>
+        <Byte>B8</Byte>
+        <Byte>48</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>85</Byte>
+        <Byte>B0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm4,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8E0F6</AddressString>
+      <Before>
+        <Byte>BB</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>25</Byte>
+        <Byte>9A</Byte>
+        <Byte>65</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>F6</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B85654</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>07</Byte>
+        <Byte>33</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>3C</Byte>
+        <Byte>F0</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+AF3256</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>3E</Byte>
+        <Byte>14</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>3A</Byte>
+        <Byte>14</Byte>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>2B</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8FB32</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D7</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>5E</Byte>
+        <Byte>4B</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B7DDE4</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>9C</Byte>
+        <Byte>45</Byte>
+        <Byte>48</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>AC</Byte>
+        <Byte>68</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>6E</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B7DC2E</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>62</Byte>
+        <Byte>6A</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8DCD7</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>B9</Byte>
+        <Byte>69</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>E6</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8A4F4</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>FC</Byte>
+        <Byte>1B</Byte>
+        <Byte>CA</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>9C</Byte>
+        <Byte>A1</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>87</Byte>
+        <Byte>F8</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm7,[DarkSoulsII.exe+10B5118]</Description>
+      <AddressString>DarkSoulsII.exe+B8A4C4</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>3D</Byte>
+        <Byte>4C</Byte>
+        <Byte>AC</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>54</Byte>
+        <Byte>24</Byte>
+        <Byte>70</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm9,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B89710</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>44</Byte>
+        <Byte>C2</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>7F</Byte>
+        <Byte>AF</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>A4</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B7D54D</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>43</Byte>
+        <Byte>71</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+2FBD0C</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>83</Byte>
+        <Byte>7B</Byte>
+        <Byte>72</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>84</Byte>
+        <Byte>89</Byte>
+        <Byte>DA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>30</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B7F477</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>68</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>19</Byte>
+        <Byte>52</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>96</Byte>
+        <Byte>F0</Byte>
+        <Byte>03</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm4,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8F779</AddressString>
+      <Before>
+        <Byte>84</Byte>
+        <Byte>48</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>25</Byte>
+        <Byte>17</Byte>
+        <Byte>4F</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>7F</Byte>
+        <Byte>50</Byte>
+        <Byte>BA</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B89D9A</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D7</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>F6</Byte>
+        <Byte>A8</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8E95C</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>34</Byte>
+        <Byte>5D</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>E6</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B895C7</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D7</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>C9</Byte>
+        <Byte>B0</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B84815</AddressString>
+      <Before>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>7B</Byte>
+        <Byte>FE</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>E7</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4B1128</AddressString>
+      <Before>
+        <Byte>C3</Byte>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+        <Byte>4D</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>68</Byte>
+        <Byte>35</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8A325</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D7</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>6B</Byte>
+        <Byte>A3</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B98C0F</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>F1</Byte>
+        <Byte>13</Byte>
+        <Byte>64</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>80</Byte>
+        <Byte>BA</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>F4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B990CF</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>69</Byte>
+        <Byte>0F</Byte>
+        <Byte>64</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>C0</Byte>
+        <Byte>B5</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>34</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B8D6CC</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D7</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>C4</Byte>
+        <Byte>6F</Byte>
+        <Byte>51</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>DE</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B9BB08</AddressString>
+      <Before>
+        <Byte>47</Byte>
+        <Byte>14</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>88</Byte>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C1</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+4B1631</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>8F</Byte>
+        <Byte>30</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>5F</Byte>
+        <Byte>30</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4B</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B42EDA</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>46</Byte>
+        <Byte>58</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>B6</Byte>
+        <Byte>17</Byte>
+        <Byte>56</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>56</Byte>
+        <Byte>51</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B015D1</AddressString>
+      <Before>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>03</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>BE</Byte>
+        <Byte>30</Byte>
+        <Byte>5A</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>75</Byte>
+        <Byte>4A</Byte>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>03</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+96491E</AddressString>
+      <Before>
+        <Byte>B5</Byte>
+        <Byte>58</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>72</Byte>
+        <Byte>FD</Byte>
+        <Byte>73</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B4FB12</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>4E</Byte>
+        <Byte>16</Byte>
+        <Byte>E8</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>7E</Byte>
+        <Byte>4B</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>83</Byte>
+        <Byte>C3</Byte>
+        <Byte>29</Byte>
+        <Byte>BF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+2E3A15</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>28</Byte>
+        <Byte>20</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>0D</Byte>
+        <Byte>7C</Byte>
+        <Byte>0C</Byte>
+        <Byte>DC</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>8B</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm2,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+244F98</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>7C</Byte>
+        <Byte>FB</Byte>
+        <Byte>E5</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>F8</Byte>
+        <Byte>F6</Byte>
+        <Byte>E5</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>51</Byte>
+        <Byte>60</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm9,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+1F2560</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>2F</Byte>
+        <Byte>21</Byte>
+        <Byte>EB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B4</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+BB84CB</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>C5</Byte>
+        <Byte>C1</Byte>
+        <Byte>4E</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>D8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+E22FD2</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>A8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>BE</Byte>
+        <Byte>16</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>89</Byte>
+        <Byte>49</Byte>
+        <Byte>18</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+E23622</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>F8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>3D</Byte>
+        <Byte>6E</Byte>
+        <Byte>10</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E9</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+E238DC</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>43</Byte>
+        <Byte>74</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>05</Byte>
+        <Byte>B5</Byte>
+        <Byte>0D</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>73</Byte>
+        <Byte>5C</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>43</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+82B462</AddressString>
+      <Before>
+        <Byte>59</Byte>
+        <Byte>C3</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>2E</Byte>
+        <Byte>92</Byte>
+        <Byte>87</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>14</Byte>
+        <Byte>DA</Byte>
+        <Byte>0F</Byte>
+        <Byte>14</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm7,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+410707</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>49</Byte>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>48</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>3D</Byte>
+        <Byte>89</Byte>
+        <Byte>3F</Byte>
+        <Byte>C9</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4D</Byte>
+        <Byte>8B</Byte>
+        <Byte>C8</Byte>
+        <Byte>49</Byte>
+        <Byte>F7</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+414A72</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>90</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>1E</Byte>
+        <Byte>FC</Byte>
+        <Byte>C8</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>1F</Byte>
+        <Byte>44</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+62471B</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C6</Byte>
+        <Byte>76</Byte>
+        <Byte>0B</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>05</Byte>
+        <Byte>76</Byte>
+        <Byte>FF</Byte>
+        <Byte>A7</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>77</Byte>
+        <Byte>08</Byte>
+        <Byte>EB</Byte>
+        <Byte>03</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm14,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+62591C</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>75</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>73</Byte>
+        <Byte>ED</Byte>
+        <Byte>A7</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>8B</Byte>
+        <Byte>16</Byte>
+        <Byte>48</Byte>
+        <Byte>C1</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm14,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+62487E</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>76</Byte>
+        <Byte>90</Byte>
+        <Byte>AD</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>11</Byte>
+        <Byte>FE</Byte>
+        <Byte>A7</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>FF</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+6246CC</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C6</Byte>
+        <Byte>76</Byte>
+        <Byte>0E</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>05</Byte>
+        <Byte>C5</Byte>
+        <Byte>FF</Byte>
+        <Byte>A7</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>08</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D1</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+F2B6CA</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>C6</Byte>
+        <Byte>8F</Byte>
+        <Byte>17</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B9E272</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>41</Byte>
+        <Byte>2C</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>1E</Byte>
+        <Byte>64</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>41</Byte>
+        <Byte>24</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm4,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+14B2B</AddressString>
+      <Before>
+        <Byte>91</Byte>
+        <Byte>51</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>25</Byte>
+        <Byte>65</Byte>
+        <Byte>FB</Byte>
+        <Byte>08</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>89</Byte>
+        <Byte>6C</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+112A1</AddressString>
+      <Before>
+        <Byte>EB</Byte>
+        <Byte>03</Byte>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>C7</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>EE</Byte>
+        <Byte>33</Byte>
+        <Byte>09</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>B4</Byte>
+        <Byte>24</Byte>
+        <Byte>A0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of comiss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B63CC6</AddressString>
+      <Before>
+        <Byte>6E</Byte>
+        <Byte>C9</Byte>
+        <Byte>0F</Byte>
+        <Byte>5B</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>0D</Byte>
+        <Byte>CB</Byte>
+        <Byte>09</Byte>
+        <Byte>54</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>76</Byte>
+        <Byte>41</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+67902</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>60</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>8E</Byte>
+        <Byte>CD</Byte>
+        <Byte>03</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>45</Byte>
+        <Byte>33</Byte>
+        <Byte>F6</Byte>
+        <Byte>45</Byte>
+        <Byte>33</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+66E85</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>FE</Byte>
+        <Byte>14</Byte>
+        <Byte>72</Byte>
+        <Byte>81</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>35</Byte>
+        <Byte>0B</Byte>
+        <Byte>D8</Byte>
+        <Byte>03</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>85</Byte>
+        <Byte>ED</Byte>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>18</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+20B6B</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+        <Byte>FF</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>35</Byte>
+        <Byte>25</Byte>
+        <Byte>3B</Byte>
+        <Byte>08</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>C7</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of subss xmm0,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+B64BDD</AddressString>
+      <Before>
+        <Byte>6E</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>5B</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>05</Byte>
+        <Byte>B3</Byte>
+        <Byte>FA</Byte>
+        <Byte>53</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C1</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm3,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+30EF78</AddressString>
+      <Before>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>72</Byte>
+        <Byte>0A</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>1D</Byte>
+        <Byte>18</Byte>
+        <Byte>57</Byte>
+        <Byte>D9</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>EB</Byte>
+        <Byte>08</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm8,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+503561</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>40</Byte>
+        <Byte>98</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>2E</Byte>
+        <Byte>11</Byte>
+        <Byte>BA</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>F1</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of subss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+27DE72</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>F7</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>0D</Byte>
+        <Byte>1E</Byte>
+        <Byte>68</Byte>
+        <Byte>E2</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>F1</Byte>
+        <Byte>F3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm6,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+E1C460</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4C</Byte>
+        <Byte>87</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>35</Byte>
+        <Byte>30</Byte>
+        <Byte>82</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>74</Byte>
+        <Byte>86</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm1,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+6CA27A</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>1A</Byte>
+        <Byte>A4</Byte>
+        <Byte>9D</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>0D</Byte>
+        <Byte>16</Byte>
+        <Byte>A4</Byte>
+        <Byte>9D</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addss xmm4,[DarkSoulsII.exe+10A4698]</Description>
+      <AddressString>DarkSoulsII.exe+E7ABC1</AddressString>
+      <Before>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>25</Byte>
+        <Byte>CF</Byte>
+        <Byte>9A</Byte>
+        <Byte>22</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>25</Byte>
+        <Byte>C3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm1,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+2614</AddressString>
+      <Before>
+        <Byte>C0</Byte>
+        <Byte>AA</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>0D</Byte>
+        <Byte>85</Byte>
+        <Byte>1E</Byte>
+        <Byte>0A</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm4,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+1DEC88C</AddressString>
+      <Before>
+        <Byte>E9</Byte>
+        <Byte>87</Byte>
+        <Byte>55</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>25</Byte>
+        <Byte>0D</Byte>
+        <Byte>7C</Byte>
+        <Byte>2B</Byte>
+        <Byte>FF</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>2D</Byte>
+        <Byte>35</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+B791D9</AddressString>
+      <Before>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>C0</Byte>
+        <Byte>B2</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>0D</Byte>
+        <Byte>A9</Byte>
+        <Byte>A4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+B791FB</AddressString>
+      <Before>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>9E</Byte>
+        <Byte>B2</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>0D</Byte>
+        <Byte>97</Byte>
+        <Byte>A4</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm1,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+89B2F7</AddressString>
+      <Before>
+        <Byte>C4</Byte>
+        <Byte>99</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>0D</Byte>
+        <Byte>A2</Byte>
+        <Byte>91</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>5E</Byte>
+        <Byte>CA</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm3,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+9EC6A9</AddressString>
+      <Before>
+        <Byte>74</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>DC</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>1D</Byte>
+        <Byte>F0</Byte>
+        <Byte>7D</Byte>
+        <Byte>6B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>12</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+85B2C0</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>F8</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>05</Byte>
+        <Byte>D9</Byte>
+        <Byte>91</Byte>
+        <Byte>84</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>74</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm2,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+9EC7B1</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>CA</Byte>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>15</Byte>
+        <Byte>E8</Byte>
+        <Byte>7C</Byte>
+        <Byte>6B</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>D1</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+89B37B</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>1E</Byte>
+        <Byte>91</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>CB</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+B79B81</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>18</Byte>
+        <Byte>A9</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>0D</Byte>
+        <Byte>01</Byte>
+        <Byte>9B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+B79BA3</AddressString>
+      <Before>
+        <Byte>5B</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>F6</Byte>
+        <Byte>A8</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>0D</Byte>
+        <Byte>EF</Byte>
+        <Byte>9A</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm3,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+B7971D</AddressString>
+      <Before>
+        <Byte>58</Byte>
+        <Byte>D1</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>1D</Byte>
+        <Byte>7C</Byte>
+        <Byte>AD</Byte>
+        <Byte>52</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+85A3E1</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>05</Byte>
+        <Byte>B8</Byte>
+        <Byte>A0</Byte>
+        <Byte>84</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>D8</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm1,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+86B1A9</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>C2</Byte>
+        <Byte>C1</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>0D</Byte>
+        <Byte>F0</Byte>
+        <Byte>92</Byte>
+        <Byte>83</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>76</Byte>
+        <Byte>D0</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+B9DDE4</AddressString>
+      <Before>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>05</Byte>
+        <Byte>B5</Byte>
+        <Byte>66</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm2,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BA312D</AddressString>
+      <Before>
+        <Byte>C1</Byte>
+        <Byte>A4</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>15</Byte>
+        <Byte>6C</Byte>
+        <Byte>13</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>42</Byte>
+        <Byte>50</Byte>
+        <Byte>33</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm2,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BA3191</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>7F</Byte>
+        <Byte>BF</Byte>
+        <Byte>58</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>15</Byte>
+        <Byte>08</Byte>
+        <Byte>13</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>F6</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of addps xmm2,[DarkSoulsII.exe+112EEF0]</Description>
+      <AddressString>DarkSoulsII.exe+BA3140</AddressString>
+      <Before>
+        <Byte>56</Byte>
+        <Byte>D0</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>D1</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>15</Byte>
+        <Byte>A9</Byte>
+        <Byte>BD</Byte>
+        <Byte>58</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D2</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm2,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BA33BC</AddressString>
+      <Before>
+        <Byte>CE</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>47</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>15</Byte>
+        <Byte>DD</Byte>
+        <Byte>10</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>D0</Byte>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm2,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+A2E5FC</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>34</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>15</Byte>
+        <Byte>9D</Byte>
+        <Byte>5E</Byte>
+        <Byte>67</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C9</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BE164E</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>4B</Byte>
+        <Byte>2E</Byte>
+        <Byte>4C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>0D</Byte>
+        <Byte>C4</Byte>
+        <Byte>D9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BE166D</AddressString>
+      <Before>
+        <Byte>54</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>2C</Byte>
+        <Byte>2E</Byte>
+        <Byte>4C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>15</Byte>
+        <Byte>95</Byte>
+        <Byte>D9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of minps xmm3,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+4AEAA3</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>0D</Byte>
+        <Byte>5A</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5D</Byte>
+        <Byte>1D</Byte>
+        <Byte>F6</Byte>
+        <Byte>59</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>1D</Byte>
+        <Byte>4F</Byte>
+        <Byte>67</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+85A7F6</AddressString>
+      <Before>
+        <Byte>54</Byte>
+        <Byte>EF</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>F7</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>05</Byte>
+        <Byte>A3</Byte>
+        <Byte>9C</Byte>
+        <Byte>84</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>E8</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BE19B6</AddressString>
+      <Before>
+        <Byte>54</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>C8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>E3</Byte>
+        <Byte>2A</Byte>
+        <Byte>4C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>0F</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+BE19D0</AddressString>
+      <Before>
+        <Byte>54</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>D0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>C9</Byte>
+        <Byte>2A</Byte>
+        <Byte>4C</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>57</Byte>
+        <Byte>10</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of minps xmm2,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+4A9EBF</AddressString>
+      <Before>
+        <Byte>15</Byte>
+        <Byte>F1</Byte>
+        <Byte>A5</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>5D</Byte>
+        <Byte>15</Byte>
+        <Byte>DA</Byte>
+        <Byte>A5</Byte>
+        <Byte>BF</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>15</Byte>
+        <Byte>33</Byte>
+        <Byte>B3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+2EB943</AddressString>
+      <Before>
+        <Byte>5C</Byte>
+        <Byte>CB</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>05</Byte>
+        <Byte>56</Byte>
+        <Byte>8B</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>0A</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+2EA61B</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>05</Byte>
+        <Byte>7E</Byte>
+        <Byte>9E</Byte>
+        <Byte>DB</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>93</Byte>
+        <Byte>F0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andps xmm3,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+85A969</AddressString>
+      <Before>
+        <Byte>28</Byte>
+        <Byte>CC</Byte>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>27</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>1D</Byte>
+        <Byte>30</Byte>
+        <Byte>9B</Byte>
+        <Byte>84</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>C8</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of andnps xmm0,[DarkSoulsII.exe+10A44A0]</Description>
+      <AddressString>DarkSoulsII.exe+31436D</AddressString>
+      <Before>
+        <Byte>5C</Byte>
+        <Byte>CB</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>D8</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>55</Byte>
+        <Byte>05</Byte>
+        <Byte>2C</Byte>
+        <Byte>01</Byte>
+        <Byte>D9</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jb DarkSoulsII.exe+F48E85</Description>
+      <AddressString>DarkSoulsII.exe+F48E79</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>77</Byte>
+        <Byte>C7</Byte>
+        <Byte>15</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>72</Byte>
+        <Byte>0A</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>0D</Byte>
+        <Byte>11</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of xorps xmm0,xmm0</Description>
+      <AddressString>DarkSoulsII.exe+F48E6B</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C8</Byte>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[rsp+50]</Description>
+      <AddressString>DarkSoulsII.exe+F48E65</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>FF</Byte>
+        <Byte>50</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss [rsp+48],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+F48E4F</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>DA</Byte>
+        <Byte>4C</Byte>
+        <Byte>8B</Byte>
+        <Byte>C2</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>11</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>48</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>01</Byte>
+        <Byte>4C</Byte>
+        <Byte>8D</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rsp+20],eax</Description>
+      <AddressString>DarkSoulsII.exe+F48E99</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>D3</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>07</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jne DarkSoulsII.exe+B939B6</Description>
+      <AddressString>DarkSoulsII.exe+B939AF</AddressString>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>DB</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>05</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je DarkSoulsII.exe+B939B1</Description>
+      <AddressString>DarkSoulsII.exe+B939A5</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>80</Byte>
+        <Byte>7D</Byte>
+        <Byte>76</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>0A</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>88</Byte>
+        <Byte>64</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[rcx]</Description>
+      <AddressString>DarkSoulsII.exe+A31BF0</AddressString>
+      <Before>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+        <Byte>CC</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>09</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>C0</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rsp+14],447A0000</Description>
+      <AddressString>DarkSoulsII.exe+37C618</AddressString>
+      <Before>
+        <Byte>49</Byte>
+        <Byte>08</Byte>
+        <Byte>0F</Byte>
+        <Byte>57</Byte>
+        <Byte>DB</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>14</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>7A</Byte>
+        <Byte>44</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>89</Byte>
+        <Byte>5C</Byte>
+        <Byte>24</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+10BF8C8]</Description>
+      <AddressString>DarkSoulsII.exe+37C5F3</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>CD</Byte>
+        <Byte>32</Byte>
+        <Byte>D4</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm1,[DarkSoulsII.exe+10DD204]</Description>
+      <AddressString>DarkSoulsII.exe+37C5FB</AddressString>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>CD</Byte>
+        <Byte>32</Byte>
+        <Byte>D4</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>0D</Byte>
+        <Byte>01</Byte>
+        <Byte>0C</Byte>
+        <Byte>D6</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>15</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rsp],447A0000</Description>
+      <AddressString>DarkSoulsII.exe+37C67F</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>48</Byte>
+        <Byte>8D</Byte>
+        <Byte>41</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>04</Byte>
+        <Byte>24</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>7A</Byte>
+        <Byte>44</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>D8</Byte>
+        <Byte>C7</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mulss xmm7,[DarkSoulsII.exe+10A55F0]</Description>
+      <AddressString>DarkSoulsII.exe+B42D67</AddressString>
+      <Before>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>FA</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>3D</Byte>
+        <Byte>81</Byte>
+        <Byte>28</Byte>
+        <Byte>56</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>2C</Byte>
+        <Byte>DF</Byte>
+        <Byte>85</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movss xmm0,[DarkSoulsII.exe+11D3A70]</Description>
+      <AddressString>DarkSoulsII.exe+B42D49</AddressString>
+      <Before>
+        <Byte>84</Byte>
+        <Byte>FB</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>1F</Byte>
+        <Byte>0D</Byte>
+        <Byte>69</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>2F</Byte>
+        <Byte>C2</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je DarkSoulsII.exe+B42E44</Description>
+      <AddressString>DarkSoulsII.exe+B42D43</AddressString>
+      <Before>
+        <Byte>4E</Byte>
+        <Byte>0C</Byte>
+        <Byte>40</Byte>
+        <Byte>84</Byte>
+        <Byte>ED</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>FB</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>05</Byte>
+        <Byte>1F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps xmm7,xmm11</Description>
+      <AddressString>DarkSoulsII.exe+B42D5E</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>FF</Byte>
+        <Byte>46</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>FB</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>FA</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of subss xmm7,xmm10</Description>
+      <AddressString>DarkSoulsII.exe+B42D62</AddressString>
+      <Before>
+        <Byte>10</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>FB</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>5C</Byte>
+        <Byte>FA</Byte>
+      </Actual>
+      <After>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>59</Byte>
+        <Byte>3D</Byte>
+        <Byte>81</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call DarkSoulsII.exe+B42C20</Description>
+      <AddressString>DarkSoulsII.exe+AE941B</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>40</Byte>
+        <Byte>0F</Byte>
+        <Byte>B6</Byte>
+        <Byte>D7</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>00</Byte>
+        <Byte>98</Byte>
+        <Byte>05</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>BB</Byte>
+        <Byte>58</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+50],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+2353</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>43</Byte>
+        <Byte>50</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+20],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+B3E4A4</AddressString>
+      <Before>
+        <Byte>40</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>47</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4B</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>53</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+60],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+235D</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>50</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4B</Byte>
+        <Byte>60</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>60</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rdi+10],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+494690</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+10],xmm5</Description>
+      <AddressString>DarkSoulsII.exe+49549E</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>D2</Byte>
+        <Byte>EF</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>6B</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>43</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rsi+10],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+498DA7</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D3</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>46</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rsi+20],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+498DB0</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4E</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>40</Byte>
+        <Byte>20</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rsi+30],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+498DB9</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>40</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>46</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>30</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rsi+40],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+498DC2</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4E</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>34</Byte>
+        <Byte>B4</Byte>
+        <Byte>B6</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+20],xmm3</Description>
+      <AddressString>DarkSoulsII.exe+4954EC</AddressString>
+      <Before>
+        <Byte>55</Byte>
+        <Byte>CD</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>5B</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>BB</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+40],xmm7</Description>
+      <AddressString>DarkSoulsII.exe+4954F9</AddressString>
+      <Before>
+        <Byte>BB</Byte>
+        <Byte>90</Byte>
+        <Byte>06</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>7B</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>57</Byte>
+        <Byte>10</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rdi+20],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+49469A</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4F</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rdi+30],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+49469F</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>77</Byte>
+        <Byte>40</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rdi+40],xmm6</Description>
+      <AddressString>DarkSoulsII.exe+4946A4</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>77</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>B4</Byte>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movdqa [rbx+30],xmm8</Description>
+      <AddressString>DarkSoulsII.exe+4954A3</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>43</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>D9</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movaps [rsi+40],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+498F2C</AddressString>
+      <Before>
+        <Byte>40</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>C6</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>46</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>8E</Byte>
+        <Byte>40</Byte>
+        <Byte>06</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Start of writes</Description>
+      <AddressString>DarkSoulsII.exe+498DC2</AddressString>
+      <Before>
+        <Byte>30</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4E</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>34</Byte>
+        <Byte>B4</Byte>
+        <Byte>B6</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movaps [rsi+40],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+498F2C</AddressString>
+      <Before>
+        <Byte>40</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>C6</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>46</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>8E</Byte>
+        <Byte>40</Byte>
+        <Byte>06</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rbx+40],xmm7</Description>
+      <AddressString>DarkSoulsII.exe+4954F9</AddressString>
+      <Before>
+        <Byte>BB</Byte>
+        <Byte>90</Byte>
+        <Byte>06</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>7B</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>57</Byte>
+        <Byte>10</Byte>
+        <Byte>44</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rdi+40],xmm6</Description>
+      <AddressString>DarkSoulsII.exe+4946A4</AddressString>
+      <Before>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>77</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>B4</Byte>
+        <Byte>24</Byte>
+        <Byte>D0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rsi+10],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+498DA7</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>D3</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>46</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rbx+10],xmm5</Description>
+      <AddressString>DarkSoulsII.exe+49549E</AddressString>
+      <Before>
+        <Byte>1D</Byte>
+        <Byte>D2</Byte>
+        <Byte>EF</Byte>
+        <Byte>C0</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>6B</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>43</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rdi+10],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+494690</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>4C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>10</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rsi+20],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+498DB0</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4E</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>40</Byte>
+        <Byte>20</Byte>
+        <Byte>66</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rbx+20],xmm3</Description>
+      <AddressString>DarkSoulsII.exe+4954EC</AddressString>
+      <Before>
+        <Byte>55</Byte>
+        <Byte>CD</Byte>
+        <Byte>0F</Byte>
+        <Byte>56</Byte>
+        <Byte>D9</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>5B</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>BB</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rdi+20],xmm1</Description>
+      <AddressString>DarkSoulsII.exe+49469A</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>40</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>4F</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rsi+30],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+498DB9</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>40</Byte>
+        <Byte>20</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>46</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>0F</Byte>
+        <Byte>28</Byte>
+        <Byte>48</Byte>
+        <Byte>30</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rbx+30],xmm8</Description>
+      <AddressString>DarkSoulsII.exe+4954A3</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>44</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>43</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>54</Byte>
+        <Byte>D9</Byte>
+        <Byte>41</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movdqa [rdi+30],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+49469F</AddressString>
+      <Before>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>0F</Byte>
+        <Byte>7F</Byte>
+        <Byte>47</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>Change of movaps [rbx+40],xmm0</Description>
+      <AddressString>DarkSoulsII.exe+495605</AddressString>
+      <Before>
+        <Byte>C7</Byte>
+        <Byte>41</Byte>
+        <Byte>0F</Byte>
+        <Byte>58</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>29</Byte>
+        <Byte>43</Byte>
+        <Byte>40</Byte>
+      </Actual>
+      <After>
+        <Byte>80</Byte>
+        <Byte>BB</Byte>
+        <Byte>F8</Byte>
+        <Byte>07</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>rotMemory</Name>
+      <Address>7FF71A2B0000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

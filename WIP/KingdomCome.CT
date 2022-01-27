@@ -1,0 +1,1466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3645</ID>
+      <Description>"-- Disable CE HotKeys LUA script"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+getHotkeyHandlerThread().State='htsDisabled'
+
+[DISABLE]
+{$lua}
+getHotkeyHandlerThread().State='htsActive'
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3646</ID>
+      <Description>"Kingdome Come: Deliverance AOB script"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// Game Executable   : KingdomCome.exe
+// Author            : Cs
+// Executable Version: 1.9.4.0
+// Module Version    : 
+// Script Date       : 2020-07-19
+// Created with      : customAOBInjectionTemplates version: 1.3.6
+[ENABLE]
+aobscanmodule(aobMoveSpeedCalc,WHGame.DLL,F3 0F 58 86 ?? ?? 00 00 F3 41 0F 10 56 ?? F3 0F 58 96 ?? ?? 00 00 F3 41 0F 10 4E ?? F3 0F 58 8E ?? ?? 00 00)
+aobscanmodule(aobPlayerEntityGrabber,WHGame.DLL,48 8B 89 ?? ?? 00 00 8A DA 48 8B)
+aobscanmodule(aobPlayerMovementOffset,WHGame.DLL,4C 39 BF ?? ?? 00 00 0F 84 ?? ?? ?? ?? 4C 89 BD ?? ?? 00 00)
+aobscanmodule(aobVitalStatsOffset,WHGame.DLL,48 8B BF ?? ?? 00 00 48 8B 9B ?? ?? 00 00 E8 ?? ?? ?? ?? E8)
+aobscanmodule(aobDamageCalc,WHGame.DLL,F3 0F 58 53 ?? E8 ?? ?? ?? ?? F3 0F 11 43)
+aobscanmodule(aobVisibilityCalc,WHGame.DLL,F3 45 0F 11 55 ?? F3 45 0F 11 4D ?? 45)
+aobscanmodule(aobNoiseCalc,WHGame.DLL,F3 0F 11 47 ?? F3 0F 10 45 ?? F3 0F 5E)
+aobscanmodule(aobWeightCalc,WHGame.DLL,66 0F 6E 4B ?? 48 8B 47 ?? 48 8B 5C 24 ?? 0F 5B C9)
+aobscanmodule(aobNourishmentChecker,WHGame.DLL,F3 0F 10 80 ?? ?? 00 00 0F 2F 83 ?? ?? 00 00 0F 97 C0 48 83 C4 20 5B C3)
+aobscanmodule(aobXPGainMod,WHGame.DLL,4C 8D 44 24 ?? 89 44 24 ?? 48 8B CE E8)
+aobscanmodule(aobItemCountUpdater,WHGame.DLL,01 51 ?? 85 D2 74 ?? 44)
+aobscanmodule(aobInjuryReader,WHGame.DLL,8B 86 ?? ?? 00 00 89 45 ?? 48 8D 45 ?? 48 89 44 24 ?? 48 8D)
+aobscanmodule(aobQualityUpdater1,WHGame.DLL,F3 0F 10 43 ?? 0F 28 CE E8)
+aobscanmodule(aobQualityUpdater2,WHGame.DLL,F3 0F 11 41 ?? E8 ?? ?? ?? ?? 48)
+aobscanmodule(aobFOVReader,WHGame.DLL,F3 0F 10 81 ?? ?? ?? ?? F3 0F 59 05 ?? ?? ?? ?? F3 44)
+aobscanmodule(aobJumpHeightCalc,WHGame.DLL,F3 0F 58 C0 F3 0F 59 C6 E8)
+aobscanmodule(aobVitalStatUpdater,WHGame.DLL,F3 0F 11 B4 B3 04 05 00 00)
+aobscanmodule(aobDiceGameControl,WHGame.DLL,8B 46 ?? 39 47 ?? 7C ?? B8 01 00 00 00)
+aobscanmodule(aobDiceAIOffset,WHGame.DLL,48 83 B8 ?? ?? 00 00 00 75 ?? F3 0F 58)
+aobscanmodule(aobDiceRequirementOffset,WHGame.DLL,44 8B 51 ?? 41 8B 4F ?? 44)
+
+alloc(newmemMoveSpeedCalc,4096,aobMoveSpeedCalc)
+
+label(aobMoveSpeedCalc_r)
+label(aobMoveSpeedCalc_i)
+registersymbol(aobMoveSpeedCalc_r)
+registersymbol(aobMoveSpeedCalc_i)
+
+label(lblMoveSpeedCalc)
+label(lblMoveSpeedCalcSkip)
+label(lblMoveSpeedCalcRet)
+
+label(bEnableMoveSpeedMod)
+label(fMoveSpeedMod)
+registersymbol(bEnableMoveSpeedMod)
+registersymbol(fMoveSpeedMod)
+
+label(aobPlayerEntityGrabber_r)
+label(aobPlayerEntityGrabber_i)
+registersymbol(aobPlayerEntityGrabber_r)
+registersymbol(aobPlayerEntityGrabber_i)
+
+label(lblPlayerEntityGrabber)
+label(lblPlayerEntityGrabberSkip)
+label(lblPlayerEntityGrabberRet)
+
+label(pPlayerEntity)
+label(pPlayerVitals)
+label(iPlayerMovementOffset)
+label(iEntityVitalsOffset)
+label(iVitalStatsOffset)
+registersymbol(pPlayerEntity)
+registersymbol(pPlayerVitals)
+registersymbol(iPlayerMovementOffset)
+registersymbol(iEntityVitalsOffset)
+registersymbol(iVitalStatsOffset)
+
+label(aobDamageCalc_r)
+label(aobDamageCalc_i)
+registersymbol(aobDamageCalc_r)
+registersymbol(aobDamageCalc_i)
+
+label(lblDamageCalc)
+label(lblDamageCalcSkip)
+label(lblDamageCalcRet)
+label(lblDamageCalcNonPlayer)
+
+label(bEnablePlayerDamageMod)
+label(fPlayerDamageMod)
+label(bEnableNonPlayerDamageMod)
+label(fNonPlayerDamageMod)
+registersymbol(bEnablePlayerDamageMod)
+registersymbol(fPlayerDamageMod)
+registersymbol(bEnableNonPlayerDamageMod)
+registersymbol(fNonPlayerDamageMod)
+
+label(aobVisibilityCalc_r)
+label(aobVisibilityCalc_i)
+registersymbol(aobVisibilityCalc_r)
+registersymbol(aobVisibilityCalc_i)
+
+label(lblVisibilityCalc)
+label(lblVisibilityCalcSkip)
+label(lblVisibilityCalcRet)
+
+label(bEnableZeroVisibility)
+label(bEnableZeroConspicuous)
+registersymbol(bEnableZeroVisibility)
+registersymbol(bEnableZeroConspicuous)
+
+label(fForcedVal)
+
+label(aobNoiseCalc_r)
+label(aobNoiseCalc_i)
+registersymbol(aobNoiseCalc_r)
+registersymbol(aobNoiseCalc_i)
+
+label(lblNoiseCalc)
+label(lblNoiseCalcSkip)
+label(lblNoiseCalcRet)
+
+label(bEnableZeroNoise)
+label(fNoiseVal)
+registersymbol(bEnableZeroNoise)
+registersymbol(fNoiseVal)
+
+label(aobWeightCalc_r)
+label(aobWeightCalc_i)
+registersymbol(aobWeightCalc_r)
+registersymbol(aobWeightCalc_i)
+
+label(lblWeightCalc)
+label(lblWeightCalcSkip)
+label(lblWeightCalcRet)
+
+label(bEnableZeroWeight)
+label(bEnableMinMoney)
+label(iMinMoney)
+label(bEnableMinSchnapps)
+label(iMinSchnapps)
+label(bEnableMinLockpicks)
+label(iMinLockpicks)
+label(bEnableMinArrows)
+label(iMinArrows)
+registersymbol(bEnableZeroWeight)
+registersymbol(bEnableMinMoney)
+registersymbol(iMinMoney)
+registersymbol(bEnableMinSchnapps)
+registersymbol(iMinSchnapps)
+registersymbol(bEnableMinLockpicks)
+registersymbol(iMinLockpicks)
+registersymbol(bEnableMinArrows)
+registersymbol(iMinArrows)
+
+label(aobNourishmentChecker_r)
+label(aobNourishmentChecker_i)
+registersymbol(aobNourishmentChecker_r)
+registersymbol(aobNourishmentChecker_i)
+
+label(lblNourishmentChecker)
+label(lblNourishmentCheckerSkip)
+label(lblNourishmentCheckerRet)
+
+label(bEnableMinHealth)
+label(fMinHealth)
+label(bEnableMinStamina)
+label(fMinStamina)
+label(bEnableMinEnergy)
+label(fMinEnergy)
+label(bEnableMinNourishment)
+label(fMinNourishment)
+registersymbol(bEnableMinHealth)
+registersymbol(fMinHealth)
+registersymbol(bEnableMinStamina)
+registersymbol(fMinStamina)
+registersymbol(bEnableMinEnergy)
+registersymbol(fMinEnergy)
+registersymbol(bEnableMinNourishment)
+registersymbol(fMinNourishment)
+
+label(aobXPGainMod_r)
+label(aobXPGainMod_i)
+registersymbol(aobXPGainMod_r)
+registersymbol(aobXPGainMod_i)
+
+label(lblXPGainMod)
+label(lblXPGainModSkip)
+label(lblXPGainModRet)
+
+label(bEnableXPGainMod)
+label(fXPGainMod)
+registersymbol(bEnableXPGainMod)
+registersymbol(fXPGainMod)
+
+label(aobItemCountUpdater_r)
+label(aobItemCountUpdater_i)
+registersymbol(aobItemCountUpdater_r)
+registersymbol(aobItemCountUpdater_i)
+
+label(lblItemCountUpdater)
+label(lblItemCountUpdaterSkip)
+label(lblItemCountUpdaterRet)
+
+label(bEnableInfiniteItems)
+registersymbol(bEnableInfiniteItems)
+
+label(aobInjuryReader_r)
+label(aobInjuryReader_i)
+registersymbol(aobInjuryReader_r)
+registersymbol(aobInjuryReader_i)
+
+label(lblInjuryReader)
+label(lblInjuryReaderSkip)
+label(lblInjuryReaderRet)
+
+label(bEnableNoInjuries)
+registersymbol(bEnableNoInjuries)
+
+label(aobQualityUpdater1_r)
+label(aobQualityUpdater1_i)
+registersymbol(aobQualityUpdater1_r)
+registersymbol(aobQualityUpdater1_i)
+
+label(lblQualityUpdater1)
+label(lblQualityUpdater1Skip)
+label(lblQualityUpdater1Ret)
+
+label(aobQualityUpdater2_r)
+label(aobQualityUpdater2_i)
+registersymbol(aobQualityUpdater2_r)
+registersymbol(aobQualityUpdater2_i)
+
+label(lblQualityUpdater2)
+label(lblQualityUpdater2Skip)
+label(lblQualityUpdater2Ret)
+
+label(bEnableMaxQuality)
+registersymbol(bEnableMaxQuality)
+
+label(aobFOVReader_r)
+label(aobFOVReader_i)
+registersymbol(aobFOVReader_r)
+registersymbol(aobFOVReader_i)
+
+label(lblFOVReader)
+label(lblFOVReaderSkip)
+label(lblFOVReaderRet)
+
+label(bEnableForcedFOV)
+label(fForcedFOV)
+registersymbol(bEnableForcedFOV)
+registersymbol(fForcedFOV)
+
+label(aobJumpHeightCalc_r)
+label(aobJumpHeightCalc_i)
+registersymbol(aobJumpHeightCalc_r)
+registersymbol(aobJumpHeightCalc_i)
+
+label(lblJumpHeightCalc)
+label(lblJumpHeightCalcSkip)
+label(lblJumpHeightCalcRet)
+
+label(bEnableJumpHeightMod)
+label(fJumpHeightMod)
+registersymbol(bEnableJumpHeightMod)
+registersymbol(fJumpHeightMod)
+
+label(aobVitalStatUpdater_r)
+label(aobVitalStatUpdater_i)
+registersymbol(aobVitalStatUpdater_r)
+registersymbol(aobVitalStatUpdater_i)
+
+label(lblVitalStatUpdater)
+label(lblVitalStatUpdaterSkip)
+label(lblVitalStatUpdaterRet)
+
+label(aobDiceGameControl_r)
+label(aobDiceGameControl_i)
+registersymbol(aobDiceGameControl_r)
+registersymbol(aobDiceGameControl_i)
+
+label(lblDiceGameControl)
+label(lblDiceGameControlSkip)
+label(lblDiceGameControlRet)
+label(lblDiceGameControlAI)
+
+label(iDiceAIOffset)
+label(iDiceRequirementOffset)
+registersymbol(iDiceAIOffset)
+registersymbol(iDiceRequirementOffset)
+
+label(bEnableDiceGameQuickWin)
+label(bEnableDiceGameResetAIScore)
+registersymbol(bEnableDiceGameQuickWin)
+registersymbol(bEnableDiceGameResetAIScore)
+
+newmemMoveSpeedCalc:
+////////////////////////////
+// Default values
+////////////////////////////
+// Player controls
+bEnableMoveSpeedMod:
+dd 1
+fMoveSpeedMod:
+dd (float)2.5
+bEnableJumpHeightMod:
+dd 1
+fJumpHeightMod:
+dd (float)3.5
+bEnableZeroVisibility:
+dd 0
+bEnableZeroConspicuous:
+dd 0
+bEnableZeroNoise:
+dd 0
+fNoiseVal:
+dd (float)-1000.0
+bEnableXPGainMod:
+dd 1
+fXPGainMod:
+dd (float)4.0
+////////////////////////////
+// Vital controls
+bEnablePlayerDamageMod:
+dd 1
+fPlayerDamageMod:
+dd (float)0.75
+bEnableNonPlayerDamageMod:
+dd 1
+fNonPlayerDamageMod:
+dd (float)1.0
+bEnableNoInjuries:
+dd 1
+bEnableMinHealth:
+dd 1
+fMinHealth:
+dd (float)100.0
+bEnableMinStamina:
+dd 1
+fMinStamina:
+dd (float)80.0
+bEnableMinEnergy:
+dd 1
+fMinEnergy:
+dd (float)75.0
+bEnableMinNourishment:
+dd 1
+fMinNourishment:
+dd (float)60.0
+////////////////////////////
+// Inventory controls
+bEnableInfiniteItems:
+dd 0
+bEnableMaxQuality:
+dd 1
+bEnableZeroWeight:
+dd 1
+bEnableMinMoney:
+dd 1
+iMinMoney:
+dd (int)1000
+bEnableMinSchnapps:
+dd 1
+iMinSchnapps:
+dd (int)3
+bEnableMinLockpicks:
+dd 1
+iMinLockpicks:
+dd (int)3
+bEnableMinArrows:
+dd 1
+iMinArrows:
+dd (int)5
+////////////////////////////
+// Misc controls
+bEnableForcedFOV:
+dd 1
+fForcedFOV:
+dd (float)72.0
+bEnableDiceGameQuickWin:
+dd 1
+bEnableDiceGameResetAIScore:
+dd 1
+
+lblMoveSpeedCalc:
+mov r13,[pPlayerEntity]
+test r13,r13
+jz short lblMoveSpeedCalcSkip
+movsxd rax,[iPlayerMovementOffset]
+cmp qword ptr [rax+r13],rsi
+jne short lblMoveSpeedCalcSkip
+cmp dword ptr [bEnableMoveSpeedMod],1
+jne short lblMoveSpeedCalcSkip
+movsxd rax,[aobMoveSpeedCalc_i+04]
+movss xmm15,[rsi+rax]
+mulss xmm15,[fMoveSpeedMod]
+movss [rsi+rax],xmm15
+movss xmm15,[rsi+rax-04]
+mulss xmm15,[fMoveSpeedMod]
+movss [rsi+rax-04],xmm15
+movss xmm15,[rsi+rax-08]
+mulss xmm15,[fMoveSpeedMod]
+movss [rsi+rax-08],xmm15
+lblMoveSpeedCalcSkip:
+readmem(aobMoveSpeedCalc,8)
+jmp lblMoveSpeedCalcRet
+aobMoveSpeedCalc_i:
+readmem(aobMoveSpeedCalc,8)
+
+lblPlayerEntityGrabber:
+mov qword ptr [pPlayerEntity],rcx
+readmem(aobPlayerEntityGrabber,7)
+mov qword ptr [pPlayerVitals],rcx
+lblPlayerEntityGrabberSkip:
+jmp lblPlayerEntityGrabberRet
+aobPlayerEntityGrabber_i:
+readmem(aobPlayerEntityGrabber,7)
+pPlayerEntity:
+dq 0
+pPlayerVitals:
+dq 0
+iPlayerMovementOffset:
+readmem(aobPlayerMovementOffset+03,04)
+iEntityVitalsOffset:
+readmem(aobPlayerEntityGrabber+03,04)
+iVitalStatsOffset:
+readmem(aobVitalStatsOffset+03,04)
+
+lblDamageCalc:
+push rdx
+cmp qword ptr [pPlayerVitals],rcx
+jne short lblDamageCalcNonPlayer
+cmp dword ptr [bEnablePlayerDamageMod],1
+jne short lblDamageCalcSkip
+movsx rdx,[aobDamageCalc_i+04]
+fld dword ptr [rbx+rdx]
+fmul dword ptr [fPlayerDamageMod]
+fstp dword ptr [rbx+rdx]
+lblDamageCalcSkip:
+pop rdx
+readmem(aobDamageCalc,5)
+jmp lblDamageCalcRet
+lblDamageCalcNonPlayer:
+cmp dword ptr [bEnableNonPlayerDamageMod],1
+jne short lblDamageCalcSkip
+movsx rdx,[aobDamageCalc_i+04]
+fld dword ptr [rbx+rdx]
+fmul dword ptr [fNonPlayerDamageMod]
+fstp dword ptr [rbx+rdx]
+jmp lblDamageCalcSkip
+aobDamageCalc_i:
+readmem(aobDamageCalc,5)
+
+lblVisibilityCalc:
+cmp dword ptr [bEnableZeroVisibility],1
+jne short @f
+movss xmm10,[fForcedVal]
+@@:
+cmp dword ptr [bEnableZeroConspicuous],1
+jne short @f
+movss xmm9,[fForcedVal]
+@@:
+lblVisibilityCalcSkip:
+readmem(aobVisibilityCalc,6)
+jmp lblVisibilityCalcRet
+aobVisibilityCalc_i:
+readmem(aobVisibilityCalc,6)
+fForcedVal:
+dd (float)-1000.0
+
+lblNoiseCalc:
+cmp dword ptr [bEnableZeroNoise],1
+jne short lblNoiseCalcSkip
+movss xmm0,[fNoiseVal]
+lblNoiseCalcSkip:
+readmem(aobNoiseCalc,5)
+jmp lblNoiseCalcRet
+aobNoiseCalc_i:
+readmem(aobNoiseCalc,5)
+
+lblWeightCalc:
+push rdx
+push rsi
+mov rdx,[rbx+20]
+test rdx,rdx
+jz lblWeightCalcSkip
+mov rdx,[rdx+18]
+test rdx,rdx
+jz lblWeightCalcSkip
+
+mov rax,0x79656E6F6D
+cmp qword ptr [rdx],rax
+jne short @f
+cmp dword ptr [bEnableMinMoney],1
+jne short @f
+mov eax,[iMinMoney]
+movsx rsi,[aobWeightCalc_i+04]
+cmp dword ptr [rbx+rsi],eax
+jge short @f
+mov dword ptr [rbx+rsi],eax
+jmp lblWeightCalcSkip
+@@:
+mov rax,0x6D756964656D6552
+cmp qword ptr [rdx],rax
+jne short @f
+cmp dword ptr [bEnableMinSchnapps],1
+jne short @f
+mov eax,[iMinSchnapps]
+movsx rsi,[aobWeightCalc_i+04]
+cmp dword ptr [rbx+rsi],eax
+jge short @f
+mov dword ptr [rbx+rsi],eax
+jmp lblWeightCalcSkip
+@@:
+mov rax,0x6B6369706B636F6C
+cmp qword ptr [rdx],rax
+jne short @f
+cmp dword ptr [bEnableMinLockpicks],1
+jne short @f
+mov eax,[iMinLockpicks]
+movsx rsi,[aobWeightCalc_i+04]
+cmp dword ptr [rbx+rsi],eax
+jge short @f
+mov dword ptr [rbx+rsi],eax
+jmp lblWeightCalcSkip
+@@:
+mov eax,0x6F727261
+cmp dword ptr [rdx],eax
+jne short @f
+mov ax,0x5F77
+cmp word ptr [rdx+04],ax
+jne short @f
+cmp dword ptr [bEnableMinArrows],1
+jne short @f
+mov eax,[iMinArrows]
+movsx rsi,[aobWeightCalc_i+04]
+cmp dword ptr [rbx+rsi],eax
+jge short @f
+mov dword ptr [rbx+rsi],eax
+jmp lblWeightCalcSkip
+@@:
+lblWeightCalcSkip:
+pop rsi
+pop rdx
+readmem(aobWeightCalc,5)
+cmp dword ptr [bEnableZeroWeight],1
+jne short @f
+xorps xmm1,xmm1
+@@:
+jmp lblWeightCalcRet
+aobWeightCalc_i:
+readmem(aobWeightCalc,5)
+
+lblNourishmentChecker:
+push rcx
+movsxd rax,[aobNourishmentChecker_i+03]
+
+cmp dword ptr [bEnableMinHealth],1
+jne short @f
+mov ecx,[fMinHealth]
+cmp dword ptr [rax+rbx-0C],ecx
+jge short @f
+mov dword ptr [rax+rbx-0C],ecx
+@@:
+
+cmp dword ptr [bEnableMinStamina],1
+jne short @f
+mov ecx,[fMinStamina]
+cmp dword ptr [rax+rbx-08],ecx
+jge short @f
+mov dword ptr [rax+rbx-08],ecx
+@@:
+
+cmp dword ptr [bEnableMinEnergy],1
+jne short @f
+mov ecx,[fMinEnergy]
+cmp dword ptr [rax+rbx-04],ecx
+jge short @f
+mov dword ptr [rax+rbx-04],ecx
+@@:
+
+cmp dword ptr [bEnableMinNourishment],1
+jne short @f
+mov ecx,[fMinNourishment]
+cmp dword ptr [rax+rbx],ecx
+jge short @f
+mov dword ptr [rax+rbx],ecx
+@@:
+
+lblNourishmentCheckerSkip:
+pop rcx
+readmem(aobNourishmentChecker+08,7)
+jmp lblNourishmentCheckerRet
+aobNourishmentChecker_i:
+readmem(aobNourishmentChecker+08,7)
+
+lblXPGainMod:
+cmp dword ptr [bEnableXPGainMod],1
+jne short lblXPGainModSkip
+shr eax,7
+push rax
+fild dword ptr [rsp]
+fmul dword ptr [fXPGainMod]
+fistp dword ptr [rsp]
+pop rax
+shl eax,7
+lblXPGainModSkip:
+readmem(aobXPGainMod,5)
+jmp lblXPGainModRet
+aobXPGainMod_i:
+readmem(aobXPGainMod,5)
+
+lblItemCountUpdater:
+cmp dword ptr [bEnableInfiniteItems],1
+jne short lblItemCountUpdaterSkip
+cmp edx,0
+jge short lblItemCountUpdaterSkip
+sub [rcx+38],edx
+lblItemCountUpdaterSkip:
+readmem(aobItemCountUpdater,5)
+jmp lblItemCountUpdaterRet
+aobItemCountUpdater_i:
+readmem(aobItemCountUpdater,5)
+
+lblInjuryReader:
+cmp dword ptr [bEnableNoInjuries],1
+jne short lblInjuryReaderSkip
+movsxd rax,[aobInjuryReader_i+02]
+mov dword ptr [rsi+rax],0
+lblInjuryReaderSkip:
+readmem(aobInjuryReader,6)
+jmp lblInjuryReaderRet
+aobInjuryReader_i:
+readmem(aobInjuryReader,6)
+
+lblQualityUpdater1:
+cmp dword ptr [bEnableMaxQuality],1
+jne short lblQualityUpdater1Skip
+push rax
+movsx rax,[aobQualityUpdater1_i+04]
+mov dword ptr [rax+rbx],(float)1.0
+pop rax
+lblQualityUpdater1Skip:
+readmem(aobQualityUpdater1,5)
+jmp lblQualityUpdater1Ret
+aobQualityUpdater1_i:
+readmem(aobQualityUpdater1,5)
+
+lblQualityUpdater2:
+cmp dword ptr [bEnableMaxQuality],1
+jne short lblQualityUpdater2Skip
+push (float)1.0
+movss xmm0,[rsp]
+add rsp,8
+lblQualityUpdater2Skip:
+readmem(aobQualityUpdater2,5)
+jmp lblQualityUpdater2Ret
+aobQualityUpdater2_i:
+readmem(aobQualityUpdater2,5)
+
+lblFOVReader:
+cmp dword ptr [bEnableForcedFOV],1
+jne short lblFOVReaderSkip
+movsxd rax,[aobFOVReader_i+04]
+movss xmm0,[fForcedFOV]
+movss [rax+rcx],xmm0
+lblFOVReaderSkip:
+readmem(aobFOVReader,8)
+jmp lblFOVReaderRet
+aobFOVReader_i:
+readmem(aobFOVReader,8)
+
+lblJumpHeightCalc:
+readmem(aobJumpHeightCalc,8)
+cmp dword ptr [bEnableJumpHeightMod],1
+jne short lblJumpHeightCalcSkip
+mulss xmm0,[fJumpHeightMod]
+lblJumpHeightCalcSkip:
+jmp lblJumpHeightCalcRet
+aobJumpHeightCalc_i:
+readmem(aobJumpHeightCalc,8)
+
+lblVitalStatUpdater:
+cmp qword ptr [pPlayerVitals],rcx
+jne short lblVitalStatUpdaterSkip
+cmp rsi,0
+jne short lblVitalStatUpdaterSkip
+cmp dword ptr [bEnableMinHealth],1
+jne short lblVitalStatUpdaterSkip
+movss xmm0,[fMinHealth]
+ucomiss xmm0,xmm6
+jz short lblVitalStatUpdaterSkip
+jc short lblVitalStatUpdaterSkip
+movss xmm6,xmm0
+lblVitalStatUpdaterSkip:
+readmem(aobVitalStatUpdater,9)
+jmp lblVitalStatUpdaterRet
+aobVitalStatUpdater_i:
+readmem(aobVitalStatUpdater,9)
+
+lblDiceGameControl:
+movsxd rax,[iDiceAIOffset]
+cmp qword ptr [rax+rdi],0
+jne short lblDiceGameControlAI
+cmp dword ptr [bEnableDiceGameQuickWin],1
+jne short lblDiceGameControlSkip
+movsxd rax,[iDiceRequirementOffset]
+movsx rbx,[aobDiceGameControl_i+05]
+mov rbx,[rbx+rdi+40]
+movsxd rax,[rax+rbx]
+movsx rbx,[aobDiceGameControl_i+05]
+mov dword ptr [rbx+rdi],eax
+lblDiceGameControlSkip:
+readmem(aobDiceGameControl,6)
+jmp lblDiceGameControlRet
+lblDiceGameControlAI:
+cmp dword ptr [bEnableDiceGameResetAIScore],1
+jne short lblDiceGameControlSkip
+movsx rbx,[aobDiceGameControl_i+05]
+mov dword ptr [rbx+rdi],0
+jmp short lblDiceGameControlSkip
+
+aobDiceGameControl_i:
+readmem(aobDiceGameControl,6)
+iDiceAIOffset:
+readmem(aobDiceAIOffset+03,4)
+iDiceRequirementOffset:
+readmem(aobDiceRequirementOffset+03,1)
+dd 0
+
+aobDiceGameControl:
+aobDiceGameControl_r:
+jmp lblDiceGameControl
+nop
+lblDiceGameControlRet:
+
+aobVitalStatUpdater:
+aobVitalStatUpdater_r:
+jmp lblVitalStatUpdater
+nop 4
+lblVitalStatUpdaterRet:
+
+aobJumpHeightCalc:
+aobJumpHeightCalc_r:
+jmp lblJumpHeightCalc
+nop 3
+lblJumpHeightCalcRet:
+
+aobFOVReader:
+aobFOVReader_r:
+jmp lblFOVReader
+nop 3
+lblFOVReaderRet:
+
+aobQualityUpdater2:
+aobQualityUpdater2_r:
+jmp lblQualityUpdater2
+lblQualityUpdater2Ret:
+
+aobQualityUpdater1:
+aobQualityUpdater1_r:
+jmp lblQualityUpdater1
+lblQualityUpdater1Ret:
+
+aobInjuryReader:
+aobInjuryReader_r:
+jmp lblInjuryReader
+nop
+lblInjuryReaderRet:
+
+aobItemCountUpdater:
+aobItemCountUpdater_r:
+jmp lblItemCountUpdater
+lblItemCountUpdaterRet:
+
+aobXPGainMod:
+aobXPGainMod_r:
+jmp lblXPGainMod
+lblXPGainModRet:
+
+aobNourishmentChecker+08:
+aobNourishmentChecker_r:
+jmp lblNourishmentChecker
+nop 2
+lblNourishmentCheckerRet:
+
+aobWeightCalc:
+aobWeightCalc_r:
+jmp lblWeightCalc
+lblWeightCalcRet:
+
+aobNoiseCalc:
+aobNoiseCalc_r:
+jmp lblNoiseCalc
+lblNoiseCalcRet:
+
+aobVisibilityCalc:
+aobVisibilityCalc_r:
+jmp lblVisibilityCalc
+nop
+lblVisibilityCalcRet:
+
+aobDamageCalc:
+aobDamageCalc_r:
+jmp lblDamageCalc
+lblDamageCalcRet:
+
+aobPlayerEntityGrabber:
+aobPlayerEntityGrabber_r:
+jmp lblPlayerEntityGrabber
+nop 2
+lblPlayerEntityGrabberRet:
+
+aobMoveSpeedCalc:
+aobMoveSpeedCalc_r:
+jmp lblMoveSpeedCalc
+nop 3
+lblMoveSpeedCalcRet:
+
+[DISABLE]
+aobMoveSpeedCalc_r:
+readmem(aobMoveSpeedCalc_i,8)
+
+unregistersymbol(aobMoveSpeedCalc_r)
+unregistersymbol(aobMoveSpeedCalc_i)
+
+unregistersymbol(bEnableMoveSpeedMod)
+unregistersymbol(fMoveSpeedMod)
+
+aobPlayerEntityGrabber_r:
+readmem(aobPlayerEntityGrabber_i,7)
+
+unregistersymbol(aobPlayerEntityGrabber_r)
+unregistersymbol(aobPlayerEntityGrabber_i)
+
+unregistersymbol(pPlayerEntity)
+unregistersymbol(pPlayerVitals)
+unregistersymbol(iPlayerMovementOffset)
+unregistersymbol(iEntityVitalsOffset)
+unregistersymbol(iVitalStatsOffset)
+
+aobDamageCalc_r:
+readmem(aobDamageCalc_i,5)
+
+unregistersymbol(aobDamageCalc_r)
+unregistersymbol(aobDamageCalc_i)
+
+unregistersymbol(bEnablePlayerDamageMod)
+unregistersymbol(fPlayerDamageMod)
+unregistersymbol(bEnableNonPlayerDamageMod)
+unregistersymbol(fNonPlayerDamageMod)
+
+aobVisibilityCalc_r:
+readmem(aobVisibilityCalc_i,6)
+
+unregistersymbol(aobVisibilityCalc_r)
+unregistersymbol(aobVisibilityCalc_i)
+
+unregistersymbol(bEnableZeroVisibility)
+unregistersymbol(bEnableZeroConspicuous)
+
+aobNoiseCalc_r:
+readmem(aobNoiseCalc_i,5)
+
+unregistersymbol(aobNoiseCalc_r)
+unregistersymbol(aobNoiseCalc_i)
+
+unregistersymbol(bEnableZeroNoise)
+unregistersymbol(fNoiseVal)
+
+aobWeightCalc_r:
+readmem(aobWeightCalc_i,5)
+
+unregistersymbol(aobWeightCalc_r)
+unregistersymbol(aobWeightCalc_i)
+
+unregistersymbol(bEnableZeroWeight)
+unregistersymbol(bEnableMinMoney)
+unregistersymbol(iMinMoney)
+unregistersymbol(bEnableMinSchnapps)
+unregistersymbol(iMinSchnapps)
+unregistersymbol(bEnableMinLockpicks)
+unregistersymbol(iMinLockpicks)
+unregistersymbol(bEnableMinArrows)
+unregistersymbol(iMinArrows)
+
+aobNourishmentChecker_r:
+readmem(aobNourishmentChecker_i,7)
+
+unregistersymbol(bEnableMinHealth)
+unregistersymbol(fMinHealth)
+unregistersymbol(bEnableMinStamina)
+unregistersymbol(fMinStamina)
+unregistersymbol(bEnableMinEnergy)
+unregistersymbol(fMinEnergy)
+unregistersymbol(aobNourishmentChecker_r)
+unregistersymbol(aobNourishmentChecker_i)
+
+unregistersymbol(bEnableMinNourishment)
+unregistersymbol(fMinNourishment)
+
+aobXPGainMod_r:
+readmem(aobXPGainMod_i,5)
+
+unregistersymbol(aobXPGainMod_r)
+unregistersymbol(aobXPGainMod_i)
+
+unregistersymbol(bEnableXPGainMod)
+unregistersymbol(fXPGainMod)
+
+aobItemCountUpdater_r:
+readmem(aobItemCountUpdater_i,5)
+
+unregistersymbol(aobItemCountUpdater_r)
+unregistersymbol(aobItemCountUpdater_i)
+
+unregistersymbol(bEnableInfiniteItems)
+
+aobInjuryReader_r:
+readmem(aobInjuryReader_i,6)
+
+unregistersymbol(aobInjuryReader_r)
+unregistersymbol(aobInjuryReader_i)
+
+unregistersymbol(bEnableNoInjuries)
+
+aobQualityUpdater1_r:
+readmem(aobQualityUpdater1_i,5)
+
+unregistersymbol(aobQualityUpdater1_r)
+unregistersymbol(aobQualityUpdater1_i)
+
+unregistersymbol(bEnableMaxQuality)
+
+aobQualityUpdater2_r:
+readmem(aobQualityUpdater2_i,5)
+
+unregistersymbol(aobQualityUpdater2_r)
+unregistersymbol(aobQualityUpdater2_i)
+
+aobFOVReader_r:
+readmem(aobFOVReader_i,8)
+
+unregistersymbol(aobFOVReader_r)
+unregistersymbol(aobFOVReader_i)
+
+unregistersymbol(bEnableForcedFOV)
+unregistersymbol(fForcedFOV)
+
+aobJumpHeightCalc_r:
+readmem(aobJumpHeightCalc_i,8)
+
+unregistersymbol(aobJumpHeightCalc_r)
+unregistersymbol(aobJumpHeightCalc_i)
+
+unregistersymbol(bEnableJumpHeightMod)
+unregistersymbol(fJumpHeightMod)
+
+aobVitalStatUpdater_r:
+readmem(aobVitalStatUpdater_i,9)
+
+unregistersymbol(aobVitalStatUpdater_r)
+unregistersymbol(aobVitalStatUpdater_i)
+
+aobDiceGameControl_r:
+readmem(aobDiceGameControl_i,6)
+
+unregistersymbol(aobDiceGameControl_r)
+unregistersymbol(aobDiceGameControl_i)
+
+unregistersymbol(bEnableDiceGameQuickWin)
+unregistersymbol(bEnableDiceGameResetAIScore)
+
+unregistersymbol(iDiceAIOffset)
+unregistersymbol(iDiceRequirementOffset)
+
+dealloc(newmemMoveSpeedCalc)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3647</ID>
+          <Description>"Player controls"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>8000FF</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3648</ID>
+              <Description>"bEnableMoveSpeedMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60000"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMoveSpeedMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3649</ID>
+                  <Description>"fMoveSpeedMod"</Description>
+                  <LastState Value="2.5" RealAddress="7FFCEAD60004"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMoveSpeedMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3650</ID>
+              <Description>"bEnableJumpHeightMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60008"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableJumpHeightMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3651</ID>
+                  <Description>"fJumpHeightMod"</Description>
+                  <LastState Value="3.5" RealAddress="7FFCEAD6000C"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fJumpHeightMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3652</ID>
+              <Description>"bEnableZeroVisibility"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60010"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableZeroVisibility</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3653</ID>
+              <Description>"bEnableZeroConspicuous"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60014"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableZeroConspicuous</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3654</ID>
+              <Description>"bEnableZeroNoise"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60018"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableZeroNoise</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3655</ID>
+                  <Description>"fNoiseVal"</Description>
+                  <LastState Value="-1000" RealAddress="7FFCEAD6001C"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fNoiseVal</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3656</ID>
+              <Description>"bEnableXPGainMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60020"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableXPGainMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3657</ID>
+                  <Description>"fXPGainMod"</Description>
+                  <LastState Value="4" RealAddress="7FFCEAD60024"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fXPGainMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3658</ID>
+          <Description>"Vital controls"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>8000FF</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3659</ID>
+              <Description>"bEnablePlayerDamageMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60028"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnablePlayerDamageMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3660</ID>
+                  <Description>"fPlayerDamageMod"</Description>
+                  <LastState Value="0.75" RealAddress="7FFCEAD6002C"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fPlayerDamageMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3661</ID>
+              <Description>"bEnableNonPlayerDamageMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60030"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableNonPlayerDamageMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3662</ID>
+                  <Description>"fNonPlayerDamageMod"</Description>
+                  <LastState Value="1" RealAddress="7FFCEAD60034"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fNonPlayerDamageMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3663</ID>
+              <Description>"bEnableNoInjuries"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60038"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableNoInjuries</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3664</ID>
+              <Description>"bEnableMinHealth"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD6003C"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinHealth</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3665</ID>
+                  <Description>"fMinHealth"</Description>
+                  <LastState Value="100" RealAddress="7FFCEAD60040"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMinHealth</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3666</ID>
+              <Description>"bEnableMinStamina"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60044"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinStamina</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3667</ID>
+                  <Description>"fMinStamina"</Description>
+                  <LastState Value="80" RealAddress="7FFCEAD60048"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMinStamina</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3668</ID>
+              <Description>"bEnableMinEnergy"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD6004C"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinEnergy</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3669</ID>
+                  <Description>"fMinEnergy"</Description>
+                  <LastState Value="75" RealAddress="7FFCEAD60050"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMinEnergy</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3670</ID>
+              <Description>"bEnableMinNourishment"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60054"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinNourishment</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3671</ID>
+                  <Description>"fMinNourishment"</Description>
+                  <LastState Value="60" RealAddress="7FFCEAD60058"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMinNourishment</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3672</ID>
+          <Description>"Inventory controls"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>8000FF</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3673</ID>
+              <Description>"bEnableInfiniteItems"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD6005C"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableInfiniteItems</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3674</ID>
+              <Description>"bEnableMaxQuality"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60060"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMaxQuality</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3675</ID>
+              <Description>"bEnableZeroWeight"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60064"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableZeroWeight</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3676</ID>
+              <Description>"bEnableMinMoney"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60068"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinMoney</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3677</ID>
+                  <Description>"iMinMoney"</Description>
+                  <LastState Value="1000" RealAddress="7FFCEAD6006C"/>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iMinMoney</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3678</ID>
+              <Description>"bEnableMinSchnapps"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60070"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinSchnapps</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3679</ID>
+                  <Description>"iMinSchnapps"</Description>
+                  <LastState Value="3" RealAddress="7FFCEAD60074"/>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iMinSchnapps</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3680</ID>
+              <Description>"bEnableMinLockpicks"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60078"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinLockpicks</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3681</ID>
+                  <Description>"iMinLockpicks"</Description>
+                  <LastState Value="3" RealAddress="7FFCEAD6007C"/>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iMinLockpicks</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3682</ID>
+              <Description>"bEnableMinArrows"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60080"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMinArrows</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3683</ID>
+                  <Description>"iMinArrows"</Description>
+                  <LastState Value="5" RealAddress="7FFCEAD60084"/>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iMinArrows</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3684</ID>
+          <Description>"Misc controls"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>8000FF</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3685</ID>
+              <Description>"bEnableForcedFOV"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="1" RealAddress="7FFCEAD60088"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableForcedFOV</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3686</ID>
+                  <Description>"fForcedFOV"</Description>
+                  <LastState Value="80" RealAddress="7FFCEAD6008C"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fForcedFOV</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3687</ID>
+              <Description>"bEnableDiceGameQuickWin"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60090"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableDiceGameQuickWin</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3688</ID>
+              <Description>"bEnableDiceGameResetAIScore"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <LastState Value="0" RealAddress="7FFCEAD60094"/>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableDiceGameResetAIScore</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>HW BP
+Windows debugger
+Money is stored as int, 10x value shown.
+I.e. 66 for 6.6
+The binaries in 1.9.5 and 1.9.6 are identical.
+</Comments>
+  <LuaScript>PROCESS_NAME = 'KingdomCome.exe'
+--------
+-------- Check for process and auto attach if need be
+--------
+local autoAttachTimer = nil          ---- Declaration for our static timer object (no destroy here!)
+local autoAttachTimerInterval = 5000 ---- Timer in milliseconds
+
+local function autoAttachTimer_tick(timer) ---- Timer callback
+        ---- Check to see if we are attached to the right process
+    if getProcessIDFromProcessName(PROCESS_NAME) ~= getOpenedProcessID() then
+        ---- If not the right process, check if process is running and attach if exists
+	    if getProcessIDFromProcessName(PROCESS_NAME) ~= nil then
+		    openProcess(PROCESS_NAME) ---- Open the process
+    	end
+	end
+end
+autoAttachTimer = createTimer(getMainForm())       ---- Create timer with the main form as it's parent
+autoAttachTimer.Interval = autoAttachTimerInterval ---- Set timer interval
+autoAttachTimer.OnTimer = autoAttachTimer_tick     ---- Set timer tick call back
+
+</LuaScript>
+</CheatTable>

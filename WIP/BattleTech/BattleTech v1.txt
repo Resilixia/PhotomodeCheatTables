@@ -116,4 +116,27 @@ UnityPlayer.dll+8D40B4 - 48 8B CB              - mov rcx,rbx
 UnityPlayer.dll+8D40B7 - E8 C4E4FFFF           - call UnityPlayer.dll+8D2580
 UnityPlayer.dll+8D40BC - BA 01000000           - mov edx,00000001 { 1 }
 
+HUD - this works by stopping the read of the canvas ui scale:
+UnityPlayer.dll+2A8AD1 - EB 0D                 - jmp UnityPlayer.dll+2A8AE0
+UnityPlayer.dll+2A8AD3 - F3 0F10 45 67         - movss xmm0,[rbp+67]
+UnityPlayer.dll+2A8AD8 - F3 0F5E C6            - divss xmm0,xmm6
+UnityPlayer.dll+2A8ADC - F3 0F5E CE            - divss xmm1,xmm6
+UnityPlayer.dll+2A8AE0 - 48 8D 45 67           - lea rax,[rbp+67]
+UnityPlayer.dll+2A8AE4 - F3 0F11 4D 6B         - movss [rbp+6B],xmm1
+UnityPlayer.dll+2A8AE9 - F3 0F11 45 67         - movss [rbp+67],xmm0
+UnityPlayer.dll+2A8AEE - F3 44 0F10 00         - movss xmm8,[rax]
+UnityPlayer.dll+2A8AF3 - F3 0F10 78 04         - movss xmm7,[rax+04]
+UnityPlayer.dll+2A8AF8 - F3 0F10 87 B4010000   - movss xmm0,[rdi+000001B4]		<<<nop to kill hud (not 3d elements)
+UnityPlayer.dll+2A8B00 - F3 0F59 F0            - mulss xmm6,xmm0
+UnityPlayer.dll+2A8B04 - 41 0F28 C8            - movaps xmm1,xmm8
+UnityPlayer.dll+2A8B08 - 0F28 D7               - movaps xmm2,xmm7
+UnityPlayer.dll+2A8B0B - F3 0F5E C8            - divss xmm1,xmm0
+UnityPlayer.dll+2A8B0F - F3 0F5E D0            - divss xmm2,xmm0
+UnityPlayer.dll+2A8B13 - F3 0F10 83 E0000000   - movss xmm0,[rbx+000000E0]
+UnityPlayer.dll+2A8B1B - 0F2E C1               - ucomiss xmm0,xmm1
+UnityPlayer.dll+2A8B1E - F3 0F11 4D 67         - movss [rbp+67],xmm1
+UnityPlayer.dll+2A8B23 - F3 0F11 55 6B         - movss [rbp+6B],xmm2
+UnityPlayer.dll+2A8B28 - 7A 11                 - jp UnityPlayer.dll+2A8B3B
+
+
 
